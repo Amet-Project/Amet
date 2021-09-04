@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
 
+//Amplify AWS
+import Amplify from 'aws-amplify';
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
+
 import "assets/scss/material-kit-react.scss?v=1.9.0";
 
 // pages for this product

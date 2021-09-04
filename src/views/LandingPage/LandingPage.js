@@ -22,6 +22,11 @@ import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 
+//Amplify section
+import { API, graphqlOperation} from 'aws-amplify'
+import { listCasinos } from '../../graphql/queries'
+ 
+
 const dashboardRoutes = [];
 
 const useStyles = makeStyles(styles);
