@@ -23,8 +23,8 @@ import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 
 //Amplify section
-import { API, graphqlOperation} from 'aws-amplify'
-import { listCasinos } from '../../graphql/queries'
+//import { API, graphqlOperation} from 'aws-amplify'
+//import { listCasinos } from '../../graphql/queries'
  
 
 const dashboardRoutes = [];
