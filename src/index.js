@@ -10,6 +10,7 @@ import Components from "views/Components/Components.js";
 import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
+import SignupPage from "views/SignupPage/SignupPage.js";
 
 //Amplify AWS
 import Amplify from 'aws-amplify';
@@ -24,6 +25,7 @@ ReactDOM.render(
       <Route path="/components" component={Components} />
       <Route path="/profile" component={ProfilePage} />
       <Route path="/login" component={LoginPage} />
+      <Route path="/signup" component={SignupPage} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,
