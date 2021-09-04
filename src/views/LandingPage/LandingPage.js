@@ -39,7 +39,7 @@ export default function LandingPage(props) {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand="Wevent"
+        brand="Amet"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -55,7 +55,7 @@ export default function LandingPage(props) {
               <h1 className={classes.title}>Tu evento, más fácil que nunca.</h1>
               <h4>
                 Organiza tu evento desde la comodidad de tu casa, pon fecha, lugar, 
-                música, comida y más. Encuentra la combinación perfecta en Wevent.
+                música, comida y más. Encuentra la combinación perfecta en Amet.
               </h4>
               <br />
               <Button
