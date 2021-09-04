@@ -47,6 +47,12 @@ const signupPageStyle = {
   form: {
     margin: "0"
   },
+  signupLink: {
+    color: "#FFFFFF",
+    fontSize: "1.125rem",
+    lineHeight: "1.5em",
+    textDecoration: "underline"
+  },
   cardHeader: {
     width: "auto",
     textAlign: "center",
