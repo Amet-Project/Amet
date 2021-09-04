@@ -13,7 +13,7 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 
 //Amplify AWS
 import Amplify from 'aws-amplify';
-import awsExports from './aws-exports';
+import awsExports from './aws-exports.js';
 Amplify.configure(awsExports);
 
 var hist = createBrowserHistory();
