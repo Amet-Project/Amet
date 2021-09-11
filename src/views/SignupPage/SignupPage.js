@@ -28,7 +28,6 @@ import { createUsuario } from '../../graphql/mutations.js'
 import { listUsuarios } from '../../graphql/queries.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
-
 const initialState = { 
   //id: 100,
   nombres: '',
@@ -39,6 +38,7 @@ const initialState = {
 }
 
 const useStyles = makeStyles(styles);
+const bcrypt = require('bcryptjs');
 
 export default function SigninPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
@@ -59,6 +59,7 @@ export default function SigninPage(props) {
       
       const usuario = { ...formState }
       setUsuarios([...usuarios, usuario])
+      usuario.pwd = bcrypt.hashSync(usuario.pwd, bcrypt.genSaltSync());
       setFormState(initialState)
       await API.graphql(graphqlOperation(createUsuario, {input: usuario}))
       console.log(formState)

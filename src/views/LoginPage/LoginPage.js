@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,16 +18,25 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-
+//Importanto estilos
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
 import image from "assets/img/bg7.jpg";
 
+//Amplify imports
+import Amplify, { API, graphqlOperation } from 'aws-amplify'
+
+import { porEmail } from "../../graphql/queries";
+import awsExports from "../../aws-exports.js";
+Amplify.configure(awsExports);
+
+
 const useStyles = makeStyles(styles);
+const bcrypt = require('bcryptjs');
 
 export default function LoginPage(props) {
+  let history = useHistory();
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const [userData, setUserData] = useState({email: '', password:''})
+  const [userData, setUserData] = useState({email: '', pwd:''})
   const [isInvalidEmail, setIsInvalidEmail] = useState(false)
 
   setTimeout(function() {
@@ -39,14 +49,35 @@ export default function LoginPage(props) {
     setUserData({...userData, [key]: value});
   }
 
-  const LoginUser = () => {
+  const ValidateInputs = () => {
     setIsInvalidEmail(handleValidation())
-    console.log('test: ', isInvalidEmail);
     if(isInvalidEmail){
-      console.log('Login success: ', userData)
+      console.log('Invalid email:');
+    }else{
+      console.log('Valid email');
+    }
+    loginUser();
+  }
+  const aftertLoging = (user) => {
+    console.log('Login success: ', user.nombres);
+    history.push('/');
+  }
+  //Validate credentials
+  function loginUser() {
+    try {
+      API.graphql(graphqlOperation(porEmail, {email: userData.email}))
+      .then((response)=>{
+        const loggedUser = response.data.PorEmail.items[0];
+        const doesPasswordMatch = bcrypt.compareSync(userData.pwd, loggedUser.pwd)
+        doesPasswordMatch ? 
+        aftertLoging(loggedUser) :
+        console.log('Contraseña incorrecta');
+      });
+
+    } catch (err) {
+      console.log('Error al iniciar sesión:', err)
     }
   }
-
   const handleValidation = () => {
     let fields = userData;
     let formIsInvalid = false;
@@ -137,13 +168,13 @@ export default function LoginPage(props) {
                     <TextInput.PasswordInput
                       id="passwordInput"
                       labelText="Contraseña:"
-                      value={userData.password}
-                      onChange={e => setInput('password', e.target.value)}
+                      value={userData.pwd}
+                      onChange={e => setInput('pwd', e.target.value)}
                       className="passwordInput"
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg" onClick={LoginUser}>
+                    <Button simple color="primary" size="lg" onClick={ValidateInputs}>
                       Iniciar Sesión
                     </Button>
                   </CardFooter>
