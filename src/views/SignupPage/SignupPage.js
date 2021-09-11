@@ -76,7 +76,7 @@ export default function SigninPage(props) {
     <div>
       <Header
         absolute
-        color="transparent"
+        color="primary"
         brand="Amet"
         rightLinks={<HeaderLinks />}
         {...rest}

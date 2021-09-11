@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // Carbon components
 import { DatePicker, DatePickerInput } from 'carbon-components-react'
+import { Run32 } from '@carbon/icons-react';
 
 // core components
 import Header from "components/Header/Header.js";
@@ -23,6 +24,8 @@ import ProductSection from "./Sections/ProductSection.js";
 import TeamSection from "./Sections/TeamSection.js";
 import WorkSection from "./Sections/WorkSection.js";
 
+import dateFormat from 'dateformat';
+
 //Amplify section
 //import { API, graphqlOperation} from 'aws-amplify'
 //import { listCasinos } from '../../graphql/queries'
@@ -33,20 +36,19 @@ const dashboardRoutes = [];
 const useStyles = makeStyles(styles);
 
 export default function LandingPage(props) {
+  const [datePicked, setDatePicked] = useState('')
   const classes = useStyles();
   const { ...rest } = props;
+
   return (
     <div>
       <Header
-        color="transparent"
+        color="primary"
         routes={dashboardRoutes}
         brand="Amet"
         rightLinks={<HeaderLinks />}
         fixed
-        changeColorOnScroll={{
-          height: 400,
-          color: "white"
-        }}
+        height={300}
         {...rest}
       />
       <Parallax filter image={require("assets/img/party.jpeg")}>
@@ -59,7 +61,7 @@ export default function LandingPage(props) {
                 música, comida y más. Encuentra la combinación perfecta en Amet.
               </h4>
               <br />
-              <DatePicker datePickerType="single" dateFormat="d-m-Y" minDate="today">
+              <DatePicker datePickerType="single" dateFormat="d-m-Y" minDate="today" value={datePicked} onChange={e => setDatePicked(dateFormat(e, "dd-mm-yyyy"))}>
                 <DatePickerInput
                   placeholder="dd/mm/aaaa"
                   id="date-picker-single"
@@ -67,14 +69,13 @@ export default function LandingPage(props) {
               </DatePicker>
               <br />
               <Button
-                color="danger"
+                color="primary"
                 size="lg"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                target="_blank"
+                href={ "/startevent=" + datePicked}
                 rel="noopener noreferrer"
               >
-                <i className="fas fa-play" />
-                Ver video
+                <Run32 />
+                Iniciar Evento
               </Button>
             </GridItem>
           </GridContainer>
