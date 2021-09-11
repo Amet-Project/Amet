@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
-// @material-ui/icons
-import Email from "@material-ui/icons/Email";
+
+// Carbon components
+import { TextInput } from 'carbon-components-react'
+
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -17,7 +17,6 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -26,12 +25,53 @@ import image from "assets/img/bg7.jpg";
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  const [cardAnimaton, setCardAnimation] = useState("cardHidden");
+  const [userData, setUserData] = useState({email: '', password:''})
+  const [inputErrors, setInputErrors] = useState({})
+  const [isInvalidEmail, setIsInvalidEmail] = useState(false)
+
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+
+  const setInput = (key, value) => {
+    setUserData({...userData, [key]: value});
+  }
+
+  const LoginUser = () => {
+    setIsInvalidEmail(handleValidation())
+    console.log('test: ', isInvalidEmail);
+    if(isInvalidEmail){
+      console.log('Login success: ', userData)
+    }
+  }
+
+  const handleValidation = () => {
+    let fields = userData;
+    let errors = {};
+    let formIsInvalid = false;
+
+    //Email
+    if(!fields["email"]){
+       formIsInvalid = true;
+       errors["email"] = "Cannot be empty";
+    }
+
+    if(typeof fields["email"] !== "undefined"){
+       let lastAtPos = fields["email"].lastIndexOf('@');
+       let lastDotPos = fields["email"].lastIndexOf('.');
+
+       if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') == -1 && lastDotPos > 2 && (fields["email"].length - lastDotPos) > 2)) {
+          formIsInvalid = true;
+          errors["email"] = "Email is not valid";
+        }
+    }
+    setInputErrors(errors)
+    return formIsInvalid;
+  }
+
   return (
     <div>
       <Header
@@ -89,42 +129,26 @@ export default function LoginPage(props) {
                   </CardHeader>
                   <p className={classes.divider}>O inicia sesión con Email</p>
                   <CardBody>
-                    <CustomInput
-                      labelText="Email..."
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "email",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
+                    <TextInput
+                      id="emailInput"
+                      labelText="Email:"
+                      type='email'
+                      invalid={isInvalidEmail}
+                      value={userData.email}
+                      onChange={e => setInput('email', e.target.value)}
+                      className="emailInput"
                     />
-                    <CustomInput
-                      labelText="Password"
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off"
-                      }}
+                    <br />
+                    <TextInput.PasswordInput
+                      id="passwordInput"
+                      labelText="Password:"
+                      value={userData.password}
+                      onChange={e => setInput('password', e.target.value)}
+                      className="passwordInput"
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
+                    <Button simple color="primary" size="lg" onClick={LoginUser}>
                       Iniciar Sesión
                     </Button>
                   </CardFooter>

@@ -4,7 +4,8 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
-// @material-ui/icons
+// Carbon components
+import { DatePicker, DatePickerInput } from 'carbon-components-react'
 
 // core components
 import Header from "components/Header/Header.js";
@@ -57,6 +58,13 @@ export default function LandingPage(props) {
                 Organiza tu evento desde la comodidad de tu casa, pon fecha, lugar, 
                 música, comida y más. Encuentra la combinación perfecta en Amet.
               </h4>
+              <br />
+              <DatePicker datePickerType="single" dateFormat="d-m-Y" minDate="today">
+                <DatePickerInput
+                  placeholder="dd/mm/aaaa"
+                  id="date-picker-single"
+                />
+              </DatePicker>
               <br />
               <Button
                 color="danger"

@@ -46,7 +46,7 @@ export default function TeamSection() {
               </h4>
               <CardBody>
                 <p className={classes.description}>
-                  Isaac es joto pero es buen pedo, solo cuídenlo en la peda
+                  Isaac es malacopa pero es buen pedo, solo cuídenlo en la peda
                   porque a veces se roba cosas como <a href="#pablo">botellas</a> encendedores,
                   entre otras cosas.
                 </p>

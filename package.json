@@ -6,9 +6,13 @@
   "main": "src/index.js",
   "dependencies": {
     "@aws-amplify/ui-react": "^1.2.12",
+    "@carbon/icons-react": "10.22.0",
     "@material-ui/core": "4.10.0",
     "@material-ui/icons": "4.9.1",
     "aws-amplify": "^4.2.6",
+    "carbon-components": "10.25.0",
+    "carbon-components-react": "7.25.0",
+    "carbon-icons": "7.0.7",
     "classnames": "2.2.6",
     "history": "4.10.1",
     "moment": "2.26.0",
@@ -21,7 +25,8 @@
     "react-router-dom": "5.2.0",
     "react-scripts": "3.4.1",
     "react-slick": "0.26.1",
-    "react-swipeable-views": "0.13.9"
+    "react-swipeable-views": "0.13.9",
+    "sass": "1.29.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
