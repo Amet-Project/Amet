@@ -143,6 +143,14 @@ const title = {
   fontFamily: `"Roboto Slab", "Times New Roman", serif`
 };
 
+const headerTitle = {
+  color: "#FFFFFF",
+  margin: "1.75rem 0 0.875rem",
+  textDecoration: "none",
+  fontWeight: "700",
+  fontFamily: `"Roboto Slab", "Times New Roman", serif`
+};
+
 const cardTitle = {
   ...title,
   marginTop: ".625rem"
@@ -191,6 +199,7 @@ export {
   cardHeader,
   defaultBoxShadow,
   title,
+  headerTitle,
   cardTitle,
   cardLink,
   cardSubtitle

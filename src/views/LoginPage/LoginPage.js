@@ -27,7 +27,6 @@ const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const [userData, setUserData] = useState({email: '', password:''})
-  const [inputErrors, setInputErrors] = useState({})
   const [isInvalidEmail, setIsInvalidEmail] = useState(false)
 
   setTimeout(function() {
@@ -50,25 +49,21 @@ export default function LoginPage(props) {
 
   const handleValidation = () => {
     let fields = userData;
-    let errors = {};
     let formIsInvalid = false;
 
     //Email
     if(!fields["email"]){
        formIsInvalid = true;
-       errors["email"] = "Cannot be empty";
     }
 
     if(typeof fields["email"] !== "undefined"){
        let lastAtPos = fields["email"].lastIndexOf('@');
        let lastDotPos = fields["email"].lastIndexOf('.');
 
-       if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') == -1 && lastDotPos > 2 && (fields["email"].length - lastDotPos) > 2)) {
+       if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') === -1 && lastDotPos > 2 && (fields["email"].length - lastDotPos) > 2)) {
           formIsInvalid = true;
-          errors["email"] = "Email is not valid";
         }
     }
-    setInputErrors(errors)
     return formIsInvalid;
   }
 
@@ -76,7 +71,7 @@ export default function LoginPage(props) {
     <div>
       <Header
         absolute
-        color="transparent"
+        color="primary"
         brand="Amet"
         rightLinks={<HeaderLinks />}
         {...rest}
@@ -131,7 +126,7 @@ export default function LoginPage(props) {
                   <CardBody>
                     <TextInput
                       id="emailInput"
-                      labelText="Email:"
+                      labelText="Correo electrónico:"
                       type='email'
                       invalid={isInvalidEmail}
                       value={userData.email}
@@ -141,7 +136,7 @@ export default function LoginPage(props) {
                     <br />
                     <TextInput.PasswordInput
                       id="passwordInput"
-                      labelText="Password:"
+                      labelText="Contraseña:"
                       value={userData.password}
                       onChange={e => setInput('password', e.target.value)}
                       className="passwordInput"
