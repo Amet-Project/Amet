@@ -1275,3 +1275,86 @@ export const listUsuarios = /* GraphQL */ `
     }
   }
 `;
+export const porEmail = /* GraphQL */ `
+  query PorEmail(
+    $email: String
+    $ap_paterno: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUsuarioFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PorEmail(
+      email: $email
+      ap_paterno: $ap_paterno
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchUsuarios = /* GraphQL */ `
+  query SearchUsuarios(
+    $filter: SearchableUsuarioFilterInput
+    $sort: SearchableUsuarioSortInput
+    $limit: Int
+    $nextToken: String
+    $from: Int
+  ) {
+    searchUsuarios(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
+      items {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+    }
+  }
+`;

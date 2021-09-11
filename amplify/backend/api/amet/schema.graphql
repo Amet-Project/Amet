@@ -138,10 +138,11 @@ type EventoCasinoSE @model
     casino_se: CasinoServicioExtra! @connection(fields: ["id_casino_se"])
 }
 
-type Usuario @model 
-  @key(name: "porRol", fields: ["rol", "ap_paterno"]){
+type Usuario @model @searchable
+@key(name: "porEmail", fields: ["email", "ap_paterno"], queryField: "PorEmail")
+  {
     id: ID!
-    nombres: String!
+    nombres: String! 
     ap_paterno: String!
     ap_materno: String
     nacimiento: String

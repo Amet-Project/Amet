@@ -31,15 +31,11 @@ Amplify.configure(awsExports);
 
 const initialState = { 
   //id: 100,
-  id_rol: 2,
   nombres: '',
   ap_paterno: '',
-  ap_materno: '',
-  nacimiento: '',
-  sexo: '',
   email: '',
-  telefono: '',
-  celular: ''
+  pwd: '',
+  rol: 'CLIENTE'
 }
 
 const useStyles = makeStyles(styles);
@@ -57,9 +53,9 @@ export default function SigninPage(props) {
   //Add to API function
   async function addUser() {
     try {
-      if (!formState.nombres || !formState.email || !formState.telefono ) return
+      if (!formState.nombres || !formState.email || !formState.pwd ) return
       //Get last id
-      const usuariosData = await API.graphql(graphqlOperation(listUsuarios, {limit: 1, order: [['created_at', 'DESC']]  }))
+      //const usuariosData = await API.graphql(graphqlOperation(listUsuarios, {limit: 1, order: [['created_at', 'DESC']]  }))
       
       const usuario = { ...formState }
       setUsuarios([...usuarios, usuario])
@@ -72,7 +68,7 @@ export default function SigninPage(props) {
   }
 
   const setInput = (key, value) => {
-    console.log(formState)
+    //console.log(formState)
     setFormState({ ...formState, [key]: value })
   }
 
@@ -153,7 +149,7 @@ export default function SigninPage(props) {
                     <label>
                       Password
                       <br />
-                      <input value={formState.telefono} onChange={e => setInput('telefono', e.target.value)}/>
+                      <input value={formState.pwd} onChange={e => setInput('pwd', e.target.value)}/>
                     </label>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
