@@ -25,7 +25,6 @@ export const createEvento = /* GraphQL */ `
       }
       usuario {
         id
-        id_rol
         nombres
         ap_paterno
         ap_materno
@@ -34,18 +33,14 @@ export const createEvento = /* GraphQL */ `
         email
         telefono
         celular
+        pwd
         eventos {
           nextToken
         }
         casinos {
           nextToken
         }
-        rol {
-          id
-          nombre
-          createdAt
-          updatedAt
-        }
+        rol
         createdAt
         updatedAt
       }
@@ -132,7 +127,6 @@ export const updateEvento = /* GraphQL */ `
       }
       usuario {
         id
-        id_rol
         nombres
         ap_paterno
         ap_materno
@@ -141,18 +135,14 @@ export const updateEvento = /* GraphQL */ `
         email
         telefono
         celular
+        pwd
         eventos {
           nextToken
         }
         casinos {
           nextToken
         }
-        rol {
-          id
-          nombre
-          createdAt
-          updatedAt
-        }
+        rol
         createdAt
         updatedAt
       }
@@ -239,7 +229,6 @@ export const deleteEvento = /* GraphQL */ `
       }
       usuario {
         id
-        id_rol
         nombres
         ap_paterno
         ap_materno
@@ -248,18 +237,14 @@ export const deleteEvento = /* GraphQL */ `
         email
         telefono
         celular
+        pwd
         eventos {
           nextToken
         }
         casinos {
           nextToken
         }
-        rol {
-          id
-          nombre
-          createdAt
-          updatedAt
-        }
+        rol
         createdAt
         updatedAt
       }
@@ -377,7 +362,6 @@ export const createCasinoHorarioFijo = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -386,6 +370,8 @@ export const createCasinoHorarioFijo = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -452,7 +438,6 @@ export const updateCasinoHorarioFijo = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -461,6 +446,8 @@ export const updateCasinoHorarioFijo = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -527,7 +514,6 @@ export const deleteCasinoHorarioFijo = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -536,6 +522,8 @@ export const deleteCasinoHorarioFijo = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -763,7 +751,6 @@ export const createCasinoPrecioFlex = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -772,6 +759,8 @@ export const createCasinoPrecioFlex = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -834,7 +823,6 @@ export const updateCasinoPrecioFlex = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -843,6 +831,8 @@ export const updateCasinoPrecioFlex = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -905,7 +895,6 @@ export const deleteCasinoPrecioFlex = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -914,6 +903,8 @@ export const deleteCasinoPrecioFlex = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1009,7 +1000,6 @@ export const createCasino = /* GraphQL */ `
       }
       usuario {
         id
-        id_rol
         nombres
         ap_paterno
         ap_materno
@@ -1018,18 +1008,14 @@ export const createCasino = /* GraphQL */ `
         email
         telefono
         celular
+        pwd
         eventos {
           nextToken
         }
         casinos {
           nextToken
         }
-        rol {
-          id
-          nombre
-          createdAt
-          updatedAt
-        }
+        rol
         createdAt
         updatedAt
       }
@@ -1122,7 +1108,6 @@ export const updateCasino = /* GraphQL */ `
       }
       usuario {
         id
-        id_rol
         nombres
         ap_paterno
         ap_materno
@@ -1131,18 +1116,14 @@ export const updateCasino = /* GraphQL */ `
         email
         telefono
         celular
+        pwd
         eventos {
           nextToken
         }
         casinos {
           nextToken
         }
-        rol {
-          id
-          nombre
-          createdAt
-          updatedAt
-        }
+        rol
         createdAt
         updatedAt
       }
@@ -1235,7 +1216,6 @@ export const deleteCasino = /* GraphQL */ `
       }
       usuario {
         id
-        id_rol
         nombres
         ap_paterno
         ap_materno
@@ -1244,18 +1224,14 @@ export const deleteCasino = /* GraphQL */ `
         email
         telefono
         celular
+        pwd
         eventos {
           nextToken
         }
         casinos {
           nextToken
         }
-        rol {
-          id
-          nombre
-          createdAt
-          updatedAt
-        }
+        rol
         createdAt
         updatedAt
       }
@@ -1298,7 +1274,6 @@ export const createCasinoArea = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -1307,6 +1282,8 @@ export const createCasinoArea = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1361,7 +1338,6 @@ export const updateCasinoArea = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -1370,6 +1346,8 @@ export const updateCasinoArea = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1424,7 +1402,6 @@ export const deleteCasinoArea = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -1433,6 +1410,8 @@ export const deleteCasinoArea = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1559,7 +1538,6 @@ export const createCasinoServicio = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -1568,6 +1546,8 @@ export const createCasinoServicio = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1622,7 +1602,6 @@ export const updateCasinoServicio = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -1631,6 +1610,8 @@ export const updateCasinoServicio = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1685,7 +1666,6 @@ export const deleteCasinoServicio = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -1694,6 +1674,8 @@ export const deleteCasinoServicio = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1831,7 +1813,6 @@ export const createCasinoServicioExtra = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -1840,6 +1821,8 @@ export const createCasinoServicioExtra = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1905,7 +1888,6 @@ export const updateCasinoServicioExtra = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -1914,6 +1896,8 @@ export const updateCasinoServicioExtra = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1979,7 +1963,6 @@ export const deleteCasinoServicioExtra = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -1988,6 +1971,8 @@ export const deleteCasinoServicioExtra = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -2104,7 +2089,6 @@ export const createEventoCasinoSE = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -2113,6 +2097,8 @@ export const createEventoCasinoSE = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -2197,7 +2183,6 @@ export const updateEventoCasinoSE = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -2206,6 +2191,8 @@ export const updateEventoCasinoSE = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -2290,7 +2277,6 @@ export const deleteEventoCasinoSE = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -2299,6 +2285,8 @@ export const deleteEventoCasinoSE = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -2369,7 +2357,6 @@ export const createUsuario = /* GraphQL */ `
   ) {
     createUsuario(input: $input, condition: $condition) {
       id
-      id_rol
       nombres
       ap_paterno
       ap_materno
@@ -2378,6 +2365,7 @@ export const createUsuario = /* GraphQL */ `
       email
       telefono
       celular
+      pwd
       eventos {
         items {
           id
@@ -2404,15 +2392,7 @@ export const createUsuario = /* GraphQL */ `
         }
         nextToken
       }
-      rol {
-        id
-        nombre
-        usuarios {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      rol
       createdAt
       updatedAt
     }
@@ -2425,7 +2405,6 @@ export const updateUsuario = /* GraphQL */ `
   ) {
     updateUsuario(input: $input, condition: $condition) {
       id
-      id_rol
       nombres
       ap_paterno
       ap_materno
@@ -2434,6 +2413,7 @@ export const updateUsuario = /* GraphQL */ `
       email
       telefono
       celular
+      pwd
       eventos {
         items {
           id
@@ -2460,15 +2440,7 @@ export const updateUsuario = /* GraphQL */ `
         }
         nextToken
       }
-      rol {
-        id
-        nombre
-        usuarios {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      rol
       createdAt
       updatedAt
     }
@@ -2481,7 +2453,6 @@ export const deleteUsuario = /* GraphQL */ `
   ) {
     deleteUsuario(input: $input, condition: $condition) {
       id
-      id_rol
       nombres
       ap_paterno
       ap_materno
@@ -2490,6 +2461,7 @@ export const deleteUsuario = /* GraphQL */ `
       email
       telefono
       celular
+      pwd
       eventos {
         items {
           id
@@ -2516,105 +2488,7 @@ export const deleteUsuario = /* GraphQL */ `
         }
         nextToken
       }
-      rol {
-        id
-        nombre
-        usuarios {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createRol = /* GraphQL */ `
-  mutation CreateRol(
-    $input: CreateRolInput!
-    $condition: ModelRolConditionInput
-  ) {
-    createRol(input: $input, condition: $condition) {
-      id
-      nombre
-      usuarios {
-        items {
-          id
-          id_rol
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateRol = /* GraphQL */ `
-  mutation UpdateRol(
-    $input: UpdateRolInput!
-    $condition: ModelRolConditionInput
-  ) {
-    updateRol(input: $input, condition: $condition) {
-      id
-      nombre
-      usuarios {
-        items {
-          id
-          id_rol
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteRol = /* GraphQL */ `
-  mutation DeleteRol(
-    $input: DeleteRolInput!
-    $condition: ModelRolConditionInput
-  ) {
-    deleteRol(input: $input, condition: $condition) {
-      id
-      nombre
-      usuarios {
-        items {
-          id
-          id_rol
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      rol
       createdAt
       updatedAt
     }

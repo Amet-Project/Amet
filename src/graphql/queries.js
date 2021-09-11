@@ -22,7 +22,6 @@ export const getEvento = /* GraphQL */ `
       }
       usuario {
         id
-        id_rol
         nombres
         ap_paterno
         ap_materno
@@ -31,18 +30,14 @@ export const getEvento = /* GraphQL */ `
         email
         telefono
         celular
+        pwd
         eventos {
           nextToken
         }
         casinos {
           nextToken
         }
-        rol {
-          id
-          nombre
-          createdAt
-          updatedAt
-        }
+        rol
         createdAt
         updatedAt
       }
@@ -124,7 +119,6 @@ export const listEventos = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -133,6 +127,8 @@ export const listEventos = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -219,7 +215,6 @@ export const getCasinoHorarioFijo = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -228,6 +223,8 @@ export const getCasinoHorarioFijo = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -423,7 +420,6 @@ export const getCasinoPrecioFlex = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -432,6 +428,8 @@ export const getCasinoPrecioFlex = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -566,7 +564,6 @@ export const getCasino = /* GraphQL */ `
       }
       usuario {
         id
-        id_rol
         nombres
         ap_paterno
         ap_materno
@@ -575,18 +572,14 @@ export const getCasino = /* GraphQL */ `
         email
         telefono
         celular
+        pwd
         eventos {
           nextToken
         }
         casinos {
           nextToken
         }
-        rol {
-          id
-          nombre
-          createdAt
-          updatedAt
-        }
+        rol
         createdAt
         updatedAt
       }
@@ -626,7 +619,6 @@ export const listCasinos = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -635,6 +627,8 @@ export const listCasinos = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -676,7 +670,6 @@ export const getCasinoArea = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -685,6 +678,8 @@ export const getCasinoArea = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -812,7 +807,6 @@ export const getCasinoServicio = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -821,6 +815,8 @@ export const getCasinoServicio = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -959,7 +955,6 @@ export const getCasinoServicioExtra = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -968,6 +963,8 @@ export const getCasinoServicioExtra = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1091,7 +1088,6 @@ export const getEventoCasinoSE = /* GraphQL */ `
         }
         usuario {
           id
-          id_rol
           nombres
           ap_paterno
           ap_materno
@@ -1100,6 +1096,8 @@ export const getEventoCasinoSE = /* GraphQL */ `
           email
           telefono
           celular
+          pwd
+          rol
           createdAt
           updatedAt
         }
@@ -1204,7 +1202,6 @@ export const getUsuario = /* GraphQL */ `
   query GetUsuario($id: ID!) {
     getUsuario(id: $id) {
       id
-      id_rol
       nombres
       ap_paterno
       ap_materno
@@ -1213,6 +1210,7 @@ export const getUsuario = /* GraphQL */ `
       email
       telefono
       celular
+      pwd
       eventos {
         items {
           id
@@ -1239,15 +1237,7 @@ export const getUsuario = /* GraphQL */ `
         }
         nextToken
       }
-      rol {
-        id
-        nombre
-        usuarios {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
+      rol
       createdAt
       updatedAt
     }
@@ -1262,7 +1252,6 @@ export const listUsuarios = /* GraphQL */ `
     listUsuarios(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        id_rol
         nombres
         ap_paterno
         ap_materno
@@ -1271,65 +1260,14 @@ export const listUsuarios = /* GraphQL */ `
         email
         telefono
         celular
+        pwd
         eventos {
           nextToken
         }
         casinos {
           nextToken
         }
-        rol {
-          id
-          nombre
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getRol = /* GraphQL */ `
-  query GetRol($id: ID!) {
-    getRol(id: $id) {
-      id
-      nombre
-      usuarios {
-        items {
-          id
-          id_rol
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listRols = /* GraphQL */ `
-  query ListRols(
-    $filter: ModelRolFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listRols(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        nombre
-        usuarios {
-          nextToken
-        }
+        rol
         createdAt
         updatedAt
       }

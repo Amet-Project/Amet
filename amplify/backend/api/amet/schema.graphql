@@ -5,8 +5,8 @@ type Evento @model
   @key(name: "porCasinoHorarioFlex", fields: ["id_cas_hor_flex", "fecha"]){
     id: ID!
     id_usuario: ID!
-    id_cas_hor_fijo: ID!
-    id_cas_hor_flex: ID!
+    id_cas_hor_fijo: ID
+    id_cas_hor_flex: ID
     fecha: String!
     importe: Float!
     casino_servicios_extras: [EventoCasinoSE] @connection(keyName: "porEvento", fields: ["id"])
@@ -65,8 +65,8 @@ type Casino @model
     id_usuario: ID!
     direccion: String!
     titulo: String!
-    descripcion: String!
-    rfc: String!
+    descripcion: String
+    rfc: String
     horarios_fijos: [CasinoHorarioFijo] @connection(keyName: "porCasino", fields: ["id"])
     precios_flexibles: [CasinoPrecioFlex] @connection(keyName: "porCasino", fields: ["id"])
     areas: [CasinoArea] @connection(keyName: "porCasino", fields: ["id"])
@@ -81,7 +81,7 @@ type CasinoArea @model
     id: ID!
     id_casino: ID!
     id_area: ID!
-    descripcion: String!
+    descripcion: String
     casino: Casino! @connection(fields: ["id_casino"])
     area: Area! @connection(fields: ["id_area"])
 }
@@ -98,7 +98,7 @@ type CasinoServicio @model
     id: ID!
     id_casino: ID!
     id_servicio: ID!
-    descripcion: String!
+    descripcion: String
     casino: Casino! @connection(fields: ["id_casino"])
     servicio: Servicio! @connection(fields: ["id_servicio"])
 }
@@ -115,7 +115,7 @@ type CasinoServicioExtra @model
     id: ID!
     id_casino: ID!
     id_servicio_extra: ID!
-    descripcion: String!
+    descripcion: String
     costo: Float!
     eventos: [EventoCasinoSE] @connection(keyName: "porCasinoSE", fields: ["id"])
     casino: Casino! @connection(fields: ["id_casino"])
@@ -139,26 +139,26 @@ type EventoCasinoSE @model
 }
 
 type Usuario @model 
-  @key(name: "porRol", fields: ["id_rol", "ap_paterno"]){
+  @key(name: "porRol", fields: ["rol", "ap_paterno"]){
     id: ID!
-    id_rol: ID!
     nombres: String!
     ap_paterno: String!
-    ap_materno: String!
-    nacimiento: String!
-    sexo: String!
+    ap_materno: String
+    nacimiento: String
+    sexo: String
     email: String!
-    telefono: String!
-    celular: String!
+    telefono: String
+    celular: String
+    pwd: String!
     eventos: [Evento] @connection(keyName: "porUsuario", fields: ["id"])
     casinos: [Casino] @connection(keyName: "porUsuario", fields: ["id"])
-    rol: Rol! @connection(fields: ["id_rol"])
+    rol: Rol!
 }
 
-type Rol @model {
-  id: ID!
-  nombre: String!
-  usuarios: [Usuario] @connection(keyName: "porRol", fields: ["id"])
+enum Rol {
+  ADMIN
+  PROVEEDOR
+  CLIENTE
 }
 
 
