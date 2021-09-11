@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -20,8 +20,27 @@ import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
 import image from "assets/img/bg7.jpg";
+
+//Amplify imports
+import Amplify, { API, graphqlOperation } from 'aws-amplify'
+import { createUsuario } from '../../graphql/mutations.js'
+import { listUsuarios } from '../../graphql/queries.js'
+import awsExports from "../../aws-exports.js";
+Amplify.configure(awsExports);
+
+const initialState = { 
+  //id: 100,
+  id_rol: 2,
+  nombres: '',
+  ap_paterno: '',
+  ap_materno: '',
+  nacimiento: '',
+  sexo: '',
+  email: '',
+  telefono: '',
+  celular: ''
+}
 
 const useStyles = makeStyles(styles);
 
@@ -32,6 +51,31 @@ export default function SigninPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+  const [formState, setFormState] = useState(initialState)
+  const [usuarios, setUsuarios] = useState([])
+
+  //Add to API function
+  async function addUser() {
+    try {
+      if (!formState.nombres || !formState.email || !formState.telefono ) return
+      //Get last id
+      const usuariosData = await API.graphql(graphqlOperation(listUsuarios, {limit: 1, order: [['created_at', 'DESC']]  }))
+      
+      const usuario = { ...formState }
+      setUsuarios([...usuarios, usuario])
+      setFormState(initialState)
+      await API.graphql(graphqlOperation(createUsuario, {input: usuario}))
+      console.log(formState)
+    } catch (err) {
+      console.log('error creating user:', err)
+    }
+  }
+
+  const setInput = (key, value) => {
+    console.log(formState)
+    setFormState({ ...formState, [key]: value })
+  }
+
   return (
     <div>
       <Header
@@ -88,57 +132,32 @@ export default function SigninPage(props) {
                   </CardHeader>
                   <p className={classes.divider}>O regístrate con Email</p>
                   <CardBody>
-                    <CustomInput
-                      labelText="First Name..."
-                      id="first"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Email..."
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "email",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Password"
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off"
-                      }}
-                    />
+                    <label>
+                      First Name
+                      <br />
+                      <input value={formState.nombres} onChange={e => setInput('nombres', e.target.value)}/>
+                    </label>
+                    <br />
+                    <label>
+                      Last Name
+                      <br />
+                      <input value={formState.ap_paterno} onChange={e => setInput('ap_paterno', e.target.value)}/>
+                    </label>
+                    <br />
+                    <label>
+                      Email
+                      <br />
+                      <input value={formState.email} onChange={e => setInput('email', e.target.value)}/>
+                    </label>
+                    <br />
+                    <label>
+                      Password
+                      <br />
+                      <input value={formState.telefono} onChange={e => setInput('telefono', e.target.value)}/>
+                    </label>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
+                    <Button simple color="primary" size="lg" onClick={addUser}>
                       Registrarme
                     </Button>
                   </CardFooter>
