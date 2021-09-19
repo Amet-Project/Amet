@@ -17,7 +17,6 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/bg7.jpg";
@@ -25,7 +24,7 @@ import image from "assets/img/bg7.jpg";
 //Amplify imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
 import { createUsuario } from '../../graphql/mutations.js'
-import { listUsuarios } from '../../graphql/queries.js'
+import { porEmail } from '../../graphql/queries.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -53,17 +52,23 @@ export default function SigninPage(props) {
   //Add to API function
   async function addUser() {
     try {
-      if (!formState.nombres || !formState.email || !formState.pwd ) return
-      //Get last id
-      //const usuariosData = await API.graphql(graphqlOperation(listUsuarios, {limit: 1, order: [['created_at', 'DESC']]  }))
-      
+      //Inputs validation
+      if (!formState.nombres || !formState.email || !formState.pwd ) {
+        console.log("Favor de ingresar todos los campos")
+        return 
+      }   
+      //Email exist validation
+      const usuarioAux = await API.graphql(graphqlOperation(porEmail, {email: formState.email}))
+      if (usuarioAux.data.PorEmail.items.length > 0){
+        console.log("El correo que esta deseando ingresar ya eta registrado")
+        return
+      } 
       const usuario = { ...formState }
       setUsuarios([...usuarios, usuario])
       setFormState(initialState)
       await API.graphql(graphqlOperation(createUsuario, {input: usuario}))
-      console.log(formState)
     } catch (err) {
-      console.log('error creating user:', err)
+      console.log('error creando usuario:', err)
     }
   }
 
