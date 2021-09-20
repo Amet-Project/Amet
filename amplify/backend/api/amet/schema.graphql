@@ -2,17 +2,20 @@
 type Evento @model 
   @key(name: "porUsuario", fields: ["id_usuario", "fecha"])
   @key(name: "porCasinoHorarioFijo", fields: ["id_cas_hor_fijo", "fecha"])
-  @key(name: "porCasinoHorarioFlex", fields: ["id_cas_hor_flex", "fecha"]){
+  @key(name: "porCasinoHorarioFlex", fields: ["id_cas_hor_flex", "fecha"])
+  @key(name: "porCasino", fields: ["id_casino", "fecha"]){
     id: ID!
     id_usuario: ID!
     id_cas_hor_fijo: ID
     id_cas_hor_flex: ID
+    id_casino: ID!
     fecha: String!
     importe: Float!
     casino_servicios_extras: [EventoCasinoSE] @connection(keyName: "porEvento", fields: ["id"])
     usuario: Usuario! @connection(fields: ["id_usuario"])
-    cas_hor_fijo: CasinoHorarioFijo! @connection(fields: ["id_cas_hor_fijo"])
-    cas_hor_flex: CasinoHorarioFlex! @connection(fields: ["id_cas_hor_flex"])
+    cas_hor_fijo: CasinoHorarioFijo @connection(fields: ["id_cas_hor_fijo"])
+    cas_hor_flex: CasinoHorarioFlex @connection(fields: ["id_cas_hor_flex"])
+    casino: Casino! @connection(fields: ["id_casino"])
 }
 
 type CasinoHorarioFijo @model 
@@ -72,6 +75,8 @@ type Casino @model
     areas: [CasinoArea] @connection(keyName: "porCasino", fields: ["id"])
     servicios: [CasinoServicio] @connection(keyName: "porCasino", fields: ["id"])
     servicios_extras: [CasinoServicioExtra] @connection(keyName: "porCasino", fields: ["id"])
+    eventos: [Evento] @connection(keyName: "porCasino", fields: ["id"])
+    imagenes: [Imagen] @connection(keyName: "porCasino", fields: ["id"])
     usuario: Usuario! @connection(fields: ["id_usuario"])
 }
 
@@ -139,7 +144,7 @@ type EventoCasinoSE @model
 }
 
 type Usuario @model @searchable
-@key(name: "porEmail", fields: ["email", "ap_paterno"], queryField: "PorEmail")
+@key(name: "usuarioPorEmail", fields: ["email", "ap_paterno"], queryField: "PorEmail")
   {
     id: ID!
     nombres: String! 
@@ -154,6 +159,15 @@ type Usuario @model @searchable
     eventos: [Evento] @connection(keyName: "porUsuario", fields: ["id"])
     casinos: [Casino] @connection(keyName: "porUsuario", fields: ["id"])
     rol: Rol!
+}
+
+type Imagen @model @searchable
+@key(name: "porCasino", fields: ["id_casino", "id"])
+  {
+    id: ID!
+    id_casino: ID!
+    url: String! 
+    casino: Casino! @connection(fields: ["id_casino"])
 }
 
 enum Rol {
