@@ -52,6 +52,10 @@ type ServicioMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type ImagenMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type UsuarioMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -66,8 +70,9 @@ export declare class Evento {
   readonly importe: number;
   readonly casino_servicios_extras?: (EventoCasinoSE | null)[];
   readonly usuario: Usuario;
-  readonly cas_hor_fijo: CasinoHorarioFijo;
-  readonly cas_hor_flex: CasinoHorarioFlex;
+  readonly cas_hor_fijo?: CasinoHorarioFijo;
+  readonly cas_hor_flex?: CasinoHorarioFlex;
+  readonly casino: Casino;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Evento, EventoMetaData>);
@@ -108,6 +113,8 @@ export declare class Casino {
   readonly areas?: (CasinoArea | null)[];
   readonly servicios?: (CasinoServicio | null)[];
   readonly servicios_extras?: (CasinoServicioExtra | null)[];
+  readonly eventos?: (Evento | null)[];
+  readonly imagenes?: (Imagen | null)[];
   readonly usuario: Usuario;
   readonly createdAt?: string;
   readonly updatedAt?: string;
@@ -205,6 +212,16 @@ export declare class Servicio {
   readonly updatedAt?: string;
   constructor(init: ModelInit<Servicio, ServicioMetaData>);
   static copyOf(source: Servicio, mutator: (draft: MutableModel<Servicio, ServicioMetaData>) => MutableModel<Servicio, ServicioMetaData> | void): Servicio;
+}
+
+export declare class Imagen {
+  readonly id: string;
+  readonly url: string;
+  readonly casino: Casino;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Imagen, ImagenMetaData>);
+  static copyOf(source: Imagen, mutator: (draft: MutableModel<Imagen, ImagenMetaData>) => MutableModel<Imagen, ImagenMetaData> | void): Imagen;
 }
 
 export declare class Usuario {

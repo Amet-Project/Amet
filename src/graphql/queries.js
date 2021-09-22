@@ -1,6 +1,35 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getTodo = /* GraphQL */ `
+  query GetTodo($id: ID!) {
+    getTodo(id: $id) {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTodos = /* GraphQL */ `
+  query ListTodos(
+    $filter: ModelTodoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getEvento = /* GraphQL */ `
   query GetEvento($id: ID!) {
     getEvento(id: $id) {
@@ -8,6 +37,7 @@ export const getEvento = /* GraphQL */ `
       id_usuario
       id_cas_hor_fijo
       id_cas_hor_flex
+      id_casino
       fecha
       importe
       casino_servicios_extras {
@@ -95,6 +125,52 @@ export const getEvento = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        eventos {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -112,6 +188,7 @@ export const listEventos = /* GraphQL */ `
         id_usuario
         id_cas_hor_fijo
         id_cas_hor_flex
+        id_casino
         fecha
         importe
         casino_servicios_extras {
@@ -156,6 +233,16 @@ export const listEventos = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -184,6 +271,7 @@ export const getCasinoHorarioFijo = /* GraphQL */ `
           id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
+          id_casino
           fecha
           importe
           createdAt
@@ -211,6 +299,12 @@ export const getCasinoHorarioFijo = /* GraphQL */ `
           nextToken
         }
         servicios_extras {
+          nextToken
+        }
+        eventos {
+          nextToken
+        }
+        imagenes {
           nextToken
         }
         usuario {
@@ -293,6 +387,7 @@ export const getCasinoHorarioFlex = /* GraphQL */ `
           id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
+          id_casino
           fecha
           importe
           createdAt
@@ -416,6 +511,12 @@ export const getCasinoPrecioFlex = /* GraphQL */ `
           nextToken
         }
         servicios_extras {
+          nextToken
+        }
+        eventos {
+          nextToken
+        }
+        imagenes {
           nextToken
         }
         usuario {
@@ -562,6 +663,30 @@ export const getCasino = /* GraphQL */ `
         }
         nextToken
       }
+      eventos {
+        items {
+          id
+          id_usuario
+          id_cas_hor_fijo
+          id_cas_hor_flex
+          id_casino
+          fecha
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_casino
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       usuario {
         id
         nombres
@@ -617,6 +742,12 @@ export const listCasinos = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
+        eventos {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
         usuario {
           id
           nombres
@@ -666,6 +797,12 @@ export const getCasinoArea = /* GraphQL */ `
           nextToken
         }
         servicios_extras {
+          nextToken
+        }
+        eventos {
+          nextToken
+        }
+        imagenes {
           nextToken
         }
         usuario {
@@ -803,6 +940,12 @@ export const getCasinoServicio = /* GraphQL */ `
           nextToken
         }
         servicios_extras {
+          nextToken
+        }
+        eventos {
+          nextToken
+        }
+        imagenes {
           nextToken
         }
         usuario {
@@ -953,6 +1096,12 @@ export const getCasinoServicioExtra = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
+        eventos {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
         usuario {
           id
           nombres
@@ -1081,6 +1230,7 @@ export const getEventoCasinoSE = /* GraphQL */ `
         id_usuario
         id_cas_hor_fijo
         id_cas_hor_flex
+        id_casino
         fecha
         importe
         casino_servicios_extras {
@@ -1122,6 +1272,16 @@ export const getEventoCasinoSE = /* GraphQL */ `
           id_cas_precio_flex
           hora_inicio
           hora_fin
+          createdAt
+          updatedAt
+        }
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
           createdAt
           updatedAt
         }
@@ -1177,6 +1337,7 @@ export const listEventoCasinoSES = /* GraphQL */ `
           id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
+          id_casino
           fecha
           importe
           createdAt
@@ -1217,6 +1378,7 @@ export const getUsuario = /* GraphQL */ `
           id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
+          id_casino
           fecha
           importe
           createdAt
@@ -1268,6 +1430,91 @@ export const listUsuarios = /* GraphQL */ `
           nextToken
         }
         rol
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getImagen = /* GraphQL */ `
+  query GetImagen($id: ID!) {
+    getImagen(id: $id) {
+      id
+      id_casino
+      url
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        eventos {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listImagens = /* GraphQL */ `
+  query ListImagens(
+    $filter: ModelImagenFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listImagens(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        id_casino
+        url
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -1350,6 +1597,43 @@ export const searchUsuarios = /* GraphQL */ `
           nextToken
         }
         rol
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+    }
+  }
+`;
+export const searchImagens = /* GraphQL */ `
+  query SearchImagens(
+    $filter: SearchableImagenFilterInput
+    $sort: SearchableImagenSortInput
+    $limit: Int
+    $nextToken: String
+    $from: Int
+  ) {
+    searchImagens(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
+      items {
+        id
+        id_casino
+        url
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }

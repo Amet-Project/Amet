@@ -1,6 +1,6 @@
 projects:
   amet:
-    schemaPath: amplify/backend/api/amet/build/schema.graphql
+    schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.js
     excludes:

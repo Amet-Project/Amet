@@ -1,4 +1,8 @@
-
+type Todo @model {
+  id: ID!
+  name: String!
+  description: String
+}
 type Evento @model 
   @key(name: "porUsuario", fields: ["id_usuario", "fecha"])
   @key(name: "porCasinoHorarioFijo", fields: ["id_cas_hor_fijo", "fecha"])
@@ -175,7 +179,3 @@ enum Rol {
   PROVEEDOR
   CLIENTE
 }
-
-
-
-

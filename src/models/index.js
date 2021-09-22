@@ -8,7 +8,7 @@ const Rol = {
   "CLIENTE": "CLIENTE"
 };
 
-const { Evento, EventoCasinoSE, CasinoServicioExtra, Casino, CasinoHorarioFijo, CasinoPrecioFlex, CasinoHorarioFlex, CasinoArea, Area, CasinoServicio, Servicio, Usuario, ServicioExtra } = initSchema(schema);
+const { Evento, EventoCasinoSE, CasinoServicioExtra, Casino, CasinoHorarioFijo, CasinoPrecioFlex, CasinoHorarioFlex, CasinoArea, Area, CasinoServicio, Servicio, Imagen, Usuario, ServicioExtra } = initSchema(schema);
 
 export {
   Evento,
@@ -22,6 +22,7 @@ export {
   Area,
   CasinoServicio,
   Servicio,
+  Imagen,
   Usuario,
   ServicioExtra,
   Rol

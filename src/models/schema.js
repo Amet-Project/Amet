@@ -57,7 +57,7 @@ export const schema = {
                     "type": {
                         "model": "CasinoHorarioFijo"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
@@ -70,11 +70,24 @@ export const schema = {
                     "type": {
                         "model": "CasinoHorarioFlex"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
                         "targetName": "id_cas_hor_flex"
+                    }
+                },
+                "casino": {
+                    "name": "casino",
+                    "isArray": false,
+                    "type": {
+                        "model": "Casino"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "id_casino"
                     }
                 },
                 "createdAt": {
@@ -127,6 +140,16 @@ export const schema = {
                         "name": "porCasinoHorarioFlex",
                         "fields": [
                             "id_cas_hor_flex",
+                            "fecha"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "porCasino",
+                        "fields": [
+                            "id_casino",
                             "fecha"
                         ]
                     }
@@ -424,6 +447,34 @@ export const schema = {
                     "isArray": true,
                     "type": {
                         "model": "CasinoServicioExtra"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "casino"
+                    }
+                },
+                "eventos": {
+                    "name": "eventos",
+                    "isArray": true,
+                    "type": {
+                        "model": "Evento"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "casino"
+                    }
+                },
+                "imagenes": {
+                    "name": "imagenes",
+                    "isArray": true,
+                    "type": {
+                        "model": "Imagen"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -1132,6 +1183,76 @@ export const schema = {
                 }
             ]
         },
+        "Imagen": {
+            "name": "Imagen",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "url": {
+                    "name": "url",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "casino": {
+                    "name": "casino",
+                    "isArray": false,
+                    "type": {
+                        "model": "Casino"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "id_casino"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Imagens",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "porCasino",
+                        "fields": [
+                            "id_casino",
+                            "id"
+                        ]
+                    }
+                }
+            ]
+        },
         "Usuario": {
             "name": "Usuario",
             "fields": {
@@ -1267,13 +1388,18 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
                     "type": "key",
                     "properties": {
-                        "name": "porRol",
+                        "name": "usuarioPorEmail",
                         "fields": [
-                            "rol",
+                            "email",
                             "ap_paterno"
-                        ]
+                        ],
+                        "queryField": "PorEmail"
                     }
                 }
             ]
@@ -1347,5 +1473,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "63691f37b64f1b6ea0ae9c1a16835ce9"
+    "version": "ca0feba5cc6c28387f8f069f3c1e3d52"
 };
