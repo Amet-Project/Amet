@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,39 +16,19 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-import image from "assets/img/bg7.jpg";
 
-//Amplify Imports
-import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { listCasinos } from '../../graphql/queries.js'
-import awsExports from "../../aws-exports.js";
-Amplify.configure(awsExports);
+import image from "assets/img/bg7.jpg";
 
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const { date } = useParams()
 
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
-  const [casinos, setCasinos] = useState([])
-
-  useEffect(() => {
-    //fetchCasinos()
-  }, [])
-
-  //Cambiar a casinos
-  //Get the whole items
-  async function fetchCasinos() {
-    try {
-      const usersData = await API.graphql(graphqlOperation(listCasinos))
-      setCasinos(usersData.data.listCasinos.items)
-    } catch (err) { console.log('error cargando casinos') }
-  }
 
   return (
     <div>
@@ -73,22 +53,13 @@ export default function LoginPage(props) {
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h3>Card Header {date}</h3>
+                    <h3>Card Header Musica</h3>
                   </CardHeader>
                   <CardBody>
-                    <div>
-                    {
-                      casinos && casinos.map(casino => (
-                        <div id = {casino.id}>
-                          <p>{casino.titulo}</p>
-                          <p>{casino.descripcion}</p>
-                        </div>
-                      ))
-                    }
-                    </div>                   
+                    <h4> Card Body </h4>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg" onClick={fetchCasinos}>
+                    <Button simple color="primary" size="lg">
                       Button
                     </Button>
                   </CardFooter>
