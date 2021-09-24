@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -37,6 +37,10 @@ export default function LoginPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
+  useEffect(() => {
+    fetchCasinos()
+  }, [])
+
   async function fetchCasinos() {
     try {
       const usersData = await API.graphql(graphqlOperation(listCasinos))
@@ -70,18 +74,21 @@ export default function LoginPage(props) {
                     <h3>Card Header Casinos</h3>
                   </CardHeader>
                   <CardBody>
-                    <div>
+                    <p> Prueba de Tarjeta</p>
+{/*                     <div>
                       {
                         casinos && casinos.map(casino => (
-                          <div id={casino.id}>
-                            <p>{casino.titulo}</p>
-                            <p>-----------------</p>
-                            <p>{casino.descripcion}</p>
-                            <br></br>
-                          </div>
+                          <CardBody>
+                            <div id={casino.id}>
+                              <p>{casino.titulo}</p>
+                              <p>----</p>
+                              <p>{casino.descripcion}</p>
+                              <p>-----------------</p>
+                            </div>
+                          </CardBody>
                         ))
                       }
-                    </div>
+                    </div> */}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     <Button simple color="primary" size="lg" onClick={fetchCasinos}>
@@ -90,6 +97,22 @@ export default function LoginPage(props) {
                   </CardFooter>
                 </form>
               </Card>
+              {
+                casinos && casinos.map(casino => (
+                  <Card className={classes[cardAnimaton]}>
+                    <form className={classes.form}>
+                      <CardHeader color="primary" className={classes.cardHeader}>
+                        <h3>{casino.titulo}</h3>
+                      </CardHeader>
+                      <CardBody>
+                        <div id={casino.id}>
+                          <p>{casino.descripcion}</p>
+                        </div>
+                      </CardBody>
+                    </form>
+                  </Card>
+                ))
+              }
             </GridItem>
           </GridContainer>
         </div>
