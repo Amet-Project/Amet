@@ -38,7 +38,7 @@ export default function LoginPage(props) {
   const [casinos, setCasinos] = useState([])
 
   useEffect(() => {
-    //fetchCasinos()
+    fetchCasinos()
   }, [])
 
   //Cambiar a casinos
@@ -70,30 +70,31 @@ export default function LoginPage(props) {
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
-              <Card className={classes[cardAnimaton]}>
-                <form className={classes.form}>
-                  <CardHeader color="primary" className={classes.cardHeader}>
-                    <h3>Card Header {date}</h3>
-                  </CardHeader>
-                  <CardBody>
-                    <div>
-                    {
-                      casinos && casinos.map(casino => (
-                        <div id = {casino.id}>
-                          <p>{casino.titulo}</p>
-                          <p>{casino.descripcion}</p>
-                        </div>
-                      ))
-                    }
-                    </div>                   
-                  </CardBody>
-                  <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg" onClick={fetchCasinos}>
-                      Button
-                    </Button>
-                  </CardFooter>
-                </form>
-              </Card>
+            {
+                casinos && casinos.map(casino => (
+                  <div>
+                    <Card className={classes[cardAnimaton]}>
+                      <form className={classes.form}>
+                        <CardHeader color="primary" className={classes.cardHeader}>
+                          <h3>{casino.titulo}</h3>
+                        </CardHeader>
+                        <CardBody>
+                          <div id={casino.id}>
+                            <img className={classes.casinoImage} src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
+                            <p>{casino.descripcion}</p>
+                          </div>
+                        </CardBody>
+                        <CardFooter className={classes.cardFooter}>
+                          <Button color="primary" size="lg">
+                            Reservar
+                          </Button>
+                        </CardFooter>
+                      </form>
+                    </Card>
+                    <br />
+                  </div>
+                ))
+              }
             </GridItem>
           </GridContainer>
         </div>
