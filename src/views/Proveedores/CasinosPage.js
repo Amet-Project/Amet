@@ -68,35 +68,6 @@ export default function LoginPage(props) {
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
-              <Card className={classes[cardAnimaton]}>
-                <form className={classes.form}>
-                  <CardHeader color="primary" className={classes.cardHeader}>
-                    <h3>Card Header Casinos</h3>
-                  </CardHeader>
-                  <CardBody>
-                    <p> Prueba de Tarjeta</p>
-{/*                     <div>
-                      {
-                        casinos && casinos.map(casino => (
-                          <CardBody>
-                            <div id={casino.id}>
-                              <p>{casino.titulo}</p>
-                              <p>----</p>
-                              <p>{casino.descripcion}</p>
-                              <p>-----------------</p>
-                            </div>
-                          </CardBody>
-                        ))
-                      }
-                    </div> */}
-                  </CardBody>
-                  <CardFooter className={classes.cardFooter}>
-                    <Button color="primary" size="lg" onClick={fetchCasinos}>
-                      Button
-                    </Button>
-                  </CardFooter>
-                </form>
-              </Card>
               {
                 casinos && casinos.map(casino => (
                   <div>
@@ -107,7 +78,7 @@ export default function LoginPage(props) {
                         </CardHeader>
                         <CardBody>
                           <div id={casino.id}>
-                            <img src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
+                            <img className={classes.casinoImage} src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
                             <p>{casino.descripcion}</p>
                           </div>
                         </CardBody>

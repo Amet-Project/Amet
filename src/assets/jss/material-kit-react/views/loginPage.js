@@ -91,6 +91,10 @@ const signupPageStyle = {
   },
   inputIconsColor: {
     color: "#495057"
+  },
+  casinoImage: {
+    width: "-webkit-fill-available",
+    verticalAlign: "middle"
   }
 };
 
