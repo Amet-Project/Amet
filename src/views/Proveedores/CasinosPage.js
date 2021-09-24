@@ -91,7 +91,7 @@ export default function LoginPage(props) {
                     </div> */}
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg" onClick={fetchCasinos}>
+                    <Button color="primary" size="lg" onClick={fetchCasinos}>
                       Button
                     </Button>
                   </CardFooter>
@@ -99,18 +99,27 @@ export default function LoginPage(props) {
               </Card>
               {
                 casinos && casinos.map(casino => (
-                  <Card className={classes[cardAnimaton]}>
-                    <form className={classes.form}>
-                      <CardHeader color="primary" className={classes.cardHeader}>
-                        <h3>{casino.titulo}</h3>
-                      </CardHeader>
-                      <CardBody>
-                        <div id={casino.id}>
-                          <p>{casino.descripcion}</p>
-                        </div>
-                      </CardBody>
-                    </form>
-                  </Card>
+                  <div>
+                    <Card className={classes[cardAnimaton]}>
+                      <form className={classes.form}>
+                        <CardHeader color="primary" className={classes.cardHeader}>
+                          <h3>{casino.titulo}</h3>
+                        </CardHeader>
+                        <CardBody>
+                          <div id={casino.id}>
+                            <img src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
+                            <p>{casino.descripcion}</p>
+                          </div>
+                        </CardBody>
+                        <CardFooter className={classes.cardFooter}>
+                          <Button color="primary" size="lg">
+                            Reservar
+                          </Button>
+                        </CardFooter>
+                      </form>
+                    </Card>
+                    <br />
+                  </div>
                 ))
               }
             </GridItem>
