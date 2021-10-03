@@ -47,6 +47,12 @@ const signupPageStyle = {
   form: {
     margin: "0"
   },
+  signupLink: {
+    color: "#FFFFFF",
+    fontSize: "1.125rem",
+    lineHeight: "1.5em",
+    textDecoration: "underline"
+  },
   cardHeader: {
     width: "auto",
     textAlign: "center",
@@ -85,6 +91,16 @@ const signupPageStyle = {
   },
   inputIconsColor: {
     color: "#495057"
+  },
+  casinoImage: {
+    width: "-webkit-fill-available",
+    verticalAlign: "middle"
+  },
+  row: {
+    marginLeft: "1rem !important",
+  },
+  "g-4": {
+    marginLeft: "1rem !important",
   }
 };
 

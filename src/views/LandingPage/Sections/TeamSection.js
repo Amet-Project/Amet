@@ -31,7 +31,7 @@ export default function TeamSection() {
   );
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Conoce al equipo de Wevent</h2>
+      <h2 className={classes.title}>Conoce al equipo de Amet</h2>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
@@ -46,7 +46,7 @@ export default function TeamSection() {
               </h4>
               <CardBody>
                 <p className={classes.description}>
-                  Isaac es joto pero es buen pedo, solo cuídenlo en la peda
+                  Isaac es malacopa pero es buen pedo, solo cuídenlo en la peda
                   porque a veces se roba cosas como <a href="#pablo">botellas</a> encendedores,
                   entre otras cosas.
                 </p>

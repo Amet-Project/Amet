@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
-// @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
+
+// Carbon components
+import { TextInput } from 'carbon-components-react'
+
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -17,27 +18,92 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-
+//Importanto estilos
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
 import image from "assets/img/bg7.jpg";
 
+//Amplify imports
+import Amplify, { API, graphqlOperation } from 'aws-amplify'
+
+import { usuarioPorEmail } from "../../graphql/queries";
+import awsExports from "../../aws-exports.js";
+Amplify.configure(awsExports);
+
+
 const useStyles = makeStyles(styles);
+const bcrypt = require('bcryptjs');
 
 export default function LoginPage(props) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  let history = useHistory();
+  const [cardAnimaton, setCardAnimation] = useState("cardHidden");
+  const [userData, setUserData] = useState({email: '', pwd:''})
+  const [isInvalidEmail, setIsInvalidEmail] = useState(false)
+
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
+
+  const setInput = (key, value) => {
+    setUserData({...userData, [key]: value});
+  }
+
+  const ValidateInputs = () => {
+    setIsInvalidEmail(handleValidation())
+    if(isInvalidEmail){
+      console.log('Invalid email:');
+    }else{
+      console.log('Valid email');
+    }
+    loginUser();
+  }
+  const aftertLoging = (user) => {
+    console.log('Login success: ', user.nombres);
+    history.push('/');
+  }
+  //Validate credentials
+  function loginUser() {
+    try {
+      API.graphql(graphqlOperation(usuarioPorEmail, {email: userData.email}))
+      .then((response)=>{
+        const loggedUser = response.data.usuarioPorEmail.items[0];
+        const doesPasswordMatch = bcrypt.compareSync(userData.pwd, loggedUser.pwd)
+        doesPasswordMatch ? 
+        aftertLoging(loggedUser) :
+        console.log('Contraseña incorrecta');
+      });
+
+    } catch (err) {
+      console.log('Error al iniciar sesión:', err)
+    }
+  }
+  const handleValidation = () => {
+    let fields = userData;
+    let formIsInvalid = false;
+
+    //Email
+    if(!fields["email"]){
+       formIsInvalid = true;
+    }
+
+    if(typeof fields["email"] !== "undefined"){
+       let lastAtPos = fields["email"].lastIndexOf('@');
+       let lastDotPos = fields["email"].lastIndexOf('.');
+
+       if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') === -1 && lastDotPos > 2 && (fields["email"].length - lastDotPos) > 2)) {
+          formIsInvalid = true;
+        }
+    }
+    return formIsInvalid;
+  }
+
   return (
     <div>
       <Header
         absolute
-        color="transparent"
-        brand="Wevent"
+        color="primary"
+        brand="Amet"
         rightLinks={<HeaderLinks />}
         {...rest}
       />
@@ -55,7 +121,8 @@ export default function LoginPage(props) {
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Registrarse</h4>
+                    <h4>Si aún no tienes una cuenta</h4>
+                    <Link to="/signup" className={classes.signupLink}>Regístrate</Link>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
@@ -86,60 +153,29 @@ export default function LoginPage(props) {
                       </Button>
                     </div>
                   </CardHeader>
-                  <p className={classes.divider}>O regístrate con Email</p>
+                  <p className={classes.divider}>O inicia sesión con Email</p>
                   <CardBody>
-                    <CustomInput
-                      labelText="First Name..."
-                      id="first"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
+                    <TextInput
+                      id="emailInput"
+                      labelText="Correo electrónico:"
+                      type='email'
+                      invalid={isInvalidEmail}
+                      value={userData.email}
+                      onChange={e => setInput('email', e.target.value)}
+                      className="emailInput"
                     />
-                    <CustomInput
-                      labelText="Email..."
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "email",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Password"
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_outline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off"
-                      }}
+                    <br />
+                    <TextInput.PasswordInput
+                      id="passwordInput"
+                      labelText="Contraseña:"
+                      value={userData.pwd}
+                      onChange={e => setInput('pwd', e.target.value)}
+                      className="passwordInput"
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
-                      Registrarme
+                    <Button simple color="primary" size="lg" onClick={ValidateInputs}>
+                      Iniciar Sesión
                     </Button>
                   </CardFooter>
                 </form>
