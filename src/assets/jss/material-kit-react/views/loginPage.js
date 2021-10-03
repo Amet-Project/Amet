@@ -95,6 +95,12 @@ const signupPageStyle = {
   casinoImage: {
     width: "-webkit-fill-available",
     verticalAlign: "middle"
+  },
+  row: {
+    marginLeft: "1rem !important",
+  },
+  "g-4": {
+    marginLeft: "1rem !important",
   }
 };
 

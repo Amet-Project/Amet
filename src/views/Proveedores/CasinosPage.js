@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+import { Button, CardGroup, Row, Col} from 'react-bootstrap';
+import Card from 'react-bootstrap/Card'
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
@@ -66,8 +65,28 @@ export default function LoginPage(props) {
         }}
       >
         <div className={classes.container}>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
+            <Row xs={3} md={4} className="g-4">
+            {
+                casinos && casinos.map(casino => (
+                  <Col>
+                  <Card text='dark'>
+                    <Card.Img variant="top" src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
+                    <Card.Body>
+                      <Card.Title>
+                        {casino.titulo}
+                      </Card.Title>
+                      <Card.Text>
+                        {casino.descripcion}
+                      </Card.Text>
+                    </Card.Body>
+                    <Button variant="primary">Reservar</Button>
+                  </Card>
+                  </Col>
+                ))
+              }
+            </Row>
+
+{/*             <GridItem xs={12} sm={12} md={4}>
               {
                 casinos && casinos.map(casino => (
                   <div>
@@ -93,8 +112,7 @@ export default function LoginPage(props) {
                   </div>
                 ))
               }
-            </GridItem>
-          </GridContainer>
+            </GridItem> */}
         </div>
         <Footer whiteFont />
       </div>
