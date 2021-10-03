@@ -21,12 +21,13 @@ import image from "assets/img/bg7.jpg";
 //Amplify Imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
 import { listCasinos } from '../../graphql/queries.js'
+import { eventoPorFecha } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage(props) {
+export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const { date } = useParams()
 
@@ -35,7 +36,7 @@ export default function LoginPage(props) {
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
-  const [casinos, setCasinos] = useState([])
+  const [casinos, setCasinos] = useState([]);
 
   useEffect(() => {
     fetchCasinos()
@@ -45,9 +46,24 @@ export default function LoginPage(props) {
   //Get the whole items
   async function fetchCasinos() {
     try {
-      const usersData = await API.graphql(graphqlOperation(listCasinos))
-      setCasinos(usersData.data.listCasinos.items)
-    } catch (err) { console.log('error cargando casinos') }
+      const casinosData = await API.graphql(graphqlOperation(listCasinos));
+      const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
+      let eventsArray = eventosData.data.eventoPorFecha.items;
+      let venuesArray = casinosData.data.listCasinos.items;
+      let indexVenueToDelete = 0;
+
+      for (let i = 0; i < eventsArray.length; i++) {
+        for (let j = 0; j < venuesArray.length; j++) {
+          if (eventsArray[i].id_casino == venuesArray[j].id) {
+            indexVenueToDelete = j;
+            break;
+          }      
+        }
+        venuesArray.splice(indexVenueToDelete, 1);    
+      }
+
+      setCasinos(venuesArray);
+    } catch (err) { console.log('error cargando casinos', err) }
   }
 
   return (

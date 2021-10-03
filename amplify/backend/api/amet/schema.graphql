@@ -2,7 +2,8 @@ type Evento @model
   @key(name: "porUsuario", fields: ["id_usuario", "fecha"])
   @key(name: "porCasinoHorarioFijo", fields: ["id_cas_hor_fijo", "fecha"])
   @key(name: "porCasinoHorarioFlex", fields: ["id_cas_hor_flex", "fecha"])
-  @key(name: "porCasino", fields: ["id_casino", "fecha"]){
+  @key(name: "porCasino", fields: ["id_casino", "fecha"])
+  @key(name: "eventoPorFecha", fields: ["fecha", "id_casino"], queryField: "eventoPorFecha"){
     id: ID!
     id_usuario: ID!
     id_cas_hor_fijo: ID
@@ -143,14 +144,14 @@ type EventoCasinoSE @model
 }
 
 type Usuario @model @searchable
-@key(name: "usuarioPorEmail", fields: ["email", "ap_paterno"], queryField: "PorEmail")
+@key(name: "usuarioPorEmail", fields: ["email", "ap_paterno"], queryField: "usuarioPorEmail")
   {
     id: ID!
     nombres: String! 
     ap_paterno: String!
     ap_materno: String
     nacimiento: String
-    sexo: String
+    sexo: Sexo
     email: String!
     telefono: String
     celular: String
@@ -181,3 +182,10 @@ enum Rol {
   PROVEEDOR
   CLIENTE
 }
+
+enum Sexo {
+  HOMBRE
+  MUJER
+  OTRO
+}
+
