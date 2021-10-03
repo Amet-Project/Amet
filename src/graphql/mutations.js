@@ -1199,7 +1199,6 @@ export const createCasino = /* GraphQL */ `
         items {
           id
           id_casino
-          url
           createdAt
           updatedAt
         }
@@ -1331,7 +1330,6 @@ export const updateCasino = /* GraphQL */ `
         items {
           id
           id_casino
-          url
           createdAt
           updatedAt
         }
@@ -1463,7 +1461,6 @@ export const deleteCasino = /* GraphQL */ `
         items {
           id
           id_casino
-          url
           createdAt
           updatedAt
         }
@@ -2847,7 +2844,11 @@ export const createImagen = /* GraphQL */ `
     createImagen(input: $input, condition: $condition) {
       id
       id_casino
-      url
+      file {
+        bucket
+        region
+        key
+      }
       casino {
         id
         id_usuario
@@ -2907,7 +2908,11 @@ export const updateImagen = /* GraphQL */ `
     updateImagen(input: $input, condition: $condition) {
       id
       id_casino
-      url
+      file {
+        bucket
+        region
+        key
+      }
       casino {
         id
         id_usuario
@@ -2967,7 +2972,11 @@ export const deleteImagen = /* GraphQL */ `
     deleteImagen(input: $input, condition: $condition) {
       id
       id_casino
-      url
+      file {
+        bucket
+        region
+        key
+      }
       casino {
         id
         id_usuario

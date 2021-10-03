@@ -652,7 +652,6 @@ export const getCasino = /* GraphQL */ `
         items {
           id
           id_casino
-          url
           createdAt
           updatedAt
         }
@@ -1413,7 +1412,11 @@ export const getImagen = /* GraphQL */ `
     getImagen(id: $id) {
       id
       id_casino
-      url
+      file {
+        bucket
+        region
+        key
+      }
       casino {
         id
         id_usuario
@@ -1475,7 +1478,11 @@ export const listImagens = /* GraphQL */ `
       items {
         id
         id_casino
-        url
+        file {
+          bucket
+          region
+          key
+        }
         casino {
           id
           id_usuario
@@ -1493,8 +1500,82 @@ export const listImagens = /* GraphQL */ `
     }
   }
 `;
-export const porEmail = /* GraphQL */ `
-  query PorEmail(
+export const eventoPorFecha = /* GraphQL */ `
+  query EventoPorFecha(
+    $fecha: String
+    $id_casino: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelEventoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    eventoPorFecha(
+      fecha: $fecha
+      id_casino: $id_casino
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        id_usuario
+        id_cas_hor_fijo
+        id_cas_hor_flex
+        id_casino
+        fecha
+        importe
+        casino_servicios_extras {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        cas_hor_fijo {
+          id
+          id_casino
+          hora_inicio
+          hora_fin
+          lunes
+          martes
+          miercoles
+          jueves
+          viernes
+          sabado
+          domingo
+          precio
+          createdAt
+          updatedAt
+        }
+        cas_hor_flex {
+          id
+          id_cas_precio_flex
+          hora_inicio
+          hora_fin
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const usuarioPorEmail = /* GraphQL */ `
+  query UsuarioPorEmail(
     $email: String
     $ap_paterno: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -1502,7 +1583,7 @@ export const porEmail = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    PorEmail(
+    usuarioPorEmail(
       email: $email
       ap_paterno: $ap_paterno
       sortDirection: $sortDirection
@@ -1594,7 +1675,11 @@ export const searchImagens = /* GraphQL */ `
       items {
         id
         id_casino
-        url
+        file {
+          bucket
+          region
+          key
+        }
         casino {
           id
           id_usuario
