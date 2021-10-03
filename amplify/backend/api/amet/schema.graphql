@@ -165,9 +165,16 @@ type Imagen @model @searchable
   {
     id: ID!
     id_casino: ID!
-    url: String! 
+    #url: String! 
+    file: S3Object
     casino: Casino! @connection(fields: ["id_casino"])
 }
+
+type S3Object{
+  bucket: String!
+  region: String!
+  key: String!
+} 
 
 enum Rol {
   ADMIN
