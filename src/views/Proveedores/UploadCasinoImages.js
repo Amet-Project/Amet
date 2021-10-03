@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid'; //IMPORT THE LIBRARY THAT GENERATES THE UUID
 import { useParams } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -28,6 +29,7 @@ export default function UploadCasinoImages(props) {
   const addImageToDB = async (image) => {
     console.log('addimage to db');
     try {
+        //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
         await API.graphql(graphqlOperation(createImagen, {input:image}));
     } catch (error) {
         console.log(error);
@@ -37,17 +39,19 @@ export default function UploadCasinoImages(props) {
   function onChange(e) {
     const file = e.target.files[0];
     console.log(file);
-
-    Storage.put(file.name, file, {
+    //SAVING THE IMAGE ON THE BUCKET OF S3
+    const uniqueName = uuidv4(); //HERE GENERATES AN UNIQUE ID FOR THE IMAGE
+    Storage.put(uniqueName, file, {
         contentType: 'image/png'
     }).then(() => {
 
       const image = {
         id_casino: '0651d1df-ac5a-4f99-8ec0-ef08d71400eb',
         file: {
+          //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
           bucket: awsExports.aws_user_files_s3_bucket,
           region: awsExports.aws_user_files_s3_bucket_region,
-          key: file.name
+          key: uniqueName, 
         }
       }
 

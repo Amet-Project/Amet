@@ -42,7 +42,8 @@ export default function CasinoDetails(props) {
 
   async function fetchCasinoImages() {
     try {
-      Storage.get('FOTO_ParisFloresBelmares.png').then((response) => {
+        //REQUESTING THE IMAGE BY ITS KEY ON THE BUCKET OF S3
+      Storage.get('ce507970-8693-48d2-adae-c62bd7ac1a6b').then((response) => {
           setCasinosImgs(response);
         
       });
