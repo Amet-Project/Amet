@@ -652,7 +652,6 @@ export const getCasino = /* GraphQL */ `
         items {
           id
           id_casino
-          url
           createdAt
           updatedAt
         }
@@ -1413,7 +1412,11 @@ export const getImagen = /* GraphQL */ `
     getImagen(id: $id) {
       id
       id_casino
-      url
+      file {
+        bucket
+        region
+        key
+      }
       casino {
         id
         id_usuario
@@ -1475,7 +1478,11 @@ export const listImagens = /* GraphQL */ `
       items {
         id
         id_casino
-        url
+        file {
+          bucket
+          region
+          key
+        }
         casino {
           id
           id_usuario
@@ -1594,7 +1601,11 @@ export const searchImagens = /* GraphQL */ `
       items {
         id
         id_casino
-        url
+        file {
+          bucket
+          region
+          key
+        }
         casino {
           id
           id_usuario
