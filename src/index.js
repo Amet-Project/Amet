@@ -12,6 +12,7 @@ import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import SignupPage from "views/SignupPage/SignupPage.js";
 import StartEventPage from "views/StartEventPage/StartEventPage.js";
+import ReservePage from "views/ReservePage/ReservePage.js";
 import CasinosPage from "views/Proveedores/CasinosPage.js";
 import ComidaPage from "views/Proveedores/ComidaPage.js";
 import MusicaPage from "views/Proveedores/MusicaPage.js";
@@ -31,6 +32,7 @@ ReactDOM.render(
       <Route path="/login" component={LoginPage} />
       <Route path="/signup" component={SignupPage} />
       <Route path='/startevent=:date' component={StartEventPage} />
+      <Route path='/reserveevent=:date=:idvenue' component={ReservePage} />
       <Route path="/casinos" component={CasinosPage} />
       <Route path="/comida" component={ComidaPage} />
       <Route path="/musica" component={MusicaPage} />

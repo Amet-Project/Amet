@@ -101,7 +101,7 @@ export default function StartEventPage(props) {
                           </div>
                         </CardBody>
                         <CardFooter className={classes.cardFooter}>
-                          <Button color="primary" size="lg">
+                          <Button color="primary" size="lg" href={ "/reserveevent=" + date + "="+ casino.id}>
                             Reservar
                           </Button>
                         </CardFooter>
