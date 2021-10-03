@@ -10,6 +10,11 @@
       "StackName": "amplify-amet-dev-203521",
       "StackId": "arn:aws:cloudformation:us-west-2:138910070635:stack/amplify-amet-dev-203521/5cc042c0-1b45-11ec-acce-06b52e52978f",
       "AmplifyAppId": "d3ewf1gx56suec"
+    },
+    "categories": {
+      "auth": {
+        "ametbe250c30": {}
+      }
     }
   }
 }

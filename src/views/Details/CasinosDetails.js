@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,54 +16,38 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
+
 import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
-import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { listCasinos } from '../../graphql/queries.js'
-import { eventoPorFecha } from '../../graphql/queriesExt.js'
+import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
 
-export default function StartEventPage(props) {
+export default function CasinoDetails(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const { date } = useParams()
+  const [casinosImgs, setCasinosImgs] = useState([])
 
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
-  const [casinos, setCasinos] = useState([]);
 
   useEffect(() => {
-    fetchCasinos()
+    fetchCasinoImages()
   }, [])
 
-  //Cambiar a casinos
-  //Get the whole items
-  async function fetchCasinos() {
+  async function fetchCasinoImages() {
     try {
-      const casinosData = await API.graphql(graphqlOperation(listCasinos));
-      const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
-      let eventsArray = eventosData.data.eventoPorFecha.items;
-      let venuesArray = casinosData.data.listCasinos.items;
-      let indexVenueToDelete = 0;
-
-      for (let i = 0; i < eventsArray.length; i++) {
-        for (let j = 0; j < venuesArray.length; j++) {
-          if (eventsArray[i].id_casino == venuesArray[j].id) {
-            indexVenueToDelete = j;
-            break;
-          }      
-        }
-        venuesArray.splice(indexVenueToDelete, 1);    
-      }
-
-      setCasinos(venuesArray);
-    } catch (err) { console.log('error cargando casinos', err) }
+        //REQUESTING THE IMAGE BY ITS KEY ON THE BUCKET OF S3
+      Storage.get('ce507970-8693-48d2-adae-c62bd7ac1a6b').then((response) => {
+          setCasinosImgs(response);
+        
+      });
+    } catch (err) { console.log('error cargando las imagenes de casino', err); }
   }
 
   return (
@@ -83,10 +67,14 @@ export default function StartEventPage(props) {
           backgroundPosition: "top center"
         }}
       >
-        <div className={classes.container}>
+          <img src={casinosImgs}/>
+
+
+        {/* <div className={classes.container}>
+
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
-            {
+              {
                 casinos && casinos.map(casino => (
                   <div>
                     <Card className={classes[cardAnimaton]}>
@@ -113,7 +101,9 @@ export default function StartEventPage(props) {
               }
             </GridItem>
           </GridContainer>
-        </div>
+        </div> */}
+        
+        
         <Footer whiteFont />
       </div>
     </div>

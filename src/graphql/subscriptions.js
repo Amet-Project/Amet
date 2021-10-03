@@ -1,39 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo {
-    onCreateTodo {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo {
-    onUpdateTodo {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo {
-    onDeleteTodo {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateEvento = /* GraphQL */ `
   subscription OnCreateEvento {
     onCreateEvento {
@@ -1193,7 +1160,6 @@ export const onCreateCasino = /* GraphQL */ `
         items {
           id
           id_casino
-          url
           createdAt
           updatedAt
         }
@@ -1322,7 +1288,6 @@ export const onUpdateCasino = /* GraphQL */ `
         items {
           id
           id_casino
-          url
           createdAt
           updatedAt
         }
@@ -1451,7 +1416,6 @@ export const onDeleteCasino = /* GraphQL */ `
         items {
           id
           id_casino
-          url
           createdAt
           updatedAt
         }
@@ -2760,7 +2724,11 @@ export const onCreateImagen = /* GraphQL */ `
     onCreateImagen {
       id
       id_casino
-      url
+      file {
+        bucket
+        region
+        key
+      }
       casino {
         id
         id_usuario
@@ -2817,7 +2785,11 @@ export const onUpdateImagen = /* GraphQL */ `
     onUpdateImagen {
       id
       id_casino
-      url
+      file {
+        bucket
+        region
+        key
+      }
       casino {
         id
         id_usuario
@@ -2874,7 +2846,11 @@ export const onDeleteImagen = /* GraphQL */ `
     onDeleteImagen {
       id
       id_casino
-      url
+      file {
+        bucket
+        region
+        key
+      }
       casino {
         id
         id_usuario

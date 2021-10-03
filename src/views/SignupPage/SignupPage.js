@@ -24,11 +24,10 @@ import image from "assets/img/bg7.jpg";
 //Amplify imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
 import { createUsuario } from '../../graphql/mutations.js'
-import { porEmail } from '../../graphql/queries.js'
+import { usuarioPorEmail } from '../../graphql/queries.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 const initialState = { 
-  //id: 100,
   nombres: '',
   ap_paterno: '',
   email: '',
@@ -58,9 +57,9 @@ export default function SigninPage(props) {
         return 
       }   
       //Email exist validation
-      const usuarioAux = await API.graphql(graphqlOperation(porEmail, {email: formState.email}))
-      if (usuarioAux.data.PorEmail.items.length > 0){
-        console.log("El correo que esta deseando ingresar ya eta registrado")
+      const usuarioAux = await API.graphql(graphqlOperation(usuarioPorEmail, {email: formState.email}))
+      if (usuarioAux.data.usuarioPorEmail.items.length > 0){
+        console.log("El correo que esta deseando ingresar ya esta registrado")
         return
       } 
       const usuario = { ...formState }

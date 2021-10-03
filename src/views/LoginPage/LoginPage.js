@@ -25,7 +25,7 @@ import image from "assets/img/bg7.jpg";
 //Amplify imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
 
-import { porEmail } from "../../graphql/queries";
+import { usuarioPorEmail } from "../../graphql/queries";
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -65,9 +65,9 @@ export default function LoginPage(props) {
   //Validate credentials
   function loginUser() {
     try {
-      API.graphql(graphqlOperation(porEmail, {email: userData.email}))
+      API.graphql(graphqlOperation(usuarioPorEmail, {email: userData.email}))
       .then((response)=>{
-        const loggedUser = response.data.PorEmail.items[0];
+        const loggedUser = response.data.usuarioPorEmail.items[0];
         const doesPasswordMatch = bcrypt.compareSync(userData.pwd, loggedUser.pwd)
         doesPasswordMatch ? 
         aftertLoging(loggedUser) :
