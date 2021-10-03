@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,6 +16,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
+
 import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
@@ -28,21 +29,18 @@ const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const { date } = useParams()
+  const [casinos, setCasinos] = useState([])
 
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
-  const [casinos, setCasinos] = useState([])
 
   useEffect(() => {
     fetchCasinos()
   }, [])
 
-  //Cambiar a casinos
-  //Get the whole items
   async function fetchCasinos() {
     try {
       const usersData = await API.graphql(graphqlOperation(listCasinos))
@@ -70,7 +68,7 @@ export default function LoginPage(props) {
         <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
-            {
+              {
                 casinos && casinos.map(casino => (
                   <div>
                     <Card className={classes[cardAnimaton]}>
