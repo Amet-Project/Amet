@@ -12,6 +12,7 @@
     "@material-ui/icons": "4.9.1",
     "aws-amplify": "^4.2.10",
     "bcryptjs": "^2.4.3",
+    "bootstrap": "^5.1.1",
     "carbon-components": "10.25.0",
     "carbon-components-react": "7.25.0",
     "carbon-icons": "7.0.7",
@@ -22,14 +23,16 @@
     "node-sass": "4.14.1",
     "nouislider": "14.5.0",
     "prop-types": "15.7.2",
-    "react": "16.13.1",
+    "react": "16.14",
+    "react-bootstrap": "^2.0.0-rc.0",
     "react-datetime": "2.16.3",
-    "react-dom": "16.13.1",
+    "react-dom": "16.14",
     "react-router-dom": "5.2.0",
     "react-scripts": "3.4.1",
     "react-slick": "0.26.1",
     "react-swipeable-views": "0.13.9",
-    "sass": "1.29.0"
+    "sass": "1.29.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",

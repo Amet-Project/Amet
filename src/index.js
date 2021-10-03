@@ -16,6 +16,9 @@ import ReservePage from "views/ReservePage/ReservePage.js";
 import CasinosPage from "views/Proveedores/CasinosPage.js";
 import ComidaPage from "views/Proveedores/ComidaPage.js";
 import MusicaPage from "views/Proveedores/MusicaPage.js";
+import UploadCasinoImages from "views/Proveedores/UploadCasinoImages.js";
+import CasinoDetails from "views/Details/CasinosDetails.js";
+
 
 //Amplify AWS
 import Amplify from 'aws-amplify';
@@ -34,6 +37,8 @@ ReactDOM.render(
       <Route path='/startevent=:date' component={StartEventPage} />
       <Route path='/reserveevent=:date=:idvenue' component={ReservePage} />
       <Route path="/casinos" component={CasinosPage} />
+      <Route path="/casinosupload" component={UploadCasinoImages} />
+      <Route path="/casinodetails" component={CasinoDetails} />
       <Route path="/comida" component={ComidaPage} />
       <Route path="/musica" component={MusicaPage} />
       <Route path="/" component={LandingPage} />
