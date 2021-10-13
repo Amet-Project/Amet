@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -40,6 +40,15 @@ export default function LandingPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
+  useEffect(() => {
+    validateAuthentication()
+  }, [])
+
+  function validateAuthentication() {
+    let authen = window.sessionStorage.getItem('auth');
+    console.log('authen: ', authen);
+  }
+
   return (
     <div>
       <Header
@@ -71,7 +80,7 @@ export default function LandingPage(props) {
               <Button
                 color="primary"
                 size="lg"
-                href={ "/startevent=" + datePicked}
+                href= {window.sessionStorage.getItem('auth') ? ("/startevent=" + datePicked) : ("/login=" + datePicked)}
                 rel="noopener noreferrer"
               >
                 <Run32 />

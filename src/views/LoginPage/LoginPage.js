@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -38,6 +39,7 @@ export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const [userData, setUserData] = useState({email: '', pwd:''})
   const [isInvalidEmail, setIsInvalidEmail] = useState(false)
+  const { date } = useParams()
 
   setTimeout(function() {
     setCardAnimation("");
@@ -60,18 +62,31 @@ export default function LoginPage(props) {
   }
   const aftertLoging = (user) => {
     console.log('Login success: ', user.nombres);
-    history.push('/');
+    window.sessionStorage.setItem('auth', true);
+    window.sessionStorage.setItem('idAuth', user.id);
+    if(date != undefined){
+      history.push('/startevent=' + date);
+    }
+    else{
+      history.push('/');
+    }
   }
   //Validate credentials
   function loginUser() {
     try {
       API.graphql(graphqlOperation(usuarioPorEmail, {email: userData.email}))
       .then((response)=>{
-        const loggedUser = response.data.usuarioPorEmail.items[0];
-        const doesPasswordMatch = bcrypt.compareSync(userData.pwd, loggedUser.pwd)
-        doesPasswordMatch ? 
-        aftertLoging(loggedUser) :
-        console.log('Contraseña incorrecta');
+        if(response.data.usuarioPorEmail.items.length == 0){
+          console.log('No se encontro usuario');
+        }
+        else {
+          console.log('data: ', response.data);
+          const loggedUser = response.data.usuarioPorEmail.items[0];
+          const doesPasswordMatch = bcrypt.compareSync(userData.pwd, loggedUser.pwd)
+          doesPasswordMatch ?
+            aftertLoging(loggedUser) :
+            console.log('Contraseña incorrecta');
+        }
       });
 
     } catch (err) {

@@ -15,7 +15,7 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
-import { createImagen } from '../../graphql/mutations.js'
+import { createImagenCasino } from '../../graphql/mutations.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -30,7 +30,7 @@ export default function UploadCasinoImages(props) {
     console.log('addimage to db');
     try {
         //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
-        await API.graphql(graphqlOperation(createImagen, {input:image}));
+        await API.graphql(graphqlOperation(createImagenCasino, {input:image}));
     } catch (error) {
         console.log(error);
     }  

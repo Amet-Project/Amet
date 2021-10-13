@@ -50,11 +50,11 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="/login"
+          href= {window.sessionStorage.getItem('auth') ? "/user" : "/login"}
           color="transparent"
           className={classes.navLink}
         >
-          <AccountCircle className={classes.icons} /> Iniciar sesión
+          <AccountCircle className={classes.icons} /> {window.sessionStorage.getItem('auth') ? 'Perfil' : 'Iniciar Sesión' }
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>

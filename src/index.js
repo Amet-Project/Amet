@@ -18,6 +18,7 @@ import ComidaPage from "views/Proveedores/ComidaPage.js";
 import MusicaPage from "views/Proveedores/MusicaPage.js";
 import UploadCasinoImages from "views/Proveedores/UploadCasinoImages.js";
 import CasinoDetails from "views/Details/CasinosDetails.js";
+import UserDetails from "views/Details/UserDetails.js";
 
 
 //Amplify AWS
@@ -32,6 +33,7 @@ ReactDOM.render(
     <Switch>
       <Route path="/components" component={Components} />
       <Route path="/profile" component={ProfilePage} />
+      <Route path="/login=:date" component={LoginPage} />
       <Route path="/login" component={LoginPage} />
       <Route path="/signup" component={SignupPage} />
       <Route path='/startevent=:date' component={StartEventPage} />
@@ -39,6 +41,7 @@ ReactDOM.render(
       <Route path="/casinos" component={CasinosPage} />
       <Route path="/casinosupload" component={UploadCasinoImages} />
       <Route path="/casinodetails" component={CasinoDetails} />
+      <Route path="/user" component={UserDetails} />
       <Route path="/comida" component={ComidaPage} />
       <Route path="/musica" component={MusicaPage} />
       <Route path="/" component={LandingPage} />
