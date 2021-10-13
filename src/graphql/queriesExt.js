@@ -22,3 +22,22 @@ export const eventoPorFecha = /* GraphQL */ `
     }
   }
 `;
+
+export const listCasinosandImage = `
+  query ListCasinosandImage {
+    listCasinos {
+      items {
+        descripcion
+        id
+        titulo
+        imagenes(limit: 1, sortDirection: DESC) {
+          items {
+            file {
+              key
+            }
+          }
+        }
+      }
+    }
+  }
+`;

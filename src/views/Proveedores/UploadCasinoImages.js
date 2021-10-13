@@ -46,7 +46,7 @@ export default function UploadCasinoImages(props) {
     }).then(() => {
 
       const image = {
-        id_casino: '0651d1df-ac5a-4f99-8ec0-ef08d71400eb',
+        id_casino: '3dfdaed4-c482-4759-b774-7054fa3f00d2',
         file: {
           //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
           bucket: awsExports.aws_user_files_s3_bucket,

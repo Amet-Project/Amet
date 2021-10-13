@@ -19,14 +19,14 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
-import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { listCasinos } from '../../graphql/queries.js'
+import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
+import { listCasinosandImage } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage(props) {
+export default function CasinoPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const [casinos, setCasinos] = useState([])
 
@@ -37,18 +37,34 @@ export default function LoginPage(props) {
   const { ...rest } = props;
 
   useEffect(() => {
-    fetchCasinos()
+    fetchCasinos();
   }, [])
 
   async function fetchCasinos() {
     try {
-      const usersData = await API.graphql(graphqlOperation(listCasinos))
+      const usersData = await API.graphql(graphqlOperation(listCasinosandImage))
+      for(let i=0;i<usersData.data.listCasinos.items.length;i++){
+        usersData.data.listCasinos.items[i].img = await getImageOfCasino(usersData.data.listCasinos.items[i]);
+      }
       setCasinos(usersData.data.listCasinos.items)
     } catch (err) { console.log('error cargando casinos') }
+  }
+  async function getImageOfCasino(casino){
+    //REQUESTING THE IMAGE BY ITS KEY ON THE BUCKET OF S3
+    if (casino.imagenes.items.length == 0) {
+      return '';
+    }else {
+      const key_image = casino.imagenes.items[0].file.key;
+      let img = await Storage.get(key_image);
+      return img;
+    }
   }
 
   return (
     <div>
+      {
+        console.log('casinos: ', casinos)
+      }
       <Header
         absolute
         color="primary"
@@ -70,7 +86,7 @@ export default function LoginPage(props) {
                 casinos && casinos.map(casino => (
                   <Col>
                   <Card text='dark'>
-                    <Card.Img variant="top" src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
+                    <Card.Img variant="top" src={casino.img} />
                     <Card.Body>
                       <Card.Title>
                         {casino.titulo}
