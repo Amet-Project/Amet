@@ -35,7 +35,6 @@ export default function UploadCasinoImages(props) {
         console.log(error);
     }  
   }
-  
   function onChange(e) {
     const file = e.target.files[0];
     console.log(file);
@@ -43,9 +42,10 @@ export default function UploadCasinoImages(props) {
     const uniqueName = uuidv4(); //HERE GENERATES AN UNIQUE ID FOR THE IMAGE
     Storage.put(uniqueName, file, {
         contentType: 'image/png'
-    }).then(() => {
-
-      const image = {
+    }).then((response) => {
+      Storage.get(response.key).then((url_img)=>{
+        console.log("response url del put:", url_img);
+        const image = {
         id_casino: '3dfdaed4-c482-4759-b774-7054fa3f00d2',
         file: {
           //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
@@ -54,9 +54,9 @@ export default function UploadCasinoImages(props) {
           key: uniqueName, 
         }
       }
-
       addImageToDB(image);
       console.log('added completed')
+      })
     })
     .catch(err => console.log(err));
 }
