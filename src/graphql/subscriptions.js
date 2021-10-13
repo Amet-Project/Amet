@@ -1,11 +1,10 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateEvento = /* GraphQL */ `
-  subscription OnCreateEvento {
-    onCreateEvento {
+export const onCreateOrdenCasino = /* GraphQL */ `
+  subscription OnCreateOrdenCasino {
+    onCreateOrdenCasino {
       id
-      id_usuario
       id_cas_hor_fijo
       id_cas_hor_flex
       id_casino
@@ -14,33 +13,12 @@ export const onCreateEvento = /* GraphQL */ `
       casino_servicios_extras {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
         }
         nextToken
-      }
-      usuario {
-        id
-        nombres
-        ap_paterno
-        ap_materno
-        nacimiento
-        sexo
-        email
-        telefono
-        celular
-        pwd
-        eventos {
-          nextToken
-        }
-        casinos {
-          nextToken
-        }
-        rol
-        createdAt
-        updatedAt
       }
       cas_hor_fijo {
         id
@@ -55,7 +33,7 @@ export const onCreateEvento = /* GraphQL */ `
         sabado
         domingo
         precio
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -65,6 +43,7 @@ export const onCreateEvento = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -76,7 +55,7 @@ export const onCreateEvento = /* GraphQL */ `
         id_cas_precio_flex
         hora_inicio
         hora_fin
-        eventos {
+        ordenes {
           nextToken
         }
         cas_precio_flex {
@@ -103,6 +82,7 @@ export const onCreateEvento = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -118,7 +98,7 @@ export const onCreateEvento = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -147,11 +127,10 @@ export const onCreateEvento = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateEvento = /* GraphQL */ `
-  subscription OnUpdateEvento {
-    onUpdateEvento {
+export const onUpdateOrdenCasino = /* GraphQL */ `
+  subscription OnUpdateOrdenCasino {
+    onUpdateOrdenCasino {
       id
-      id_usuario
       id_cas_hor_fijo
       id_cas_hor_flex
       id_casino
@@ -160,33 +139,12 @@ export const onUpdateEvento = /* GraphQL */ `
       casino_servicios_extras {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
         }
         nextToken
-      }
-      usuario {
-        id
-        nombres
-        ap_paterno
-        ap_materno
-        nacimiento
-        sexo
-        email
-        telefono
-        celular
-        pwd
-        eventos {
-          nextToken
-        }
-        casinos {
-          nextToken
-        }
-        rol
-        createdAt
-        updatedAt
       }
       cas_hor_fijo {
         id
@@ -201,7 +159,7 @@ export const onUpdateEvento = /* GraphQL */ `
         sabado
         domingo
         precio
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -211,6 +169,7 @@ export const onUpdateEvento = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -222,7 +181,7 @@ export const onUpdateEvento = /* GraphQL */ `
         id_cas_precio_flex
         hora_inicio
         hora_fin
-        eventos {
+        ordenes {
           nextToken
         }
         cas_precio_flex {
@@ -249,6 +208,7 @@ export const onUpdateEvento = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -264,7 +224,7 @@ export const onUpdateEvento = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -293,11 +253,10 @@ export const onUpdateEvento = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteEvento = /* GraphQL */ `
-  subscription OnDeleteEvento {
-    onDeleteEvento {
+export const onDeleteOrdenCasino = /* GraphQL */ `
+  subscription OnDeleteOrdenCasino {
+    onDeleteOrdenCasino {
       id
-      id_usuario
       id_cas_hor_fijo
       id_cas_hor_flex
       id_casino
@@ -306,33 +265,12 @@ export const onDeleteEvento = /* GraphQL */ `
       casino_servicios_extras {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
         }
         nextToken
-      }
-      usuario {
-        id
-        nombres
-        ap_paterno
-        ap_materno
-        nacimiento
-        sexo
-        email
-        telefono
-        celular
-        pwd
-        eventos {
-          nextToken
-        }
-        casinos {
-          nextToken
-        }
-        rol
-        createdAt
-        updatedAt
       }
       cas_hor_fijo {
         id
@@ -347,7 +285,7 @@ export const onDeleteEvento = /* GraphQL */ `
         sabado
         domingo
         precio
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -357,6 +295,7 @@ export const onDeleteEvento = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -368,7 +307,7 @@ export const onDeleteEvento = /* GraphQL */ `
         id_cas_precio_flex
         hora_inicio
         hora_fin
-        eventos {
+        ordenes {
           nextToken
         }
         cas_precio_flex {
@@ -395,6 +334,7 @@ export const onDeleteEvento = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -410,7 +350,7 @@ export const onDeleteEvento = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -454,10 +394,9 @@ export const onCreateCasinoHorarioFijo = /* GraphQL */ `
       sabado
       domingo
       precio
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -475,6 +414,7 @@ export const onCreateCasinoHorarioFijo = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -490,7 +430,7 @@ export const onCreateCasinoHorarioFijo = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -534,10 +474,9 @@ export const onUpdateCasinoHorarioFijo = /* GraphQL */ `
       sabado
       domingo
       precio
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -555,6 +494,7 @@ export const onUpdateCasinoHorarioFijo = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -570,7 +510,7 @@ export const onUpdateCasinoHorarioFijo = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -614,10 +554,9 @@ export const onDeleteCasinoHorarioFijo = /* GraphQL */ `
       sabado
       domingo
       precio
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -635,6 +574,7 @@ export const onDeleteCasinoHorarioFijo = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -650,7 +590,7 @@ export const onDeleteCasinoHorarioFijo = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -686,10 +626,9 @@ export const onCreateCasinoHorarioFlex = /* GraphQL */ `
       id_cas_precio_flex
       hora_inicio
       hora_fin
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -721,6 +660,7 @@ export const onCreateCasinoHorarioFlex = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -739,10 +679,9 @@ export const onUpdateCasinoHorarioFlex = /* GraphQL */ `
       id_cas_precio_flex
       hora_inicio
       hora_fin
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -774,6 +713,7 @@ export const onUpdateCasinoHorarioFlex = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -792,10 +732,9 @@ export const onDeleteCasinoHorarioFlex = /* GraphQL */ `
       id_cas_precio_flex
       hora_inicio
       hora_fin
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -827,6 +766,7 @@ export const onDeleteCasinoHorarioFlex = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -869,6 +809,7 @@ export const onCreateCasinoPrecioFlex = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -884,7 +825,7 @@ export const onCreateCasinoPrecioFlex = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -944,6 +885,7 @@ export const onUpdateCasinoPrecioFlex = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -959,7 +901,7 @@ export const onUpdateCasinoPrecioFlex = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1019,6 +961,7 @@ export const onDeleteCasinoPrecioFlex = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1034,7 +977,7 @@ export const onDeleteCasinoPrecioFlex = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1072,6 +1015,7 @@ export const onCreateCasino = /* GraphQL */ `
       titulo
       descripcion
       rfc
+      cap_maxima
       horarios_fijos {
         items {
           id
@@ -1142,10 +1086,9 @@ export const onCreateCasino = /* GraphQL */ `
         }
         nextToken
       }
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -1160,6 +1103,7 @@ export const onCreateCasino = /* GraphQL */ `
         items {
           id
           id_casino
+          url
           createdAt
           updatedAt
         }
@@ -1180,6 +1124,12 @@ export const onCreateCasino = /* GraphQL */ `
           nextToken
         }
         casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
           nextToken
         }
         rol
@@ -1200,6 +1150,7 @@ export const onUpdateCasino = /* GraphQL */ `
       titulo
       descripcion
       rfc
+      cap_maxima
       horarios_fijos {
         items {
           id
@@ -1270,10 +1221,9 @@ export const onUpdateCasino = /* GraphQL */ `
         }
         nextToken
       }
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -1288,6 +1238,7 @@ export const onUpdateCasino = /* GraphQL */ `
         items {
           id
           id_casino
+          url
           createdAt
           updatedAt
         }
@@ -1308,6 +1259,12 @@ export const onUpdateCasino = /* GraphQL */ `
           nextToken
         }
         casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
           nextToken
         }
         rol
@@ -1328,6 +1285,7 @@ export const onDeleteCasino = /* GraphQL */ `
       titulo
       descripcion
       rfc
+      cap_maxima
       horarios_fijos {
         items {
           id
@@ -1398,10 +1356,9 @@ export const onDeleteCasino = /* GraphQL */ `
         }
         nextToken
       }
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -1416,6 +1373,7 @@ export const onDeleteCasino = /* GraphQL */ `
         items {
           id
           id_casino
+          url
           createdAt
           updatedAt
         }
@@ -1436,6 +1394,12 @@ export const onDeleteCasino = /* GraphQL */ `
           nextToken
         }
         casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
           nextToken
         }
         rol
@@ -1461,6 +1425,7 @@ export const onCreateCasinoArea = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1476,7 +1441,7 @@ export const onCreateCasinoArea = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1528,6 +1493,7 @@ export const onUpdateCasinoArea = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1543,7 +1509,7 @@ export const onUpdateCasinoArea = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1595,6 +1561,7 @@ export const onDeleteCasinoArea = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1610,7 +1577,7 @@ export const onDeleteCasinoArea = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1725,6 +1692,7 @@ export const onCreateCasinoServicio = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1740,7 +1708,7 @@ export const onCreateCasinoServicio = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1792,6 +1760,7 @@ export const onUpdateCasinoServicio = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1807,7 +1776,7 @@ export const onUpdateCasinoServicio = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1859,6 +1828,7 @@ export const onDeleteCasinoServicio = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1874,7 +1844,7 @@ export const onDeleteCasinoServicio = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1983,10 +1953,10 @@ export const onCreateCasinoServicioExtra = /* GraphQL */ `
       id_servicio_extra
       descripcion
       costo
-      eventos {
+      ordenes {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
@@ -2000,6 +1970,7 @@ export const onCreateCasinoServicioExtra = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -2015,7 +1986,7 @@ export const onCreateCasinoServicioExtra = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -2061,10 +2032,10 @@ export const onUpdateCasinoServicioExtra = /* GraphQL */ `
       id_servicio_extra
       descripcion
       costo
-      eventos {
+      ordenes {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
@@ -2078,6 +2049,7 @@ export const onUpdateCasinoServicioExtra = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -2093,7 +2065,7 @@ export const onUpdateCasinoServicioExtra = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -2139,10 +2111,10 @@ export const onDeleteCasinoServicioExtra = /* GraphQL */ `
       id_servicio_extra
       descripcion
       costo
-      eventos {
+      ordenes {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
@@ -2156,6 +2128,7 @@ export const onDeleteCasinoServicioExtra = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -2171,7 +2144,7 @@ export const onDeleteCasinoServicioExtra = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -2275,15 +2248,14 @@ export const onDeleteServicioExtra = /* GraphQL */ `
     }
   }
 `;
-export const onCreateEventoCasinoSE = /* GraphQL */ `
-  subscription OnCreateEventoCasinoSE {
-    onCreateEventoCasinoSE {
+export const onCreateOrdenCasinoSE = /* GraphQL */ `
+  subscription OnCreateOrdenCasinoSE {
+    onCreateOrdenCasinoSE {
       id
-      id_evento
+      id_orden
       id_casino_se
-      evento {
+      orden {
         id
-        id_usuario
         id_cas_hor_fijo
         id_cas_hor_flex
         id_casino
@@ -2291,21 +2263,6 @@ export const onCreateEventoCasinoSE = /* GraphQL */ `
         importe
         casino_servicios_extras {
           nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
         }
         cas_hor_fijo {
           id
@@ -2338,6 +2295,7 @@ export const onCreateEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -2350,7 +2308,7 @@ export const onCreateEventoCasinoSE = /* GraphQL */ `
         id_servicio_extra
         descripcion
         costo
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -2360,6 +2318,7 @@ export const onCreateEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -2377,15 +2336,14 @@ export const onCreateEventoCasinoSE = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateEventoCasinoSE = /* GraphQL */ `
-  subscription OnUpdateEventoCasinoSE {
-    onUpdateEventoCasinoSE {
+export const onUpdateOrdenCasinoSE = /* GraphQL */ `
+  subscription OnUpdateOrdenCasinoSE {
+    onUpdateOrdenCasinoSE {
       id
-      id_evento
+      id_orden
       id_casino_se
-      evento {
+      orden {
         id
-        id_usuario
         id_cas_hor_fijo
         id_cas_hor_flex
         id_casino
@@ -2393,21 +2351,6 @@ export const onUpdateEventoCasinoSE = /* GraphQL */ `
         importe
         casino_servicios_extras {
           nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
         }
         cas_hor_fijo {
           id
@@ -2440,6 +2383,7 @@ export const onUpdateEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -2452,7 +2396,7 @@ export const onUpdateEventoCasinoSE = /* GraphQL */ `
         id_servicio_extra
         descripcion
         costo
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -2462,6 +2406,7 @@ export const onUpdateEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -2479,15 +2424,14 @@ export const onUpdateEventoCasinoSE = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteEventoCasinoSE = /* GraphQL */ `
-  subscription OnDeleteEventoCasinoSE {
-    onDeleteEventoCasinoSE {
+export const onDeleteOrdenCasinoSE = /* GraphQL */ `
+  subscription OnDeleteOrdenCasinoSE {
+    onDeleteOrdenCasinoSE {
       id
-      id_evento
+      id_orden
       id_casino_se
-      evento {
+      orden {
         id
-        id_usuario
         id_cas_hor_fijo
         id_cas_hor_flex
         id_casino
@@ -2495,21 +2439,6 @@ export const onDeleteEventoCasinoSE = /* GraphQL */ `
         importe
         casino_servicios_extras {
           nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
         }
         cas_hor_fijo {
           id
@@ -2542,6 +2471,7 @@ export const onDeleteEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -2554,7 +2484,7 @@ export const onDeleteEventoCasinoSE = /* GraphQL */ `
         id_servicio_extra
         descripcion
         costo
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -2564,12 +2494,1534 @@ export const onDeleteEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
         servicio_extra {
           id
           nombre
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateImagenCasino = /* GraphQL */ `
+  subscription OnCreateImagenCasino {
+    onCreateImagenCasino {
+      id
+      id_casino
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateImagenCasino = /* GraphQL */ `
+  subscription OnUpdateImagenCasino {
+    onUpdateImagenCasino {
+      id
+      id_casino
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteImagenCasino = /* GraphQL */ `
+  subscription OnDeleteImagenCasino {
+    onDeleteImagenCasino {
+      id
+      id_casino
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateBanquete = /* GraphQL */ `
+  subscription OnCreateBanquete {
+    onCreateBanquete {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_unitario
+      minimo
+      ordenes {
+        items {
+          id
+          id_banquete
+          fecha
+          numero_platillos
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_banquete
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateBanquete = /* GraphQL */ `
+  subscription OnUpdateBanquete {
+    onUpdateBanquete {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_unitario
+      minimo
+      ordenes {
+        items {
+          id
+          id_banquete
+          fecha
+          numero_platillos
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_banquete
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteBanquete = /* GraphQL */ `
+  subscription OnDeleteBanquete {
+    onDeleteBanquete {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_unitario
+      minimo
+      ordenes {
+        items {
+          id
+          id_banquete
+          fecha
+          numero_platillos
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_banquete
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateImagenBanquete = /* GraphQL */ `
+  subscription OnCreateImagenBanquete {
+    onCreateImagenBanquete {
+      id
+      id_banquete
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateImagenBanquete = /* GraphQL */ `
+  subscription OnUpdateImagenBanquete {
+    onUpdateImagenBanquete {
+      id
+      id_banquete
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteImagenBanquete = /* GraphQL */ `
+  subscription OnDeleteImagenBanquete {
+    onDeleteImagenBanquete {
+      id
+      id_banquete
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateOrdenBanquete = /* GraphQL */ `
+  subscription OnCreateOrdenBanquete {
+    onCreateOrdenBanquete {
+      id
+      id_banquete
+      fecha
+      numero_platillos
+      importe
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateOrdenBanquete = /* GraphQL */ `
+  subscription OnUpdateOrdenBanquete {
+    onUpdateOrdenBanquete {
+      id
+      id_banquete
+      fecha
+      numero_platillos
+      importe
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOrdenBanquete = /* GraphQL */ `
+  subscription OnDeleteOrdenBanquete {
+    onDeleteOrdenBanquete {
+      id
+      id_banquete
+      fecha
+      numero_platillos
+      importe
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateEntretenimiento = /* GraphQL */ `
+  subscription OnCreateEntretenimiento {
+    onCreateEntretenimiento {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_hora
+      minimo
+      ordenes {
+        items {
+          id
+          id_entretenimiento
+          fecha
+          horas
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_entretenimiento
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEntretenimiento = /* GraphQL */ `
+  subscription OnUpdateEntretenimiento {
+    onUpdateEntretenimiento {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_hora
+      minimo
+      ordenes {
+        items {
+          id
+          id_entretenimiento
+          fecha
+          horas
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_entretenimiento
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEntretenimiento = /* GraphQL */ `
+  subscription OnDeleteEntretenimiento {
+    onDeleteEntretenimiento {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_hora
+      minimo
+      ordenes {
+        items {
+          id
+          id_entretenimiento
+          fecha
+          horas
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_entretenimiento
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateImagenEntretenimiento = /* GraphQL */ `
+  subscription OnCreateImagenEntretenimiento {
+    onCreateImagenEntretenimiento {
+      id
+      id_entretenimiento
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateImagenEntretenimiento = /* GraphQL */ `
+  subscription OnUpdateImagenEntretenimiento {
+    onUpdateImagenEntretenimiento {
+      id
+      id_entretenimiento
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteImagenEntretenimiento = /* GraphQL */ `
+  subscription OnDeleteImagenEntretenimiento {
+    onDeleteImagenEntretenimiento {
+      id
+      id_entretenimiento
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateOrdenEntretenimiento = /* GraphQL */ `
+  subscription OnCreateOrdenEntretenimiento {
+    onCreateOrdenEntretenimiento {
+      id
+      id_entretenimiento
+      fecha
+      horas
+      importe
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateOrdenEntretenimiento = /* GraphQL */ `
+  subscription OnUpdateOrdenEntretenimiento {
+    onUpdateOrdenEntretenimiento {
+      id
+      id_entretenimiento
+      fecha
+      horas
+      importe
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOrdenEntretenimiento = /* GraphQL */ `
+  subscription OnDeleteOrdenEntretenimiento {
+    onDeleteOrdenEntretenimiento {
+      id
+      id_entretenimiento
+      fecha
+      horas
+      importe
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateEvento = /* GraphQL */ `
+  subscription OnCreateEvento {
+    onCreateEvento {
+      id
+      id_usuario
+      id_orden_casino
+      id_orden_banquete
+      id_orden_entretenimiento
+      fecha
+      importe_total
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_cas_hor_fijo
+        id_cas_hor_flex
+        id_casino
+        fecha
+        importe
+        casino_servicios_extras {
+          nextToken
+        }
+        cas_hor_fijo {
+          id
+          id_casino
+          hora_inicio
+          hora_fin
+          lunes
+          martes
+          miercoles
+          jueves
+          viernes
+          sabado
+          domingo
+          precio
+          createdAt
+          updatedAt
+        }
+        cas_hor_flex {
+          id
+          id_cas_precio_flex
+          hora_inicio
+          hora_fin
+          createdAt
+          updatedAt
+        }
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_banquete
+        fecha
+        numero_platillos
+        importe
+        banquete {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_entretenimiento
+        fecha
+        horas
+        importe
+        entretenimiento {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateEvento = /* GraphQL */ `
+  subscription OnUpdateEvento {
+    onUpdateEvento {
+      id
+      id_usuario
+      id_orden_casino
+      id_orden_banquete
+      id_orden_entretenimiento
+      fecha
+      importe_total
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_cas_hor_fijo
+        id_cas_hor_flex
+        id_casino
+        fecha
+        importe
+        casino_servicios_extras {
+          nextToken
+        }
+        cas_hor_fijo {
+          id
+          id_casino
+          hora_inicio
+          hora_fin
+          lunes
+          martes
+          miercoles
+          jueves
+          viernes
+          sabado
+          domingo
+          precio
+          createdAt
+          updatedAt
+        }
+        cas_hor_flex {
+          id
+          id_cas_precio_flex
+          hora_inicio
+          hora_fin
+          createdAt
+          updatedAt
+        }
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_banquete
+        fecha
+        numero_platillos
+        importe
+        banquete {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_entretenimiento
+        fecha
+        horas
+        importe
+        entretenimiento {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteEvento = /* GraphQL */ `
+  subscription OnDeleteEvento {
+    onDeleteEvento {
+      id
+      id_usuario
+      id_orden_casino
+      id_orden_banquete
+      id_orden_entretenimiento
+      fecha
+      importe_total
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_cas_hor_fijo
+        id_cas_hor_flex
+        id_casino
+        fecha
+        importe
+        casino_servicios_extras {
+          nextToken
+        }
+        cas_hor_fijo {
+          id
+          id_casino
+          hora_inicio
+          hora_fin
+          lunes
+          martes
+          miercoles
+          jueves
+          viernes
+          sabado
+          domingo
+          precio
+          createdAt
+          updatedAt
+        }
+        cas_hor_flex {
+          id
+          id_cas_precio_flex
+          hora_inicio
+          hora_fin
+          createdAt
+          updatedAt
+        }
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_banquete
+        fecha
+        numero_platillos
+        importe
+        banquete {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_entretenimiento
+        fecha
+        horas
+        importe
+        entretenimiento {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
           createdAt
           updatedAt
         }
@@ -2598,11 +4050,11 @@ export const onCreateUsuario = /* GraphQL */ `
         items {
           id
           id_usuario
-          id_cas_hor_fijo
-          id_cas_hor_flex
-          id_casino
+          id_orden_casino
+          id_orden_banquete
+          id_orden_entretenimiento
           fecha
-          importe
+          importe_total
           createdAt
           updatedAt
         }
@@ -2616,6 +4068,35 @@ export const onCreateUsuario = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      banquete {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entretenimiento {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
           createdAt
           updatedAt
         }
@@ -2644,11 +4125,11 @@ export const onUpdateUsuario = /* GraphQL */ `
         items {
           id
           id_usuario
-          id_cas_hor_fijo
-          id_cas_hor_flex
-          id_casino
+          id_orden_casino
+          id_orden_banquete
+          id_orden_entretenimiento
           fecha
-          importe
+          importe_total
           createdAt
           updatedAt
         }
@@ -2662,6 +4143,35 @@ export const onUpdateUsuario = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      banquete {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entretenimiento {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
           createdAt
           updatedAt
         }
@@ -2690,11 +4200,11 @@ export const onDeleteUsuario = /* GraphQL */ `
         items {
           id
           id_usuario
-          id_cas_hor_fijo
-          id_cas_hor_flex
-          id_casino
+          id_orden_casino
+          id_orden_banquete
+          id_orden_entretenimiento
           fecha
-          importe
+          importe_total
           createdAt
           updatedAt
         }
@@ -2708,195 +4218,41 @@ export const onDeleteUsuario = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      banquete {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entretenimiento {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
           createdAt
           updatedAt
         }
         nextToken
       }
       rol
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateImagen = /* GraphQL */ `
-  subscription OnCreateImagen {
-    onCreateImagen {
-      id
-      id_casino
-      file {
-        bucket
-        region
-        key
-      }
-      casino {
-        id
-        id_usuario
-        direccion
-        titulo
-        descripcion
-        rfc
-        horarios_fijos {
-          nextToken
-        }
-        precios_flexibles {
-          nextToken
-        }
-        areas {
-          nextToken
-        }
-        servicios {
-          nextToken
-        }
-        servicios_extras {
-          nextToken
-        }
-        eventos {
-          nextToken
-        }
-        imagenes {
-          nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateImagen = /* GraphQL */ `
-  subscription OnUpdateImagen {
-    onUpdateImagen {
-      id
-      id_casino
-      file {
-        bucket
-        region
-        key
-      }
-      casino {
-        id
-        id_usuario
-        direccion
-        titulo
-        descripcion
-        rfc
-        horarios_fijos {
-          nextToken
-        }
-        precios_flexibles {
-          nextToken
-        }
-        areas {
-          nextToken
-        }
-        servicios {
-          nextToken
-        }
-        servicios_extras {
-          nextToken
-        }
-        eventos {
-          nextToken
-        }
-        imagenes {
-          nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteImagen = /* GraphQL */ `
-  subscription OnDeleteImagen {
-    onDeleteImagen {
-      id
-      id_casino
-      file {
-        bucket
-        region
-        key
-      }
-      casino {
-        id
-        id_usuario
-        direccion
-        titulo
-        descripcion
-        rfc
-        horarios_fijos {
-          nextToken
-        }
-        precios_flexibles {
-          nextToken
-        }
-        areas {
-          nextToken
-        }
-        servicios {
-          nextToken
-        }
-        servicios_extras {
-          nextToken
-        }
-        eventos {
-          nextToken
-        }
-        imagenes {
-          nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
       createdAt
       updatedAt
     }

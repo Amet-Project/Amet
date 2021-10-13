@@ -146,7 +146,7 @@ type ImagenCasino @model @searchable
   {
     id: ID!
     id_casino: ID!
-    #url: String! 
+    url: String 
     file: S3Object
     casino: Casino! @connection(fields: ["id_casino"])
 }
@@ -171,6 +171,7 @@ type ImagenBanquete @model @searchable
   {
     id: ID!
     id_banquete: ID!
+    url: String 
     file: S3Object
     banquete: Banquete! @connection(fields: ["id_banquete"])
 }
@@ -206,6 +207,7 @@ type ImagenEntretenimiento @model @searchable
   {
     id: ID!
     id_entretenimiento: ID!
+    url: String 
     file: S3Object
     entretenimiento: Entretenimiento! @connection(fields: ["id_entretenimiento"])
 }
