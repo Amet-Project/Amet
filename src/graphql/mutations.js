@@ -1,14 +1,13 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createEvento = /* GraphQL */ `
-  mutation CreateEvento(
-    $input: CreateEventoInput!
-    $condition: ModelEventoConditionInput
+export const createOrdenCasino = /* GraphQL */ `
+  mutation CreateOrdenCasino(
+    $input: CreateOrdenCasinoInput!
+    $condition: ModelOrdenCasinoConditionInput
   ) {
-    createEvento(input: $input, condition: $condition) {
+    createOrdenCasino(input: $input, condition: $condition) {
       id
-      id_usuario
       id_cas_hor_fijo
       id_cas_hor_flex
       id_casino
@@ -17,33 +16,12 @@ export const createEvento = /* GraphQL */ `
       casino_servicios_extras {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
         }
         nextToken
-      }
-      usuario {
-        id
-        nombres
-        ap_paterno
-        ap_materno
-        nacimiento
-        sexo
-        email
-        telefono
-        celular
-        pwd
-        eventos {
-          nextToken
-        }
-        casinos {
-          nextToken
-        }
-        rol
-        createdAt
-        updatedAt
       }
       cas_hor_fijo {
         id
@@ -58,7 +36,7 @@ export const createEvento = /* GraphQL */ `
         sabado
         domingo
         precio
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -68,6 +46,7 @@ export const createEvento = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -79,7 +58,7 @@ export const createEvento = /* GraphQL */ `
         id_cas_precio_flex
         hora_inicio
         hora_fin
-        eventos {
+        ordenes {
           nextToken
         }
         cas_precio_flex {
@@ -106,6 +85,7 @@ export const createEvento = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -121,7 +101,7 @@ export const createEvento = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -150,14 +130,13 @@ export const createEvento = /* GraphQL */ `
     }
   }
 `;
-export const updateEvento = /* GraphQL */ `
-  mutation UpdateEvento(
-    $input: UpdateEventoInput!
-    $condition: ModelEventoConditionInput
+export const updateOrdenCasino = /* GraphQL */ `
+  mutation UpdateOrdenCasino(
+    $input: UpdateOrdenCasinoInput!
+    $condition: ModelOrdenCasinoConditionInput
   ) {
-    updateEvento(input: $input, condition: $condition) {
+    updateOrdenCasino(input: $input, condition: $condition) {
       id
-      id_usuario
       id_cas_hor_fijo
       id_cas_hor_flex
       id_casino
@@ -166,33 +145,12 @@ export const updateEvento = /* GraphQL */ `
       casino_servicios_extras {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
         }
         nextToken
-      }
-      usuario {
-        id
-        nombres
-        ap_paterno
-        ap_materno
-        nacimiento
-        sexo
-        email
-        telefono
-        celular
-        pwd
-        eventos {
-          nextToken
-        }
-        casinos {
-          nextToken
-        }
-        rol
-        createdAt
-        updatedAt
       }
       cas_hor_fijo {
         id
@@ -207,7 +165,7 @@ export const updateEvento = /* GraphQL */ `
         sabado
         domingo
         precio
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -217,6 +175,7 @@ export const updateEvento = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -228,7 +187,7 @@ export const updateEvento = /* GraphQL */ `
         id_cas_precio_flex
         hora_inicio
         hora_fin
-        eventos {
+        ordenes {
           nextToken
         }
         cas_precio_flex {
@@ -255,6 +214,7 @@ export const updateEvento = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -270,7 +230,7 @@ export const updateEvento = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -299,14 +259,13 @@ export const updateEvento = /* GraphQL */ `
     }
   }
 `;
-export const deleteEvento = /* GraphQL */ `
-  mutation DeleteEvento(
-    $input: DeleteEventoInput!
-    $condition: ModelEventoConditionInput
+export const deleteOrdenCasino = /* GraphQL */ `
+  mutation DeleteOrdenCasino(
+    $input: DeleteOrdenCasinoInput!
+    $condition: ModelOrdenCasinoConditionInput
   ) {
-    deleteEvento(input: $input, condition: $condition) {
+    deleteOrdenCasino(input: $input, condition: $condition) {
       id
-      id_usuario
       id_cas_hor_fijo
       id_cas_hor_flex
       id_casino
@@ -315,33 +274,12 @@ export const deleteEvento = /* GraphQL */ `
       casino_servicios_extras {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
         }
         nextToken
-      }
-      usuario {
-        id
-        nombres
-        ap_paterno
-        ap_materno
-        nacimiento
-        sexo
-        email
-        telefono
-        celular
-        pwd
-        eventos {
-          nextToken
-        }
-        casinos {
-          nextToken
-        }
-        rol
-        createdAt
-        updatedAt
       }
       cas_hor_fijo {
         id
@@ -356,7 +294,7 @@ export const deleteEvento = /* GraphQL */ `
         sabado
         domingo
         precio
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -366,6 +304,7 @@ export const deleteEvento = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -377,7 +316,7 @@ export const deleteEvento = /* GraphQL */ `
         id_cas_precio_flex
         hora_inicio
         hora_fin
-        eventos {
+        ordenes {
           nextToken
         }
         cas_precio_flex {
@@ -404,6 +343,7 @@ export const deleteEvento = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -419,7 +359,7 @@ export const deleteEvento = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -466,10 +406,9 @@ export const createCasinoHorarioFijo = /* GraphQL */ `
       sabado
       domingo
       precio
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -487,6 +426,7 @@ export const createCasinoHorarioFijo = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -502,7 +442,7 @@ export const createCasinoHorarioFijo = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -549,10 +489,9 @@ export const updateCasinoHorarioFijo = /* GraphQL */ `
       sabado
       domingo
       precio
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -570,6 +509,7 @@ export const updateCasinoHorarioFijo = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -585,7 +525,7 @@ export const updateCasinoHorarioFijo = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -632,10 +572,9 @@ export const deleteCasinoHorarioFijo = /* GraphQL */ `
       sabado
       domingo
       precio
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -653,6 +592,7 @@ export const deleteCasinoHorarioFijo = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -668,7 +608,7 @@ export const deleteCasinoHorarioFijo = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -707,10 +647,9 @@ export const createCasinoHorarioFlex = /* GraphQL */ `
       id_cas_precio_flex
       hora_inicio
       hora_fin
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -742,6 +681,7 @@ export const createCasinoHorarioFlex = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -763,10 +703,9 @@ export const updateCasinoHorarioFlex = /* GraphQL */ `
       id_cas_precio_flex
       hora_inicio
       hora_fin
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -798,6 +737,7 @@ export const updateCasinoHorarioFlex = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -819,10 +759,9 @@ export const deleteCasinoHorarioFlex = /* GraphQL */ `
       id_cas_precio_flex
       hora_inicio
       hora_fin
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -854,6 +793,7 @@ export const deleteCasinoHorarioFlex = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -899,6 +839,7 @@ export const createCasinoPrecioFlex = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -914,7 +855,7 @@ export const createCasinoPrecioFlex = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -977,6 +918,7 @@ export const updateCasinoPrecioFlex = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -992,7 +934,7 @@ export const updateCasinoPrecioFlex = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1055,6 +997,7 @@ export const deleteCasinoPrecioFlex = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1070,7 +1013,7 @@ export const deleteCasinoPrecioFlex = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1111,6 +1054,7 @@ export const createCasino = /* GraphQL */ `
       titulo
       descripcion
       rfc
+      cap_maxima
       horarios_fijos {
         items {
           id
@@ -1181,10 +1125,9 @@ export const createCasino = /* GraphQL */ `
         }
         nextToken
       }
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -1199,6 +1142,7 @@ export const createCasino = /* GraphQL */ `
         items {
           id
           id_casino
+          url
           createdAt
           updatedAt
         }
@@ -1219,6 +1163,12 @@ export const createCasino = /* GraphQL */ `
           nextToken
         }
         casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
           nextToken
         }
         rol
@@ -1242,6 +1192,7 @@ export const updateCasino = /* GraphQL */ `
       titulo
       descripcion
       rfc
+      cap_maxima
       horarios_fijos {
         items {
           id
@@ -1312,10 +1263,9 @@ export const updateCasino = /* GraphQL */ `
         }
         nextToken
       }
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -1330,6 +1280,7 @@ export const updateCasino = /* GraphQL */ `
         items {
           id
           id_casino
+          url
           createdAt
           updatedAt
         }
@@ -1350,6 +1301,12 @@ export const updateCasino = /* GraphQL */ `
           nextToken
         }
         casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
           nextToken
         }
         rol
@@ -1373,6 +1330,7 @@ export const deleteCasino = /* GraphQL */ `
       titulo
       descripcion
       rfc
+      cap_maxima
       horarios_fijos {
         items {
           id
@@ -1443,10 +1401,9 @@ export const deleteCasino = /* GraphQL */ `
         }
         nextToken
       }
-      eventos {
+      ordenes {
         items {
           id
-          id_usuario
           id_cas_hor_fijo
           id_cas_hor_flex
           id_casino
@@ -1461,6 +1418,7 @@ export const deleteCasino = /* GraphQL */ `
         items {
           id
           id_casino
+          url
           createdAt
           updatedAt
         }
@@ -1481,6 +1439,12 @@ export const deleteCasino = /* GraphQL */ `
           nextToken
         }
         casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
           nextToken
         }
         rol
@@ -1509,6 +1473,7 @@ export const createCasinoArea = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1524,7 +1489,7 @@ export const createCasinoArea = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1579,6 +1544,7 @@ export const updateCasinoArea = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1594,7 +1560,7 @@ export const updateCasinoArea = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1649,6 +1615,7 @@ export const deleteCasinoArea = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1664,7 +1631,7 @@ export const deleteCasinoArea = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1791,6 +1758,7 @@ export const createCasinoServicio = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1806,7 +1774,7 @@ export const createCasinoServicio = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1861,6 +1829,7 @@ export const updateCasinoServicio = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1876,7 +1845,7 @@ export const updateCasinoServicio = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -1931,6 +1900,7 @@ export const deleteCasinoServicio = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -1946,7 +1916,7 @@ export const deleteCasinoServicio = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -2067,10 +2037,10 @@ export const createCasinoServicioExtra = /* GraphQL */ `
       id_servicio_extra
       descripcion
       costo
-      eventos {
+      ordenes {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
@@ -2084,6 +2054,7 @@ export const createCasinoServicioExtra = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -2099,7 +2070,7 @@ export const createCasinoServicioExtra = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -2148,10 +2119,10 @@ export const updateCasinoServicioExtra = /* GraphQL */ `
       id_servicio_extra
       descripcion
       costo
-      eventos {
+      ordenes {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
@@ -2165,6 +2136,7 @@ export const updateCasinoServicioExtra = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -2180,7 +2152,7 @@ export const updateCasinoServicioExtra = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -2229,10 +2201,10 @@ export const deleteCasinoServicioExtra = /* GraphQL */ `
       id_servicio_extra
       descripcion
       costo
-      eventos {
+      ordenes {
         items {
           id
-          id_evento
+          id_orden
           id_casino_se
           createdAt
           updatedAt
@@ -2246,6 +2218,7 @@ export const deleteCasinoServicioExtra = /* GraphQL */ `
         titulo
         descripcion
         rfc
+        cap_maxima
         horarios_fijos {
           nextToken
         }
@@ -2261,7 +2234,7 @@ export const deleteCasinoServicioExtra = /* GraphQL */ `
         servicios_extras {
           nextToken
         }
-        eventos {
+        ordenes {
           nextToken
         }
         imagenes {
@@ -2374,18 +2347,17 @@ export const deleteServicioExtra = /* GraphQL */ `
     }
   }
 `;
-export const createEventoCasinoSE = /* GraphQL */ `
-  mutation CreateEventoCasinoSE(
-    $input: CreateEventoCasinoSEInput!
-    $condition: ModelEventoCasinoSEConditionInput
+export const createOrdenCasinoSE = /* GraphQL */ `
+  mutation CreateOrdenCasinoSE(
+    $input: CreateOrdenCasinoSEInput!
+    $condition: ModelOrdenCasinoSEConditionInput
   ) {
-    createEventoCasinoSE(input: $input, condition: $condition) {
+    createOrdenCasinoSE(input: $input, condition: $condition) {
       id
-      id_evento
+      id_orden
       id_casino_se
-      evento {
+      orden {
         id
-        id_usuario
         id_cas_hor_fijo
         id_cas_hor_flex
         id_casino
@@ -2393,21 +2365,6 @@ export const createEventoCasinoSE = /* GraphQL */ `
         importe
         casino_servicios_extras {
           nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
         }
         cas_hor_fijo {
           id
@@ -2440,6 +2397,7 @@ export const createEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -2452,7 +2410,7 @@ export const createEventoCasinoSE = /* GraphQL */ `
         id_servicio_extra
         descripcion
         costo
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -2462,6 +2420,7 @@ export const createEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -2479,18 +2438,17 @@ export const createEventoCasinoSE = /* GraphQL */ `
     }
   }
 `;
-export const updateEventoCasinoSE = /* GraphQL */ `
-  mutation UpdateEventoCasinoSE(
-    $input: UpdateEventoCasinoSEInput!
-    $condition: ModelEventoCasinoSEConditionInput
+export const updateOrdenCasinoSE = /* GraphQL */ `
+  mutation UpdateOrdenCasinoSE(
+    $input: UpdateOrdenCasinoSEInput!
+    $condition: ModelOrdenCasinoSEConditionInput
   ) {
-    updateEventoCasinoSE(input: $input, condition: $condition) {
+    updateOrdenCasinoSE(input: $input, condition: $condition) {
       id
-      id_evento
+      id_orden
       id_casino_se
-      evento {
+      orden {
         id
-        id_usuario
         id_cas_hor_fijo
         id_cas_hor_flex
         id_casino
@@ -2498,21 +2456,6 @@ export const updateEventoCasinoSE = /* GraphQL */ `
         importe
         casino_servicios_extras {
           nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
         }
         cas_hor_fijo {
           id
@@ -2545,6 +2488,7 @@ export const updateEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -2557,7 +2501,7 @@ export const updateEventoCasinoSE = /* GraphQL */ `
         id_servicio_extra
         descripcion
         costo
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -2567,6 +2511,7 @@ export const updateEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -2584,18 +2529,17 @@ export const updateEventoCasinoSE = /* GraphQL */ `
     }
   }
 `;
-export const deleteEventoCasinoSE = /* GraphQL */ `
-  mutation DeleteEventoCasinoSE(
-    $input: DeleteEventoCasinoSEInput!
-    $condition: ModelEventoCasinoSEConditionInput
+export const deleteOrdenCasinoSE = /* GraphQL */ `
+  mutation DeleteOrdenCasinoSE(
+    $input: DeleteOrdenCasinoSEInput!
+    $condition: ModelOrdenCasinoSEConditionInput
   ) {
-    deleteEventoCasinoSE(input: $input, condition: $condition) {
+    deleteOrdenCasinoSE(input: $input, condition: $condition) {
       id
-      id_evento
+      id_orden
       id_casino_se
-      evento {
+      orden {
         id
-        id_usuario
         id_cas_hor_fijo
         id_cas_hor_flex
         id_casino
@@ -2603,21 +2547,6 @@ export const deleteEventoCasinoSE = /* GraphQL */ `
         importe
         casino_servicios_extras {
           nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
         }
         cas_hor_fijo {
           id
@@ -2650,6 +2579,7 @@ export const deleteEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
@@ -2662,7 +2592,7 @@ export const deleteEventoCasinoSE = /* GraphQL */ `
         id_servicio_extra
         descripcion
         costo
-        eventos {
+        ordenes {
           nextToken
         }
         casino {
@@ -2672,12 +2602,1606 @@ export const deleteEventoCasinoSE = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
           createdAt
           updatedAt
         }
         servicio_extra {
           id
           nombre
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createImagenCasino = /* GraphQL */ `
+  mutation CreateImagenCasino(
+    $input: CreateImagenCasinoInput!
+    $condition: ModelImagenCasinoConditionInput
+  ) {
+    createImagenCasino(input: $input, condition: $condition) {
+      id
+      id_casino
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateImagenCasino = /* GraphQL */ `
+  mutation UpdateImagenCasino(
+    $input: UpdateImagenCasinoInput!
+    $condition: ModelImagenCasinoConditionInput
+  ) {
+    updateImagenCasino(input: $input, condition: $condition) {
+      id
+      id_casino
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteImagenCasino = /* GraphQL */ `
+  mutation DeleteImagenCasino(
+    $input: DeleteImagenCasinoInput!
+    $condition: ModelImagenCasinoConditionInput
+  ) {
+    deleteImagenCasino(input: $input, condition: $condition) {
+      id
+      id_casino
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createBanquete = /* GraphQL */ `
+  mutation CreateBanquete(
+    $input: CreateBanqueteInput!
+    $condition: ModelBanqueteConditionInput
+  ) {
+    createBanquete(input: $input, condition: $condition) {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_unitario
+      minimo
+      ordenes {
+        items {
+          id
+          id_banquete
+          fecha
+          numero_platillos
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_banquete
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateBanquete = /* GraphQL */ `
+  mutation UpdateBanquete(
+    $input: UpdateBanqueteInput!
+    $condition: ModelBanqueteConditionInput
+  ) {
+    updateBanquete(input: $input, condition: $condition) {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_unitario
+      minimo
+      ordenes {
+        items {
+          id
+          id_banquete
+          fecha
+          numero_platillos
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_banquete
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteBanquete = /* GraphQL */ `
+  mutation DeleteBanquete(
+    $input: DeleteBanqueteInput!
+    $condition: ModelBanqueteConditionInput
+  ) {
+    deleteBanquete(input: $input, condition: $condition) {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_unitario
+      minimo
+      ordenes {
+        items {
+          id
+          id_banquete
+          fecha
+          numero_platillos
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_banquete
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createImagenBanquete = /* GraphQL */ `
+  mutation CreateImagenBanquete(
+    $input: CreateImagenBanqueteInput!
+    $condition: ModelImagenBanqueteConditionInput
+  ) {
+    createImagenBanquete(input: $input, condition: $condition) {
+      id
+      id_banquete
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateImagenBanquete = /* GraphQL */ `
+  mutation UpdateImagenBanquete(
+    $input: UpdateImagenBanqueteInput!
+    $condition: ModelImagenBanqueteConditionInput
+  ) {
+    updateImagenBanquete(input: $input, condition: $condition) {
+      id
+      id_banquete
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteImagenBanquete = /* GraphQL */ `
+  mutation DeleteImagenBanquete(
+    $input: DeleteImagenBanqueteInput!
+    $condition: ModelImagenBanqueteConditionInput
+  ) {
+    deleteImagenBanquete(input: $input, condition: $condition) {
+      id
+      id_banquete
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createOrdenBanquete = /* GraphQL */ `
+  mutation CreateOrdenBanquete(
+    $input: CreateOrdenBanqueteInput!
+    $condition: ModelOrdenBanqueteConditionInput
+  ) {
+    createOrdenBanquete(input: $input, condition: $condition) {
+      id
+      id_banquete
+      fecha
+      numero_platillos
+      importe
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateOrdenBanquete = /* GraphQL */ `
+  mutation UpdateOrdenBanquete(
+    $input: UpdateOrdenBanqueteInput!
+    $condition: ModelOrdenBanqueteConditionInput
+  ) {
+    updateOrdenBanquete(input: $input, condition: $condition) {
+      id
+      id_banquete
+      fecha
+      numero_platillos
+      importe
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteOrdenBanquete = /* GraphQL */ `
+  mutation DeleteOrdenBanquete(
+    $input: DeleteOrdenBanqueteInput!
+    $condition: ModelOrdenBanqueteConditionInput
+  ) {
+    deleteOrdenBanquete(input: $input, condition: $condition) {
+      id
+      id_banquete
+      fecha
+      numero_platillos
+      importe
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createEntretenimiento = /* GraphQL */ `
+  mutation CreateEntretenimiento(
+    $input: CreateEntretenimientoInput!
+    $condition: ModelEntretenimientoConditionInput
+  ) {
+    createEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_hora
+      minimo
+      ordenes {
+        items {
+          id
+          id_entretenimiento
+          fecha
+          horas
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_entretenimiento
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEntretenimiento = /* GraphQL */ `
+  mutation UpdateEntretenimiento(
+    $input: UpdateEntretenimientoInput!
+    $condition: ModelEntretenimientoConditionInput
+  ) {
+    updateEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_hora
+      minimo
+      ordenes {
+        items {
+          id
+          id_entretenimiento
+          fecha
+          horas
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_entretenimiento
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEntretenimiento = /* GraphQL */ `
+  mutation DeleteEntretenimiento(
+    $input: DeleteEntretenimientoInput!
+    $condition: ModelEntretenimientoConditionInput
+  ) {
+    deleteEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_hora
+      minimo
+      ordenes {
+        items {
+          id
+          id_entretenimiento
+          fecha
+          horas
+          importe
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          id
+          id_entretenimiento
+          url
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createImagenEntretenimiento = /* GraphQL */ `
+  mutation CreateImagenEntretenimiento(
+    $input: CreateImagenEntretenimientoInput!
+    $condition: ModelImagenEntretenimientoConditionInput
+  ) {
+    createImagenEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_entretenimiento
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateImagenEntretenimiento = /* GraphQL */ `
+  mutation UpdateImagenEntretenimiento(
+    $input: UpdateImagenEntretenimientoInput!
+    $condition: ModelImagenEntretenimientoConditionInput
+  ) {
+    updateImagenEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_entretenimiento
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteImagenEntretenimiento = /* GraphQL */ `
+  mutation DeleteImagenEntretenimiento(
+    $input: DeleteImagenEntretenimientoInput!
+    $condition: ModelImagenEntretenimientoConditionInput
+  ) {
+    deleteImagenEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_entretenimiento
+      url
+      file {
+        bucket
+        region
+        key
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createOrdenEntretenimiento = /* GraphQL */ `
+  mutation CreateOrdenEntretenimiento(
+    $input: CreateOrdenEntretenimientoInput!
+    $condition: ModelOrdenEntretenimientoConditionInput
+  ) {
+    createOrdenEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_entretenimiento
+      fecha
+      horas
+      importe
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateOrdenEntretenimiento = /* GraphQL */ `
+  mutation UpdateOrdenEntretenimiento(
+    $input: UpdateOrdenEntretenimientoInput!
+    $condition: ModelOrdenEntretenimientoConditionInput
+  ) {
+    updateOrdenEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_entretenimiento
+      fecha
+      horas
+      importe
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteOrdenEntretenimiento = /* GraphQL */ `
+  mutation DeleteOrdenEntretenimiento(
+    $input: DeleteOrdenEntretenimientoInput!
+    $condition: ModelOrdenEntretenimientoConditionInput
+  ) {
+    deleteOrdenEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_entretenimiento
+      fecha
+      horas
+      importe
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createEvento = /* GraphQL */ `
+  mutation CreateEvento(
+    $input: CreateEventoInput!
+    $condition: ModelEventoConditionInput
+  ) {
+    createEvento(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_orden_casino
+      id_orden_banquete
+      id_orden_entretenimiento
+      fecha
+      importe_total
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_cas_hor_fijo
+        id_cas_hor_flex
+        id_casino
+        fecha
+        importe
+        casino_servicios_extras {
+          nextToken
+        }
+        cas_hor_fijo {
+          id
+          id_casino
+          hora_inicio
+          hora_fin
+          lunes
+          martes
+          miercoles
+          jueves
+          viernes
+          sabado
+          domingo
+          precio
+          createdAt
+          updatedAt
+        }
+        cas_hor_flex {
+          id
+          id_cas_precio_flex
+          hora_inicio
+          hora_fin
+          createdAt
+          updatedAt
+        }
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_banquete
+        fecha
+        numero_platillos
+        importe
+        banquete {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_entretenimiento
+        fecha
+        horas
+        importe
+        entretenimiento {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEvento = /* GraphQL */ `
+  mutation UpdateEvento(
+    $input: UpdateEventoInput!
+    $condition: ModelEventoConditionInput
+  ) {
+    updateEvento(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_orden_casino
+      id_orden_banquete
+      id_orden_entretenimiento
+      fecha
+      importe_total
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_cas_hor_fijo
+        id_cas_hor_flex
+        id_casino
+        fecha
+        importe
+        casino_servicios_extras {
+          nextToken
+        }
+        cas_hor_fijo {
+          id
+          id_casino
+          hora_inicio
+          hora_fin
+          lunes
+          martes
+          miercoles
+          jueves
+          viernes
+          sabado
+          domingo
+          precio
+          createdAt
+          updatedAt
+        }
+        cas_hor_flex {
+          id
+          id_cas_precio_flex
+          hora_inicio
+          hora_fin
+          createdAt
+          updatedAt
+        }
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_banquete
+        fecha
+        numero_platillos
+        importe
+        banquete {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_entretenimiento
+        fecha
+        horas
+        importe
+        entretenimiento {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEvento = /* GraphQL */ `
+  mutation DeleteEvento(
+    $input: DeleteEventoInput!
+    $condition: ModelEventoConditionInput
+  ) {
+    deleteEvento(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_orden_casino
+      id_orden_banquete
+      id_orden_entretenimiento
+      fecha
+      importe_total
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_cas_hor_fijo
+        id_cas_hor_flex
+        id_casino
+        fecha
+        importe
+        casino_servicios_extras {
+          nextToken
+        }
+        cas_hor_fijo {
+          id
+          id_casino
+          hora_inicio
+          hora_fin
+          lunes
+          martes
+          miercoles
+          jueves
+          viernes
+          sabado
+          domingo
+          precio
+          createdAt
+          updatedAt
+        }
+        cas_hor_flex {
+          id
+          id_cas_precio_flex
+          hora_inicio
+          hora_fin
+          createdAt
+          updatedAt
+        }
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_banquete
+        fecha
+        numero_platillos
+        importe
+        banquete {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_entretenimiento
+        fecha
+        horas
+        importe
+        entretenimiento {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
           createdAt
           updatedAt
         }
@@ -2709,11 +4233,11 @@ export const createUsuario = /* GraphQL */ `
         items {
           id
           id_usuario
-          id_cas_hor_fijo
-          id_cas_hor_flex
-          id_casino
+          id_orden_casino
+          id_orden_banquete
+          id_orden_entretenimiento
           fecha
-          importe
+          importe_total
           createdAt
           updatedAt
         }
@@ -2727,6 +4251,35 @@ export const createUsuario = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      banquete {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entretenimiento {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
           createdAt
           updatedAt
         }
@@ -2758,11 +4311,11 @@ export const updateUsuario = /* GraphQL */ `
         items {
           id
           id_usuario
-          id_cas_hor_fijo
-          id_cas_hor_flex
-          id_casino
+          id_orden_casino
+          id_orden_banquete
+          id_orden_entretenimiento
           fecha
-          importe
+          importe_total
           createdAt
           updatedAt
         }
@@ -2776,6 +4329,35 @@ export const updateUsuario = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      banquete {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entretenimiento {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
           createdAt
           updatedAt
         }
@@ -2807,11 +4389,11 @@ export const deleteUsuario = /* GraphQL */ `
         items {
           id
           id_usuario
-          id_cas_hor_fijo
-          id_cas_hor_flex
-          id_casino
+          id_orden_casino
+          id_orden_banquete
+          id_orden_entretenimiento
           fecha
-          importe
+          importe_total
           createdAt
           updatedAt
         }
@@ -2825,204 +4407,41 @@ export const deleteUsuario = /* GraphQL */ `
           titulo
           descripcion
           rfc
+          cap_maxima
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      banquete {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      entretenimiento {
+        items {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
           createdAt
           updatedAt
         }
         nextToken
       }
       rol
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createImagen = /* GraphQL */ `
-  mutation CreateImagen(
-    $input: CreateImagenInput!
-    $condition: ModelImagenConditionInput
-  ) {
-    createImagen(input: $input, condition: $condition) {
-      id
-      id_casino
-      file {
-        bucket
-        region
-        key
-      }
-      casino {
-        id
-        id_usuario
-        direccion
-        titulo
-        descripcion
-        rfc
-        horarios_fijos {
-          nextToken
-        }
-        precios_flexibles {
-          nextToken
-        }
-        areas {
-          nextToken
-        }
-        servicios {
-          nextToken
-        }
-        servicios_extras {
-          nextToken
-        }
-        eventos {
-          nextToken
-        }
-        imagenes {
-          nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateImagen = /* GraphQL */ `
-  mutation UpdateImagen(
-    $input: UpdateImagenInput!
-    $condition: ModelImagenConditionInput
-  ) {
-    updateImagen(input: $input, condition: $condition) {
-      id
-      id_casino
-      file {
-        bucket
-        region
-        key
-      }
-      casino {
-        id
-        id_usuario
-        direccion
-        titulo
-        descripcion
-        rfc
-        horarios_fijos {
-          nextToken
-        }
-        precios_flexibles {
-          nextToken
-        }
-        areas {
-          nextToken
-        }
-        servicios {
-          nextToken
-        }
-        servicios_extras {
-          nextToken
-        }
-        eventos {
-          nextToken
-        }
-        imagenes {
-          nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteImagen = /* GraphQL */ `
-  mutation DeleteImagen(
-    $input: DeleteImagenInput!
-    $condition: ModelImagenConditionInput
-  ) {
-    deleteImagen(input: $input, condition: $condition) {
-      id
-      id_casino
-      file {
-        bucket
-        region
-        key
-      }
-      casino {
-        id
-        id_usuario
-        direccion
-        titulo
-        descripcion
-        rfc
-        horarios_fijos {
-          nextToken
-        }
-        precios_flexibles {
-          nextToken
-        }
-        areas {
-          nextToken
-        }
-        servicios {
-          nextToken
-        }
-        servicios_extras {
-          nextToken
-        }
-        eventos {
-          nextToken
-        }
-        imagenes {
-          nextToken
-        }
-        usuario {
-          id
-          nombres
-          ap_paterno
-          ap_materno
-          nacimiento
-          sexo
-          email
-          telefono
-          celular
-          pwd
-          rol
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
       createdAt
       updatedAt
     }
