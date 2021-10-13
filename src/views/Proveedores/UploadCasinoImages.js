@@ -46,7 +46,8 @@ export default function UploadCasinoImages(props) {
       Storage.get(response.key).then((url_img)=>{
         console.log("response url del put:", url_img);
         const image = {
-        id_casino: '3dfdaed4-c482-4759-b774-7054fa3f00d2',
+        id_casino: '0651d1df-ac5a-4f99-8ec0-ef08d71400eb',
+        url: url_img,
         file: {
           //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
           bucket: awsExports.aws_user_files_s3_bucket,

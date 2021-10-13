@@ -43,20 +43,16 @@ export default function CasinoPage(props) {
   async function fetchCasinos() {
     try {
       const usersData = await API.graphql(graphqlOperation(listCasinosandImage))
-      for(let i=0;i<usersData.data.listCasinos.items.length;i++){
-        usersData.data.listCasinos.items[i].img = await getImageOfCasino(usersData.data.listCasinos.items[i]);
-      }
       setCasinos(usersData.data.listCasinos.items)
     } catch (err) { console.log('error cargando casinos') }
   }
-  async function getImageOfCasino(casino){
+  function getImageOfCasino(casino){
     //REQUESTING THE IMAGE BY ITS KEY ON THE BUCKET OF S3
     if (casino.imagenes.items.length == 0) {
       return '';
     }else {
-      const key_image = casino.imagenes.items[0].file.key;
-      let img = await Storage.get(key_image);
-      return img;
+      const url_image = casino.imagenes.items[0].url;
+      return url_image;
     }
   }
 
@@ -86,7 +82,7 @@ export default function CasinoPage(props) {
                 casinos && casinos.map(casino => (
                   <Col>
                   <Card text='dark'>
-                    <Card.Img variant="top" src={casino.img} />
+                    <Card.Img variant="top" src={getImageOfCasino(casino)} />
                     <Card.Body>
                       <Card.Title>
                         {casino.titulo}

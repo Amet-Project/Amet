@@ -43,7 +43,7 @@ export default function CasinoDetails(props) {
   async function fetchCasinoImages() {
     try {
         //REQUESTING THE IMAGE BY ITS KEY ON THE BUCKET OF S3
-      Storage.get('ce507970-8693-48d2-adae-c62bd7ac1a6b').then((response) => {
+      Storage.get('bf1a3de3-a3de-4b68-a2c4-95acc3601555').then((response) => {
           setCasinosImgs(response);
         
       });
