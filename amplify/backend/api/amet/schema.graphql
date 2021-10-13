@@ -1,18 +1,15 @@
-type Evento @model 
-  @key(name: "porUsuario", fields: ["id_usuario", "fecha"])
+type OrdenCasino @model 
   @key(name: "porCasinoHorarioFijo", fields: ["id_cas_hor_fijo", "fecha"])
   @key(name: "porCasinoHorarioFlex", fields: ["id_cas_hor_flex", "fecha"])
   @key(name: "porCasino", fields: ["id_casino", "fecha"])
-  @key(name: "eventoPorFecha", fields: ["fecha", "id_casino"], queryField: "eventoPorFecha"){
+  @key(name: "casinoPorFecha", fields: ["fecha", "id_casino"], queryField: "casinoPorFecha"){
     id: ID!
-    id_usuario: ID!
     id_cas_hor_fijo: ID
     id_cas_hor_flex: ID
     id_casino: ID!
     fecha: String!
     importe: Float!
-    casino_servicios_extras: [EventoCasinoSE] @connection(keyName: "porEvento", fields: ["id"])
-    usuario: Usuario! @connection(fields: ["id_usuario"])
+    casino_servicios_extras: [OrdenCasinoSE] @connection(keyName: "porOrdenCasino", fields: ["id"])
     cas_hor_fijo: CasinoHorarioFijo @connection(fields: ["id_cas_hor_fijo"])
     cas_hor_flex: CasinoHorarioFlex @connection(fields: ["id_cas_hor_flex"])
     casino: Casino! @connection(fields: ["id_casino"])
@@ -32,7 +29,7 @@ type CasinoHorarioFijo @model
     sabado: Boolean!
     domingo: Boolean!
     precio: Float!
-    eventos: [Evento] @connection(keyName: "porCasinoHorarioFijo", fields: ["id"])
+    ordenes: [OrdenCasino] @connection(keyName: "porCasinoHorarioFijo", fields: ["id"])
     casino: Casino! @connection(fields: ["id_casino"])
 }
 
@@ -42,7 +39,7 @@ type CasinoHorarioFlex @model
     id_cas_precio_flex: ID!
     hora_inicio: String!
     hora_fin: String!
-    eventos: [Evento] @connection(keyName: "porCasinoHorarioFlex", fields: ["id"])
+    ordenes: [OrdenCasino] @connection(keyName: "porCasinoHorarioFlex", fields: ["id"])
     cas_precio_flex: CasinoPrecioFlex! @connection(fields: ["id_cas_precio_flex"])
 }
 
@@ -70,13 +67,14 @@ type Casino @model
     titulo: String!
     descripcion: String
     rfc: String
+    cap_maxima: Int!
     horarios_fijos: [CasinoHorarioFijo] @connection(keyName: "porCasino", fields: ["id"])
     precios_flexibles: [CasinoPrecioFlex] @connection(keyName: "porCasino", fields: ["id"])
     areas: [CasinoArea] @connection(keyName: "porCasino", fields: ["id"])
     servicios: [CasinoServicio] @connection(keyName: "porCasino", fields: ["id"])
     servicios_extras: [CasinoServicioExtra] @connection(keyName: "porCasino", fields: ["id"])
-    eventos: [Evento] @connection(keyName: "porCasino", fields: ["id"])
-    imagenes: [Imagen] @connection(keyName: "porCasino", fields: ["id"])
+    ordenes: [OrdenCasino] @connection(keyName: "porCasino", fields: ["id"])
+    imagenes: [ImagenCasino] @connection(keyName: "porCasino", fields: ["id"])
     usuario: Usuario! @connection(fields: ["id_usuario"])
 }
 
@@ -122,7 +120,7 @@ type CasinoServicioExtra @model
     id_servicio_extra: ID!
     descripcion: String
     costo: Float!
-    eventos: [EventoCasinoSE] @connection(keyName: "porCasinoSE", fields: ["id"])
+    ordenes: [OrdenCasinoSE] @connection(keyName: "porCasinoSE", fields: ["id"])
     casino: Casino! @connection(fields: ["id_casino"])
     servicio_extra: ServicioExtra! @connection(fields: ["id_servicio_extra"])
 }
@@ -133,14 +131,114 @@ type ServicioExtra @model {
   casinos: [CasinoServicioExtra] @connection(keyName: "porServicioExtra", fields: ["id"])
 }
 
-type EventoCasinoSE @model 
-  @key(name: "porEvento", fields: ["id_evento", "id_casino_se"])
-  @key(name: "porCasinoSE", fields: ["id_casino_se", "id_evento"]){
+type OrdenCasinoSE @model 
+  @key(name: "porOrdenCasino", fields: ["id_orden", "id_casino_se"])
+  @key(name: "porCasinoSE", fields: ["id_casino_se", "id_orden"]){
     id: ID!
-    id_evento: ID!
+    id_orden: ID!
     id_casino_se: ID!
-    evento: Evento! @connection(fields: ["id_evento"])
+    orden: OrdenCasino! @connection(fields: ["id_orden"])
     casino_se: CasinoServicioExtra! @connection(fields: ["id_casino_se"])
+}
+
+type ImagenCasino @model @searchable
+@key(name: "porCasino", fields: ["id_casino", "id"])
+  {
+    id: ID!
+    id_casino: ID!
+    #url: String! 
+    file: S3Object
+    casino: Casino! @connection(fields: ["id_casino"])
+}
+
+#Comida
+type Banquete @model 
+  @key(name: "porUsuario", fields: ["id_usuario", "titulo"]){
+    id: ID!
+    id_usuario: ID!
+    titulo: String!
+    descripcion: String
+    rfc: String
+    precio_unitario: Float!
+    minimo: Int!
+    ordenes: [OrdenBanquete] @connection(keyName: "porBanquete", fields: ["id"])
+    imagenes: [ImagenBanquete] @connection(keyName: "porBanquete", fields: ["id"])
+    usuario: Usuario! @connection(fields: ["id_usuario"])
+}
+
+type ImagenBanquete @model @searchable
+@key(name: "porBanquete", fields: ["id_banquete", "id"])
+  {
+    id: ID!
+    id_banquete: ID!
+    file: S3Object
+    banquete: Banquete! @connection(fields: ["id_banquete"])
+}
+
+type OrdenBanquete @model 
+  @key(name: "porBanquete", fields: ["id_banquete", "fecha"])
+  @key(name: "banquetePorFecha", fields: ["fecha", "id_banquete"], queryField: "banquetePorFecha"){
+    id: ID!
+    id_banquete: ID!
+    fecha: String!
+    numero_platillos: Int!
+    importe: Float!
+    banquete: Banquete! @connection(fields: ["id_banquete"])
+}
+
+#Entretenimiento
+type Entretenimiento @model 
+  @key(name: "porUsuario", fields: ["id_usuario", "titulo"]){
+    id: ID!
+    id_usuario: ID!
+    titulo: String!
+    descripcion: String
+    rfc: String
+    precio_hora: Float!
+    minimo: Int!
+    ordenes: [OrdenEntretenimiento] @connection(keyName: "porEntretenimiento", fields: ["id"])
+    imagenes: [ImagenEntretenimiento] @connection(keyName: "porEntretenimiento", fields: ["id"])
+    usuario: Usuario! @connection(fields: ["id_usuario"])
+}
+
+type ImagenEntretenimiento @model @searchable
+@key(name: "porEntretenimiento", fields: ["id_entretenimiento", "id"])
+  {
+    id: ID!
+    id_entretenimiento: ID!
+    file: S3Object
+    entretenimiento: Entretenimiento! @connection(fields: ["id_entretenimiento"])
+}
+
+type OrdenEntretenimiento @model 
+  @key(name: "porEntretenimiento", fields: ["id_entretenimiento", "fecha"])
+  @key(name: "entretenimientoPorFecha", fields: ["fecha", "id_entretenimiento"], queryField: "entretenimientoPorFecha"){
+    id: ID!
+    id_entretenimiento: ID!
+    fecha: String!
+    horas: Int!
+    importe: Float!
+    entretenimiento: Entretenimiento! @connection(fields: ["id_entretenimiento"])
+}
+
+#General
+type Evento @model 
+  @key(name: "porUsuario", fields: ["id_usuario", "fecha"])
+  @key(name: "porCasino", fields: ["id_orden_casino", "fecha"])
+  @key(name: "porBanquete", fields: ["id_orden_banquete", "fecha"])
+  @key(name: "porEntretenimiento", fields: ["id_orden_entretenimiento", "fecha"])
+  @key(name: "ordenPorFecha", fields: ["fecha", "id_usuario"], queryField: "eventoPorFecha"){
+    id: ID!
+    id_usuario: ID!
+    id_orden_casino: ID!
+    id_orden_banquete: ID
+    id_orden_entretenimiento: ID
+    fecha: String!
+    importe_total: Float!
+    usuario: Usuario! @connection(fields: ["id_usuario"])
+    casino: OrdenCasino! @connection(fields: ["id_orden_casino"])
+    banquete: OrdenBanquete @connection(fields: ["id_orden_banquete"])
+    entretenimiento: OrdenEntretenimiento @connection(fields: ["id_orden_entretenimiento"])
 }
 
 type Usuario @model @searchable
@@ -158,17 +256,9 @@ type Usuario @model @searchable
     pwd: String!
     eventos: [Evento] @connection(keyName: "porUsuario", fields: ["id"])
     casinos: [Casino] @connection(keyName: "porUsuario", fields: ["id"])
+    banquete: [Banquete] @connection(keyName: "porUsuario", fields: ["id"])
+    entretenimiento: [Entretenimiento] @connection(keyName: "porUsuario", fields: ["id"])
     rol: Rol!
-}
-
-type Imagen @model @searchable
-@key(name: "porCasino", fields: ["id_casino", "id"])
-  {
-    id: ID!
-    id_casino: ID!
-    #url: String! 
-    file: S3Object
-    casino: Casino! @connection(fields: ["id_casino"])
 }
 
 type S3Object{
