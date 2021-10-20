@@ -65,9 +65,11 @@ export const listCasinosandImage = `
         id
         rfc
         titulo
-        imagenes(limit: 1, sortDirection: DESC) {
+        imagenes(limit: 1, sortDirection: ASC) {
           items {
-            url
+            file {
+              key
+            }
           }
         }
         horarios_fijos {
