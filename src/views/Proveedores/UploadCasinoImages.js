@@ -41,23 +41,36 @@ export default function UploadCasinoImages(props) {
     //SAVING THE IMAGE ON THE BUCKET OF S3
     const uniqueName = uuidv4(); //HERE GENERATES AN UNIQUE ID FOR THE IMAGE
     Storage.put(uniqueName, file, {
-        contentType: 'image/png'
+      level: 'public',
+      contentType: 'image/png',
     }).then((response) => {
-      Storage.get(response.key).then((url_img)=>{
-        console.log("response url del put:", url_img);
-        const image = {
-        id_casino: '0651d1df-ac5a-4f99-8ec0-ef08d71400eb',
-        url: url_img,
-        file: {
-          //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
-          bucket: awsExports.aws_user_files_s3_bucket,
-          region: awsExports.aws_user_files_s3_bucket_region,
-          key: uniqueName, 
-        }
+      console.log("imagen subida: ", response);
+      const image = {
+      id_casino: '0651d1df-ac5a-4f99-8ec0-ef08d71400eb',
+      //url: url_img,
+      file: {
+      //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
+        bucket: awsExports.aws_user_files_s3_bucket,
+        region: awsExports.aws_user_files_s3_bucket_region,
+        key: response.key, 
       }
-      addImageToDB(image);
-      console.log('added completed')
-      })
+    }
+    addImageToDB(image);
+      //Storage.get(response.key, {level: 'public'}).then((url_img)=>{
+      //   console.log("response url del put:", url_img);
+      //   const image = {
+      //   id_casino: '0651d1df-ac5a-4f99-8ec0-ef08d71400eb',
+      //   url: url_img,
+      //   file: {
+      //     //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
+      //     bucket: awsExports.aws_user_files_s3_bucket,
+      //     region: awsExports.aws_user_files_s3_bucket_region,
+      //     key: uniqueName, 
+      //   }
+      // }
+      // addImageToDB(image);
+      //console.log('added completed:', response);
+      //})
     })
     .catch(err => console.log(err));
 }

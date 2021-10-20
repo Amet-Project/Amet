@@ -27,9 +27,11 @@ export const listCasinosandImage = `
   query ListCasinosandImage {
     listCasinos {
       items {
-        imagenes(limit: 1, sortDirection: DESC) {
+        imagenes(limit: 1, sortDirection: ASC) {
           items {
-            url
+            file {
+              key
+            }
           }
         }
         id

@@ -42,25 +42,38 @@ export default function CasinoPage(props) {
 
   async function fetchCasinos() {
     try {
-      const usersData = await API.graphql(graphqlOperation(listCasinosandImage))
-      setCasinos(usersData.data.listCasinos.items)
-    } catch (err) { console.log('error cargando casinos') }
+      // REQUESTING THE LIST OF CASINOS WITH THEIR IMAGES INFO
+      let usersData = await API.graphql(graphqlOperation(listCasinosandImage));
+      let casinos = usersData.data.listCasinos.items;
+      // ITERATING THE ARRAY OF CASINOS TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
+      for (let idxCasino = 0; idxCasino < casinos.length; idxCasino++) {
+        if (casinos[idxCasino].imagenes.items.length == 0) {
+          casinos[idxCasino].img = '';
+        }else {
+          const key_image = casinos[idxCasino].imagenes.items[0].file.key;
+          //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
+          const img = await Storage.get(key_image, {level: 'public'});
+          casinos[idxCasino].img = img;
+        }
+      }
+     
+      setCasinos(casinos);
+    } catch (err) { console.log('error cargando casinos: ', err) }
   }
-  function getImageOfCasino(casino){
-    //REQUESTING THE IMAGE BY ITS KEY ON THE BUCKET OF S3
-    if (casino.imagenes.items.length == 0) {
-      return '';
-    }else {
-      const url_image = casino.imagenes.items[0].url;
-      return url_image;
-    }
-  }
+  // async function getImageOfCasino(casino){
+  //   //REQUESTING THE IMAGE BY ITS KEY ON THE BUCKET OF S3
+  //   if (casino.imagenes.items.length == 0) {
+  //     return '';
+  //   }else {
+  //     const key_image = casino.imagenes.items[0].file.key;
+  //     const img = await Storage.get(key_image, {level: 'public'});
+  //     console.log(img);
+  //     return img;
+  //   }
+  // }
 
   return (
     <div>
-      {
-        console.log('casinos: ', casinos)
-      }
       <Header
         absolute
         color="primary"
@@ -80,9 +93,10 @@ export default function CasinoPage(props) {
             <Row xs={3} md={4} className="g-4">
             {
                 casinos && casinos.map(casino => (
-                  <Col>
+                  <Col key={casino.id}>
                   <Card text='dark'>
-                    <Card.Img variant="top" src={getImageOfCasino(casino)} />
+                    {/* <Card.Img variant="top" src={getImageOfCasino(casino)} /> */}
+                    <Card.Img variant="top" src={casino.img} />
                     <Card.Body>
                       <Card.Title>
                         {casino.titulo}
