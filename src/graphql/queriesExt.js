@@ -1,7 +1,7 @@
 export const eventoPorFecha = /* GraphQL */ `
   query EventoPorFecha(
     $fecha: String
-    $id_casino: ModelIDKeyConditionInput
+    $id_usuario: ModelIDKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelEventoFilterInput
     $limit: Int
@@ -9,14 +9,14 @@ export const eventoPorFecha = /* GraphQL */ `
   ) {
     eventoPorFecha(
       fecha: $fecha
-      id_casino: $id_casino
+      id_usuario: $id_usuario
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
     ) {
       items {
-        id_casino
+        id_orden_casino
       }
       nextToken
     }
