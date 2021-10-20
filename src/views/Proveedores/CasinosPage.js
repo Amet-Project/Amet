@@ -26,6 +26,10 @@ Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
 
+//variables
+let lowPrice = 0;
+let highPrice = 0;
+
 export default function CasinoPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const [casinos, setCasinos] = useState([])
@@ -102,7 +106,18 @@ export default function CasinoPage(props) {
                         {casino.titulo}
                       </Card.Title>
                       <Card.Text>
+                        {lowPrice = 999999,
+                        highPrice = 0,
+                        casino.horarios_fijos.items.map(hf => {
+                          if (hf.precio > highPrice) {
+                            highPrice = hf.precio
+                          } 
+                          if (hf.precio < lowPrice) {
+                            lowPrice = hf.precio
+                          }
+                        })}
                         {casino.descripcion}
+                        <p>{lowPrice + " - " + highPrice} </p>
                       </Card.Text>
                     </Card.Body>
                     <Button variant="primary">Reservar</Button>

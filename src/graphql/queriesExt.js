@@ -23,38 +23,6 @@ export const eventoPorFecha = /* GraphQL */ `
   }
 `;
 
-export const listCasinos = /* GraphQL */ `
-  query ListCasinos(
-    $filter: ModelCasinoFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCasinos(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        cap_maxima
-        descripcion
-        direccion
-        id
-        rfc
-        titulo
-        horarios_fijos {
-          items {
-            domingo
-            jueves
-            lunes
-            martes
-            miercoles
-            precio
-            sabado
-            viernes
-          }
-        }
-      }
-      nextToken
-    }
-  }
-`;
-
 export const listCasinosandImage = `
   query ListCasinosandImage {
     listCasinos {
@@ -65,7 +33,7 @@ export const listCasinosandImage = `
         id
         rfc
         titulo
-        imagenes(limit: 1, sortDirection: ASC) {
+        imagenes(limit: 1, sortDirection: DESC) {
           items {
             file {
               key
