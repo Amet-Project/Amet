@@ -20,12 +20,28 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { listCasinos } from '../../graphql/queries.js'
+import { listCasinos } from '../../graphql/queriesExt.js'
 import { eventoPorFecha } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
+
+const days = [
+  'domingo',
+  'lunes',
+  'martes',
+  'miercoles',
+  'jueves',
+  'viernes',
+  'sabado',
+];
+let price = 0;
+let day;
+
+//casinos
+let lowPrice = 0;
+let highPrice = 0;
 
 export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
@@ -51,6 +67,10 @@ export default function StartEventPage(props) {
       let eventsArray = eventosData.data.eventoPorFecha.items;
       let venuesArray = casinosData.data.listCasinos.items;
       let indexVenueToDelete = 0;
+
+      const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
+      const dayNumber = new Date(dateMod).getDay();
+      day = days[dayNumber];
 
       for (let i = 0; i < eventsArray.length; i++) {
         for (let j = 0; j < venuesArray.length; j++) {
@@ -95,13 +115,33 @@ export default function StartEventPage(props) {
                           <h3>{casino.titulo}</h3>
                         </CardHeader>
                         <CardBody>
-                          <div id={casino.id}>
+                          <div id={casino.id}>                                                   
+                            { price = 0, 
+                            casino.horarios_fijos.items.map(hf => {
+                              if(hf[day]) {
+                                price = hf.precio;                               
+                              }
+                            })}
+
+                            {lowPrice = 999999,
+                            highPrice = 0,
+                            casino.horarios_fijos.items.map(hf => {
+                              if (hf.precio > highPrice) {
+                                highPrice = hf.precio
+                              } 
+                              if (hf.precio < lowPrice) {
+                                lowPrice = hf.precio
+                              }
+                            })}
+
                             <img className={classes.casinoImage} src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
-                            <p>{casino.descripcion}</p>
+                            <p>{casino["descripcion"]}</p>
+                            <p>{lowPrice + " - " + highPrice} </p>
+                            <p>{price === 0 ? "No disponible este día" : price.toString()}</p>
                           </div>
                         </CardBody>
                         <CardFooter className={classes.cardFooter}>
-                          <Button color="primary" size="lg" href={ "/reserveevent=" + date + "="+ casino.id}>
+                          <Button color="primary" size="lg" disabled={price === 0} href={ "/reserveevent=" + date + "=" + casino.id}>
                             Reservar
                           </Button>
                         </CardFooter>

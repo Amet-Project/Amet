@@ -49,7 +49,7 @@ export default function CasinoPage(props) {
   function getImageOfCasino(casino){
     //REQUESTING THE IMAGE BY ITS KEY ON THE BUCKET OF S3
     if (casino.imagenes.items.length == 0) {
-      return '';
+      return 'http://atrilco.com/wp-content/uploads/2017/11/ef3-placeholder-image.jpg';
     }else {
       const url_image = casino.imagenes.items[0].url;
       return url_image;
