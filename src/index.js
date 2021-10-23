@@ -21,6 +21,7 @@ import CasinoDetails from "views/Details/CasinosDetails.js";
 import UserDetails from "views/Details/UserDetails.js";
 import AdminUsersPage from "views/AdminPages/AdminUsers.js";
 import AdminCasinosPage from "views/AdminPages/AdminCasinos.js";
+import SigninProveedores from "views/SignupPage/SignupProveedores.js";
 
 
 //Amplify AWS
@@ -38,6 +39,7 @@ ReactDOM.render(
       <Route path="/login=:date" component={LoginPage} />
       <Route path="/login" component={LoginPage} />
       <Route path="/signup" component={SignupPage} />
+      <Route path="/signup_proveedores" component={SigninProveedores} />
       <Route path='/startevent=:date' component={StartEventPage} />
       <Route path='/reserveevent=:date=:idvenue' component={ReservePage} />
       <Route path="/casinos" component={CasinosPage} />
