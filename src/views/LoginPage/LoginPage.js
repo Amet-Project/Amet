@@ -64,6 +64,7 @@ export default function LoginPage(props) {
     console.log('Login success: ', user.nombres);
     window.sessionStorage.setItem('auth', true);
     window.sessionStorage.setItem('idAuth', user.id);
+    window.sessionStorage.setItem('userRole', user.rol)
     if(date != undefined){
       history.push('/startevent=' + date);
     }

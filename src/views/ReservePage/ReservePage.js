@@ -116,21 +116,18 @@ export default function ReservePage(props) {
               <div className={classes.container}>
                   <Accordion expanded={expanded === 'panel1'}>
                       <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                          <Typography>Collapsible Group Item #1</Typography>
+                          <Typography>Confirma tu casino</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                           <Typography>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                              malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                              sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                              sit amet blandit leo lobortis eget.
+                              Seleccionaste el casino con ID: {idvenue}.
                           </Typography>
-                          <ColorButton variant="contained" onClick={handleNext('panel2')}>Siguiente</ColorButton>
+                          <ColorButton variant="contained" onClick={handleNext('panel2')}>Confirmar</ColorButton>
                       </AccordionDetails>
                   </Accordion>
                   <Accordion expanded={expanded === 'panel2'}>
                       <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                          <Typography>Collapsible Group Item #2</Typography>
+                          <Typography>Selecciona</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                           <Typography>
@@ -139,6 +136,7 @@ export default function ReservePage(props) {
                               sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
                               sit amet blandit leo lobortis eget.
                           </Typography>
+                          <ColorButton variant="contained" onClick={handleNext('panel1')}>Anterior</ColorButton>
                           <ColorButton variant="contained" onClick={handleNext('panel3')}>Siguiente</ColorButton>
                       </AccordionDetails>
                   </Accordion>
@@ -153,6 +151,7 @@ export default function ReservePage(props) {
                               sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
                               sit amet blandit leo lobortis eget.
                           </Typography>
+                          <ColorButton variant="contained" onClick={handleNext('panel2')}>Anterior</ColorButton>
                           <ColorButton variant="contained" onClick={handleNext(false)}>Finalizar</ColorButton>
                       </AccordionDetails>
                   </Accordion>

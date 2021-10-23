@@ -19,6 +19,8 @@ import MusicaPage from "views/Proveedores/MusicaPage.js";
 import UploadCasinoImages from "views/Proveedores/UploadCasinoImages.js";
 import CasinoDetails from "views/Details/CasinosDetails.js";
 import UserDetails from "views/Details/UserDetails.js";
+import AdminUsersPage from "views/AdminPages/AdminUsers.js";
+import AdminCasinosPage from "views/AdminPages/AdminCasinos.js";
 
 
 //Amplify AWS
@@ -44,6 +46,8 @@ ReactDOM.render(
       <Route path="/user" component={UserDetails} />
       <Route path="/comida" component={ComidaPage} />
       <Route path="/musica" component={MusicaPage} />
+      <Route path="/adminusers" component={AdminUsersPage} />
+      <Route path="/admincasinos" component={AdminCasinosPage} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,
