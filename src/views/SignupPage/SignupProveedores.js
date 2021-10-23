@@ -30,9 +30,14 @@ Amplify.configure(awsExports);
 const initialState = { 
   nombres: '',
   ap_paterno: '',
+  ap_materno: '',
+  celular: '',
+  telefono: '',
+  nacimiento: '',
+  //sexo: '',
   email: '',
   pwd: '',
-  rol: 'CLIENTE'
+  rol: 'PROVEEDOR'
 }
 
 const useStyles = makeStyles(styles);
@@ -49,7 +54,7 @@ export default function SigninProveedores(props) {
   const [usuarios, setUsuarios] = useState([])
 
   //Add to API function
-  async function addUser() {
+  async function addProveedor() {
     try {
       //Inputs validation
       if (!formState.nombres || !formState.email || !formState.pwd ) {
@@ -131,18 +136,42 @@ export default function SigninProveedores(props) {
                       </Button>
                     </div>
                   </CardHeader>
-                  <p className={classes.divider}>O regístrate con Email</p>
+                  <p className={classes.divider}>Ingresa tus datos</p>
                   <CardBody>
                     <label>
-                      First Name
+                      Nombre(s)
                       <br />
                       <input value={formState.nombres} onChange={e => setInput('nombres', e.target.value)}/>
                     </label>
                     <br />
                     <label>
-                      Last Name
+                      Apellido Paterno
                       <br />
                       <input value={formState.ap_paterno} onChange={e => setInput('ap_paterno', e.target.value)}/>
+                    </label>
+                    <br />
+                    <label>
+                      Apellido Materno
+                      <br />
+                      <input value={formState.ap_materno} onChange={e => setInput('ap_materno', e.target.value)}/>
+                    </label>
+                    <br />
+                    <label>
+                      Celular
+                      <br />
+                      <input value={formState.celular} onChange={e => setInput('celular', e.target.value)}/>
+                    </label>
+                    <br />
+                    <label>
+                      Telefono
+                      <br />
+                      <input value={formState.telefono} onChange={e => setInput('telefono', e.target.value)}/>
+                    </label>
+                    <br />
+                    <label>
+                      Fecha de nacimiento
+                      <br />
+                      <input type="date" value={formState.nacimiento} onChange={e => setInput('nacimiento', e.target.value)}/>
                     </label>
                     <br />
                     <label>
@@ -158,7 +187,7 @@ export default function SigninProveedores(props) {
                     </label>
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg" onClick={addUser}>
+                    <Button simple color="primary" size="lg" onClick={addProveedor}>
                       Registrarme
                     </Button>
                   </CardFooter>

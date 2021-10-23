@@ -47,8 +47,8 @@ export default function CasinoPage(props) {
   async function fetchCasinos() {
     try {
       // REQUESTING THE LIST OF CASINOS WITH THEIR IMAGES INFO
-      let usersData = await API.graphql(graphqlOperation(listCasinosWithImage));
-      let casinos = usersData.data.listCasinos.items;
+      let casinosData = await API.graphql(graphqlOperation(listCasinosWithImage));
+      let casinos = casinosData.data.listCasinos.items;
       // ITERATING THE ARRAY OF CASINOS TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
       for (let idxCasino = 0; idxCasino < casinos.length; idxCasino++) {
         if (casinos[idxCasino].imagenes.items.length == 0) {
