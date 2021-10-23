@@ -84,27 +84,7 @@ export const getCasino = /* GraphQL */ `
           sabado
           domingo
           precio
-          createdAt
-          updatedAt
         }
-        nextToken
-      }
-      precios_flexibles {
-        items {
-          id
-          id_casino
-          lunes
-          martes
-          miercoles
-          jueves
-          viernes
-          sabado
-          domingo
-          precio
-          createdAt
-          updatedAt
-        }
-        nextToken
       }
       areas {
         items {
@@ -112,10 +92,7 @@ export const getCasino = /* GraphQL */ `
           id_casino
           id_area
           descripcion
-          createdAt
-          updatedAt
         }
-        nextToken
       }
       servicios {
         items {
@@ -126,10 +103,7 @@ export const getCasino = /* GraphQL */ `
           servicio {
             nombre
           }
-          createdAt
-          updatedAt
         }
-        nextToken
       }
       servicios_extras {
         items {
@@ -141,63 +115,15 @@ export const getCasino = /* GraphQL */ `
           servicio_extra {
             nombre
           }
-          createdAt
-          updatedAt
         }
-        nextToken
-      }
-      ordenes {
-        items {
-          id
-          id_cas_hor_fijo
-          id_cas_hor_flex
-          id_casino
-          fecha
-          importe
-          createdAt
-          updatedAt
-        }
-        nextToken
       }
       imagenes {
         items {
           id
           id_casino
           url
-          createdAt
-          updatedAt
         }
-        nextToken
       }
-      usuario {
-        id
-        nombres
-        ap_paterno
-        ap_materno
-        nacimiento
-        sexo
-        email
-        telefono
-        celular
-        pwd
-        eventos {
-          nextToken
-        }
-        casinos {
-          nextToken
-        }
-        banquete {
-          nextToken
-        }
-        entretenimiento {
-          nextToken
-        }
-        rol
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
