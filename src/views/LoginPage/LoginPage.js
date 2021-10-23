@@ -139,6 +139,8 @@ export default function LoginPage(props) {
                   <CardHeader color="primary" className={classes.cardHeader}>
                     <h4>Si aún no tienes una cuenta</h4>
                     <Link to="/signup" className={classes.signupLink}>Regístrate</Link>
+                    <br/>
+                    <Link to="/signup_proveedores" className={classes.signupLink}>Regístrate como Proveedor</Link>
                     <div className={classes.socialLine}>
                       <Button
                         justIcon
