@@ -23,8 +23,8 @@ export const eventoPorFecha = /* GraphQL */ `
   }
 `;
 
-export const listCasinosandImage = `
-  query ListCasinosandImage {
+export const listCasinosWithImage = `
+  query ListCasinosWithImage {
     listCasinos {
       items {
         cap_maxima
@@ -50,6 +50,8 @@ export const listCasinosandImage = `
             precio
             sabado
             viernes
+            hora_inicio
+            hora_fin
           }
         }
       }

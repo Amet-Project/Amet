@@ -20,7 +20,7 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
-import { listCasinosandImage } from '../../graphql/queriesExt.js'
+import { listCasinosWithImage } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -47,7 +47,7 @@ export default function CasinoPage(props) {
   async function fetchCasinos() {
     try {
       // REQUESTING THE LIST OF CASINOS WITH THEIR IMAGES INFO
-      let usersData = await API.graphql(graphqlOperation(listCasinosandImage));
+      let usersData = await API.graphql(graphqlOperation(listCasinosWithImage));
       let casinos = usersData.data.listCasinos.items;
       // ITERATING THE ARRAY OF CASINOS TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
       for (let idxCasino = 0; idxCasino < casinos.length; idxCasino++) {
