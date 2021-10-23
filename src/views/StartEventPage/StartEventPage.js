@@ -20,7 +20,7 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { listCasinosandImage } from '../../graphql/queriesExt.js'
+import { listCasinosWithImage } from '../../graphql/queriesExt.js'
 import { eventoPorFecha } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
@@ -40,6 +40,8 @@ const days = [
 //Variables
 let price = 0;
 let day;
+let startHour;
+let endHour;
 
 export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
@@ -60,10 +62,10 @@ export default function StartEventPage(props) {
   //Get the whole items
   async function fetchCasinos() {
     try {
-      const casinosData = await API.graphql(graphqlOperation(listCasinosandImage));
+      const casinosData = await API.graphql(graphqlOperation(listCasinosWithImage));
       const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
       let eventsArray = eventosData.data.eventoPorFecha.items;
-      let venuesArray = casinosData.data.listCasinosandImage.items;
+      let venuesArray = casinosData.data.listCasinos.items;
       let indexVenueToDelete = 0;
 
       const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
@@ -114,15 +116,20 @@ export default function StartEventPage(props) {
                         </CardHeader>
                         <CardBody>
                           <div id={casino.id}>                                                   
-                            { price = 0, 
+                            { price = 0,
+                            startHour = "",
+                            endHour = "", 
                             casino.horarios_fijos.items.map(hf => {
                               if(hf[day]) {
-                                price = hf.precio;                               
+                                price = hf.precio;
+                                startHour = hf.hora_inicio;
+                                endHour = hf.hora_fin;                               
                               }
                             })}                           
 
                             <img className={classes.casinoImage} src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
-                            <p>{casino["descripcion"]}</p>                           
+                            <p>{casino.descripcion}</p>
+                            <p>{startHour + " - " + endHour} </p>                           
                             <p>{price === 0 ? "No disponible este día" : price.toString()}</p>
                           </div>
                         </CardBody>
