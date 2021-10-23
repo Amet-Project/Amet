@@ -19,7 +19,7 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
-import Amplify, { API, graphqlOperation } from 'aws-amplify'
+import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
 import { listCasinosWithImage } from '../../graphql/queriesExt.js'
 import { eventoPorFecha } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
@@ -66,6 +66,16 @@ export default function StartEventPage(props) {
       const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
       let eventsArray = eventosData.data.eventoPorFecha.items;
       let venuesArray = casinosData.data.listCasinos.items;
+      for (let idxCasino = 0; idxCasino < venuesArray.length; idxCasino++) {
+        if (venuesArray[idxCasino].imagenes.items.length == 0) {
+          venuesArray[idxCasino].img = '';
+        }else {
+          const key_image = venuesArray[idxCasino].imagenes.items[0].file.key;
+          //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
+          const img = await Storage.get(key_image, {level: 'public'});
+          venuesArray[idxCasino].img = img;
+        }
+      }
       let indexVenueToDelete = 0;
 
       const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
@@ -108,40 +118,43 @@ export default function StartEventPage(props) {
             <GridItem xs={12} sm={12} md={4}>
             {
                 casinos && casinos.map(casino => (
+                  casino.aprobado ? 
                   <div>
-                    <Card className={classes[cardAnimaton]}>
-                      <form className={classes.form}>
-                        <CardHeader color="primary" className={classes.cardHeader}>
-                          <h3>{casino.titulo}</h3>
-                        </CardHeader>
-                        <CardBody>
-                          <div id={casino.id}>                                                   
-                            { price = 0,
-                            startHour = "",
-                            endHour = "", 
-                            casino.horarios_fijos.items.map(hf => {
-                              if(hf[day]) {
-                                price = hf.precio;
-                                startHour = hf.hora_inicio;
-                                endHour = hf.hora_fin;                               
-                              }
-                            })}                           
+                  <Card className={classes[cardAnimaton]}>
+                    <form className={classes.form}>
+                      <CardHeader color="primary" className={classes.cardHeader}>
+                        <h3>{casino.titulo}</h3>
+                      </CardHeader>
+                      <CardBody>
+                        <div id={casino.id}>                                                   
+                          { price = 0,
+                          startHour = "",
+                          endHour = "", 
+                          casino.horarios_fijos.items.map(hf => {
+                            if(hf[day]) {
+                              price = hf.precio;
+                              startHour = hf.hora_inicio;
+                              endHour = hf.hora_fin;                               
+                            }
+                          })}                           
 
-                            <img className={classes.casinoImage} src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
-                            <p>{casino.descripcion}</p>
-                            <p>{startHour + " - " + endHour} </p>                           
-                            <p>{price === 0 ? "No disponible este día" : price.toString()}</p>
-                          </div>
-                        </CardBody>
-                        <CardFooter className={classes.cardFooter}>
-                          <Button color="primary" size="lg" disabled={price === 0} href={ "/reserveevent=" + date + "=" + casino.id}>
-                            Reservar
-                          </Button>
-                        </CardFooter>
-                      </form>
-                    </Card>
-                    <br />
-                  </div>
+                          <img className={classes.casinoImage} src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
+                          <p>{casino.descripcion}</p>
+                          <p>{startHour + " - " + endHour} </p>                           
+                          <p>{price === 0 ? "No disponible este día" : price.toString()}</p>
+                        </div>
+                      </CardBody>
+                      <CardFooter className={classes.cardFooter}>
+                        <Button color="primary" size="lg" disabled={price === 0} href={ "/reserveevent=" + date + "=" + casino.id}>
+                          Reservar
+                        </Button>
+                      </CardFooter>
+                    </form>
+                  </Card>
+                  <br />
+                </div>
+                :
+                null
                 ))
               }
             </GridItem>

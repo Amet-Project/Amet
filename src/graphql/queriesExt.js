@@ -33,6 +33,7 @@ export const listCasinosWithImage = `
         id
         rfc
         titulo
+        aprobado
         imagenes(limit: 1, sortDirection: DESC) {
           items {
             file {

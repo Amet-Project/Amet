@@ -47,6 +47,7 @@ export const createOrdenCasino = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -86,6 +87,7 @@ export const createOrdenCasino = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -176,6 +178,7 @@ export const updateOrdenCasino = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -215,6 +218,7 @@ export const updateOrdenCasino = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -305,6 +309,7 @@ export const deleteOrdenCasino = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -344,6 +349,7 @@ export const deleteOrdenCasino = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -427,6 +433,7 @@ export const createCasinoHorarioFijo = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -510,6 +517,7 @@ export const updateCasinoHorarioFijo = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -593,6 +601,7 @@ export const deleteCasinoHorarioFijo = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -682,6 +691,7 @@ export const createCasinoHorarioFlex = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -738,6 +748,7 @@ export const updateCasinoHorarioFlex = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -794,6 +805,7 @@ export const deleteCasinoHorarioFlex = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -840,6 +852,7 @@ export const createCasinoPrecioFlex = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -919,6 +932,7 @@ export const updateCasinoPrecioFlex = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -998,6 +1012,7 @@ export const deleteCasinoPrecioFlex = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -1055,6 +1070,7 @@ export const createCasino = /* GraphQL */ `
       descripcion
       rfc
       cap_maxima
+      aprobado
       horarios_fijos {
         items {
           id
@@ -1193,6 +1209,7 @@ export const updateCasino = /* GraphQL */ `
       descripcion
       rfc
       cap_maxima
+      aprobado
       horarios_fijos {
         items {
           id
@@ -1331,6 +1348,7 @@ export const deleteCasino = /* GraphQL */ `
       descripcion
       rfc
       cap_maxima
+      aprobado
       horarios_fijos {
         items {
           id
@@ -1474,6 +1492,7 @@ export const createCasinoArea = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -1545,6 +1564,7 @@ export const updateCasinoArea = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -1616,6 +1636,7 @@ export const deleteCasinoArea = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -1759,6 +1780,7 @@ export const createCasinoServicio = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -1830,6 +1852,7 @@ export const updateCasinoServicio = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -1901,6 +1924,7 @@ export const deleteCasinoServicio = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -2055,6 +2079,7 @@ export const createCasinoServicioExtra = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -2137,6 +2162,7 @@ export const updateCasinoServicioExtra = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -2219,6 +2245,7 @@ export const deleteCasinoServicioExtra = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -2398,6 +2425,7 @@ export const createOrdenCasinoSE = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -2421,6 +2449,7 @@ export const createOrdenCasinoSE = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -2489,6 +2518,7 @@ export const updateOrdenCasinoSE = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -2512,6 +2542,7 @@ export const updateOrdenCasinoSE = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -2580,6 +2611,7 @@ export const deleteOrdenCasinoSE = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -2603,6 +2635,7 @@ export const deleteOrdenCasinoSE = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -2642,6 +2675,7 @@ export const createImagenCasino = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -2708,6 +2742,7 @@ export const updateImagenCasino = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -2774,6 +2809,7 @@ export const deleteImagenCasino = /* GraphQL */ `
         descripcion
         rfc
         cap_maxima
+        aprobado
         horarios_fijos {
           nextToken
         }
@@ -2831,6 +2867,7 @@ export const createBanquete = /* GraphQL */ `
       rfc
       precio_unitario
       minimo
+      aprobado
       ordenes {
         items {
           id
@@ -2898,6 +2935,7 @@ export const updateBanquete = /* GraphQL */ `
       rfc
       precio_unitario
       minimo
+      aprobado
       ordenes {
         items {
           id
@@ -2965,6 +3003,7 @@ export const deleteBanquete = /* GraphQL */ `
       rfc
       precio_unitario
       minimo
+      aprobado
       ordenes {
         items {
           id
@@ -3041,6 +3080,7 @@ export const createImagenBanquete = /* GraphQL */ `
         rfc
         precio_unitario
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3092,6 +3132,7 @@ export const updateImagenBanquete = /* GraphQL */ `
         rfc
         precio_unitario
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3143,6 +3184,7 @@ export const deleteImagenBanquete = /* GraphQL */ `
         rfc
         precio_unitario
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3191,6 +3233,7 @@ export const createOrdenBanquete = /* GraphQL */ `
         rfc
         precio_unitario
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3239,6 +3282,7 @@ export const updateOrdenBanquete = /* GraphQL */ `
         rfc
         precio_unitario
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3287,6 +3331,7 @@ export const deleteOrdenBanquete = /* GraphQL */ `
         rfc
         precio_unitario
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3329,6 +3374,7 @@ export const createEntretenimiento = /* GraphQL */ `
       rfc
       precio_hora
       minimo
+      aprobado
       ordenes {
         items {
           id
@@ -3396,6 +3442,7 @@ export const updateEntretenimiento = /* GraphQL */ `
       rfc
       precio_hora
       minimo
+      aprobado
       ordenes {
         items {
           id
@@ -3463,6 +3510,7 @@ export const deleteEntretenimiento = /* GraphQL */ `
       rfc
       precio_hora
       minimo
+      aprobado
       ordenes {
         items {
           id
@@ -3539,6 +3587,7 @@ export const createImagenEntretenimiento = /* GraphQL */ `
         rfc
         precio_hora
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3590,6 +3639,7 @@ export const updateImagenEntretenimiento = /* GraphQL */ `
         rfc
         precio_hora
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3641,6 +3691,7 @@ export const deleteImagenEntretenimiento = /* GraphQL */ `
         rfc
         precio_hora
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3689,6 +3740,7 @@ export const createOrdenEntretenimiento = /* GraphQL */ `
         rfc
         precio_hora
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3737,6 +3789,7 @@ export const updateOrdenEntretenimiento = /* GraphQL */ `
         rfc
         precio_hora
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3785,6 +3838,7 @@ export const deleteOrdenEntretenimiento = /* GraphQL */ `
         rfc
         precio_hora
         minimo
+        aprobado
         ordenes {
           nextToken
         }
@@ -3896,6 +3950,7 @@ export const createEvento = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -3916,6 +3971,7 @@ export const createEvento = /* GraphQL */ `
           rfc
           precio_unitario
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -3936,6 +3992,7 @@ export const createEvento = /* GraphQL */ `
           rfc
           precio_hora
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -4029,6 +4086,7 @@ export const updateEvento = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -4049,6 +4107,7 @@ export const updateEvento = /* GraphQL */ `
           rfc
           precio_unitario
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -4069,6 +4128,7 @@ export const updateEvento = /* GraphQL */ `
           rfc
           precio_hora
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -4162,6 +4222,7 @@ export const deleteEvento = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -4182,6 +4243,7 @@ export const deleteEvento = /* GraphQL */ `
           rfc
           precio_unitario
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -4202,6 +4264,7 @@ export const deleteEvento = /* GraphQL */ `
           rfc
           precio_hora
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -4252,6 +4315,7 @@ export const createUsuario = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -4266,6 +4330,7 @@ export const createUsuario = /* GraphQL */ `
           rfc
           precio_unitario
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -4280,6 +4345,7 @@ export const createUsuario = /* GraphQL */ `
           rfc
           precio_hora
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -4330,6 +4396,7 @@ export const updateUsuario = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -4344,6 +4411,7 @@ export const updateUsuario = /* GraphQL */ `
           rfc
           precio_unitario
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -4358,6 +4426,7 @@ export const updateUsuario = /* GraphQL */ `
           rfc
           precio_hora
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -4408,6 +4477,7 @@ export const deleteUsuario = /* GraphQL */ `
           descripcion
           rfc
           cap_maxima
+          aprobado
           createdAt
           updatedAt
         }
@@ -4422,6 +4492,7 @@ export const deleteUsuario = /* GraphQL */ `
           rfc
           precio_unitario
           minimo
+          aprobado
           createdAt
           updatedAt
         }
@@ -4436,6 +4507,7 @@ export const deleteUsuario = /* GraphQL */ `
           rfc
           precio_hora
           minimo
+          aprobado
           createdAt
           updatedAt
         }
