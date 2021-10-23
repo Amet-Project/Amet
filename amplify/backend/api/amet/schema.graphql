@@ -68,6 +68,7 @@ type Casino @model
     descripcion: String
     rfc: String
     cap_maxima: Int!
+    aprobado: Boolean!
     horarios_fijos: [CasinoHorarioFijo] @connection(keyName: "porCasino", fields: ["id"])
     precios_flexibles: [CasinoPrecioFlex] @connection(keyName: "porCasino", fields: ["id"])
     areas: [CasinoArea] @connection(keyName: "porCasino", fields: ["id"])
@@ -161,6 +162,7 @@ type Banquete @model
     rfc: String
     precio_unitario: Float!
     minimo: Int!
+    aprobado: Boolean!
     ordenes: [OrdenBanquete] @connection(keyName: "porBanquete", fields: ["id"])
     imagenes: [ImagenBanquete] @connection(keyName: "porBanquete", fields: ["id"])
     usuario: Usuario! @connection(fields: ["id_usuario"])
@@ -197,6 +199,7 @@ type Entretenimiento @model
     rfc: String
     precio_hora: Float!
     minimo: Int!
+    aprobado: Boolean!
     ordenes: [OrdenEntretenimiento] @connection(keyName: "porEntretenimiento", fields: ["id"])
     imagenes: [ImagenEntretenimiento] @connection(keyName: "porEntretenimiento", fields: ["id"])
     usuario: Usuario! @connection(fields: ["id_usuario"])
