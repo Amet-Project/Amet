@@ -23,6 +23,26 @@ export const eventoPorFecha = /* GraphQL */ `
   }
 `;
 
+export const listCrudCasinos = `
+  query listCrudCasinos {
+    listCasinos {
+      items {
+        id
+        cap_maxima
+        titulo
+        aprobado
+        usuario {
+          id
+          nombres
+          ap_materno
+          ap_paterno
+        }
+      }
+    }
+  }
+`;
+
+
 export const listCasinosWithImage = `
   query ListCasinosWithImage {
     listCasinos {

@@ -50,7 +50,7 @@ export default function CasinoPage(props) {
       let casinos = casinosData.data.listCasinos.items;
       // ITERATING THE ARRAY OF CASINOS TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
       for (let idxCasino = 0; idxCasino < casinos.length; idxCasino++) {
-        if (casinos[idxCasino].imagenes.items.length == 0) {
+        if (casinos[idxCasino].imagenes.items.length === 0) {
           casinos[idxCasino].img = '';
         }else {
           const key_image = casinos[idxCasino].imagenes.items[0].file.key;
