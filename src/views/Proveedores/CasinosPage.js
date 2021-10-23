@@ -15,7 +15,6 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
 import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
@@ -64,17 +63,6 @@ export default function CasinoPage(props) {
       setCasinos(casinos);
     } catch (err) { console.log('error cargando casinos: ', err) }
   }
-  // async function getImageOfCasino(casino){
-  //   //REQUESTING THE IMAGE BY ITS KEY ON THE BUCKET OF S3
-  //   if (casino.imagenes.items.length == 0) {
-  //     return '';
-  //   }else {
-  //     const key_image = casino.imagenes.items[0].file.key;
-  //     const img = await Storage.get(key_image, {level: 'public'});
-  //     console.log(img);
-  //     return img;
-  //   }
-  // }
 
   return (
     <div>

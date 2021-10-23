@@ -118,40 +118,43 @@ export default function StartEventPage(props) {
             <GridItem xs={12} sm={12} md={4}>
             {
                 casinos && casinos.map(casino => (
-                  <div key={casino.id}>
-                    <Card className={classes[cardAnimaton]}>
-                      <form className={classes.form}>
-                        <CardHeader color="primary" className={classes.cardHeader}>
-                          <h3>{casino.titulo}</h3>
-                        </CardHeader>
-                        <CardBody>
-                          <div id={casino.id}>                                                   
-                            { price = 0,
-                            startHour = "",
-                            endHour = "", 
-                            casino.horarios_fijos.items.map(hf => {
-                              if(hf[day]) {
-                                price = hf.precio;
-                                startHour = hf.hora_inicio;
-                                endHour = hf.hora_fin;                               
-                              }
-                            })}                           
+                  casino.aprobado ? 
+                  <div>
+                  <Card className={classes[cardAnimaton]}>
+                    <form className={classes.form}>
+                      <CardHeader color="primary" className={classes.cardHeader}>
+                        <h3>{casino.titulo}</h3>
+                      </CardHeader>
+                      <CardBody>
+                        <div id={casino.id}>                                                   
+                          { price = 0,
+                          startHour = "",
+                          endHour = "", 
+                          casino.horarios_fijos.items.map(hf => {
+                            if(hf[day]) {
+                              price = hf.precio;
+                              startHour = hf.hora_inicio;
+                              endHour = hf.hora_fin;                               
+                            }
+                          })}                           
 
-                            <img className={classes.casinoImage} src={casino.img} />
-                            <p>{casino.descripcion}</p>
-                            <p>{startHour + " - " + endHour} </p>                           
-                            <p>{price === 0 ? "No disponible este día" : price.toString()}</p>
-                          </div>
-                        </CardBody>
-                        <CardFooter className={classes.cardFooter}>
-                          <Button color="primary" size="lg" disabled={price === 0} href={ "/reserveevent=" + date + "=" + casino.id}>
-                            Reservar
-                          </Button>
-                        </CardFooter>
-                      </form>
-                    </Card>
-                    <br />
-                  </div>
+                          <img className={classes.casinoImage} src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
+                          <p>{casino.descripcion}</p>
+                          <p>{startHour + " - " + endHour} </p>                           
+                          <p>{price === 0 ? "No disponible este día" : price.toString()}</p>
+                        </div>
+                      </CardBody>
+                      <CardFooter className={classes.cardFooter}>
+                        <Button color="primary" size="lg" disabled={price === 0} href={ "/reserveevent=" + date + "=" + casino.id}>
+                          Reservar
+                        </Button>
+                      </CardFooter>
+                    </form>
+                  </Card>
+                  <br />
+                </div>
+                :
+                null
                 ))
               }
             </GridItem>

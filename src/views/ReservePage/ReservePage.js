@@ -26,7 +26,7 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { listCasinos } from '../../graphql/queries.js'
+import { getCasino } from '../../graphql/queriesExt'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -77,6 +77,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 export default function ReservePage(props) {
 
     const [expanded, setExpanded] = React.useState('panel1');
+    const [casinoSE, setCasinoSE] = useState([])
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -94,7 +95,33 @@ export default function ReservePage(props) {
       const classes = useStyles();
       const { ...rest } = props;
 
-    const { date, idvenue } = useParams()
+    const { date, idVenue } = useParams()
+
+    useEffect(() => {
+        fetchCasino();
+      }, [])
+
+    async function fetchCasino() {
+        try {
+          // REQUESTING THE LIST OF CASINOS WITH THEIR IMAGES INFO
+          let casinoData = await API.graphql(graphqlOperation(getCasino, { id: idVenue }));
+          let casinoServicios = casinoData.data.getCasino.items.servicios.items;
+          let casinoServiciosExtras = casinoData.data.getCasino.items.servicios_extras.items;
+          console.log('serv:', casinoData.data.getCasino.items.servicios_extras.items)
+          setCasinoSE(casinoServiciosExtras);
+          // ITERATING THE ARRAY OF CASINOS TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
+          /*for (let idxCasino = 0; idxCasino < casinos.length; idxCasino++) {
+            if (casinos[idxCasino].imagenes.items.length == 0) {
+              casinos[idxCasino].img = '';
+            }else {
+              const key_image = casinos[idxCasino].imagenes.items[0].file.key;
+              //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
+              const img = await Storage.get(key_image, {level: 'public'});
+              casinos[idxCasino].img = img;
+            }
+          }*/
+        } catch (err) { console.log('error cargando casinos: ', err) }
+      }
 
   return (
       <div>
@@ -120,43 +147,53 @@ export default function ReservePage(props) {
                       </AccordionSummary>
                       <AccordionDetails>
                           <Typography>
-                              Seleccionaste el casino con ID: {idvenue}.
+                              Seleccionaste el casino con ID: {idVenue} para la fecha: {date}.
                           </Typography>
-                          <ColorButton variant="contained" onClick={handleNext('panel2')}>Confirmar</ColorButton>
+                          <ColorButton variant="contained" onClick={casinoSE.length > 0 ? handleNext('panelSE') : handleNext('panel2') }>Confirmar</ColorButton>
                       </AccordionDetails>
                   </Accordion>
+                  {casinoSE.length > 0 ?
+                      <Accordion expanded={expanded === 'panelSE'}>
+                          <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+                              <Typography>Selecciona Servicios Extras</Typography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                              <Typography>
+                                  Hehe no sirve
+                              </Typography>
+                              <ColorButton variant="contained" onClick={handleNext('panel1')}>Anterior</ColorButton>
+                              <ColorButton variant="contained" onClick={handleNext('panel2')}>Siguiente</ColorButton>
+                          </AccordionDetails>
+                      </Accordion>
+                      :
+                    null
+                  }
                   <Accordion expanded={expanded === 'panel2'}>
                       <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                          <Typography>Selecciona</Typography>
+                          <Typography>Selecciona Música</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                           <Typography>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                              malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                              sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                              sit amet blandit leo lobortis eget.
-                          </Typography>
+                              Hehe no sirve
+                            </Typography>
                           <ColorButton variant="contained" onClick={handleNext('panel1')}>Anterior</ColorButton>
                           <ColorButton variant="contained" onClick={handleNext('panel3')}>Siguiente</ColorButton>
                       </AccordionDetails>
                   </Accordion>
                   <Accordion expanded={expanded === 'panel3'}>
                       <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                          <Typography>Collapsible Group Item #3</Typography>
+                          <Typography>Selecciona Comida</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
                           <Typography>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                              malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                              sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                              sit amet blandit leo lobortis eget.
+                              Hehe tampoco sirve we xd
                           </Typography>
                           <ColorButton variant="contained" onClick={handleNext('panel2')}>Anterior</ColorButton>
                           <ColorButton variant="contained" onClick={handleNext(false)}>Finalizar</ColorButton>
                       </AccordionDetails>
                   </Accordion>
                   <h1>{date}</h1>
-                  <h1>{idvenue}</h1>
+                  <h1>{idVenue}</h1>
                   <h1>{window.sessionStorage.getItem('idAuth')}</h1>
               </div>
               <Footer whiteFont />
