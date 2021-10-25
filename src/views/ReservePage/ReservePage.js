@@ -78,6 +78,7 @@ export default function ReservePage(props) {
 
     const [expanded, setExpanded] = React.useState('panel1');
     const [casinoSE, setCasinoSE] = useState([])
+    const { date, idVenue } = useParams()
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -95,8 +96,6 @@ export default function ReservePage(props) {
       const classes = useStyles();
       const { ...rest } = props;
 
-    const { date, idVenue } = useParams()
-
     useEffect(() => {
         fetchCasino();
       }, [])
@@ -105,9 +104,8 @@ export default function ReservePage(props) {
         try {
           // REQUESTING THE LIST OF CASINOS WITH THEIR IMAGES INFO
           let casinoData = await API.graphql(graphqlOperation(getCasino, { id: idVenue }));
-          let casinoServicios = casinoData.data.getCasino.items.servicios.items;
-          let casinoServiciosExtras = casinoData.data.getCasino.items.servicios_extras.items;
-          console.log('serv:', casinoData.data.getCasino.items.servicios_extras.items)
+          let casinoServicios = casinoData.data.getCasino.servicios.items;
+          let casinoServiciosExtras = casinoData.data.getCasino.servicios_extras.items;
           setCasinoSE(casinoServiciosExtras);
           // ITERATING THE ARRAY OF CASINOS TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
           /*for (let idxCasino = 0; idxCasino < casinos.length; idxCasino++) {
