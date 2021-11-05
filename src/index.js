@@ -18,6 +18,10 @@ import ComidaPage from "views/Proveedores/ComidaPage.js";
 import MusicaPage from "views/Proveedores/MusicaPage.js";
 import UploadCasinoImages from "views/Proveedores/UploadCasinoImages.js";
 import CasinoDetails from "views/Details/CasinosDetails.js";
+import UserDetails from "views/Details/UserDetails.js";
+import AdminUsersPage from "views/AdminPages/AdminUsers.js";
+import AdminCasinosPage from "views/AdminPages/AdminCasinos.js";
+import SigninProveedores from "views/SignupPage/SignupProveedores.js";
 
 
 //Amplify AWS
@@ -32,15 +36,20 @@ ReactDOM.render(
     <Switch>
       <Route path="/components" component={Components} />
       <Route path="/profile" component={ProfilePage} />
+      <Route path="/login=:date" component={LoginPage} />
       <Route path="/login" component={LoginPage} />
       <Route path="/signup" component={SignupPage} />
+      <Route path="/signup_proveedores" component={SigninProveedores} />
       <Route path='/startevent=:date' component={StartEventPage} />
-      <Route path='/reserveevent=:date=:idvenue' component={ReservePage} />
+      <Route path='/reserveevent=:date=:idVenue' component={ReservePage} />
       <Route path="/casinos" component={CasinosPage} />
       <Route path="/casinosupload" component={UploadCasinoImages} />
       <Route path="/casinodetails" component={CasinoDetails} />
+      <Route path="/user" component={UserDetails} />
       <Route path="/comida" component={ComidaPage} />
       <Route path="/musica" component={MusicaPage} />
+      <Route path="/adminusers" component={AdminUsersPage} />
+      <Route path="/admincasinos" component={AdminCasinosPage} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,

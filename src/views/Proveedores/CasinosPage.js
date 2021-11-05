@@ -15,18 +15,21 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
 import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
-import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import { listCasinos } from '../../graphql/queries.js'
+import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
+import { listCasinosWithImage } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage(props) {
+//variables
+let lowPrice = 0;
+let highPrice = 0;
+
+export default function CasinoPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const [casinos, setCasinos] = useState([])
 
@@ -37,14 +40,28 @@ export default function LoginPage(props) {
   const { ...rest } = props;
 
   useEffect(() => {
-    fetchCasinos()
+    fetchCasinos();
   }, [])
 
   async function fetchCasinos() {
     try {
-      const usersData = await API.graphql(graphqlOperation(listCasinos))
-      setCasinos(usersData.data.listCasinos.items)
-    } catch (err) { console.log('error cargando casinos') }
+      // REQUESTING THE LIST OF CASINOS WITH THEIR IMAGES INFO
+      let casinosData = await API.graphql(graphqlOperation(listCasinosWithImage));
+      let casinos = casinosData.data.listCasinos.items;
+      // ITERATING THE ARRAY OF CASINOS TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
+      for (let idxCasino = 0; idxCasino < casinos.length; idxCasino++) {
+        if (casinos[idxCasino].imagenes.items.length === 0) {
+          casinos[idxCasino].img = '';
+        }else {
+          const key_image = casinos[idxCasino].imagenes.items[0].file.key;
+          //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
+          const img = await Storage.get(key_image, {level: 'public'});
+          casinos[idxCasino].img = img;
+        }
+      }
+     
+      setCasinos(casinos);
+    } catch (err) { console.log('error cargando casinos: ', err) }
   }
 
   return (
@@ -68,15 +85,27 @@ export default function LoginPage(props) {
             <Row xs={3} md={4} className="g-4">
             {
                 casinos && casinos.map(casino => (
-                  <Col>
+                  <Col key={casino.id}>
                   <Card text='dark'>
-                    <Card.Img variant="top" src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
+                    {/* <Card.Img variant="top" src={getImageOfCasino(casino)} /> */}
+                    <Card.Img variant="top" src={casino.img} />
                     <Card.Body>
                       <Card.Title>
                         {casino.titulo}
                       </Card.Title>
                       <Card.Text>
+                        {lowPrice = 999999,
+                        highPrice = 0,
+                        casino.horarios_fijos.items.map(hf => {
+                          if (hf.precio > highPrice) {
+                            highPrice = hf.precio
+                          } 
+                          if (hf.precio < lowPrice) {
+                            lowPrice = hf.precio
+                          }
+                        })}
                         {casino.descripcion}
+                        <p>{lowPrice + " - " + highPrice} </p>
                       </Card.Text>
                     </Card.Body>
                     <Button variant="primary">Reservar</Button>

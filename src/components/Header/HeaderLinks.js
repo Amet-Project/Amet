@@ -26,6 +26,30 @@ export default function HeaderLinks(props) {
   const classes = useStyles();
   return (
     <List className={classes.list}>
+      {
+        window.sessionStorage.getItem('userRole') === 'ADMIN' ?
+        <ListItem className={classes.listItem}>
+        <CustomDropdown
+          noLiPadding
+          buttonText="Administrar"
+          buttonProps={{
+            className: classes.navLink,
+            color: "transparent"
+          }}
+          buttonIcon={Apps}
+          dropdownList={[
+            <Link to="/adminusers" className={classes.dropdownLink}>
+              Usuarios
+            </Link>,
+            <Link to="/admincasinos" className={classes.dropdownLink}>
+              Casinos
+            </Link>
+          ]}
+        />
+      </ListItem>
+      :
+      null
+      }
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
@@ -50,11 +74,11 @@ export default function HeaderLinks(props) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="/login"
+          href= {window.sessionStorage.getItem('auth') ? "/user" : "/login"}
           color="transparent"
           className={classes.navLink}
         >
-          <AccountCircle className={classes.icons} /> Iniciar sesión
+          <AccountCircle className={classes.icons} /> {window.sessionStorage.getItem('auth') ? 'Perfil' : 'Iniciar Sesión' }
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
