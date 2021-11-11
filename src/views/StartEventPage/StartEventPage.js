@@ -58,7 +58,6 @@ export default function StartEventPage(props) {
     fetchCasinos()
   }, [])
 
-  //Cambiar a casinos
   //Get the whole items
   async function fetchCasinos() {
     try {
@@ -153,8 +152,7 @@ export default function StartEventPage(props) {
                   </Card>
                   <br />
                 </div>
-                :
-                null
+                : null
                 ))
               }
             </GridItem>

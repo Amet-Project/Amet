@@ -59,3 +59,25 @@ export const listCasinosWithImage = `
     }
   }
 `;
+
+export const listBanquetesWithImage = `
+  query ListBanquetesWithImage {
+    listBanquetes {
+      items {
+        aprobado
+        descripcion
+        minimo
+        titulo
+        rfc
+        precio_unitario
+        imagenes (limit: 1, sortDirection: DESC) {
+          items {
+            file {
+              key
+            }
+          }
+        }
+      }
+    }
+  }
+`;
