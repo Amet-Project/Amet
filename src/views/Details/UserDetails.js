@@ -17,8 +17,8 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
+import { GetUsuarioDetails } from '../../graphql/queriesExt.js'
 
-import { usuarioPorEmail } from "../../graphql/queries";
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -26,18 +26,28 @@ Amplify.configure(awsExports);
 const useStyles = makeStyles(styles);
 const bcrypt = require('bcryptjs');
 
-export default function LoginPage(props) {
+export default function UserDetails(props) {
   let history = useHistory();
   const [idAuth, setidAuth] = useState('');
+  const [user, setUser] = useState([]);
   const classes = useStyles();
   const { ...rest } = props;
 
   useEffect(() => {
-    getidAuth()
-  }, [])
+    fetchUser();
+  }, []);
 
-  function getidAuth() {
-    setidAuth(window.sessionStorage.getItem('idAuth'))
+  async function fetchUser(){
+    const idAuthMine = window.sessionStorage.getItem('idAuth');
+    setidAuth(idAuthMine);
+    console.log("idAuth: ", idAuthMine);
+    try {
+      const response = await API.graphql(graphqlOperation(GetUsuarioDetails, {id: idAuthMine}));
+      setUser(response.data.getUsuario);
+    } catch (err) {
+      console.log('Error cargando usuario: ',err);
+    }
+    
   }
 
   return (
@@ -58,7 +68,7 @@ export default function LoginPage(props) {
         }}
       >
         <div className={classes.container}>
-            <h3>{idAuth}</h3>
+            <h3>Nombre del usuario: {user.nombres}</h3>
         </div>
         <Footer whiteFont />
       </div>

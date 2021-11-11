@@ -74,6 +74,14 @@ export const listCasinosWithImage = `
             hora_fin
           }
         }
+        servicios {
+          items {
+            descripcion
+            servicio {
+              nombre
+            }
+          }
+        }
       }
     }
   }
@@ -96,6 +104,28 @@ export const listBanquetesWithImage = `
             }
           }
         }
+      }
+    }
+  }
+  `;
+
+  export const listEntretenimientoWithImage = `
+  query ListEntretenimientoWithImage {
+    listEntretenimientos {
+      items {
+        aprobado
+        descripcion
+        imagenes {
+          items {
+            file {
+              key
+            }
+          }
+        }
+        minimo
+        precio_hora
+        rfc
+        titulo
       }
     }
   }
@@ -165,6 +195,24 @@ export const getCasino = `
           url
         }
       }
+    }
+  }
+`;
+
+export const GetUsuarioDetails = /* GraphQL */ `
+  query GetUsuario($id: ID!) {
+    getUsuario(id: $id) {
+      ap_materno
+      ap_paterno
+      celular
+      createdAt
+      email
+      nacimiento
+      nombres
+      rol
+      sexo
+      telefono
+      id
     }
   }
 `;
