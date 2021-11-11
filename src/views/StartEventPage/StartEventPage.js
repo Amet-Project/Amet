@@ -91,7 +91,7 @@ export default function StartEventPage(props) {
         }
         venuesArray.splice(indexVenueToDelete, 1);    
       }
-
+      console.log('Casinos: ', venuesArray);
       setCasinos(venuesArray);
     } catch (err) { console.log('error cargando casinos', err) }
   }
@@ -137,11 +137,11 @@ export default function StartEventPage(props) {
                               endHour = hf.hora_fin;                               
                             }
                           })}                           
-
                           <img className={classes.casinoImage} src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
-                          <p>{casino.descripcion}</p>
-                          <p>{startHour + " - " + endHour} </p>                           
-                          <p>{price === 0 ? "No disponible este día" : price.toString()}</p>
+                          <p>Dirección: {casino.direccion} </p>
+                          <p>Descripción: {casino.descripcion}</p>
+                          <p>Horario: {startHour + " - " + endHour} </p>                           
+                          <p>Precio: ${price === 0 ? "No disponible este día" : price.toString()}</p>
                         </div>
                       </CardBody>
                       <CardFooter className={classes.cardFooter}>
