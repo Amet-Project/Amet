@@ -80,6 +80,25 @@ export const listCasinosWithImage = `
   }
 `;
 
+export const GetUsuarioDetails = /* GraphQL */ `
+  query GetUsuario($id: ID!) {
+    getUsuario(id: $id) {
+      ap_materno
+      ap_paterno
+      celular
+      createdAt
+      email
+      nacimiento
+      nombres
+      rol
+      sexo
+      telefono
+      id
+    }
+  }
+`;
+
+
 export const getCasino = /* GraphQL */ `
   query GetCasino($id: ID!) {
     getCasino(id: $id) {
