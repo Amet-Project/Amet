@@ -77,7 +77,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 export default function ReservePage(props) {
 
     const [expanded, setExpanded] = React.useState('panel1');
-    const [casinoSE, setCasinoSE] = useState([])
+    const [casino, setCasino] = useState([])
     const { date, idVenue } = useParams()
 
     const handleChange = (panel) => (event, newExpanded) => {
@@ -103,10 +103,12 @@ export default function ReservePage(props) {
     async function fetchCasino() {
         try {
           // REQUESTING THE LIST OF CASINOS WITH THEIR IMAGES INFO
-          let casinoData = await API.graphql(graphqlOperation(getCasino, { id: idVenue }));
-          let casinoServicios = casinoData.data.getCasino.servicios.items;
-          let casinoServiciosExtras = casinoData.data.getCasino.servicios_extras.items;
-          setCasinoSE(casinoServiciosExtras);
+          const response = await API.graphql(graphqlOperation(getCasino, { id: idVenue }));
+          const casinoData = response.data.getCasino;
+          //const casinoServicios = casinoData.data.getCasino.servicios.items;
+          const casinoServiciosExtras = casinoData.servicios_extras.items;
+          console.log("Datos del casino:", casinoData);
+          setCasino(casinoData);
           // ITERATING THE ARRAY OF CASINOS TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
           /*for (let idxCasino = 0; idxCasino < casinos.length; idxCasino++) {
             if (casinos[idxCasino].imagenes.items.length == 0) {
@@ -145,12 +147,12 @@ export default function ReservePage(props) {
                       </AccordionSummary>
                       <AccordionDetails>
                           <Typography>
-                              Seleccionaste el casino con ID: {idVenue} para la fecha: {date}.
+                              Seleccionaste el casino con ID: {idVenue} y con datos: {casino.titulo} para la fecha: {date}.
                           </Typography>
-                          <ColorButton variant="contained" onClick={casinoSE.length > 0 ? handleNext('panelSE') : handleNext('panel2') }>Confirmar</ColorButton>
+                          <ColorButton variant="contained" onClick={casino.length > 0 ? handleNext('panelSE') : handleNext('panel2') }>Confirmar</ColorButton>
                       </AccordionDetails>
                   </Accordion>
-                  {casinoSE.length > 0 ?
+                  {casino.length > 0 ?
                       <Accordion expanded={expanded === 'panelSE'}>
                           <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
                               <Typography>Selecciona Servicios Extras</Typography>
