@@ -65,6 +65,7 @@ export default function StartEventPage(props) {
       const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
       let eventsArray = eventosData.data.eventoPorFecha.items;
       let venuesArray = casinosData.data.listCasinos.items;
+      
       for (let idxCasino = 0; idxCasino < venuesArray.length; idxCasino++) {
         if (venuesArray[idxCasino].imagenes.items.length == 0) {
           venuesArray[idxCasino].img = '';
@@ -136,11 +137,19 @@ export default function StartEventPage(props) {
                               endHour = hf.hora_fin;                               
                             }
                           })}                           
-                          <img className={classes.casinoImage} src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
-                          <p>Dirección: {casino.direccion} </p>
-                          <p>Descripción: {casino.descripcion}</p>
-                          <p>Horario: {startHour + " - " + endHour} </p>                           
-                          <p>Precio: ${price === 0 ? "No disponible este día" : price.toString()}</p>
+                          <img className={classes.casinoImage} src={casino.img} />
+                          Dirección: {casino.direccion} <br />
+                          Descripción: {casino.descripcion} <br />
+                          Horario: {startHour + " - " + endHour} <br />                         
+                          Precio: ${price === 0 ? "No disponible este día" : price.toString()} <br />
+                          {console.log(casino.servicios)}
+                          {casino.servicios.items.length != 0 ? "Servicios" : ""}
+                          <ul>
+                            {casino.servicios && casino.servicios.items.map(srv => (
+                                <li>{srv.servicio.nombre}</li>
+                              ))
+                            }
+                          </ul>
                         </div>
                       </CardBody>
                       <CardFooter className={classes.cardFooter}>

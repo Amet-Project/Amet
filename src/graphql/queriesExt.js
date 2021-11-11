@@ -74,6 +74,14 @@ export const listCasinosWithImage = `
             hora_fin
           }
         }
+        servicios {
+          items {
+            descripcion
+            servicio {
+              nombre
+            }
+          }
+        }
       }
     }
   }
@@ -96,6 +104,28 @@ export const listBanquetesWithImage = `
             }
           }
         }
+      }
+    }
+  }
+  `;
+
+  export const listEntretenimientoWithImage = `
+  query ListEntretenimientoWithImage {
+    listEntretenimientos {
+      items {
+        aprobado
+        descripcion
+        imagenes {
+          items {
+            file {
+              key
+            }
+          }
+        }
+        minimo
+        precio_hora
+        rfc
+        titulo
       }
     }
   }

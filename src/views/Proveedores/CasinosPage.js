@@ -100,8 +100,9 @@ export default function CasinoPage(props) {
                               lowPrice = hf.precio
                             }
                           })}
-                          {casino.descripcion}
-                          <p>{lowPrice + " - " + highPrice} </p>
+                          
+                          {casino.descripcion} <br />
+                          {lowPrice + " - " + highPrice}
                         </Card.Text>
                       </Card.Body>
                       <Button variant="primary">Reservar</Button>
