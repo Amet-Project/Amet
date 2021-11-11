@@ -41,7 +41,7 @@ ReactDOM.render(
       <Route path="/signup" component={SignupPage} />
       <Route path="/signup_proveedores" component={SigninProveedores} />
       <Route path='/startevent=:date' component={StartEventPage} />
-      <Route path='/reserveevent=:date=:idvenue' component={ReservePage} />
+      <Route path='/reserveevent=:date=:idVenue' component={ReservePage} />
       <Route path="/casinos" component={CasinosPage} />
       <Route path="/casinosupload" component={UploadCasinoImages} />
       <Route path="/casinodetails" component={CasinoDetails} />
