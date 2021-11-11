@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, CardGroup, Row, Col} from 'react-bootstrap';
+import {CardGroup, Row, Col} from 'react-bootstrap';
 import Card from 'react-bootstrap/Card'
 
 // core components
@@ -11,6 +11,8 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/bg7.jpg";
+import Button from "components/CustomButtons/Button.js";
+
 
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
@@ -100,12 +102,11 @@ export default function CasinoPage(props) {
                               lowPrice = hf.precio
                             }
                           })}
-                          
-                          {casino.descripcion} <br />
-                          {lowPrice + " - " + highPrice}
+                          <p>Descripción: {casino.descripcion}</p>
+                          <p>Precio: ${lowPrice + " - $" + highPrice}</p>
                         </Card.Text>
                       </Card.Body>
-                      <Button variant="primary">Reservar</Button>
+                      <Button color="primary">Reservar</Button>
                     </Card>
                     </Col>
                   </div>
