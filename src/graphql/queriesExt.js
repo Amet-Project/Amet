@@ -1,4 +1,4 @@
-export const eventoPorFecha = /* GraphQL */ `
+export const eventoPorFecha =`
   query EventoPorFecha(
     $fecha: String
     $id_usuario: ModelIDKeyConditionInput
@@ -42,7 +42,6 @@ export const listCrudCasinos = `
   }
 `;
 
-
 export const listCasinosWithImage = `
   query ListCasinosWithImage {
     listCasinos {
@@ -75,31 +74,64 @@ export const listCasinosWithImage = `
             hora_fin
           }
         }
+        servicios {
+          items {
+            descripcion
+            servicio {
+              nombre
+            }
+          }
+        }
       }
     }
   }
 `;
 
-export const GetUsuarioDetails = /* GraphQL */ `
-  query GetUsuario($id: ID!) {
-    getUsuario(id: $id) {
-      ap_materno
-      ap_paterno
-      celular
-      createdAt
-      email
-      nacimiento
-      nombres
-      rol
-      sexo
-      telefono
-      id
+export const listBanquetesWithImage = `
+  query ListBanquetesWithImage {
+    listBanquetes {
+      items {
+        aprobado
+        descripcion
+        minimo
+        titulo
+        rfc
+        precio_unitario
+        imagenes (limit: 1, sortDirection: DESC) {
+          items {
+            file {
+              key
+            }
+          }
+        }
+      }
     }
   }
-`;
+  `;
 
+  export const listEntretenimientoWithImage = `
+  query ListEntretenimientoWithImage {
+    listEntretenimientos {
+      items {
+        aprobado
+        descripcion
+        imagenes {
+          items {
+            file {
+              key
+            }
+          }
+        }
+        minimo
+        precio_hora
+        rfc
+        titulo
+      }
+    }
+  }
+  `;
 
-export const getCasino = /* GraphQL */ `
+export const getCasino = `
   query GetCasino($id: ID!) {
     getCasino(id: $id) {
       id
@@ -163,6 +195,24 @@ export const getCasino = /* GraphQL */ `
           url
         }
       }
+    }
+  }
+`;
+
+export const GetUsuarioDetails = /* GraphQL */ `
+  query GetUsuario($id: ID!) {
+    getUsuario(id: $id) {
+      ap_materno
+      ap_paterno
+      celular
+      createdAt
+      email
+      nacimiento
+      nombres
+      rol
+      sexo
+      telefono
+      id
     }
   }
 `;

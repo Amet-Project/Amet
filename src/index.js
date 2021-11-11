@@ -15,7 +15,7 @@ import StartEventPage from "views/StartEventPage/StartEventPage.js";
 import ReservePage from "views/ReservePage/ReservePage.js";
 import CasinosPage from "views/Proveedores/CasinosPage.js";
 import ComidaPage from "views/Proveedores/ComidaPage.js";
-import MusicaPage from "views/Proveedores/MusicaPage.js";
+import EntretenimientoPage from "views/Proveedores/EntretenimientoPage.js";
 import UploadCasinoImages from "views/Proveedores/UploadCasinoImages.js";
 import CasinoDetails from "views/Details/CasinosDetails.js";
 import UserDetails from "views/Details/UserDetails.js";
@@ -47,7 +47,7 @@ ReactDOM.render(
       <Route path="/casinodetails" component={CasinoDetails} />
       <Route path="/user" component={UserDetails} />
       <Route path="/comida" component={ComidaPage} />
-      <Route path="/musica" component={MusicaPage} />
+      <Route path="/entretenimiento" component={EntretenimientoPage} />
       <Route path="/adminusers" component={AdminUsersPage} />
       <Route path="/admincasinos" component={AdminCasinosPage} />
       <Route path="/" component={LandingPage} />
