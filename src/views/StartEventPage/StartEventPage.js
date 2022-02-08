@@ -82,10 +82,11 @@ export default function StartEventPage(props) {
       const dayNumber = new Date(dateMod).getDay();
       day = days[dayNumber];
       console.log('Casinos: ', venuesArray);
+      console.log('Eventos: ', eventsArray);
 
       for (let i = 0; i < eventsArray.length; i++) {
         for (let j = 0; j < venuesArray.length; j++) {
-          if (eventsArray[i].id_casino == venuesArray[j].id) {
+          if (eventsArray[i].casino.id_casino == venuesArray[j].id) {
             indexVenueToDelete = j;
             break;
           }      
