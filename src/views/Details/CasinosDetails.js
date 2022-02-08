@@ -21,32 +21,44 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
+import { getCasino } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
+
+
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
 
 export default function CasinoDetails(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const [casinosImgs, setCasinosImgs] = useState([])
+  const { id } = useParams();
 
   setTimeout(function() {
     setCardAnimation("");
-  }, 700);
+  }, 1500);
   const classes = useStyles();
   const { ...rest } = props;
-
+  const [casinosImgs, setCasinosImgs] = useState([]);
+  const [casino, setCasino] = useState([]);
   useEffect(() => {
-    fetchCasinoImages()
+    fetchCasinoData()
   }, [])
 
-  async function fetchCasinoImages() {
+  async function fetchCasinoData() {
     try {
-        //REQUESTING THE IMAGE BY ITS KEY ON THE BUCKET OF S3
-      Storage.get('bf1a3de3-a3de-4b68-a2c4-95acc3601555').then((response) => {
-          setCasinosImgs(response);
-        
+      const responseGql = await API.graphql(graphqlOperation(getCasino, {id: id}));
+      const casinoData = responseGql.data.getCasino;
+      const casinoKeyImages = casinoData.imagenes.items;
+      let arrayImages = [];
+      //REQUESTING IMAGES BY ITS KEY ON THE BUCKET OF S3
+      casinoKeyImages.forEach(image => {
+        Storage.get(image.file.key).then((response) => {
+          arrayImages.push(response)
+        });
       });
+      setCasinosImgs(arrayImages);
+      setCasino(casinoData);
+      console.log(casinoData)
     } catch (err) { console.log('error cargando las imagenes de casino', err); }
   }
 
@@ -67,41 +79,38 @@ export default function CasinoDetails(props) {
           backgroundPosition: "top center"
         }}
       >
-          <img src={casinosImgs}/>
 
-
-        {/* <div className={classes.container}>
-
+        <div className={classes.container}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
-              {
-                casinos && casinos.map(casino => (
-                  <div>
-                    <Card className={classes[cardAnimaton]}>
-                      <form className={classes.form}>
-                        <CardHeader color="primary" className={classes.cardHeader}>
-                          <h3>{casino.titulo}</h3>
-                        </CardHeader>
-                        <CardBody>
-                          <div id={casino.id}>
-                            <img className={classes.casinoImage} src={'https://images.getbento.com/accounts/e1aebb31183b4f68112b495ab2ebbf66/media/images/937502_DSC_1141.jpg?w=1800&fit=max&auto=compress,format&h=1800'} />
-                            <p>{casino.descripcion}</p>
-                          </div>
-                        </CardBody>
-                        <CardFooter className={classes.cardFooter}>
-                          <Button color="primary" size="lg">
-                            Reservar
-                          </Button>
-                        </CardFooter>
-                      </form>
-                    </Card>
-                    <br />
-                  </div>
-                ))
-              }
+              <div>
+                <Card className={classes[cardAnimaton]}>
+                  <form className={classes.form}>
+                    <CardHeader color="primary" className={classes.cardHeader}>
+                      <h3>{casino.titulo}</h3>
+                    </CardHeader>
+                    <CardBody>
+                      <p>{casino.descripcion}</p>
+                      <p>Direccion: {casino.direccion}</p>
+                      <p>Capacidad maxima: {casino.cap_maxima} personas</p>
+                      {
+                        casinosImgs.map(img => (
+                          <img key={img} className={classes.casinoImage} src={img} />
+                        ))
+                      }
+                    </CardBody>
+                    <CardFooter className={classes.cardFooter}>
+                      <Button color="primary" size="lg">
+                        Reservar
+                      </Button>
+                    </CardFooter>
+                  </form>
+                </Card>
+                <br />
+              </div>
             </GridItem>
           </GridContainer>
-        </div> */}
+        </div>
         
         
         <Footer whiteFont />

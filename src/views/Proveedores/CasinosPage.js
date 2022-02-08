@@ -106,7 +106,7 @@ export default function CasinoPage(props) {
                           <p>Precio: ${lowPrice + " - $" + highPrice}</p>
                         </Card.Text>
                       </Card.Body>
-                      <Button color="primary">Reservar</Button>
+                      <Button href={"\\casinodetails="+casino.id} color="primary">Detalles</Button>
                     </Card>
                     </Col>
                   </div>

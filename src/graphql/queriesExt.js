@@ -190,9 +190,9 @@ export const getCasino = `
       }
       imagenes {
         items {
-          id
-          id_casino
-          url
+          file {
+            key
+          }
         }
       }
     }
