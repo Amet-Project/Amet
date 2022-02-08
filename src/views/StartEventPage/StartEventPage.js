@@ -76,11 +76,12 @@ export default function StartEventPage(props) {
           venuesArray[idxCasino].img = img;
         }
       }
-      let indexVenueToDelete = 0;
+      let indexVenueToDelete = -1;
 
       const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
       const dayNumber = new Date(dateMod).getDay();
       day = days[dayNumber];
+      console.log('Casinos: ', venuesArray);
 
       for (let i = 0; i < eventsArray.length; i++) {
         for (let j = 0; j < venuesArray.length; j++) {
@@ -89,7 +90,9 @@ export default function StartEventPage(props) {
             break;
           }      
         }
-        venuesArray.splice(indexVenueToDelete, 1);    
+        if(indexVenueToDelete != -1){
+          venuesArray.splice(indexVenueToDelete, 1);
+        }
       }
       console.log('Casinos: ', venuesArray);
       setCasinos(venuesArray);
