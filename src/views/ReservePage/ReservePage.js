@@ -100,7 +100,10 @@ export default function ReservePage(props) {
     const [horariosFijos, setHorariosFijos] = useState([]);
     const { date, idVenue } = useParams();
     const [checkedState, setCheckedState] = useState([]);
-    
+    const [food, setFood] = useState([]);
+    const [checkedStateFood, setCheckedStateFood] = useState();
+    const [music, setMusic] = useState([]);
+    const [checkedStateMusic, setCheckedStateMusic] = useState();
     const [total, setTotal] = useState(0);
     const [subtotal, setSubtotal] = useState(0);
 
@@ -124,11 +127,36 @@ export default function ReservePage(props) {
         setTotal(totalPrice);
     };
 
+    const handleOnChangeMusic = (musicId, price) => {
+        if(musicId === checkedStateMusic){
+            setCheckedStateMusic(null);
+            setTotal(subtotal);
+        }
+        else{
+            setCheckedStateMusic(musicId);
+            let totalPrice = subtotal + price
+            setTotal(totalPrice);
+        }
+    };
+
+    const handleOnChangeFood = (foodId, price) => {
+        if(foodId === checkedStateFood){
+            setCheckedStateFood(null);
+            setTotal(subtotal);
+        }
+        else{
+            setCheckedStateFood(foodId);
+            let totalPrice = subtotal + price
+            setTotal(totalPrice);
+        }
+    };
+
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
 
     const handleNext = (panel) => (event) => {
+        setSubtotal(total);
         setExpanded(panel);
       };
 
@@ -153,6 +181,11 @@ export default function ReservePage(props) {
             const casinoData = response.data.getCasino;
             //const casinoServicios = casinoData.data.getCasino.servicios.items;
             const casinoSE = casinoData.servicios_extras.items;
+            let servExtraCount = 0;
+            for (const servExtra of casinoSE) {
+                checkedState[servExtraCount] = false;
+                servExtraCount++;
+            }
             const casinoHF = casinoData.horarios_fijos.items;
             console.log("Datos del casino: ", casinoData);
             console.log("Servicios extras: ", casinoSE);
@@ -177,9 +210,9 @@ export default function ReservePage(props) {
             let eventsArray = eventosData.data.eventoPorFecha.items;
             let musicArray = musicaData.data.listEntretenimientos.items;
             let foodArray = comidaData.data.listBanquetes.items;
-            console.log("EventsData: ", eventsArray);
-            console.log("musicData: ", musicaData.data.listEntretenimientos);
-            console.log("comidaData: ", comidaData.data.listBanquetes);
+            console.log('Food: ', foodArray);
+            setFood(foodArray);
+            setMusic(musicArray);
 
         } catch (err) { console.log('error cargando casinos: ', err) }
       }
@@ -292,10 +325,31 @@ export default function ReservePage(props) {
                           <Typography>Selecciona Música</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
-                          <Typography>
-                              Hehe no sirve
-                            </Typography>
-                          <ColorButton variant="contained" onClick={serviciosExtras.length > 0 ? handleNext('panelSE') : handleNext('panel1') }>Anterior</ColorButton>
+                          <div>
+                              <ul className="music-list">
+                                  {music.map(({ id, titulo, precio_hora }, index) => {
+                                      return (
+                                          <li key={index}>
+                                              <div className="music-list-item">
+                                                  <div className="left-section">
+                                                      <input
+                                                          type="checkbox"
+                                                          id={`custom-checkbox-${index}`}
+                                                          name={titulo}
+                                                          value={titulo}
+                                                          checked={checkedStateMusic === id}
+                                                          onChange={() => handleOnChangeMusic(id, precio_hora)}
+                                                      />
+                                                      <label style={{ color: "black" }}>{titulo}</label>
+                                                  </div>
+                                                  <div className="right-section">Precio por hora: {getFormattedPrice(precio_hora)}</div>
+                                              </div>
+                                          </li>
+                                      );
+                                  })}
+                              </ul>
+                          </div>
+                          <ColorButton variant="contained" onClick={serviciosExtras.length > 0 ? handleNext('panelSE') : handleNext('panel1')}>Anterior</ColorButton>
                           <ColorButton variant="contained" onClick={handleNext('panel3')}>Siguiente</ColorButton>
                       </AccordionDetails>
                   </Accordion>
@@ -304,9 +358,30 @@ export default function ReservePage(props) {
                           <Typography>Selecciona Comida</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
-                          <Typography>
-                              Hehe tampoco sirve we xd
-                          </Typography>
+                          <div>
+                              <ul className="food-list">
+                                  {food.map(({ id, titulo, precio_unitario }, index) => {
+                                      return (
+                                          <li key={index}>
+                                              <div className="food-list-item">
+                                                  <div className="left-section">
+                                                      <input
+                                                          type="checkbox"
+                                                          id={`custom-checkbox-${index}`}
+                                                          name={titulo}
+                                                          value={titulo}
+                                                          checked={checkedStateFood === id}
+                                                          onChange={() => handleOnChangeFood(id, precio_unitario)}
+                                                      />
+                                                      <label style={{ color: "black" }}>{titulo}</label>
+                                                  </div>
+                                                  <div className="right-section">Precio unitario: {getFormattedPrice(precio_unitario)}</div>
+                                              </div>
+                                          </li>
+                                      );
+                                  })}
+                              </ul>
+                          </div>
                           <ColorButton variant="contained" onClick={handleNext('panel2')}>Anterior</ColorButton>
                           <ColorButton variant="contained" onClick={handleNext(false)}>Finalizar</ColorButton>
                       </AccordionDetails>
