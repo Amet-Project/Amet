@@ -127,7 +127,8 @@ export default function StartEventPage(props) {
                       </CardHeader>
                       <CardBody>
                         <div id={casino.id}>                                                   
-                          { price = 0,
+                          { 
+                          price = 0,
                           startHour = "",
                           endHour = "", 
                           casino.horarios_fijos.items.map(hf => {
@@ -136,7 +137,8 @@ export default function StartEventPage(props) {
                               startHour = hf.hora_inicio;
                               endHour = hf.hora_fin;                               
                             }
-                          })}                           
+                          })
+                          }                           
                           <img className={classes.casinoImage} src={casino.img} />
                           Dirección: {casino.direccion} <br />
                           Descripción: {casino.descripcion} <br />

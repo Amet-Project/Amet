@@ -83,7 +83,6 @@ export default function CasinoPage(props) {
             {
                 casinos && casinos.map(casino => (
                   casino.aprobado ? 
-                  <div>
                     <Col key={casino.id}>
                     <Card text='dark'>
                       <Card.Img variant="top" src={casino.img} />
@@ -102,14 +101,13 @@ export default function CasinoPage(props) {
                               lowPrice = hf.precio
                             }
                           })}
-                          <p>Descripción: {casino.descripcion}</p>
+                          <p>{casino.descripcion}</p>
                           <p>Precio: ${lowPrice + " - $" + highPrice}</p>
                         </Card.Text>
                       </Card.Body>
                       <Button href={"\\casinodetails="+casino.id} color="primary">Detalles</Button>
                     </Card>
                     </Col>
-                  </div>
                   : null
                 ))
               }
