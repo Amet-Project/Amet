@@ -21,6 +21,8 @@ import CasinoDetails from "views/Details/CasinosDetails.js";
 import UserDetails from "views/Details/UserDetails.js";
 import AdminUsersPage from "views/AdminPages/AdminUsers.js";
 import AdminCasinosPage from "views/AdminPages/AdminCasinos.js";
+import AdminCasinoProveedorPage from "views/AdminPages/AdminCasinoProveedor.js";
+import RegistrarCasinoPage from "views/AdminPages/RegistrarCasino.js";
 import SigninProveedores from "views/SignupPage/SignupProveedores.js";
 
 
@@ -50,6 +52,8 @@ ReactDOM.render(
       <Route path="/entretenimiento" component={EntretenimientoPage} />
       <Route path="/adminusers" component={AdminUsersPage} />
       <Route path="/admincasinos" component={AdminCasinosPage} />
+      <Route path="/admincasinoproveedor" component={AdminCasinoProveedorPage} />
+      <Route path="/registrarcasino" component={RegistrarCasinoPage} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,

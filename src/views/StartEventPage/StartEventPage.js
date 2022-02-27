@@ -76,20 +76,24 @@ export default function StartEventPage(props) {
           venuesArray[idxCasino].img = img;
         }
       }
-      let indexVenueToDelete = 0;
+      let indexVenueToDelete = -1;
 
       const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
       const dayNumber = new Date(dateMod).getDay();
       day = days[dayNumber];
+      console.log('Casinos: ', venuesArray);
+      console.log('Eventos: ', eventsArray);
 
       for (let i = 0; i < eventsArray.length; i++) {
         for (let j = 0; j < venuesArray.length; j++) {
-          if (eventsArray[i].id_casino == venuesArray[j].id) {
+          if (eventsArray[i].casino.id_casino == venuesArray[j].id) {
             indexVenueToDelete = j;
             break;
           }      
         }
-        venuesArray.splice(indexVenueToDelete, 1);    
+        if(indexVenueToDelete != -1){
+          venuesArray.splice(indexVenueToDelete, 1);
+        }
       }
       console.log('Casinos: ', venuesArray);
       setCasinos(venuesArray);

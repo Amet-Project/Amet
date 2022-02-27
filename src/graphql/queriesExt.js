@@ -16,7 +16,15 @@ export const eventoPorFecha =`
       nextToken: $nextToken
     ) {
       items {
-        id_orden_casino
+        casino {
+          id_casino
+        }
+        banquete {
+          id_banquete
+        }
+        entretenimiento {
+          id_entretenimiento
+        }
       }
       nextToken
     }
@@ -91,6 +99,7 @@ export const listBanquetesWithImage = `
   query ListBanquetesWithImage {
     listBanquetes {
       items {
+        id
         aprobado
         descripcion
         minimo
@@ -113,6 +122,7 @@ export const listBanquetesWithImage = `
   query ListEntretenimientoWithImage {
     listEntretenimientos {
       items {
+        id
         aprobado
         descripcion
         imagenes {

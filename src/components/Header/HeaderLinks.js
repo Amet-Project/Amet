@@ -39,16 +39,40 @@ export default function HeaderLinks(props) {
           buttonIcon={Apps}
           dropdownList={[
             <Link to="/adminusers" className={classes.dropdownLink}>
-              Usuarios
+              Administrar Usuarios
             </Link>,
             <Link to="/admincasinos" className={classes.dropdownLink}>
-              Casinos
+              Administrar Casinos
             </Link>
           ]}
         />
       </ListItem>
       :
       null
+      }
+      {
+        window.sessionStorage.getItem('userRole') === 'PROVEEDOR' ?
+          <ListItem className={classes.listItem}>
+            <CustomDropdown
+              noLiPadding
+              buttonText="Administrar"
+              buttonProps={{
+                className: classes.navLink,
+                color: "transparent"
+              }}
+              buttonIcon={Apps}
+              dropdownList={[
+                <Link to="/registrarcasino" className={classes.dropdownLink}>
+                  Registrar Casino
+                </Link>,
+                <Link to="/admincasinoproveedor" className={classes.dropdownLink}>
+                  Administrar Casinos
+                </Link>
+              ]}
+            />
+          </ListItem>
+          :
+          null
       }
       <ListItem className={classes.listItem}>
         <CustomDropdown
