@@ -65,7 +65,7 @@ export default function LoginPage(props) {
     window.sessionStorage.setItem('auth', true);
     window.sessionStorage.setItem('idAuth', user.id);
     window.sessionStorage.setItem('userRole', user.rol)
-    if(date != undefined){
+    if(date !== undefined){
       history.push('/startevent=' + date);
     }
     else{
@@ -77,7 +77,7 @@ export default function LoginPage(props) {
     try {
       API.graphql(graphqlOperation(usuarioPorEmail, {email: userData.email}))
       .then((response)=>{
-        if(response.data.usuarioPorEmail.items.length == 0){
+        if(response.data.usuarioPorEmail.items.length === 0){
           console.log('No se encontro usuario');
         }
         else {

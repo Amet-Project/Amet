@@ -44,7 +44,7 @@ export default function ComidaPage(props) {
 
       // ITERATING THE ARRAY OF banquetes TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
       for (let idxBanquete = 0; idxBanquete < banquetes.length; idxBanquete++) {
-        if (banquetes[idxBanquete].imagenes.items.length == 0) {
+        if (banquetes[idxBanquete].imagenes.items.length === 0) {
           banquetes[idxBanquete].img = '';
         }else {
           const key_image = banquetes[idxBanquete].imagenes.items[0].file.key;

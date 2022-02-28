@@ -226,3 +226,16 @@ export const GetUsuarioDetails = /* GraphQL */ `
     }
   }
 `;
+
+export const listCainosByUser = `
+  query ListCainosByUser($id: ID!) {
+    getUsuario(id: $id) {
+      casinos {
+        items {
+          titulo
+          id
+        }
+      }
+    }
+  }
+`;

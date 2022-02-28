@@ -56,7 +56,7 @@ export default function StartEventPage(props) {
 
   useEffect(() => {
     fetchCasinos()
-  }, [])
+  }, []);
 
   //Get the whole items
   async function fetchCasinos() {
@@ -67,7 +67,7 @@ export default function StartEventPage(props) {
       let venuesArray = casinosData.data.listCasinos.items;
       
       for (let idxCasino = 0; idxCasino < venuesArray.length; idxCasino++) {
-        if (venuesArray[idxCasino].imagenes.items.length == 0) {
+        if (venuesArray[idxCasino].imagenes.items.length === 0) {
           venuesArray[idxCasino].img = '';
         }else {
           const key_image = venuesArray[idxCasino].imagenes.items[0].file.key;
@@ -86,12 +86,12 @@ export default function StartEventPage(props) {
 
       for (let i = 0; i < eventsArray.length; i++) {
         for (let j = 0; j < venuesArray.length; j++) {
-          if (eventsArray[i].casino.id_casino == venuesArray[j].id) {
+          if (eventsArray[i].casino.id_casino === venuesArray[j].id) {
             indexVenueToDelete = j;
             break;
           }      
         }
-        if(indexVenueToDelete != -1){
+        if(indexVenueToDelete !== -1){
           venuesArray.splice(indexVenueToDelete, 1);
         }
       }
@@ -149,7 +149,7 @@ export default function StartEventPage(props) {
                           Horario: {startHour + " - " + endHour} <br />                         
                           Precio: ${price === 0 ? "No disponible este día" : price.toString()} <br />
                           {console.log(casino.servicios)}
-                          {casino.servicios.items.length != 0 ? "Servicios" : ""}
+                          {casino.servicios.items.length !== 0 ? "Servicios" : ""}
                           <ul>
                             {casino.servicios && casino.servicios.items.map(srv => (
                                 <li>{srv.servicio.nombre}</li>
