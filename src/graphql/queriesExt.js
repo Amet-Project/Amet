@@ -234,6 +234,16 @@ export const listCasinosByUser = `
         items {
           titulo
           id
+          direccion
+          descripcion
+          cap_maxima
+          imagenes {
+            items {
+              file {
+                key
+              }
+            }
+          }
         }
       }
     }
