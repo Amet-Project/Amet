@@ -56,7 +56,7 @@ export default function StartEventPage(props) {
 
   useEffect(() => {
     fetchCasinos()
-  }, [])
+  }, []);
 
   //Get the whole items
   async function fetchCasinos() {
@@ -67,7 +67,7 @@ export default function StartEventPage(props) {
       let venuesArray = casinosData.data.listCasinos.items;
       
       for (let idxCasino = 0; idxCasino < venuesArray.length; idxCasino++) {
-        if (venuesArray[idxCasino].imagenes.items.length == 0) {
+        if (venuesArray[idxCasino].imagenes.items.length === 0) {
           venuesArray[idxCasino].img = '';
         }else {
           const key_image = venuesArray[idxCasino].imagenes.items[0].file.key;
@@ -76,20 +76,24 @@ export default function StartEventPage(props) {
           venuesArray[idxCasino].img = img;
         }
       }
-      let indexVenueToDelete = 0;
+      let indexVenueToDelete = -1;
 
       const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
       const dayNumber = new Date(dateMod).getDay();
       day = days[dayNumber];
+      console.log('Casinos: ', venuesArray);
+      console.log('Eventos: ', eventsArray);
 
       for (let i = 0; i < eventsArray.length; i++) {
         for (let j = 0; j < venuesArray.length; j++) {
-          if (eventsArray[i].id_casino == venuesArray[j].id) {
+          if (eventsArray[i].casino.id_casino === venuesArray[j].id) {
             indexVenueToDelete = j;
             break;
           }      
         }
-        venuesArray.splice(indexVenueToDelete, 1);    
+        if(indexVenueToDelete !== -1){
+          venuesArray.splice(indexVenueToDelete, 1);
+        }
       }
       console.log('Casinos: ', venuesArray);
       setCasinos(venuesArray);
@@ -127,7 +131,8 @@ export default function StartEventPage(props) {
                       </CardHeader>
                       <CardBody>
                         <div id={casino.id}>                                                   
-                          { price = 0,
+                          { 
+                          price = 0,
                           startHour = "",
                           endHour = "", 
                           casino.horarios_fijos.items.map(hf => {
@@ -136,14 +141,15 @@ export default function StartEventPage(props) {
                               startHour = hf.hora_inicio;
                               endHour = hf.hora_fin;                               
                             }
-                          })}                           
+                          })
+                          }                           
                           <img className={classes.casinoImage} src={casino.img} />
                           Dirección: {casino.direccion} <br />
                           Descripción: {casino.descripcion} <br />
                           Horario: {startHour + " - " + endHour} <br />                         
                           Precio: ${price === 0 ? "No disponible este día" : price.toString()} <br />
                           {console.log(casino.servicios)}
-                          {casino.servicios.items.length != 0 ? "Servicios" : ""}
+                          {casino.servicios.items.length !== 0 ? "Servicios" : ""}
                           <ul>
                             {casino.servicios && casino.servicios.items.map(srv => (
                                 <li>{srv.servicio.nombre}</li>

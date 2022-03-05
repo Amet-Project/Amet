@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
+import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -16,6 +17,7 @@ import image from "assets/img/bg7.jpg";
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
 import { createImagenCasino } from '../../graphql/mutations.js'
+import { listCasinosByUser } from "../../graphql/queriesExt";
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -24,7 +26,36 @@ const useStyles = makeStyles(styles);
 export default function UploadCasinoImages(props) {
 
   const classes = useStyles();
+  const [casinos, setCasinos] = useState([]);
+  const [idSelected, setId] = useState('');
+  const [file, setFile] = useState({});
+
+  //const [idAuth, setidAuth] = useState('');
   const { ...rest } = props;
+
+  
+  useEffect(() => {
+    getidAuth();
+  }, [])
+
+  async function getidAuth() {
+    if(window.sessionStorage.getItem('auth') && window.sessionStorage.getItem('userRole') === 'PROVEEDOR'){
+      let idAuth = window.sessionStorage.getItem('idAuth');
+      try{
+        const casinosData = await API.graphql(graphqlOperation(listCasinosByUser, {id: idAuth}));
+        const casinoList = casinosData.data.getUsuario.casinos.items;
+        setCasinos(casinoList);
+        console.log(casinoList);
+  
+      }catch(err){console.log('error cargando casinos: ', err)};
+
+    }else{
+      window.location.href="/";
+      return;
+    }  
+  }
+
+
 
   const addImageToDB = async (image) => {
     console.log('addimage to db');
@@ -35,9 +66,15 @@ export default function UploadCasinoImages(props) {
         console.log(error);
     }  
   }
-  function onChange(e) {
-    const file = e.target.files[0];
-    console.log(file);
+
+  function onCasinoSelected(e) {
+    setId(e.target.value);
+  }
+  function onFileSelected(e) {
+    setFile(e.target.files[0]);
+  }
+  function onChange() {
+    console.log(idSelected, file);
     //SAVING THE IMAGE ON THE BUCKET OF S3
     const uniqueName = uuidv4(); //HERE GENERATES AN UNIQUE ID FOR THE IMAGE
     Storage.put(uniqueName, file, {
@@ -46,7 +83,7 @@ export default function UploadCasinoImages(props) {
     }).then((response) => {
       console.log("imagen subida: ", response);
       const image = {
-      id_casino: '0651d1df-ac5a-4f99-8ec0-ef08d71400eb',
+      id_casino: idSelected,
       //url: url_img,
       file: {
       //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
@@ -56,21 +93,6 @@ export default function UploadCasinoImages(props) {
       }
     }
     addImageToDB(image);
-      //Storage.get(response.key, {level: 'public'}).then((url_img)=>{
-      //   console.log("response url del put:", url_img);
-      //   const image = {
-      //   id_casino: '0651d1df-ac5a-4f99-8ec0-ef08d71400eb',
-      //   url: url_img,
-      //   file: {
-      //     //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
-      //     bucket: awsExports.aws_user_files_s3_bucket,
-      //     region: awsExports.aws_user_files_s3_bucket_region,
-      //     key: uniqueName, 
-      //   }
-      // }
-      // addImageToDB(image);
-      //console.log('added completed:', response);
-      //})
     })
     .catch(err => console.log(err));
 }
@@ -96,8 +118,15 @@ export default function UploadCasinoImages(props) {
       >
         <div className={classes.container}>
           <div>
-              <p>Ingresa una imagen para el casino</p>
-              <input type="file" onChange={(evt) => onChange(evt)}/>
+            <select defaultValue={{ label: "Elige un casino", value: '' }} onChange={(evt)=> onCasinoSelected(evt)}>
+              {casinos.map((casino) => (
+              <option key={casino.id} value={casino.id}>{casino.titulo}</option>
+              ))}
+            </select>
+            <br/>
+            <input name="image_uploads" accept=".jfif, .png, .jpeg, .jpg" type="file" onChange={(evt) => onFileSelected(evt)}/>
+            <br/>
+            <button onClick={onChange}>Subir imagen</button>
           </div>
         </div>
         <Footer whiteFont />
