@@ -20,6 +20,7 @@ import EntretenimientoPage from "views/Proveedores/EntretenimientoPage.js";
 import UploadCasinoImages from "views/Proveedores/UploadCasinoImages.js";
 import CasinoDetails from "views/Details/CasinosDetails.js";
 import UserDetails from "views/Details/UserDetails.js";
+import Events from "views/EventosPages/Events.js";
 import AdminUsersPage from "views/AdminPages/AdminUsers.js";
 import AdminCasinosPage from "views/AdminPages/AdminCasinos.js";
 import AdminCasinoProveedorPage from "views/AdminPages/AdminCasinoProveedor.js";
@@ -50,6 +51,8 @@ ReactDOM.render(
       <Route path="/casinosupload" component={UploadCasinoImages} />
       <Route path="/casinodetails=:id" component={CasinoDetails} />
       <Route path="/user" component={UserDetails} />
+      <Route path="/admineventos" component={Events} />
+      <Route path="/registrarcasino" component={RegistrarCasinoPage} />
       <Route path="/comida" component={ComidaPage} />
       <Route path="/entretenimiento" component={EntretenimientoPage} />
       <Route path="/adminusers" component={AdminUsersPage} />

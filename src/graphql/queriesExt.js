@@ -239,3 +239,41 @@ export const listCasinosByUser = `
     }
   }
 `;
+
+export const listEventsByUser = `
+query ListEventsByUser(id: ID!) {
+  getUsuario(id: $id) {
+    eventos {
+      items {
+        fecha
+        importe_total
+        id_orden_banquete
+        id_orden_casino
+        id_orden_entretenimiento
+        banquete {
+          importe
+          banquete {
+            titulo
+            id
+          }
+        }
+        casino {
+          casino {
+            titulo
+            id
+          }
+          importe
+        }
+        entretenimiento {
+          id
+          importe
+          entretenimiento {
+            titulo
+          }
+        }
+      }
+    }
+    nombres
+  }
+}
+`;
