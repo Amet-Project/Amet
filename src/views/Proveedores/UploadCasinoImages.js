@@ -17,7 +17,7 @@ import image from "assets/img/bg7.jpg";
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
 import { createImagenCasino } from '../../graphql/mutations.js'
-import { listCainosByUser } from "../../graphql/queriesExt";
+import { listCasinosByUser } from "../../graphql/queriesExt";
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -42,7 +42,7 @@ export default function UploadCasinoImages(props) {
     if(window.sessionStorage.getItem('auth') && window.sessionStorage.getItem('userRole') === 'PROVEEDOR'){
       let idAuth = window.sessionStorage.getItem('idAuth');
       try{
-        const casinosData = await API.graphql(graphqlOperation(listCainosByUser, {id: idAuth}));
+        const casinosData = await API.graphql(graphqlOperation(listCasinosByUser, {id: idAuth}));
         const casinoList = casinosData.data.getUsuario.casinos.items;
         setCasinos(casinoList);
         console.log(casinoList);
