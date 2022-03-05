@@ -227,8 +227,8 @@ export const GetUsuarioDetails = /* GraphQL */ `
   }
 `;
 
-export const listCainosByUser = `
-  query ListCainosByUser($id: ID!) {
+export const listCasinosByUser = `
+  query ListCasinosByUser($id: ID!) {
     getUsuario(id: $id) {
       casinos {
         items {
