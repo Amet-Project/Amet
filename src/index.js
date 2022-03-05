@@ -10,6 +10,7 @@ import Components from "views/Components/Components.js";
 import LandingPage from "views/LandingPage/LandingPage.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
+import LogoutPage from "views/LogoutPage/LogoutPage.js";
 import SignupPage from "views/SignupPage/SignupPage.js";
 import StartEventPage from "views/StartEventPage/StartEventPage.js";
 import ReservePage from "views/ReservePage/ReservePage.js";
@@ -40,6 +41,7 @@ ReactDOM.render(
       <Route path="/profile" component={ProfilePage} />
       <Route path="/login=:date" component={LoginPage} />
       <Route path="/login" component={LoginPage} />
+      <Route path="/logout" component={LogoutPage} />
       <Route path="/signup" component={SignupPage} />
       <Route path="/signup_proveedores" component={SigninProveedores} />
       <Route path='/startevent=:date' component={StartEventPage} />
