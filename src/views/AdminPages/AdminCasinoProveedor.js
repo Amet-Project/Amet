@@ -12,18 +12,21 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 
 //Importanto estilos
-import styles from "assets/jss/material-kit-react/views/loginPage.js";
+import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";
 import image from "assets/img/bg7.jpg";
 
 //Amplify imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
 
-import { listCrudCasinos } from "../../graphql/queriesExt";
+import { listCrudCasinos, listEntretenimientoWithImage } from "../../graphql/queriesExt";
+import { listCasinosByUser } from "../../graphql/queriesExt";
+import { listBanqueteByUser } from "../../graphql/queriesExt";
+import { listEntretenimientoByUser } from "../../graphql/queriesExt";
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(informationPageStyle);
 const bcrypt = require('bcryptjs');
 
 export default function AdminCasinoProveedor(props) {
@@ -31,29 +34,35 @@ export default function AdminCasinoProveedor(props) {
   const [idAuth, setidAuth] = useState('');
   const classes = useStyles();
   const [casinos, setCasinos] = useState([]);
+  const [banquetes, setBanquetes] = useState([]);
+  const [musica, setMusica] = useState([]);
   const { ...rest } = props;
 
   useEffect(() => {
     getidAuth();
-    getCasinos();
   }, [])
 
-  function getidAuth() {
+  async function getidAuth() {
     if(window.sessionStorage.getItem('auth') && window.sessionStorage.getItem('userRole') === 'PROVEEDOR'){
-      setidAuth(window.sessionStorage.getItem('idAuth'))
+      let idAuth = window.sessionStorage.getItem('idAuth');
+      try{
+        const casinosData = await API.graphql(graphqlOperation(listCasinosByUser, {id: idAuth}));
+        const casinoList = casinosData.data.getUsuario.casinos.items;
+        setCasinos(casinoList);
+        console.log('casinos: ', casinosData);
+
+        const musicData = await API.graphql(graphqlOperation(listEntretenimientoByUser, {id: idAuth}));
+        console.log('music: ', musicData);
+
+        const banquetesData = await API.graphql(graphqlOperation(listBanqueteByUser, {id: idAuth}));
+        console.log('banquetes: ', banquetesData);
+  
+      }catch(err){console.log('error cargando casinos: ', err)};
+
     }else{
       window.location.href="/";
       return;
-    }  
-  }
-
-  async function getCasinos(){
-    try{
-      const casinosData = await API.graphql(graphqlOperation(listCrudCasinos));
-      const casinoList = casinosData.data.listCasinos.items;
-      setCasinos(casinoList);
-      console.log(casinoList);
-    }catch(err){console.log('error cargando casinos: ', err)};
+    } 
   }
 
   return (
@@ -73,8 +82,38 @@ export default function AdminCasinoProveedor(props) {
           backgroundPosition: "top center"
         }}
       >
-        <div className={classes.container}>
-            <h3>Hola</h3>
+        <div className={classes.infoBigContainer}>
+        {
+          casinos.length > 0 ? 
+          <div className={classes.infoContainer}>
+              <h2>Casinos</h2>
+              <hr className={classes.hrRound}></hr>
+              <ul className="casino-list">
+                {casinos.map(({ id, titulo, descripcion, direccion }, index) => {
+                  return (
+                    <li key={index}>
+                      <div className="music-list-item">
+                        <div className="left-section">
+                          <h3>{titulo}</h3>
+                          <h4>{descripcion}</h4>
+                          <h4>{direccion}</h4>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div> : null
+        }
+        <div className={classes.infoContainer}>
+          <h2>Banquetes</h2>
+          <hr className={classes.hrRound}></hr>
+        </div>
+
+        <div className={classes.infoContainer}>
+          <h2>Entretenimiento</h2>
+          <hr className={classes.hrRound}></hr>
+        </div>
         </div>
         <Footer whiteFont />
       </div>

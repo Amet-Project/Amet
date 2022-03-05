@@ -234,6 +234,45 @@ export const listCasinosByUser = `
         items {
           titulo
           id
+          direccion
+          descripcion
+          cap_maxima
+          imagenes {
+            items {
+              file {
+                key
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const listBanqueteByUser = `
+  query listBanqueteByUser($id: ID!) {
+    getUsuario(id: $id) {
+      banquete {
+        items {
+          titulo
+          id
+          descripcion
+          precio_unitario
+        }
+      
+    }
+  }
+`;
+
+export const listEntretenimientoByUser = `
+  query listEntretenimientoByUser($id: ID!) {
+    getUsuario(id: $id) {
+      entretenimiento {
+        items {
+          descripcion
+          titulo
+          precio_hora
         }
       }
     }
