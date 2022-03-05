@@ -1,7 +1,5 @@
 /*eslint-disable*/
 import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
 
@@ -13,6 +11,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
 import { Apps, AccountCircle } from "@material-ui/icons";
+import MenuIcon from '@mui/icons-material/Menu';
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -96,6 +95,43 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem>
+      {
+        
+        window.sessionStorage.getItem('auth') ?
+          <ListItem className={classes.listItem}>
+            <CustomDropdown
+              noLiPadding
+              buttonText="MENU"
+              buttonProps={{
+                className: classes.navLink,
+                color: "transparent"
+              }}
+              buttonIcon={MenuIcon}
+              dropdownList={[
+                <Link to="/user" className={classes.dropdownLink}>
+                  Perfil
+                </Link>,
+                <Link to="/admineventos" className={classes.dropdownLink}>
+                  Mis eventos
+                </Link>,
+                <Link to="/logout" className={classes.dropdownLink}>
+                  Salir
+                </Link>
+                
+              ]}
+            />
+          </ListItem>
+          :
+          <ListItem className={classes.listItem}>
+          <Button
+            href="/login"
+            color="transparent"
+            className={classes.navLink}
+          >
+            <AccountCircle className={classes.icons} /> {'Iniciar Sesión' }
+          </Button>
+          </ListItem>
+      }{/*
       <ListItem className={classes.listItem}>
         <Button
           href= {window.sessionStorage.getItem('auth') ? "/user" : "/login"}
@@ -104,7 +140,7 @@ export default function HeaderLinks(props) {
         >
           <AccountCircle className={classes.icons} /> {window.sessionStorage.getItem('auth') ? 'Perfil' : 'Iniciar Sesión' }
         </Button>
-      </ListItem>
+      </ListItem>*/}
       <ListItem className={classes.listItem}>
         {/*<Tooltip title="Delete">
           <IconButton aria-label="Delete">
