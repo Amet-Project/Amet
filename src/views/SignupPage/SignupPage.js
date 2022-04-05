@@ -131,16 +131,15 @@ export default function SigninPage(props) {
                       </Button>
                     </div>
                   </CardHeader>
-                  <p className={classes.divider}>O regístrate con Email</p>
                   <CardBody>
                     <label>
-                      First Name
+                      Nombres
                       <br />
                       <input value={formState.nombres} onChange={e => setInput('nombres', e.target.value)}/>
                     </label>
                     <br />
                     <label>
-                      Last Name
+                      Aoellidos
                       <br />
                       <input value={formState.ap_paterno} onChange={e => setInput('ap_paterno', e.target.value)}/>
                     </label>
@@ -152,7 +151,7 @@ export default function SigninPage(props) {
                     </label>
                     <br />
                     <label>
-                      Password
+                      Contraseña
                       <br />
                       <input value={formState.pwd} onChange={e => setInput('pwd', e.target.value)}/>
                     </label>

@@ -15,16 +15,14 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
+//Importanto estilos
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
 import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
 import { getCasino } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
-
-
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
