@@ -260,23 +260,29 @@ export const listBanqueteByUser = `
           descripcion
           precio_unitario
         }
-      
+      }
     }
   }
 `;
 
 export const listEntretenimientoByUser = `
-  query listEntretenimientoByUser($id: ID!) {
-    getUsuario(id: $id) {
-      entretenimiento {
-        items {
-          descripcion
-          titulo
-          precio_hora
+query ListEntretenimientoyUser($id: ID!) {
+  getUsuario(id: $id) {
+    entretenimiento {
+      items {
+        id
+        titulo
+        imagenes {
+          items {
+            file {
+              key
+            }
+          }
         }
       }
     }
   }
+}
 `;
 
 export const listEventsByUser = `

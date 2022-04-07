@@ -16,8 +16,8 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
-import { createImagenCasino } from '../../graphql/mutations.js'
-import { listCasinosByUser } from "../../graphql/queriesExt";
+import { createImagenBanquete } from '../../graphql/mutations.js'
+import { listBanqueteByUser } from "../../graphql/queriesExt";
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -42,11 +42,11 @@ export default function UploadCasinoImages(props) {
     if(window.sessionStorage.getItem('auth') && window.sessionStorage.getItem('userRole') === 'PROVEEDOR'){
       let idAuth = window.sessionStorage.getItem('idAuth');
       try{
-        const casinosData = await API.graphql(graphqlOperation(listCasinosByUser, {id: idAuth}));
-        const casinoList = casinosData.data.getUsuario.casinos.items;
+        const casinosData = await API.graphql(graphqlOperation(listBanqueteByUser, {id: idAuth}));
+        const casinoList = casinosData.data.getUsuario.banquete.items;
         setCasinos(casinoList);
         console.log(casinoList);
-  
+
       }catch(err){console.log('error cargando casinos: ', err)};
 
     }else{
@@ -61,20 +61,21 @@ export default function UploadCasinoImages(props) {
     console.log('addimage to db');
     try {
         //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
-        await API.graphql(graphqlOperation(createImagenCasino, {input:image}));
+        await API.graphql(graphqlOperation(createImagenBanquete, {input:image}));
     } catch (error) {
         console.log(error);
     }  
   }
 
   function onCasinoSelected(e) {
+    console.log(e.target.value);
     setId(e.target.value);
   }
   function onFileSelected(e) {
     setFile(e.target.files[0]);
   }
   function onChange() {
-    console.log(idSelected, file);
+    console.log("id:",idSelected, file);
     //SAVING THE IMAGE ON THE BUCKET OF S3
     const uniqueName = uuidv4(); //HERE GENERATES AN UNIQUE ID FOR THE IMAGE
     Storage.put(uniqueName, file, {
@@ -83,7 +84,7 @@ export default function UploadCasinoImages(props) {
     }).then((response) => {
       console.log("imagen subida: ", response);
       const image = {
-      id_casino: idSelected,
+      id_banquete: idSelected,
       //url: url_img,
       file: {
       //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
