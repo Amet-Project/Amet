@@ -27,6 +27,8 @@ import AdminCasinosPage from "views/AdminPages/AdminCasinos.js";
 import AdminCasinoProveedorPage from "views/AdminPages/AdminCasinoProveedor.js";
 import RegistrarCasinoPage from "views/AdminPages/RegistrarCasino.js";
 import SigninProveedores from "views/SignupPage/SignupProveedores.js";
+import RecomendationPage from "views/RecomendationPage/Recomendationpage.js";
+import RecomendationCheckout from "views/RecomendationPage/RecomendationCheckout.js"
 
 
 //Amplify AWS
@@ -61,6 +63,8 @@ ReactDOM.render(
       <Route path="/admincasinos" component={AdminCasinosPage} />
       <Route path="/admincasinoproveedor" component={AdminCasinoProveedorPage} />
       <Route path="/registrarcasino" component={RegistrarCasinoPage} />
+      <Route path="/recomendation=:date" component={RecomendationPage} />
+      <Route path="/recomendationcheckout=:date" component={RecomendationCheckout} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,

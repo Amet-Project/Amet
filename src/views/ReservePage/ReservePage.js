@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -21,7 +21,7 @@ import { purple } from '@mui/material/colors';
 
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
+import { Loading, NumberInput, Modal, ComposedModal, ModalHeader, ModalFooter } from "carbon-components-react";
 import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
@@ -101,11 +101,18 @@ export default function ReservePage(props) {
     const { date, idVenue } = useParams();
     const [checkedState, setCheckedState] = useState([]);
     const [food, setFood] = useState([]);
+    const [selectedFood, setSelectedFood] = useState();
     const [checkedStateFood, setCheckedStateFood] = useState();
+    const [checkedFoodPrice, setCheckedFoodPrice] = useState();
+    const [checkedFoodPlates, setCheckedFoodPlates] = useState(1);
     const [music, setMusic] = useState([]);
+    const [selectedMusic, setSelectedMusic] = useState();
     const [checkedStateMusic, setCheckedStateMusic] = useState();
+    const [checkedMusicPrice, setCheckedMusicPrice] = useState();
+    const [checkedMusicHours, setCheckedMusicHours] = useState(1);
     const [total, setTotal] = useState(0);
     const [subtotal, setSubtotal] = useState(0);
+    const [open, setOpen] = useState(false);
 
     const handleOnChange = (position) => {
         const updatedCheckedState = checkedState.map((item, index) =>
@@ -127,37 +134,75 @@ export default function ReservePage(props) {
         setTotal(totalPrice);
     };
 
-    const handleOnChangeMusic = (musicId, price) => {
+    const handleOnChangeMusic = (musicId, price, titulo) => {
         if(musicId === checkedStateMusic){
             setCheckedStateMusic(null);
+            setSelectedMusic(null);
+            setCheckedMusicPrice(0);
             setTotal(subtotal);
         }
         else{
             setCheckedStateMusic(musicId);
-            let totalPrice = subtotal + price
+            setSelectedMusic(titulo);
+            setCheckedMusicPrice(price);
+            let totalPrice = subtotal + (price * checkedMusicHours);
             setTotal(totalPrice);
         }
     };
 
-    const handleOnChangeFood = (foodId, price) => {
+    const handleOnChangeMusicHours = (hours) => {
+        setCheckedMusicHours(hours);
+        if(checkedMusicPrice>0){
+            let totalPrice = subtotal + (hours * checkedMusicPrice);
+            setTotal(totalPrice);
+        }
+        else{
+            setTotal(subtotal);
+        }
+    }
+
+    const handleOnChangeFood = (foodId, price, titulo) => {
         if(foodId === checkedStateFood){
             setCheckedStateFood(null);
+            setSelectedFood(null);
+            setCheckedFoodPrice(0);
             setTotal(subtotal);
         }
         else{
             setCheckedStateFood(foodId);
-            let totalPrice = subtotal + price
+            setSelectedFood(titulo);
+            setCheckedFoodPrice(price);
+            let totalPrice = subtotal + (price * checkedFoodPlates);
             setTotal(totalPrice);
         }
     };
+
+    const handleOnChangeFoodPlates = (plates) => {
+        setCheckedFoodPlates(plates);
+        if(checkedFoodPrice>0){
+            let totalPrice = subtotal + (plates * checkedFoodPrice);
+            setTotal(totalPrice);
+        }
+        else{
+            setTotal(subtotal);
+        }
+    }
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
 
+    const onSubmitClick= (e) => {
+        e.preventDefault();
+        window.location.href="/"
+    }
+
     const handleNext = (panel) => (event) => {
         setSubtotal(total);
         setExpanded(panel);
+        if(panel==false){
+            setOpen(true);
+        }
       };
 
     const [cardAnimaton, setCardAnimation] = useState("cardHidden");
@@ -210,7 +255,28 @@ export default function ReservePage(props) {
             let eventsArray = eventosData.data.eventoPorFecha.items;
             let musicArray = musicaData.data.listEntretenimientos.items;
             let foodArray = comidaData.data.listBanquetes.items;
+            for (let idxMusic = 0; idxMusic < musicArray.length; idxMusic++) {
+                if (musicArray[idxMusic].imagenes.items.length === 0) {
+                  musicArray[idxMusic].img = '';
+                }else {
+                  const key_image = musicArray[idxMusic].imagenes.items[0].file.key;
+                  //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
+                  const img = await Storage.get(key_image, {level: 'public'});
+                  musicArray[idxMusic].img = img;
+                }
+            }
+            for (let idxFood = 0; idxFood < foodArray.length; idxFood++) {
+                if (foodArray[idxFood].imagenes.items.length === 0) {
+                  foodArray[idxFood].img = '';
+                }else {
+                  const key_image = foodArray[idxFood].imagenes.items[0].file.key;
+                  //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
+                  const img = await Storage.get(key_image, {level: 'public'});
+                  foodArray[idxFood].img = img;
+                }
+            }
             console.log('Food: ', foodArray);
+            console.log('Music: ', musicArray);
             setFood(foodArray);
             setMusic(musicArray);
 
@@ -327,27 +393,42 @@ export default function ReservePage(props) {
                       <AccordionDetails>
                           <div>
                               <ul className="music-list">
-                                  {music.map(({ id, titulo, precio_hora }, index) => {
+                                  {music.map(({ id, titulo, precio_hora, img }, index) => {
                                       return (
                                           <li key={index}>
                                               <div className="music-list-item">
                                                   <div className="left-section">
+                                                  <img className={classes.serviceImage} src={img} />
+                                                  <br/>
                                                       <input
                                                           type="checkbox"
                                                           id={`custom-checkbox-${index}`}
                                                           name={titulo}
                                                           value={titulo}
                                                           checked={checkedStateMusic === id}
-                                                          onChange={() => handleOnChangeMusic(id, precio_hora)}
+                                                          onChange={() => handleOnChangeMusic(id, precio_hora, titulo)}
                                                       />
                                                       <label style={{ color: "black" }}>{titulo}</label>
+                                                      <br/>
                                                   </div>
                                                   <div className="right-section">Precio por hora: {getFormattedPrice(precio_hora)}</div>
                                               </div>
+                                              <br/>
+                                              <br/>
                                           </li>
                                       );
                                   })}
                               </ul>
+                              <p>Seleciona el número de horas a reservar:</p>
+                              <NumberInput
+                                  id="hr-input"
+                                  helperText="Ingresa un número entre 1 y 12"
+                                  invalidText="Número inválido"
+                                  label="Horas"
+                                  max={12}
+                                  min={1}
+                                  onChange={e => handleOnChangeMusicHours(e.imaginaryTarget.value)}
+                              />
                           </div>
                           <ColorButton variant="contained" onClick={serviciosExtras.length > 0 ? handleNext('panelSE') : handleNext('panel1')}>Anterior</ColorButton>
                           <ColorButton variant="contained" onClick={handleNext('panel3')}>Siguiente</ColorButton>
@@ -360,27 +441,42 @@ export default function ReservePage(props) {
                       <AccordionDetails>
                           <div>
                               <ul className="food-list">
-                                  {food.map(({ id, titulo, precio_unitario }, index) => {
+                                  {food.map(({ id, titulo, precio_unitario, img }, index) => {
                                       return (
                                           <li key={index}>
                                               <div className="food-list-item">
                                                   <div className="left-section">
+                                                  <img className={classes.serviceImage} src={img} />
+                                                  <br/>
                                                       <input
                                                           type="checkbox"
                                                           id={`custom-checkbox-${index}`}
                                                           name={titulo}
                                                           value={titulo}
                                                           checked={checkedStateFood === id}
-                                                          onChange={() => handleOnChangeFood(id, precio_unitario)}
+                                                          onChange={() => handleOnChangeFood(id, precio_unitario, titulo)}
                                                       />
                                                       <label style={{ color: "black" }}>{titulo}</label>
+                                                      <br/>
                                                   </div>
                                                   <div className="right-section">Precio unitario: {getFormattedPrice(precio_unitario)}</div>
                                               </div>
+                                              <br/>
+                                              <br/>
                                           </li>
                                       );
                                   })}
                               </ul>
+                              <p>Seleciona el número de platillos a reservar:</p>
+                              <NumberInput
+                                  id="hr-input"
+                                  helperText="Ingresa un número entre 1 y 500"
+                                  invalidText="Número inválido"
+                                  label="Platillos"
+                                  max={500}
+                                  min={1}
+                                  onChange={e => handleOnChangeFoodPlates(e.imaginaryTarget.value)}
+                              />
                           </div>
                           <ColorButton variant="contained" onClick={handleNext('panel2')}>Anterior</ColorButton>
                           <ColorButton variant="contained" onClick={handleNext(false)}>Finalizar</ColorButton>
@@ -390,6 +486,40 @@ export default function ReservePage(props) {
                   Total de reservación: {getFormattedPrice(total)}
                   </h3>
               </div>
+
+              <ComposedModal open={open} onClose={e => onSubmitClick(e)} onRequestClose={e => onSubmitClick(e)} preventCloseOnClickOutside={true}>
+                  <ModalHeader label="Evento #473592">
+                      <h1>
+                          Evento creado exitosamente
+                      </h1>
+                      <h2>
+                          ¡Gracias por tu reservación en Amet! Estos son los detalles de tu evento:
+                      </h2>
+                      <br/>
+                      <h2>
+                          {casino.titulo}
+                      </h2>
+                      <h3>
+                          Fecha: {date}
+                      </h3>
+                      {
+                          checkedStateMusic ? 
+                          <h3>
+                              Entretenimiento: {selectedMusic} - Horas: {checkedMusicHours}
+                          </h3> : null
+                      }
+                      {
+                          checkedStateFood ? 
+                          <h3>
+                              Banquete: {selectedFood} - Platillos: {checkedFoodPlates}
+                          </h3> : null
+                      }
+                      <h3>
+                          Total de tu reservación: ${total}
+                      </h3>
+                  </ModalHeader>
+                  <ModalFooter primaryButtonText="OK" onRequestSubmit={e => onSubmitClick(e)}/>
+              </ComposedModal>
               <Footer whiteFont />
           </div>
       </div>

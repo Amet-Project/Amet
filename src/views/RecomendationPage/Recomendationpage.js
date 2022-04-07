@@ -14,7 +14,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import { TextInput } from "carbon-components-react";
+import { Loading } from "carbon-components-react";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";
@@ -99,6 +99,12 @@ export default function StartEventPage(props) {
       }
       console.log('Casinos: ', venuesArray);
       setCasinos(venuesArray);
+      window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/recomendationcheckout="+date;
+
+    }, 5000);
     } catch (err) { console.log('error cargando casinos', err) }
   }
 
@@ -119,96 +125,14 @@ export default function StartEventPage(props) {
                   backgroundPosition: "top center"
               }}
           >
-        <div className={classes.infoBigContainer}>
-          <div className={classes.infoContainer}>
-            <h2>Registrar Casino</h2>
-            <div>
-              <TextInput
-                id="casinoName"
-                invalidText="Invalid error message."
-                labelText="Nombre"
-                placeholder="Ingresa el nombre del casino"
-              />
-              <br />
-              <TextInput
-                id="casinoAddress"
-                invalidText="Invalid error message."
-                labelText="Dirección"
-                placeholder="Ingresa la dirección del casino"
-              />
-              <br />
-              <TextInput
-                id="casinoDescription"
-                invalidText="Invalid error message."
-                labelText="Descripción"
-                placeholder="Ingresa la descripción del casino"
-              />
-              <br />
-              <TextInput
-                id="casinoCapacity"
-                invalidText="Invalid error message."
-                labelText="Capacidad máxima"
-                placeholder="Ingresa la capacidad máxima del casino"
-              />
-              <br />
-              <TextInput
-                id="mondayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Lunes"
-                placeholder="Ingresa el precio por hora de Lunes"
-              />
-              <br />
-              <TextInput
-                id="tuesdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Martes"
-                placeholder="Ingresa el precio por hora de Martes"
-              />
-              <br />
-              <TextInput
-                id="wednesdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Miércoles"
-                placeholder="Ingresa el precio por hora de Miércoles"
-              />
-              <br />
-              <TextInput
-                id="thursdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Jueves"
-                placeholder="Ingresa el precio por hora de Jueves"
-              />
-              <br />
-              <TextInput
-                id="fridayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Viernes"
-                placeholder="Ingresa el precio por hora de Viernes"
-              />
-              <br />
-              <TextInput
-                id="saturdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Sábado"
-                placeholder="Ingresa el precio por hora de Sábado"
-              />
-              <br />
-              <TextInput
-                id="sundayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Domingo"
-                placeholder="Ingresa el precio por hora de Domingo"
-              />
-            </div>
-          </div>
-        </div>
+              <div className={classes.infoBigContainer}>
+                  <div className={classes.infoContainerCenter}>
+                      <h2>Obteniendo tu recomendación de nuestra Inteligencia Artificial...</h2>
+                      <Loading
+                          description="Active loading indicator" withOverlay={false}
+                      />
+                  </div>
+              </div>
         <Footer whiteFont />
       </div>
     </div>

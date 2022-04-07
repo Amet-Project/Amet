@@ -96,6 +96,9 @@ const signupPageStyle = {
     width: "-webkit-fill-available",
     verticalAlign: "middle"
   },
+  serviceImage: {
+    width: "15%"
+  },
   row: {
     marginLeft: "1rem !important",
   },

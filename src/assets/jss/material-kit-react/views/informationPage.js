@@ -26,6 +26,16 @@ const informationPageStyle = {
     width: "100%",
     background: "#e6e6e6",
   },
+  infoContainerCenter: {
+    borderRadius: "25px",
+    padding: "20px",
+    zIndex: "2",
+    position: "relative",
+    marginTop: "1vh",
+    width: "100%",
+    background: "#e6e6e6",
+    textAlign: "-webkit-center"
+  },
   hrRound: {
     borderTop: "4px solid #000",
     borderRadius: "5px",

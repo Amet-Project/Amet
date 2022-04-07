@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // Carbon components
 import { DatePicker, DatePickerInput } from 'carbon-components-react'
 import { Run32 } from '@carbon/icons-react';
+import { Cognitive32 } from '@carbon/icons-react';
 
 // core components
 import Header from "components/Header/Header.js";
@@ -86,6 +87,16 @@ export default function LandingPage(props) {
               >
                 <Run32 />
                 Iniciar Evento
+              </Button>
+              <br />
+              <Button
+                color="facebook"
+                size="lg"
+                href= {window.sessionStorage.getItem('auth') ? ("/recomendation=" + datePicked) : ("/login=" + datePicked)}
+                rel="noopener noreferrer"
+              >
+                <Cognitive32 />
+                ¡Me siento con suerte!
               </Button>
             </GridItem>
           </GridContainer>
