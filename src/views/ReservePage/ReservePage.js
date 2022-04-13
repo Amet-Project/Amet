@@ -25,10 +25,11 @@ import { Loading, NumberInput, Modal, ComposedModal, ModalHeader, ModalFooter } 
 import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
-import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
-import { getCasino } from '../../graphql/queriesExt'
-import { listBanquetesWithImage, listEntretenimientoWithImage } from '../../graphql/queriesExt.js'
-import { eventoPorFecha } from '../../graphql/queriesExt.js'
+import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify';
+import { getCasino } from '../../graphql/queriesExt';
+import { listBanquetesWithImage, listEntretenimientoWithImage } from '../../graphql/queriesExt.js';
+import { eventoPorFecha } from '../../graphql/queriesExt.js';
+import { createEvento, createOrdenCasino, createOrdenBanquete, createOrdenEntretenimiento } from '../../graphql/mutations';
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -99,18 +100,21 @@ export default function ReservePage(props) {
     const [serviciosExtras, setServiciosExtras] = useState([]);
     const [horariosFijos, setHorariosFijos] = useState([]);
     const { date, idVenue } = useParams();
+    const [idEvent, setIdEvent ] = useState(-1);
     const [checkedState, setCheckedState] = useState([]);
     const [food, setFood] = useState([]);
     const [selectedFood, setSelectedFood] = useState();
     const [checkedStateFood, setCheckedStateFood] = useState();
     const [checkedFoodPrice, setCheckedFoodPrice] = useState();
-    const [checkedFoodPlates, setCheckedFoodPlates] = useState(1);
+    const [checkedFoodPlates, setCheckedFoodPlates] = useState(0);
     const [music, setMusic] = useState([]);
     const [selectedMusic, setSelectedMusic] = useState();
     const [checkedStateMusic, setCheckedStateMusic] = useState();
     const [checkedMusicPrice, setCheckedMusicPrice] = useState();
-    const [checkedMusicHours, setCheckedMusicHours] = useState(1);
+    const [checkedMusicHours, setCheckedMusicHours] = useState(0);
     const [total, setTotal] = useState(0);
+    const [musicPriceTotal, setMusicPriceTotal] = useState(0);
+    const [banquetePriceTotal, setBanquetePriceTotal] = useState(0);
     const [subtotal, setSubtotal] = useState(0);
     const [open, setOpen] = useState(false);
 
@@ -155,9 +159,12 @@ export default function ReservePage(props) {
         if(checkedMusicPrice>0){
             let totalPrice = subtotal + (hours * checkedMusicPrice);
             setTotal(totalPrice);
+            //console.log("horas musica:", hours, " precio por hora", checkedMusicPrice);
+            setMusicPriceTotal(hours * checkedMusicPrice);
         }
         else{
             setTotal(subtotal);
+            setMusicPriceTotal(0);
         }
     }
 
@@ -181,6 +188,8 @@ export default function ReservePage(props) {
         setCheckedFoodPlates(plates);
         if(checkedFoodPrice>0){
             let totalPrice = subtotal + (plates * checkedFoodPrice);
+            //console.log("precio:", checkedFoodPrice, " platillos", plates);
+            setBanquetePriceTotal(checkedFoodPrice * plates);
             setTotal(totalPrice);
         }
         else{
@@ -197,10 +206,77 @@ export default function ReservePage(props) {
         window.location.href="/"
     }
 
+
+    const storeEvent = async () => {
+        const idAuth = window.sessionStorage.getItem('idAuth');
+        let resBanquete, resCasino, resEntretenimiento;
+        try {
+            //console.log("horarios fijos", horariosFijos);
+            let price = 0;
+            let idHorFij = "";
+            horariosFijos.map(hf => {
+            if(hf[day]) {
+                price = hf.precio;
+                idHorFij = hf.id                           
+            }
+            })
+            const casinoOrder = {
+                id_casino: casino.id,
+                fecha: date,
+                importe: price,
+                id_cas_hor_fijo: idHorFij
+            };
+            const entretenimientoOrder = {
+                id_entretenimiento: checkedStateMusic,
+                fecha: date,
+                horas: parseInt(checkedMusicHours),
+                importe: musicPriceTotal,
+            };
+            const banqueteOrder = {
+                id_banquete: checkedStateFood,
+                fecha: date,
+                numero_platillos: parseInt(checkedFoodPlates),
+                importe: banquetePriceTotal,
+
+            };
+            if(banqueteOrder.id_banquete !== undefined  || banqueteOrder.numero_platillos !== 0) 
+                resBanquete = await API.graphql(graphqlOperation(createOrdenBanquete, {input:banqueteOrder}));
+            else{
+                console.log("Falta informacion para el banquete") 
+            }
+            console.log("Orden banquete", resBanquete);
+            if(entretenimientoOrder.id_entretenimiento !== undefined  || entretenimientoOrder.horas !== 0) 
+                resEntretenimiento = await API.graphql(graphqlOperation(createOrdenEntretenimiento, {input:entretenimientoOrder}));
+            else{
+                console.log("Falta informacion para el entretenimiento") 
+            }
+            
+            console.log("Orden entretenimiento", resEntretenimiento);
+            resCasino = await API.graphql(graphqlOperation(createOrdenCasino, {input:casinoOrder}));
+            console.log("Orden casino", resCasino);
+            const event = {
+                id_usuario: idAuth,
+                id_orden_casino: resCasino.data.createOrdenCasino.id,
+                id_orden_entretenimiento: resEntretenimiento.data.createOrdenEntretenimiento.id,
+                id_orden_banquete: resBanquete.data.createOrdenBanquete.id,
+                fecha: date,
+                importe_total: total,
+
+            };
+            //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
+            const resEvent = await API.graphql(graphqlOperation(createEvento, {input:event}));
+            console.log(resEvent);
+            setIdEvent(resEvent.data.createEvento.id);
+        } catch (error) {
+            console.log("Error creando evento:", error);
+        }  
+      }
+
     const handleNext = (panel) => (event) => {
         setSubtotal(total);
         setExpanded(panel);
-        if(panel==false){
+        if(panel==false){ 
+            storeEvent();
             setOpen(true);
         }
       };
@@ -232,8 +308,8 @@ export default function ReservePage(props) {
                 servExtraCount++;
             }
             const casinoHF = casinoData.horarios_fijos.items;
-            console.log("Datos del casino: ", casinoData);
-            console.log("Servicios extras: ", casinoSE);
+            //console.log("Datos del casino: ", casinoData);
+            //console.log("Servicios extras: ", casinoSE);
             const dateMod = date.slice(6) + "-" + date.slice(3, 5) + "-" + date.slice(0, 2) + " 00:00:00";
             const dayNumber = new Date(dateMod).getDay();
             day = days[dayNumber];
@@ -275,8 +351,8 @@ export default function ReservePage(props) {
                   foodArray[idxFood].img = img;
                 }
             }
-            console.log('Food: ', foodArray);
-            console.log('Music: ', musicArray);
+            //console.log('Food: ', foodArray);
+            //console.log('Music: ', musicArray);
             setFood(foodArray);
             setMusic(musicArray);
 
@@ -426,12 +502,12 @@ export default function ReservePage(props) {
                                   invalidText="Número inválido"
                                   label="Horas"
                                   max={12}
-                                  min={1}
+                                  min={0}
                                   onChange={e => handleOnChangeMusicHours(e.imaginaryTarget.value)}
                               />
                           </div>
                           <ColorButton variant="contained" onClick={serviciosExtras.length > 0 ? handleNext('panelSE') : handleNext('panel1')}>Anterior</ColorButton>
-                          <ColorButton variant="contained" onClick={handleNext('panel3')}>Siguiente</ColorButton>
+                          <ColorButton variant="contained" onClick={ handleNext('panel3')}>Siguiente</ColorButton>
                       </AccordionDetails>
                   </Accordion>
                   <Accordion expanded={expanded === 'panel3'}>
@@ -474,7 +550,7 @@ export default function ReservePage(props) {
                                   invalidText="Número inválido"
                                   label="Platillos"
                                   max={500}
-                                  min={1}
+                                  min={0}
                                   onChange={e => handleOnChangeFoodPlates(e.imaginaryTarget.value)}
                               />
                           </div>
@@ -488,7 +564,7 @@ export default function ReservePage(props) {
               </div>
 
               <ComposedModal open={open} onClose={e => onSubmitClick(e)} onRequestClose={e => onSubmitClick(e)} preventCloseOnClickOutside={true}>
-                  <ModalHeader label="Evento #473592">
+                  <ModalHeader label={idEvent}>
                       <h1>
                           Evento creado exitosamente
                       </h1>
