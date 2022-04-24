@@ -286,10 +286,11 @@ query ListEntretenimientoyUser($id: ID!) {
 `;
 
 export const listEventsByUser = `
-query ListEventsByUser(id: ID!) {
+query ListEventsByUser($id: ID!) {
   getUsuario(id: $id) {
     eventos {
       items {
+        id
         fecha
         importe_total
         id_orden_banquete
@@ -306,6 +307,13 @@ query ListEventsByUser(id: ID!) {
           casino {
             titulo
             id
+            imagenes(limit: 1, sortDirection: DESC) {
+              items {
+                file {
+                  key
+                }
+              }
+            }
           }
           importe
         }
@@ -319,6 +327,47 @@ query ListEventsByUser(id: ID!) {
       }
     }
     nombres
+  }
+}
+`;
+
+export const getEvento = `
+query getEvento($id: ID!) {
+  getEvento(id: $id) {
+    id
+    fecha
+    importe_total
+    id_orden_banquete
+    id_orden_casino
+    id_orden_entretenimiento
+    banquete {
+      importe
+      banquete {
+        titulo
+        id
+      }
+    }
+    casino {
+      casino {
+        titulo
+        id
+        imagenes(limit: 1, sortDirection: DESC) {
+          items {
+            file {
+              key
+            }
+          }
+        }
+      }
+      importe
+    }
+    entretenimiento {
+      id
+      importe
+      entretenimiento {
+        titulo
+      }
+    }
   }
 }
 `;

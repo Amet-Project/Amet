@@ -257,15 +257,15 @@ export default function ReservePage(props) {
             const event = {
                 id_usuario: idAuth,
                 id_orden_casino: resCasino.data.createOrdenCasino.id,
-                id_orden_entretenimiento: resEntretenimiento.data.createOrdenEntretenimiento.id,
-                id_orden_banquete: resBanquete.data.createOrdenBanquete.id,
+                id_orden_entretenimiento: resEntretenimiento ? resEntretenimiento.data.createOrdenEntretenimiento.id : null,
+                id_orden_banquete: resBanquete ? resBanquete.data.createOrdenBanquete.id : null,
                 fecha: date,
                 importe_total: total,
 
             };
             //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
             const resEvent = await API.graphql(graphqlOperation(createEvento, {input:event}));
-            console.log(resEvent);
+            console.log("Evento creado: ", resEvent);
             setIdEvent(resEvent.data.createEvento.id);
         } catch (error) {
             console.log("Error creando evento:", error);
@@ -316,7 +316,10 @@ export default function ReservePage(props) {
             setServiciosExtras(casinoSE);
             setHorariosFijos(casinoHF);
             setCheckedState(new Array(casinoSE.length).fill(false))
-            casinoData.img = "https://media.istockphoto.com/photos/historic-bodiam-castle-and-moat-in-east-sussex-picture-id1159222457?k=20&m=1159222457&s=612x612&w=0&h=wM4QmgwlFr8rbTrXzhEf8tQe51eQ7W9wefZOcDOD1b0="
+            const key_image = casinoData.imagenes.items[0].file.key;
+            //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
+            const img = await Storage.get(key_image, { level: 'public' });
+            casinoData.img = img;
             setCasino(casinoData);
             casinoHF.map(hf => {
                 if (hf[day]) {
@@ -410,7 +413,7 @@ export default function ReservePage(props) {
                           {
                               price = 0,
                               startHour = "",
-                              endHour = "", 
+                              endHour = "",
                               horariosFijos.map(hf => {
                                 if(hf[day]) {
                                   price = hf.precio;

@@ -1,97 +1,99 @@
 import React, { useState, useEffect } from "react";
-// nodejs library that concatenates classes
-import classNames from "classnames";
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
-// Carbon components
-import { DatePicker, DatePickerInput } from 'carbon-components-react'
-import { Run32 } from '@carbon/icons-react';
 
 // core components
 import Header from "components/Header/Header.js";
-import Footer from "components/Footer/Footer.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
+import Footer from "components/Footer/Footer.js";
+import Button from "components/CustomButtons/Button.js";
 
-import styles from "assets/jss/material-kit-react/views/landingPage.js";
+//Importanto estilos
+import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";
+import image from "assets/img/bg7.jpg";
+
+//Amplify imports
+import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
+
+import { listEventsByUser } from "../../graphql/queriesExt";
+import awsExports from "../../aws-exports.js";
+Amplify.configure(awsExports);
 
 
-import dateFormat from 'dateformat';
+const useStyles = makeStyles(informationPageStyle);
+const bcrypt = require('bcryptjs');
 
-//Amplify section
-//import { API, graphqlOperation} from 'aws-amplify'
-//import { listCasinos } from '../../graphql/queries'
- 
-
-const dashboardRoutes = [];
-
-const useStyles = makeStyles(styles);
-
-export default function LandingPage(props) {
-  const [datePicked, setDatePicked] = useState('')
+export default function AdminCasinoProveedor(props) {
+  let history = useHistory();
+  const [idAuth, setidAuth] = useState('');
   const classes = useStyles();
+  const [eventos, setEventos] = useState([]);
   const { ...rest } = props;
 
   useEffect(() => {
-    validateAuthentication()
+    getidAuth();
   }, [])
 
-  function validateAuthentication() {
-    //let authen = window.sessionStorage.getItem('auth');
-    console.log("AUTH:", window.sessionStorage.getItem('auth'))
-
+  async function getidAuth() {
+    let idAuth = window.sessionStorage.getItem('idAuth');
+    try {
+      const eventData = await API.graphql(graphqlOperation(listEventsByUser, { id: idAuth }));
+      const eventList = eventData.data.getUsuario.eventos.items;
+      for (let idxCasino = 0; idxCasino < eventList.length; idxCasino++) {
+        if (eventList[idxCasino].casino.casino.imagenes.items.length === 0) {
+          eventList[idxCasino].img = '';
+        }else {
+          const key_image = eventList[idxCasino].casino.casino.imagenes.items[0].file.key;
+          //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
+          const img = await Storage.get(key_image, {level: 'public'});
+          eventList[idxCasino].img = img;
+        }
+      }
+      setEventos(eventList);
+      console.log(eventList);
+    } catch (err) { console.log('error cargando eventos: ', err) };
   }
 
   return (
     <div>
       <Header
+        absolute
         color="primary"
-        routes={dashboardRoutes}
         brand="Amet"
         rightLinks={<HeaderLinks />}
-        fixed
-        height={300}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/party.jpeg")}>
-        <div className={classes.container}>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Maneja tus eventos</h1>
-              <h4>
-                Organiza tu evento desde la comodidad de tu casa, pon fecha, lugar, 
-                música, comida y más. Encuentra la combinación perfecta en Amet.
-              </h4>
-              <br />
-              <DatePicker datePickerType="single" dateFormat="d-m-Y" minDate="today" value={datePicked} onChange={e => setDatePicked(dateFormat(e, "dd-mm-yyyy"))}>
-                <DatePickerInput
-                  placeholder="dd/mm/aaaa"
-                  id="date-picker-single"
-                />
-              </DatePicker>
-              <br />
-              <Button
-                color="primary"
-                size="lg"
-                href= {window.sessionStorage.getItem('auth') ? ("/startevent=" + datePicked) : ("/login=" + datePicked)}
-                rel="noopener noreferrer"
-              >
-                <Run32 />
-                Iniciar Evento
-              </Button>
-            </GridItem>
-          </GridContainer>
+      <div
+        className={classes.pageHeader}
+        style={{
+          backgroundImage: "url(" + image + ")",
+          backgroundSize: "cover",
+          backgroundPosition: "top center"
+        }}
+      >
+        <div className={classes.infoBigContainer}>
+          { eventos.map(({ id, fecha, casino, banquete, entretenimiento, importe_total, img }, index) => {
+            return (
+              <div className={classes.infoContainer}>
+                <h2>{casino.casino.titulo} - {fecha}</h2>
+                <hr className={classes.hrRound}></hr>
+                <h3>Casino: {casino.casino.titulo}</h3>
+                <h3>Banquete: {banquete.banquete.titulo}</h3>
+                <h3>Entretenimiento: {entretenimiento.entretenimiento.titulo}</h3>
+                <h3>Importe total del evento: ${importe_total}</h3>
+                <Button color="primary" size="lg" href={ "/reviewEvent=" + id}>
+                  Calificar servicios
+                </Button>
+              </div>
+            );
+          })}
         </div>
-      </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
-        </div>
+        <Footer whiteFont />
       </div>
-      <Footer />
     </div>
   );
 }

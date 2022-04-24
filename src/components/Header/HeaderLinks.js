@@ -42,6 +42,9 @@ export default function HeaderLinks(props) {
             </Link>,
             <Link to="/admincasinos" className={classes.dropdownLink}>
               Administrar Casinos
+            </Link>,
+            <Link to="/admineventos" className={classes.dropdownLink}>
+              Administrar Eventos
             </Link>
           ]}
         />
@@ -66,6 +69,9 @@ export default function HeaderLinks(props) {
                 </Link>,
                 <Link to="/admincasinoproveedor" className={classes.dropdownLink}>
                   Administrar Casinos
+                </Link>,
+                <Link to="/admineventosproveedor" className={classes.dropdownLink}>
+                  Reservaciones Eventos
                 </Link>
               ]}
             />

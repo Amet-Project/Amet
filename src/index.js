@@ -25,11 +25,12 @@ import Events from "views/EventosPages/Events.js";
 import AdminUsersPage from "views/AdminPages/AdminUsers.js";
 import AdminCasinosPage from "views/AdminPages/AdminCasinos.js";
 import AdminCasinoProveedorPage from "views/AdminPages/AdminCasinoProveedor.js";
+import AdminEventsProveedorPage from "views/AdminPages/AdminEventsProveedor.js";
 import RegistrarCasinoPage from "views/AdminPages/RegistrarCasino.js";
 import SigninProveedores from "views/SignupPage/SignupProveedores.js";
 import RecomendationPage from "views/RecomendationPage/Recomendationpage.js";
 import RecomendationCheckout from "views/RecomendationPage/RecomendationCheckout.js"
-
+import ReviewEvent from "views/ReviewEvent/ReviewEvent.js"
 
 //Amplify AWS
 import Amplify from 'aws-amplify';
@@ -62,9 +63,11 @@ ReactDOM.render(
       <Route path="/adminusers" component={AdminUsersPage} />
       <Route path="/admincasinos" component={AdminCasinosPage} />
       <Route path="/admincasinoproveedor" component={AdminCasinoProveedorPage} />
+      <Route path="/admineventosproveedor" component={AdminEventsProveedorPage} />
       <Route path="/registrarcasino" component={RegistrarCasinoPage} />
       <Route path="/recomendation=:date" component={RecomendationPage} />
       <Route path="/recomendationcheckout=:date" component={RecomendationCheckout} />
+      <Route path="/reviewEvent=:idEvent" component={ReviewEvent} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,

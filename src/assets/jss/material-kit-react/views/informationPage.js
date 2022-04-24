@@ -124,7 +124,7 @@ const informationPageStyle = {
     color: "#495057"
   },
   casinoImage: {
-    width: "-webkit-fill-available",
+    width: "5%",
     verticalAlign: "middle"
   },
   row: {
