@@ -17,7 +17,9 @@ import ReservePage from "views/ReservePage/ReservePage.js";
 import CasinosPage from "views/Proveedores/CasinosPage.js";
 import ComidaPage from "views/Proveedores/ComidaPage.js";
 import EntretenimientoPage from "views/Proveedores/EntretenimientoPage.js";
-import UploadCasinoImages from "views/Proveedores/UploadCasinoImages.js";
+import UploadCasino from "views/Proveedores/UploadCasino.js";
+import UploadBanquete from "views/Proveedores/UploadBanquete.js";
+import UploadEntretenimiento from "views/Proveedores/UploadEntretenimiento";
 import CasinoDetails from "views/Details/CasinosDetails.js";
 import UserDetails from "views/Details/UserDetails.js";
 import UserEdit from "views/Edits/UserEdit.js";
@@ -52,7 +54,9 @@ ReactDOM.render(
       <Route path='/startevent=:date' component={StartEventPage} />
       <Route path='/reserveevent=:date=:idVenue' component={ReservePage} />
       <Route path="/casinos" component={CasinosPage} />
-      <Route path="/casinosupload" component={UploadCasinoImages} />
+      <Route path="/casinosupload" component={UploadCasino} />
+      <Route path="/banquetesupload" component={UploadBanquete} />
+      <Route path="/entretenimientosupload" component={UploadEntretenimiento} />
       <Route path="/casinodetails=:id" component={CasinoDetails} />
       <Route path="/user" component={UserDetails} />
       <Route path="/user_edit" component={UserEdit} />

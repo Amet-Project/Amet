@@ -16,8 +16,8 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
-import { createImagenBanquete } from '../../graphql/mutations.js'
-import { listBanqueteByUser } from "../../graphql/queriesExt";
+import { createImagenEntretenimiento } from '../../graphql/mutations.js'
+import { listEntretenimientoByUser } from "../../graphql/queriesExt";
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles(styles);
 export default function UploadCasinoImages(props) {
 
   const classes = useStyles();
-  const [casinos, setCasinos] = useState([]);
+  const [entretenimientos, setCasinos] = useState([]);
   const [idSelected, setId] = useState('');
   const [file, setFile] = useState({});
 
@@ -42,12 +42,12 @@ export default function UploadCasinoImages(props) {
     if(window.sessionStorage.getItem('auth') && window.sessionStorage.getItem('userRole') === 'PROVEEDOR'){
       let idAuth = window.sessionStorage.getItem('idAuth');
       try{
-        const casinosData = await API.graphql(graphqlOperation(listBanqueteByUser, {id: idAuth}));
-        const casinoList = casinosData.data.getUsuario.banquete.items;
-        setCasinos(casinoList);
-        console.log(casinoList);
+        const entretenimientosData = await API.graphql(graphqlOperation(listEntretenimientoByUser, {id: idAuth}));
+        const entretenimientoList = entretenimientosData.data.getUsuario.entretenimiento.items;
+        setCasinos(entretenimientoList);
+        console.log(entretenimientoList);
 
-      }catch(err){console.log('error cargando casinos: ', err)};
+      }catch(err){console.log('error cargando entretenimientos: ', err)};
 
     }else{
       window.location.href="/";
@@ -61,7 +61,7 @@ export default function UploadCasinoImages(props) {
     console.log('addimage to db');
     try {
         //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
-        await API.graphql(graphqlOperation(createImagenBanquete, {input:image}));
+        await API.graphql(graphqlOperation(createImagenEntretenimiento, {input:image}));
     } catch (error) {
         console.log(error);
     }  
@@ -84,7 +84,7 @@ export default function UploadCasinoImages(props) {
     }).then((response) => {
       console.log("imagen subida: ", response);
       const image = {
-      id_banquete: idSelected,
+      id_entretenimiento: idSelected,
       //url: url_img,
       file: {
       //INFOTMATION THAT THE STORAGE CLASS NEED TO SAVE THE IMAGE
@@ -119,9 +119,9 @@ export default function UploadCasinoImages(props) {
       >
         <div className={classes.container}>
           <div>
-            <select defaultValue={{ label: "Elige un casino", value: '' }} onChange={(evt)=> onCasinoSelected(evt)}>
-              {casinos.map((casino) => (
-              <option key={casino.id} value={casino.id}>{casino.titulo}</option>
+            <select defaultValue={{ label: "Elige un entretenimiento", value: '' }} onChange={(evt)=> onCasinoSelected(evt)}>
+              {entretenimientos.map((entretenimiento) => (
+              <option key={entretenimiento.id} value={entretenimiento.id}>{entretenimiento.titulo}</option>
               ))}
             </select>
             <br/>
