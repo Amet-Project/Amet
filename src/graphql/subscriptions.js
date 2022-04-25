@@ -4330,3 +4330,696 @@ export const onDeleteUsuario = /* GraphQL */ `
     }
   }
 `;
+export const onCreateRatingCasino = /* GraphQL */ `
+  subscription OnCreateRatingCasino {
+    onCreateRatingCasino {
+      id
+      id_usuario
+      id_casino
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        aprobado
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateRatingCasino = /* GraphQL */ `
+  subscription OnUpdateRatingCasino {
+    onUpdateRatingCasino {
+      id
+      id_usuario
+      id_casino
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        aprobado
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteRatingCasino = /* GraphQL */ `
+  subscription OnDeleteRatingCasino {
+    onDeleteRatingCasino {
+      id
+      id_usuario
+      id_casino
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        aprobado
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateRatingBanquete = /* GraphQL */ `
+  subscription OnCreateRatingBanquete {
+    onCreateRatingBanquete {
+      id
+      id_usuario
+      id_banquete
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateRatingBanquete = /* GraphQL */ `
+  subscription OnUpdateRatingBanquete {
+    onUpdateRatingBanquete {
+      id
+      id_usuario
+      id_banquete
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteRatingBanquete = /* GraphQL */ `
+  subscription OnDeleteRatingBanquete {
+    onDeleteRatingBanquete {
+      id
+      id_usuario
+      id_banquete
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateRatingEntretenimiento = /* GraphQL */ `
+  subscription OnCreateRatingEntretenimiento {
+    onCreateRatingEntretenimiento {
+      id
+      id_usuario
+      id_entretenimiento
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateRatingEntretenimiento = /* GraphQL */ `
+  subscription OnUpdateRatingEntretenimiento {
+    onUpdateRatingEntretenimiento {
+      id
+      id_usuario
+      id_entretenimiento
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteRatingEntretenimiento = /* GraphQL */ `
+  subscription OnDeleteRatingEntretenimiento {
+    onDeleteRatingEntretenimiento {
+      id
+      id_usuario
+      id_entretenimiento
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

@@ -1,4 +1,10 @@
 export type AmplifyDependentResourcesAttributes = {
+    "api": {
+        "amet": {
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
+        }
+    },
     "auth": {
         "ametbe250c30": {
             "IdentityPoolId": "string",
