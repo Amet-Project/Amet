@@ -67,8 +67,14 @@ export default function HeaderLinks(props) {
                 <Link to="/registrarcasino" className={classes.dropdownLink}>
                   Registrar Casino
                 </Link>,
-                <Link to="/admincasinoproveedor" className={classes.dropdownLink}>
-                  Administrar Casinos
+                <Link to="/registrarentretenimiento" className={classes.dropdownLink}>
+                  Registrar Entretenimiento
+                </Link>,
+                <Link to="/registrarbanquete" className={classes.dropdownLink}>
+                  Registrar Banquete
+                </Link>,
+                <Link to="/adminserviciosproveedor" className={classes.dropdownLink}>
+                  Administrar Servicios
                 </Link>,
                 <Link to="/admineventosproveedor" className={classes.dropdownLink}>
                   Reservaciones Eventos

@@ -26,9 +26,11 @@ import UserEdit from "views/Edits/UserEdit.js";
 import Events from "views/EventosPages/Events.js";
 import AdminUsersPage from "views/AdminPages/AdminUsers.js";
 import AdminCasinosPage from "views/AdminPages/AdminCasinos.js";
-import AdminCasinoProveedorPage from "views/AdminPages/AdminCasinoProveedor.js";
+import AdminServiciosProveedorPage from "views/AdminPages/AdminServiciosProveedor";
 import AdminEventsProveedorPage from "views/AdminPages/AdminEventsProveedor.js";
 import RegistrarCasinoPage from "views/AdminPages/RegistrarCasino.js";
+import RegistrarEntretenimientoPage from "views/AdminPages/RegistrarEntretenimiento.js";
+import RegistrarBanquetePage from "views/AdminPages/RegistrarBanquete.js";
 import SigninProveedores from "views/SignupPage/SignupProveedores.js";
 import RecomendationPage from "views/RecomendationPage/Recomendationpage.js";
 import RecomendationCheckout from "views/RecomendationPage/RecomendationCheckout.js"
@@ -62,11 +64,13 @@ ReactDOM.render(
       <Route path="/user_edit" component={UserEdit} />
       <Route path="/admineventos" component={Events} />
       <Route path="/registrarcasino" component={RegistrarCasinoPage} />
+      <Route path="/registrarbanquete" component={RegistrarBanquetePage} />
+      <Route path="/registrarentretenimiento" component={RegistrarEntretenimientoPage} />
       <Route path="/comida" component={ComidaPage} />
       <Route path="/entretenimiento" component={EntretenimientoPage} />
       <Route path="/adminusers" component={AdminUsersPage} />
       <Route path="/admincasinos" component={AdminCasinosPage} />
-      <Route path="/admincasinoproveedor" component={AdminCasinoProveedorPage} />
+      <Route path="/adminserviciosproveedor" component={AdminServiciosProveedorPage} />
       <Route path="/admineventosproveedor" component={AdminEventsProveedorPage} />
       <Route path="/registrarcasino" component={RegistrarCasinoPage} />
       <Route path="/recomendation=:date" component={RecomendationPage} />

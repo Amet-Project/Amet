@@ -272,6 +272,8 @@ query ListEntretenimientoyUser($id: ID!) {
       items {
         id
         titulo
+        descripcion
+        precio_hora
         imagenes {
           items {
             file {

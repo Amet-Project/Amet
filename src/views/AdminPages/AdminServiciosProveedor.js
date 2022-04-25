@@ -35,7 +35,7 @@ export default function AdminCasinoProveedor(props) {
   const classes = useStyles();
   const [casinos, setCasinos] = useState([]);
   const [banquetes, setBanquetes] = useState([]);
-  const [musica, setMusica] = useState([]);
+  const [entretenimiento, setEntretenimientos]   = useState([]);
   const { ...rest } = props;
 
   useEffect(() => {
@@ -49,13 +49,17 @@ export default function AdminCasinoProveedor(props) {
         const casinosData = await API.graphql(graphqlOperation(listCasinosByUser, {id: idAuth}));
         const casinoList = casinosData.data.getUsuario.casinos.items;
         setCasinos(casinoList);
-        console.log('casinos: ', casinosData);
+        console.log('casinos: ', casinoList);
 
-        const musicData = await API.graphql(graphqlOperation(listEntretenimientoByUser, {id: idAuth}));
-        console.log('music: ', musicData);
+        const entretenimientoData = await API.graphql(graphqlOperation(listEntretenimientoByUser, {id: idAuth}));
+        const entretenimientosList = entretenimientoData.data.getUsuario.entretenimiento.items;
+        setEntretenimientos(entretenimientosList);
+        console.log('entretenimiento: ', entretenimientosList);
 
         const banquetesData = await API.graphql(graphqlOperation(listBanqueteByUser, {id: idAuth}));
-        console.log('banquetes: ', banquetesData);
+        const banqueteList = banquetesData.data.getUsuario.banquete.items;
+        setBanquetes(banqueteList);
+        console.log('banquetes: ', banqueteList);
   
       }catch(err){console.log('error cargando casinos: ', err)};
 
@@ -83,37 +87,80 @@ export default function AdminCasinoProveedor(props) {
         }}
       >
         <div className={classes.infoBigContainer}>
-        {
-          casinos.length > 0 ? 
-          <div className={classes.infoContainer}>
-              <h2>Casinos</h2>
+          {
+            casinos.length > 0 ? 
+            <div className={classes.infoContainer}>
+                <h2>Casinos</h2>
+                <hr className={classes.hrRound}></hr>
+                <ul className="casino-list">
+                  {casinos.map(({ id, titulo, descripcion, direccion }, index) => {
+                    return (
+                      <li key={index}>
+                        <div className="music-list-item">
+                          <div className="left-section">
+                            <h3>{titulo}</h3>
+                            <h4>{descripcion}</h4>
+                            <h4>{direccion}</h4>
+                          </div>
+                        </div>
+                        <br>
+                        </br>
+                      </li>
+                    );
+                  })}
+
+                </ul>
+
+              </div> : null
+          }
+          {
+            banquetes.length > 0 ? 
+            <div className={classes.infoContainer}>
+              <h2>Banquetes</h2>
               <hr className={classes.hrRound}></hr>
               <ul className="casino-list">
-                {casinos.map(({ id, titulo, descripcion, direccion }, index) => {
+                {banquetes.map(({ id, titulo, descripcion, precio_unitario }, index) => {
                   return (
                     <li key={index}>
                       <div className="music-list-item">
                         <div className="left-section">
                           <h3>{titulo}</h3>
                           <h4>{descripcion}</h4>
-                          <h4>{direccion}</h4>
+                          <h4>Precio por platillo: {precio_unitario}</h4>
                         </div>
                       </div>
+                      <br>
+                      </br>
                     </li>
                   );
                 })}
               </ul>
             </div> : null
-        }
-        <div className={classes.infoContainer}>
-          <h2>Banquetes</h2>
-          <hr className={classes.hrRound}></hr>
-        </div>
-
-        <div className={classes.infoContainer}>
-          <h2>Entretenimiento</h2>
-          <hr className={classes.hrRound}></hr>
-        </div>
+          }
+          {
+            entretenimiento.length > 0 ? 
+            <div className={classes.infoContainer}>
+              <h2>Entretenimiento</h2>
+              <hr className={classes.hrRound}></hr>
+              <ul className="casino-list">
+                {entretenimiento.map(({ id, titulo, descripcion, precio_hora }, index) => {
+                  return (
+                    <li key={index}>
+                      <div className="music-list-item">
+                        <div className="left-section">
+                          <h3>{titulo}</h3>
+                          <h4>{descripcion}</h4>
+                          <h4>Precio por hora: {precio_hora}</h4>
+                        </div>
+                      </div>
+                      <br>
+                      </br>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div> : null
+          }
         </div>
         <Footer whiteFont />
       </div>
