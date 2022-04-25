@@ -371,3 +371,96 @@ query getEvento($id: ID!) {
   }
 }
 `;
+
+export const listEventosByCasinoProv = `
+  query ListEventos(
+    $filter: ModelEventoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEventos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        fecha
+        id_orden_casino
+        importe_total
+        id_usuario
+        usuario {
+          nombres
+          ap_materno
+          ap_paterno
+        }
+        casino {
+          fecha
+          importe
+          casino {
+            id_usuario
+          }
+        }
+      }
+      nextToken
+    }
+  }
+`;
+
+export const listEventosByBanqueteProv = `
+  query ListEventos(
+    $filter: ModelEventoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEventos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        fecha
+        id_orden_banquete
+        importe_total
+        id_usuario
+        usuario {
+          ap_materno
+          ap_paterno
+          nombres
+        }
+        banquete {
+          fecha
+          importe
+          banquete {
+            id_usuario
+          }
+        }
+      }
+      nextToken
+    }
+  }
+`;
+
+export const listEventosByEntretenimientoProv = `
+  query ListEventos(
+    $filter: ModelEventoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEventos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        fecha
+        id_orden_entretenimiento
+        id_usuario
+        importe_total
+        usuario {
+          ap_materno
+          ap_paterno
+          nombres
+        }
+        entretenimiento {
+          fecha
+          importe
+          entretenimiento {
+            id_usuario
+          }
+        }
+      }
+      nextToken
+    }
+  }
+`;
