@@ -30,6 +30,7 @@ import { getCasino } from '../../graphql/queriesExt';
 import { listBanquetesWithImage, listEntretenimientoWithImage } from '../../graphql/queriesExt.js';
 import { eventoPorFecha } from '../../graphql/queriesExt.js';
 import { createEvento, createOrdenCasino, createOrdenBanquete, createOrdenEntretenimiento } from '../../graphql/mutations';
+import { createEventoCasino, createEventoCasEnt, createEventoCasBan } from "../../graphql/mutationsExt";
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -254,19 +255,69 @@ export default function ReservePage(props) {
             console.log("Orden entretenimiento", resEntretenimiento);
             resCasino = await API.graphql(graphqlOperation(createOrdenCasino, {input:casinoOrder}));
             console.log("Orden casino", resCasino);
-            const event = {
+
+            if(banqueteOrder.id_banquete == undefined && entretenimientoOrder.id_entretenimiento == undefined){
+                const event = {
                 id_usuario: idAuth,
                 id_orden_casino: resCasino.data.createOrdenCasino.id,
-                id_orden_entretenimiento: resEntretenimiento ? resEntretenimiento.data.createOrdenEntretenimiento.id : null,
-                id_orden_banquete: resBanquete ? resBanquete.data.createOrdenBanquete.id : null,
                 fecha: date,
                 importe_total: total,
+                };
 
-            };
-            //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
-            const resEvent = await API.graphql(graphqlOperation(createEvento, {input:event}));
-            console.log("Evento creado: ", resEvent);
-            setIdEvent(resEvent.data.createEvento.id);
+                console.log("Entrando a solo casino");
+
+                //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
+                const resEvent = await API.graphql(graphqlOperation(createEventoCasino, {input:event}));
+                console.log("Evento creado: ", resEvent);
+                setIdEvent(resEvent.data.createEvento.id);
+            }
+            else if (banqueteOrder.id_banquete == undefined){
+                const event = {
+                    id_usuario: idAuth,
+                    id_orden_casino: resCasino.data.createOrdenCasino.id,
+                    id_orden_entretenimiento: resEntretenimiento.data.createOrdenEntretenimiento.id,
+                    fecha: date,
+                    importe_total: total,
+                };
+
+                console.log("Entrando a casino sin banquete");
+
+                //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
+                const resEvent = await API.graphql(graphqlOperation(createEventoCasEnt, {input:event}));
+                console.log("Evento creado: ", resEvent);
+                setIdEvent(resEvent.data.createEvento.id);
+            }
+            else if(entretenimientoOrder.id_entretenimiento == undefined){
+                const event = {
+                    id_usuario: idAuth,
+                    id_orden_casino: resCasino.data.createOrdenCasino.id,
+                    id_orden_banquete: resBanquete.data.createOrdenBanquete.id,
+                    fecha: date,
+                    importe_total: total,
+                };
+                
+                console.log("Entrando a casino sin entretenimiento");
+
+                //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
+                const resEvent = await API.graphql(graphqlOperation(createEventoCasBan, {input:event}));
+                console.log("Evento creado: ", resEvent);
+                setIdEvent(resEvent.data.createEvento.id);
+            }
+            else{
+                const event = {
+                    id_usuario: idAuth,
+                    id_orden_casino: resCasino.data.createOrdenCasino.id,
+                    id_orden_entretenimiento: resEntretenimiento ? resEntretenimiento.data.createOrdenEntretenimiento.id : null,
+                    id_orden_banquete: resBanquete ? resBanquete.data.createOrdenBanquete.id : null,
+                    fecha: date,
+                    importe_total: total,
+                };
+
+                //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
+                const resEvent = await API.graphql(graphqlOperation(createEvento, {input:event}));
+                console.log("Evento creado: ", resEvent);
+                setIdEvent(resEvent.data.createEvento.id);
+            }
         } catch (error) {
             console.log("Error creando evento:", error);
         }  
