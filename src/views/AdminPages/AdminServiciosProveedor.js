@@ -81,9 +81,8 @@ export default function AdminCasinoProveedor(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center"
+          backgroundColor: "black",
+          backgroundSize: "contain",
         }}
       >
         <div className={classes.infoBigContainer}>
@@ -159,10 +158,12 @@ export default function AdminCasinoProveedor(props) {
                   );
                 })}
               </ul>
-            </div> : null
+              </div> : null
           }
+          <div className={classes.pageFooter}>
+            <Footer whiteFont />
+          </div>
         </div>
-        <Footer whiteFont />
       </div>
     </div>
   );

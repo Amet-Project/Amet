@@ -11,11 +11,13 @@ const informationPageStyle = {
   },
   infoBigContainer: {
     borderRadius: "25px",
-    padding: "20px",
+    padding: "100px",
     zIndex: "2",
     position: "absolute",
-    marginTop: "10vh",
+    marginTop: "0vh",
     width: "100%",
+    minHeight: "100vh",
+    backgroundColor: "black",
   },
   infoContainer: {
     borderRadius: "25px",
@@ -74,6 +76,12 @@ const informationPageStyle = {
       bottom: "0",
       width: "100%"
     }
+  },
+  pageFooter:{
+    position: "absolute",
+    width: "100%",
+    bottom: "0",
+    background: "#ddd"
   },
   form: {
     margin: "0"
