@@ -21,6 +21,7 @@ import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
 
 import { getEvento } from "../../graphql/queriesExt";
 import awsExports from "../../aws-exports.js";
+import { createRatingCasino, createRatingBanquete, createRatingEntretenimiento } from '../../graphql/mutations';
 import { NumberInput } from "carbon-components-react";
 Amplify.configure(awsExports);
 
@@ -34,7 +35,56 @@ export default function ReviewEvent(props) {
   const { idEvent } = useParams();
   const classes = useStyles();
   const [evento, setEvento] = useState([]);
+  const [casinoRate, setCasinoRate] = useState([]);
+  const [entretenimientoRate, setEntretenimientoRate] = useState([]);
+  const [banqueteRate, setBanqueteRate] = useState([]);
   const { ...rest } = props;
+  
+  const handleOnChangeCasino = (idCasino, ratingCasino) => {
+    const myCasinoRate = {
+      id_usuario: idAuth,
+      id_casino: idCasino,
+      rating: ratingCasino  
+    };
+    setCasinoRate(myCasinoRate);
+  };
+  
+  const handleOnChangeEntretenimiento = (idEntretenimiento, ratingEntretenimiento) => {
+    const myEntretenimientoRate = {
+      id_usuario: idAuth,
+      id_entretenimiento: idEntretenimiento,
+      rating: ratingEntretenimiento  
+    };
+    setEntretenimientoRate(myEntretenimientoRate);
+  };
+  const handleOnChangeBanquete = (idBanquete, ratingBanquete) => {
+    const myBanqueteRate = {
+      id_usuario: idAuth,
+      id_banquete: idBanquete,
+      rating: ratingBanquete  
+    };
+    setBanqueteRate(myBanqueteRate);
+  };
+  
+  async function sumbitRates() {
+    console.log(idAuth, casinoRate, banqueteRate, entretenimientoRate);
+    try {
+      if(casinoRate !== undefined) {
+        const resCasino = await API.graphql(graphqlOperation(createRatingCasino, {input:casinoRate})) ;
+        console.log(resCasino);
+      }
+      if (banqueteRate !== undefined){
+        const resBanquete = await API.graphql(graphqlOperation(createRatingBanquete, {input:banqueteRate}));
+        console.log(resBanquete);
+      }
+      if (entretenimientoRate !== undefined) {
+        const resEntretenimiento = await API.graphql(graphqlOperation(createRatingEntretenimiento, {input:entretenimientoRate}));
+        console.log(resEntretenimiento);
+      }
+    } catch (error) {
+      console.log("Error creando reviwes:", error);
+    }
+  };
 
   useEffect(() => {
     getidAuth();
@@ -42,12 +92,16 @@ export default function ReviewEvent(props) {
 
   async function getidAuth() {
     try {
+      let idAuth = window.sessionStorage.getItem('idAuth');
+      setidAuth(idAuth);
       console.log("idEvent: ",idEvent);
       const eventData = await API.graphql(graphqlOperation(getEvento, { id: idEvent }));
       const event = eventData.data.getEvento;
+      console.log(event);
       setEvento(event);
     } catch (err) { console.log('error cargando eventos: ', err) };
   }
+
 
   return (
     <div>
@@ -66,7 +120,6 @@ export default function ReviewEvent(props) {
           backgroundPosition: "top center"
         }}
       >
-          {console.log(evento)}
         <div className={classes.infoBigContainer}>
             {
                 evento.casino ?
@@ -80,7 +133,9 @@ export default function ReviewEvent(props) {
                             invalidText="Número inválido"
                             label="Calificación"
                             max={5}
-                            min={1}
+                            min={0}
+                            onChange={e => handleOnChangeCasino(evento.casino.casino.id, e.imaginaryTarget.value)}
+
                         />
                     </div>
                     : null
@@ -97,7 +152,8 @@ export default function ReviewEvent(props) {
                             invalidText="Número inválido"
                             label="Calificación"
                             max={5}
-                            min={1}
+                            min={0}
+                            onChange={e => handleOnChangeEntretenimiento(evento.entretenimiento.entretenimiento.id, e.imaginaryTarget.value)}
                         />
                     </div>
                     : null
@@ -114,12 +170,13 @@ export default function ReviewEvent(props) {
                             invalidText="Número inválido"
                             label="Calificación"
                             max={5}
-                            min={1}
+                            min={0}
+                            onChange={e => handleOnChangeBanquete(evento.banquete.banquete.id, e.imaginaryTarget.value)}
                         />
                     </div>
                     : null
             }
-            <Button color="primary" size="lg" href={"/reviewEvent"}>
+            <Button color="primary" size="lg" onClick={sumbitRates}>
                 Enviar calificación
             </Button>
         </div>

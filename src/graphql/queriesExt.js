@@ -364,10 +364,10 @@ query getEvento($id: ID!) {
       importe
     }
     entretenimiento {
-      id
       importe
       entretenimiento {
         titulo
+        id
       }
     }
   }
