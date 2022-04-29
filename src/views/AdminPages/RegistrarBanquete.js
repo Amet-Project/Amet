@@ -121,95 +121,53 @@ export default function StartEventPage(props) {
           >
         <div className={classes.infoBigContainer}>
           <div className={classes.infoContainer}>
-            <h2>Registrar Casino</h2>
+            <h2>Registrar Banquete</h2>
             <div>
               <TextInput
                 id="casinoName"
                 invalidText="Invalid error message."
                 labelText="Nombre"
-                placeholder="Ingresa el nombre del casino"
+                placeholder="Ingresa el nombre del banquete"
               />
               <br />
               <TextInput
                 id="casinoAddress"
                 invalidText="Invalid error message."
-                labelText="Dirección"
-                placeholder="Ingresa la dirección del casino"
+                labelText="RFC"
+                placeholder="Ingresa el RFC del banquete"
               />
               <br />
               <TextInput
                 id="casinoDescription"
                 invalidText="Invalid error message."
                 labelText="Descripción"
-                placeholder="Ingresa la descripción del casino"
+                placeholder="Ingresa la descripción del banquete"
               />
               <br />
               <TextInput
                 id="casinoCapacity"
+                helperText="Si el precio varía entre cada platillo, ingresar el precio más bajo"
                 invalidText="Invalid error message."
-                labelText="Capacidad máxima"
-                placeholder="Ingresa la capacidad máxima del casino"
+                labelText="Precio unitario"
+                placeholder="Ingresa el precio unitario del platillo"
               />
               <br />
               <TextInput
                 id="mondayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
                 invalidText="Invalid error message."
-                labelText="Precio por hora Lunes"
-                placeholder="Ingresa el precio por hora de Lunes"
-              />
-              <br />
-              <TextInput
-                id="tuesdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Martes"
-                placeholder="Ingresa el precio por hora de Martes"
-              />
-              <br />
-              <TextInput
-                id="wednesdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Miércoles"
-                placeholder="Ingresa el precio por hora de Miércoles"
-              />
-              <br />
-              <TextInput
-                id="thursdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Jueves"
-                placeholder="Ingresa el precio por hora de Jueves"
-              />
-              <br />
-              <TextInput
-                id="fridayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Viernes"
-                placeholder="Ingresa el precio por hora de Viernes"
-              />
-              <br />
-              <TextInput
-                id="saturdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Sábado"
-                placeholder="Ingresa el precio por hora de Sábado"
-              />
-              <br />
-              <TextInput
-                id="sundayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
-                invalidText="Invalid error message."
-                labelText="Precio por hora Domingo"
-                placeholder="Ingresa el precio por hora de Domingo"
+                labelText="Cantidad mínima de platillos"
+                placeholder="Ingresa la cantidad mínima de platillos para contratación"
               />
             </div>
+            <br />
+            <Button color="primary" size="lg" href={ "/reviewEvent"}>
+              Registrar banquete
+            </Button>
+          </div>
+          <div className={classes.pageFooter}>
+            <Footer whiteFont />
           </div>
         </div>
-        <Footer whiteFont />
       </div>
     </div>
   );
