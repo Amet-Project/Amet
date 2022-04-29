@@ -207,9 +207,15 @@ export default function StartEventPage(props) {
                 placeholder="Ingresa el precio por hora de Domingo"
               />
             </div>
+            <br />
+            <Button color="primary" size="lg" href={ "/reviewEvent"}>
+                  Registrar casino
+                </Button>
+          </div>
+          <div className={classes.pageFooter}>
+            <Footer whiteFont />
           </div>
         </div>
-        <Footer whiteFont />
       </div>
     </div>
   );

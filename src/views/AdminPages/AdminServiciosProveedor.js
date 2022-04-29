@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
+import Button from "components/CustomButtons/Button.js";
 
 //Importanto estilos
 import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";
@@ -81,9 +82,8 @@ export default function AdminCasinoProveedor(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center"
+          backgroundColor: "black",
+          backgroundSize: "contain",
         }}
       >
         <div className={classes.infoBigContainer}>
@@ -110,7 +110,9 @@ export default function AdminCasinoProveedor(props) {
                   })}
 
                 </ul>
-
+                <Button color="primary" size="lg" href={ "/casinosupload"}>
+                  Subir imágenes a casino
+                </Button>
               </div> : null
           }
           {
@@ -135,6 +137,9 @@ export default function AdminCasinoProveedor(props) {
                   );
                 })}
               </ul>
+              <Button color="primary" size="lg" href={ "/banquetesupload"}>
+                  Subir imágenes a banquetes
+                </Button>
             </div> : null
           }
           {
@@ -159,10 +164,15 @@ export default function AdminCasinoProveedor(props) {
                   );
                 })}
               </ul>
-            </div> : null
+              <Button color="primary" size="lg" href={ "/entretenimientosupload"}>
+                  Subir imágenes a entretenimiento
+                </Button>
+              </div> : null
           }
+          <div className={classes.pageFooter}>
+            <Footer whiteFont />
+          </div>
         </div>
-        <Footer whiteFont />
       </div>
     </div>
   );

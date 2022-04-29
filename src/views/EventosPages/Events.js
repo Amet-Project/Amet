@@ -82,8 +82,16 @@ export default function AdminCasinoProveedor(props) {
                 <h2>{casino.casino.titulo} - {fecha}</h2>
                 <hr className={classes.hrRound}></hr>
                 <h3>Casino: {casino.casino.titulo}</h3>
-                <h3>Banquete: {banquete.banquete.titulo}</h3>
-                <h3>Entretenimiento: {entretenimiento.entretenimiento.titulo}</h3>
+                {
+                  banquete ? 
+                  <h3>Banquete: {banquete.banquete.titulo}</h3>
+                  : null
+                }
+                {
+                  entretenimiento ? 
+                  <h3>Entretenimiento: {entretenimiento.entretenimiento.titulo}</h3>
+                  : null
+                }
                 <h3>Importe total del evento: ${importe_total}</h3>
                 <Button color="primary" size="lg" href={ "/reviewEvent=" + id}>
                   Calificar servicios
@@ -91,8 +99,10 @@ export default function AdminCasinoProveedor(props) {
               </div>
             );
           })}
+          <div className={classes.pageFooter}>
+            <Footer whiteFont />
+          </div>
         </div>
-        <Footer whiteFont />
       </div>
     </div>
   );
