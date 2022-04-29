@@ -22,6 +22,7 @@ import { listCrudCasinos, listEntretenimientoWithImage } from "../../graphql/que
 import { listCasinosByUser } from "../../graphql/queriesExt";
 import { listBanqueteByUser } from "../../graphql/queriesExt";
 import { listEntretenimientoByUser } from "../../graphql/queriesExt";
+import { listEventosByCasinoProv, listEventosByBanqueteProv, listEventosByEntretenimientoProv } from "../../graphql/queriesExt";
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -46,18 +47,49 @@ export default function AdminCasinoProveedor(props) {
     if(window.sessionStorage.getItem('auth') && window.sessionStorage.getItem('userRole') === 'PROVEEDOR'){
       let idAuth = window.sessionStorage.getItem('idAuth');
       try{
-        const casinosData = await API.graphql(graphqlOperation(listCasinosByUser, {id: idAuth}));
-        const casinoList = casinosData.data.getUsuario.casinos.items;
-        setCasinos(casinoList);
-        console.log('casinos: ', casinosData);
+        const casinosData = await API.graphql(graphqlOperation(listEventosByCasinoProv));
+        const casinoList = casinosData.data.listEventos.items;
+        
+        let casinosUser = []
+        for (let idxCasino = 0; idxCasino < casinoList.length; idxCasino++) {
+          //console.log('usuario prov:', idAuth, ' - Usuario due;o: ', casinoList[idxCasino].casino.casino.id_usuario)
+          if(casinoList[idxCasino].casino.casino.id_usuario == idAuth){
+            casinosUser.push(casinoList[idxCasino])
+            //console.log('casino del usuario: ', idAuth, ' - ', casinoList[idxCasino].fecha);
+          }
+        }
 
-        const musicData = await API.graphql(graphqlOperation(listEntretenimientoByUser, {id: idAuth}));
-        console.log('music: ', musicData);
+        setCasinos(casinosUser);
+        console.log('casinos: ', casinosUser);
 
-        const banquetesData = await API.graphql(graphqlOperation(listBanqueteByUser, {id: idAuth}));
-        console.log('banquetes: ', banquetesData);
+        const entData = await API.graphql(graphqlOperation(listEventosByEntretenimientoProv));
+        const entList = entData.data.listEventos.items;
+
+        let entUser = []
+        for (let idxEnt = 0; idxEnt < entList.length; idxEnt++) {
+          if(entList[idxEnt].entretenimiento != null){
+            if(entList[idxEnt].entretenimiento.entretenimiento.id_usuario == idAuth){
+              entUser.push(entList[idxEnt])
+            }
+          }
+        }
+        console.log('music: ', entUser);
+        
+
+        const banqueteData = await API.graphql(graphqlOperation(listEventosByBanqueteProv));
+        const banqueteList = banqueteData.data.listEventos.items;
+        
+        let banqueteUser = []
+        for (let idxBanquete = 0; idxBanquete < banqueteList.length; idxBanquete++) {
+          if(banqueteList[idxBanquete].banquete != null){
+            if(banqueteList[idxBanquete].banquete.banquete.id_usuario == idAuth){
+              banqueteUser.push(banqueteList[idxBanquete])
+            }
+          }
+        }
+        console.log('banquetes: ', banqueteUser);
   
-      }catch(err){console.log('error cargando casinos: ', err)};
+      }catch(err){console.log('error cargando eventos: ', err)};
 
     }else{
       window.location.href="/";
