@@ -203,7 +203,7 @@ export default function AdminCasinoProveedor(props) {
                         <Button color="primary" size="lg" href={"/admineventosproveedor"}>
                           Confirmar
                         </Button>
-                        <Button color="danger" size="lg" href={"/admineventosproveedor"}>
+                        <Button color="danger" size="lg" href={"/entretenimientosupload"}>
                           Cancelar
                         </Button>
                         <hr className={classes.hrRound}></hr>
