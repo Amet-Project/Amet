@@ -397,6 +397,8 @@ export const listEventosByCasinoProv = `
           importe
           casino {
             id_usuario
+            titulo
+            descripcion
           }
         }
       }
@@ -426,8 +428,10 @@ export const listEventosByBanqueteProv = `
         banquete {
           fecha
           importe
+          numero_platillos
           banquete {
             id_usuario
+            titulo
           }
         }
       }
@@ -457,8 +461,10 @@ export const listEventosByEntretenimientoProv = `
         entretenimiento {
           fecha
           importe
+          horas
           entretenimiento {
             id_usuario
+            titulo
           }
         }
       }

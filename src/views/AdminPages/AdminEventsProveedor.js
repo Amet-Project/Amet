@@ -10,10 +10,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
+import Button from "components/CustomButtons/Button.js";
 
 //Importanto estilos
 import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";
 import image from "assets/img/bg7.jpg";
+
 
 //Amplify imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
@@ -73,6 +75,7 @@ export default function AdminCasinoProveedor(props) {
             }
           }
         }
+        setMusica(entUser);
         console.log('music: ', entUser);
         
 
@@ -87,6 +90,7 @@ export default function AdminCasinoProveedor(props) {
             }
           }
         }
+        setBanquetes(banqueteUser);
         console.log('banquetes: ', banqueteUser);
   
       }catch(err){console.log('error cargando eventos: ', err)};
@@ -121,33 +125,99 @@ export default function AdminCasinoProveedor(props) {
               <h2>Casinos</h2>
               <hr className={classes.hrRound}></hr>
               <ul className="casino-list">
-                {casinos.map(({ id, titulo, descripcion, direccion }, index) => {
+                {casinos.map(({ casino, fecha, usuario }, index) => {
                   return (
-                    <li key={index}>
-                      <div className="music-list-item">
-                        <div className="left-section">
-                          <h3>{titulo}</h3>
-                          <h4>{descripcion}</h4>
-                          <h4>{direccion}</h4>
+                    <div>
+                      <li key={index}>
+                        <div className="music-list-item">
+                          <div className="left-section">
+                            <h3>{casino.casino.titulo} - {fecha}</h3>
+                            <h4>Reservado por {usuario.nombres} {usuario.ap_paterno} {usuario.ap_materno}</h4>
+                          </div>
                         </div>
-                      </div>
-                    </li>
+                      </li>
+                      <Button color="primary" size="lg" href={"/admineventosproveedor"}>
+                        Confirmar
+                      </Button>
+                      <Button color="danger" size="lg" href={"/admineventosproveedor"}>
+                        Cancelar
+                      </Button>
+                      <hr className={classes.hrRound}></hr>
+                      <br/>
+                    </div>
                   );
                 })}
               </ul>
             </div> : null
-        }
-        <div className={classes.infoContainer}>
-          <h2>Banquetes</h2>
-          <hr className={classes.hrRound}></hr>
+          }
+          {
+            banquetes.length > 0 ?
+              <div className={classes.infoContainer}>
+                <h2>Banquetes</h2>
+                <hr className={classes.hrRound}></hr>
+                <ul className="banquete-list">
+                  {banquetes.map(({ banquete, fecha, usuario }, index) => {
+                    return (
+                      <div>
+                        <li key={index}>
+                          <div className="music-list-item">
+                            <div className="left-section">
+                              <h3>{banquete.banquete.titulo} - {fecha}</h3>
+                              <h4>Número de platillos: {banquete.numero_platillos}</h4>
+                              <h4>Reservado por {usuario.nombres} {usuario.ap_paterno} {usuario.ap_materno}</h4>
+                            </div>
+                          </div>
+                        </li>
+                        <Button color="primary" size="lg" href={"/admineventosproveedor"}>
+                          Confirmar
+                        </Button>
+                        <Button color="danger" size="lg" href={"/admineventosproveedor"}>
+                          Cancelar
+                        </Button>
+                        <hr className={classes.hrRound}></hr>
+                        <br />
+                      </div>
+                    );
+                  })}
+                </ul>
+              </div> : null
+          }
+          {
+            musica.length > 0 ?
+              <div className={classes.infoContainer}>
+                <h2>Entretenimiento</h2>
+                <hr className={classes.hrRound}></hr>
+                <ul className="musica-list">
+                  {musica.map(({ entretenimiento, fecha, usuario }, index) => {
+                    return (
+                      <div>
+                        <li key={index}>
+                          <div className="music-list-item">
+                            <div className="left-section">
+                              <h3>{entretenimiento.entretenimiento.titulo} - {fecha}</h3>
+                              <h4>Número de horas: {entretenimiento.horas}</h4>
+                              <h4>Reservado por {usuario.nombres} {usuario.ap_paterno} {usuario.ap_materno}</h4>
+                            </div>
+                          </div>
+                        </li>
+                        <Button color="primary" size="lg" href={"/admineventosproveedor"}>
+                          Confirmar
+                        </Button>
+                        <Button color="danger" size="lg" href={"/admineventosproveedor"}>
+                          Cancelar
+                        </Button>
+                        <hr className={classes.hrRound}></hr>
+                        <br />
+                      </div>
+                    );
+                  })}
+                </ul>
+              </div> : null
+          }
+        <div className={classes.pageFooter}>
+            <Footer whiteFont />
+          </div>
         </div>
-
-        <div className={classes.infoContainer}>
-          <h2>Entretenimiento</h2>
-          <hr className={classes.hrRound}></hr>
-        </div>
-        </div>
-        <Footer whiteFont />
       </div>
     </div>
   );
