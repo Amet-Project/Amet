@@ -9,6 +9,7 @@ type OrdenCasino @model
     id_casino: ID!
     fecha: String!
     importe: Float!
+    reviewed: Boolean!
     casino_servicios_extras: [OrdenCasinoSE] @connection(keyName: "porOrdenCasino", fields: ["id"])
     cas_hor_fijo: CasinoHorarioFijo @connection(fields: ["id_cas_hor_fijo"])
     cas_hor_flex: CasinoHorarioFlex @connection(fields: ["id_cas_hor_flex"])
@@ -186,6 +187,7 @@ type OrdenBanquete @model
     fecha: String!
     numero_platillos: Int!
     importe: Float!
+    reviewed: Boolean!
     banquete: Banquete! @connection(fields: ["id_banquete"])
 }
 
@@ -223,6 +225,7 @@ type OrdenEntretenimiento @model
     fecha: String!
     horas: Int!
     importe: Float!
+    reviewed: Boolean!
     entretenimiento: Entretenimiento! @connection(fields: ["id_entretenimiento"])
 }
 

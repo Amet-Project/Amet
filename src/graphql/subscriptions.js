@@ -10,6 +10,7 @@ export const onCreateOrdenCasino = /* GraphQL */ `
       id_casino
       fecha
       importe
+      reviewed
       casino_servicios_extras {
         items {
           id
@@ -138,6 +139,7 @@ export const onUpdateOrdenCasino = /* GraphQL */ `
       id_casino
       fecha
       importe
+      reviewed
       casino_servicios_extras {
         items {
           id
@@ -266,6 +268,7 @@ export const onDeleteOrdenCasino = /* GraphQL */ `
       id_casino
       fecha
       importe
+      reviewed
       casino_servicios_extras {
         items {
           id
@@ -408,6 +411,7 @@ export const onCreateCasinoHorarioFijo = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -489,6 +493,7 @@ export const onUpdateCasinoHorarioFijo = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -570,6 +575,7 @@ export const onDeleteCasinoHorarioFijo = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -643,6 +649,7 @@ export const onCreateCasinoHorarioFlex = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -697,6 +704,7 @@ export const onUpdateCasinoHorarioFlex = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -751,6 +759,7 @@ export const onDeleteCasinoHorarioFlex = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -1110,6 +1119,7 @@ export const onCreateCasino = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -1246,6 +1256,7 @@ export const onUpdateCasino = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -1382,6 +1393,7 @@ export const onDeleteCasino = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -2288,6 +2300,7 @@ export const onCreateOrdenCasinoSE = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -2378,6 +2391,7 @@ export const onUpdateOrdenCasinoSE = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -2468,6 +2482,7 @@ export const onDeleteOrdenCasinoSE = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -2755,6 +2770,7 @@ export const onCreateBanquete = /* GraphQL */ `
           fecha
           numero_platillos
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -2820,6 +2836,7 @@ export const onUpdateBanquete = /* GraphQL */ `
           fecha
           numero_platillos
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -2885,6 +2902,7 @@ export const onDeleteBanquete = /* GraphQL */ `
           fecha
           numero_platillos
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -3087,6 +3105,7 @@ export const onCreateOrdenBanquete = /* GraphQL */ `
       fecha
       numero_platillos
       importe
+      reviewed
       banquete {
         id
         id_usuario
@@ -3133,6 +3152,7 @@ export const onUpdateOrdenBanquete = /* GraphQL */ `
       fecha
       numero_platillos
       importe
+      reviewed
       banquete {
         id
         id_usuario
@@ -3179,6 +3199,7 @@ export const onDeleteOrdenBanquete = /* GraphQL */ `
       fecha
       numero_platillos
       importe
+      reviewed
       banquete {
         id
         id_usuario
@@ -3235,6 +3256,7 @@ export const onCreateEntretenimiento = /* GraphQL */ `
           fecha
           horas
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -3300,6 +3322,7 @@ export const onUpdateEntretenimiento = /* GraphQL */ `
           fecha
           horas
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -3365,6 +3388,7 @@ export const onDeleteEntretenimiento = /* GraphQL */ `
           fecha
           horas
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -3567,6 +3591,7 @@ export const onCreateOrdenEntretenimiento = /* GraphQL */ `
       fecha
       horas
       importe
+      reviewed
       entretenimiento {
         id
         id_usuario
@@ -3613,6 +3638,7 @@ export const onUpdateOrdenEntretenimiento = /* GraphQL */ `
       fecha
       horas
       importe
+      reviewed
       entretenimiento {
         id
         id_usuario
@@ -3659,6 +3685,7 @@ export const onDeleteOrdenEntretenimiento = /* GraphQL */ `
       fecha
       horas
       importe
+      reviewed
       entretenimiento {
         id
         id_usuario
@@ -3741,6 +3768,7 @@ export const onCreateEvento = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -3789,6 +3817,7 @@ export const onCreateEvento = /* GraphQL */ `
         fecha
         numero_platillos
         importe
+        reviewed
         banquete {
           id
           id_usuario
@@ -3810,6 +3839,7 @@ export const onCreateEvento = /* GraphQL */ `
         fecha
         horas
         importe
+        reviewed
         entretenimiento {
           id
           id_usuario
@@ -3874,6 +3904,7 @@ export const onUpdateEvento = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -3922,6 +3953,7 @@ export const onUpdateEvento = /* GraphQL */ `
         fecha
         numero_platillos
         importe
+        reviewed
         banquete {
           id
           id_usuario
@@ -3943,6 +3975,7 @@ export const onUpdateEvento = /* GraphQL */ `
         fecha
         horas
         importe
+        reviewed
         entretenimiento {
           id
           id_usuario
@@ -4007,6 +4040,7 @@ export const onDeleteEvento = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -4055,6 +4089,7 @@ export const onDeleteEvento = /* GraphQL */ `
         fecha
         numero_platillos
         importe
+        reviewed
         banquete {
           id
           id_usuario
@@ -4076,6 +4111,7 @@ export const onDeleteEvento = /* GraphQL */ `
         fecha
         horas
         importe
+        reviewed
         entretenimiento {
           id
           id_usuario

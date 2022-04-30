@@ -10,6 +10,7 @@ export const getOrdenCasino = /* GraphQL */ `
       id_casino
       fecha
       importe
+      reviewed
       casino_servicios_extras {
         items {
           id
@@ -143,6 +144,7 @@ export const listOrdenCasinos = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -212,6 +214,7 @@ export const getCasinoHorarioFijo = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -331,6 +334,7 @@ export const getCasinoHorarioFlex = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -620,6 +624,7 @@ export const getCasino = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -1200,6 +1205,7 @@ export const getOrdenCasinoSE = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -1295,6 +1301,7 @@ export const listOrdenCasinoSES = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -1431,6 +1438,7 @@ export const getBanquete = /* GraphQL */ `
           fecha
           numero_platillos
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -1614,6 +1622,7 @@ export const getOrdenBanquete = /* GraphQL */ `
       fecha
       numero_platillos
       importe
+      reviewed
       banquete {
         id
         id_usuario
@@ -1665,6 +1674,7 @@ export const listOrdenBanquetes = /* GraphQL */ `
         fecha
         numero_platillos
         importe
+        reviewed
         banquete {
           id
           id_usuario
@@ -1702,6 +1712,7 @@ export const getEntretenimiento = /* GraphQL */ `
           fecha
           horas
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -1893,6 +1904,7 @@ export const getOrdenEntretenimiento = /* GraphQL */ `
       fecha
       horas
       importe
+      reviewed
       entretenimiento {
         id
         id_usuario
@@ -1948,6 +1960,7 @@ export const listOrdenEntretenimientos = /* GraphQL */ `
         fecha
         horas
         importe
+        reviewed
         entretenimiento {
           id
           id_usuario
@@ -2011,6 +2024,7 @@ export const getEvento = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -2059,6 +2073,7 @@ export const getEvento = /* GraphQL */ `
         fecha
         numero_platillos
         importe
+        reviewed
         banquete {
           id
           id_usuario
@@ -2080,6 +2095,7 @@ export const getEvento = /* GraphQL */ `
         fecha
         horas
         importe
+        reviewed
         entretenimiento {
           id
           id_usuario
@@ -2137,6 +2153,7 @@ export const listEventos = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -2146,6 +2163,7 @@ export const listEventos = /* GraphQL */ `
           fecha
           numero_platillos
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -2155,6 +2173,7 @@ export const listEventos = /* GraphQL */ `
           fecha
           horas
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -2678,6 +2697,7 @@ export const casinoPorFecha = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -2747,6 +2767,7 @@ export const banquetePorFecha = /* GraphQL */ `
         fecha
         numero_platillos
         importe
+        reviewed
         banquete {
           id
           id_usuario
@@ -2789,6 +2810,7 @@ export const entretenimientoPorFecha = /* GraphQL */ `
         fecha
         horas
         importe
+        reviewed
         entretenimiento {
           id
           id_usuario
@@ -2855,6 +2877,7 @@ export const eventoPorFecha = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -2864,6 +2887,7 @@ export const eventoPorFecha = /* GraphQL */ `
           fecha
           numero_platillos
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -2873,6 +2897,7 @@ export const eventoPorFecha = /* GraphQL */ `
           fecha
           horas
           importe
+          reviewed
           createdAt
           updatedAt
         }
