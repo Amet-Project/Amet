@@ -6,6 +6,7 @@ import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
+import { TextInput, Loading } from 'carbon-components-react'
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -52,10 +53,12 @@ export default function SigninProveedores(props) {
   const { ...rest } = props;
   const [formState, setFormState] = useState(initialState)
   const [usuarios, setUsuarios] = useState([])
+  const [loading, setLoading] = useState(false);
 
   //Add to API function
   async function addProveedor() {
     try {
+      setLoading(true);
       //Inputs validation
       if (!formState.nombres || !formState.email || !formState.pwd ) {
         console.log("Favor de ingresar todos los campos")
@@ -71,7 +74,13 @@ export default function SigninProveedores(props) {
       setUsuarios([...usuarios, usuario])
       usuario.pwd = bcrypt.hashSync(usuario.pwd, bcrypt.genSaltSync());
       setFormState(initialState)
-      await API.graphql(graphqlOperation(createUsuario, {input: usuario}))
+      await API.graphql(graphqlOperation(createUsuario, {input: usuario}));
+      window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/login";
+
+      }, 1000);
     } catch (err) {
       console.log('error creando usuario:', err)
     }
@@ -100,6 +109,13 @@ export default function SigninProveedores(props) {
         }}
       >
         <div className={classes.container}>
+        {
+            loading ?
+              <Loading
+                description="Active loading indicator" withOverlay={true}
+              />
+              : null
+          }
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
@@ -138,56 +154,61 @@ export default function SigninProveedores(props) {
                   </CardHeader>
                   <p className={classes.divider}>Ingresa tus datos</p>
                   <CardBody>
-                    <label>
-                      Nombre(s)
-                      <br />
-                      <input value={formState.nombres} onChange={e => setInput('nombres', e.target.value)}/>
-                    </label>
+                  <TextInput
+                      id="nameInput"
+                      labelText="Nombres:"
+                      value={formState.nombres}
+                      onChange={e => setInput('nombres', e.target.value)}
+                      className="emailInput"
+                    />
                     <br />
-                    <label>
-                      Apellido Paterno
-                      <br />
-                      <input value={formState.ap_paterno} onChange={e => setInput('ap_paterno', e.target.value)}/>
-                    </label>
+                    <TextInput
+                      id="lastNameInput"
+                      labelText="Apellido paterno:"
+                      value={formState.ap_paterno}
+                      onChange={e => setInput('ap_paterno', e.target.value)}
+                      className="emailInput"
+                    />
                     <br />
-                    <label>
-                      Apellido Materno
-                      <br />
-                      <input value={formState.ap_materno} onChange={e => setInput('ap_materno', e.target.value)}/>
-                    </label>
+                    <TextInput
+                      id="lastNameInput2"
+                      labelText="Apellido materno:"
+                      value={formState.ap_materno}
+                      onChange={e => setInput('ap_materno', e.target.value)}
+                      className="emailInput"
+                    />
                     <br />
-                    <label>
-                      Celular
-                      <br />
-                      <input value={formState.celular} onChange={e => setInput('celular', e.target.value)}/>
-                    </label>
+                    <TextInput
+                      id="cellphoneInput"
+                      labelText="Teléfono celular:"
+                      type='number'
+                      value={formState.celular}
+                      onChange={e => setInput('celular', e.target.value)}
+                      className="emailInput"
+                    />
                     <br />
-                    <label>
-                      Telefono
-                      <br />
-                      <input value={formState.telefono} onChange={e => setInput('telefono', e.target.value)}/>
-                    </label>
+                    <TextInput
+                      id="emailInput"
+                      labelText="Correo electrónico:"
+                      value={formState.email}
+                      type='email'
+                      onChange={e => setInput('email', e.target.value)}
+                      className="emailInput"
+                    />
                     <br />
-                    <label>
-                      Fecha de nacimiento
-                      <br />
-                      <input type="date" value={formState.nacimiento} onChange={e => setInput('nacimiento', e.target.value)}/>
-                    </label>
-                    <br />
-                    <label>
-                      Email
-                      <br />
-                      <input value={formState.email} onChange={e => setInput('email', e.target.value)}/>
-                    </label>
-                    <br />
-                    <label>
-                      Password
-                      <br />
-                      <input value={formState.pwd} onChange={e => setInput('pwd', e.target.value)}/>
-                    </label>
+                    <TextInput.PasswordInput
+                      id="passwordInput"
+                      labelText="Contraseña:"
+                      value={formState.pwd}
+                      onChange={e => setInput('pwd', e.target.value)}
+                      className="passwordInput"
+                    />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg" onClick={addProveedor}>
+                    <Button color="danger" size="lg" href="/">
+                      Cancelar
+                    </Button>
+                    <Button color="primary" size="lg" onClick={addProveedor}>
                       Registrarme
                     </Button>
                   </CardFooter>

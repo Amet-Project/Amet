@@ -93,7 +93,7 @@ export default function ComidaPage(props) {
                           Precio unitario: {banquete.precio_unitario}
                         </Card.Text>
                       </Card.Body>
-                      <Button variant="primary">Reservar</Button>
+                      <Button href={"\\banquetedetails="+banquete.id} variant="primary">Detalles</Button>
                     </Card>
                     </Col>
                   </div>
