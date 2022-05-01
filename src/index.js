@@ -21,6 +21,8 @@ import UploadCasino from "views/Proveedores/UploadCasino.js";
 import UploadBanquete from "views/Proveedores/UploadBanquete.js";
 import UploadEntretenimiento from "views/Proveedores/UploadEntretenimiento";
 import CasinoDetails from "views/Details/CasinosDetails.js";
+import BanqueteDetails from "views/Details/BanqueteDetails.js";
+import EntretenimientoDetails from "views/Details/EntretenimientoDetails";
 import UserDetails from "views/Details/UserDetails.js";
 import UserEdit from "views/Edits/UserEdit.js";
 import Events from "views/EventosPages/Events.js";
@@ -60,6 +62,8 @@ ReactDOM.render(
       <Route path="/banquetesupload" component={UploadBanquete} />
       <Route path="/entretenimientosupload" component={UploadEntretenimiento} />
       <Route path="/casinodetails=:id" component={CasinoDetails} />
+      <Route path="/banquetedetails=:id" component={BanqueteDetails} />
+      <Route path="/entretenimientodetails=:id" component={EntretenimientoDetails} />
       <Route path="/user" component={UserDetails} />
       <Route path="/user_edit" component={UserEdit} />
       <Route path="/admineventos" component={Events} />
