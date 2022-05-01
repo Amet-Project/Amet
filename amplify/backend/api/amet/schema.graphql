@@ -272,6 +272,7 @@ type Usuario @model @searchable
 type RatingCasino @model @searchable
 @key(name: "porUsuario", fields: ["id_usuario", "id_casino"])
 @key(name: "porCasino", fields: ["id_casino", "id_usuario"])
+@key(name: "ratingCasinoPorUsuario", fields: ["id_usuario", "id_casino"], queryField: "ratingCasinoPorUsuario")
 {
   id: ID!
   id_usuario: ID!
@@ -284,6 +285,7 @@ type RatingCasino @model @searchable
 type RatingBanquete @model @searchable
 @key(name: "porUsuario", fields: ["id_usuario", "id_banquete"])
 @key(name: "porBanquete", fields: ["id_banquete", "id_usuario"])
+@key(name: "ratingBanquetePorUsuario", fields: ["id_usuario", "id_banquete"], queryField: "ratingBanquetePorUsuario")
 {
   id: ID!
   id_usuario: ID!
@@ -296,6 +298,7 @@ type RatingBanquete @model @searchable
 type RatingEntretenimiento @model @searchable
 @key(name: "porUsuario", fields: ["id_usuario", "id_entretenimiento"])
 @key(name: "porEntretenimiento", fields: ["id_entretenimiento", "id_usuario"])
+@key(name: "ratingEntretenimientoPorUsuario", fields: ["id_usuario", "id_entretenimiento"], queryField: "ratingEntretenimientoPorUsuario")
 {
   id: ID!
   id_usuario: ID!

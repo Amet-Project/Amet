@@ -2956,6 +2956,174 @@ export const usuarioPorEmail = /* GraphQL */ `
     }
   }
 `;
+export const ratingCasinoPorUsuario = /* GraphQL */ `
+  query RatingCasinoPorUsuario(
+    $id_usuario: ID
+    $id_casino: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelRatingCasinoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ratingCasinoPorUsuario(
+      id_usuario: $id_usuario
+      id_casino: $id_casino
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        id_usuario
+        id_casino
+        rating
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        casino {
+          id
+          id_usuario
+          direccion
+          titulo
+          descripcion
+          rfc
+          cap_maxima
+          aprobado
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const ratingBanquetePorUsuario = /* GraphQL */ `
+  query RatingBanquetePorUsuario(
+    $id_usuario: ID
+    $id_banquete: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelRatingBanqueteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ratingBanquetePorUsuario(
+      id_usuario: $id_usuario
+      id_banquete: $id_banquete
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        id_usuario
+        id_banquete
+        rating
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        banquete {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_unitario
+          minimo
+          aprobado
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const ratingEntretenimientoPorUsuario = /* GraphQL */ `
+  query RatingEntretenimientoPorUsuario(
+    $id_usuario: ID
+    $id_entretenimiento: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelRatingEntretenimientoFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ratingEntretenimientoPorUsuario(
+      id_usuario: $id_usuario
+      id_entretenimiento: $id_entretenimiento
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        id_usuario
+        id_entretenimiento
+        rating
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        entretenimiento {
+          id
+          id_usuario
+          titulo
+          descripcion
+          rfc
+          precio_hora
+          minimo
+          aprobado
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const searchImagenCasinos = /* GraphQL */ `
   query SearchImagenCasinos(
     $filter: SearchableImagenCasinoFilterInput
