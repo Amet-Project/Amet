@@ -14,7 +14,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import { TextInput } from "carbon-components-react";
+import { NumberInput, TextInput } from "carbon-components-react";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";

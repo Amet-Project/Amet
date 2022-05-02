@@ -14,7 +14,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import { TextInput } from "carbon-components-react";
+import { NumberInput, TextInput } from "carbon-components-react";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";
@@ -22,22 +22,23 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
-import { listCasinosWithImage } from '../../graphql/queriesExt.js'
-import { eventoPorFecha } from '../../graphql/queriesExt.js'
+import { createCasino, createCasinoHorarioFijo  } from '../../graphql/mutations.js'
 import awsExports from "../../aws-exports.js";
+import { SettingsInputAntenna } from "@material-ui/icons";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(informationPageStyle);
 
-const days = [
-  'domingo',
+const arrayDays = [
   'lunes',
   'martes',
   'miercoles',
   'jueves',
   'viernes',
   'sabado',
+  'domingo',
 ];
+
 
 //Variables
 let price = 0;
@@ -47,61 +48,96 @@ let endHour;
 
 export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const { date } = useParams()
 
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
-  const [casinos, setCasinos] = useState([]);
-
+  const [casino, setCasino] = useState({
+    direccion: '',
+    titulo: '',
+    descripcion: '',
+    cap_maxima: 0,
+    aprobado: false,
+    id_usuario: ''
+  });
+  const [id_usuario, setIdUsuario] = useState('');
+  const [days, setUpDays] = useState({lunes: 0, martes: 0, miercoles: 0, jueves:0, viernes:0, sabado:0, domingo:0})
+  
   useEffect(() => {
-    fetchCasinos()
-  }, []);
+    getidAuth();
+  }, [])
 
-  //Get the whole items
-  async function fetchCasinos() {
+  const setInput = (key, value) => {
+    setCasino({...casino, [key]: value});
+  }
+  const setDays = (key, value) => {
+    setUpDays({...days, [key]: value});
+  }
+  async function getidAuth() {
     try {
-      const casinosData = await API.graphql(graphqlOperation(listCasinosWithImage));
-      const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
-      let eventsArray = eventosData.data.eventoPorFecha.items;
-      let venuesArray = casinosData.data.listCasinos.items;
-      
-      for (let idxCasino = 0; idxCasino < venuesArray.length; idxCasino++) {
-        if (venuesArray[idxCasino].imagenes.items.length === 0) {
-          venuesArray[idxCasino].img = '';
-        }else {
-          const key_image = venuesArray[idxCasino].imagenes.items[0].file.key;
-          //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
-          const img = await Storage.get(key_image, {level: 'public'});
-          venuesArray[idxCasino].img = img;
-        }
-      }
-      let indexVenueToDelete = -1;
-
-      const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
-      const dayNumber = new Date(dateMod).getDay();
-      day = days[dayNumber];
-      console.log('Casinos: ', venuesArray);
-      console.log('Eventos: ', eventsArray);
-
-      for (let i = 0; i < eventsArray.length; i++) {
-        for (let j = 0; j < venuesArray.length; j++) {
-          if (eventsArray[i].casino.id_casino === venuesArray[j].id) {
-            indexVenueToDelete = j;
-            break;
-          }      
-        }
-        if(indexVenueToDelete !== -1){
-          venuesArray.splice(indexVenueToDelete, 1);
-        }
-      }
-      console.log('Casinos: ', venuesArray);
-      setCasinos(venuesArray);
-    } catch (err) { console.log('error cargando casinos', err) }
+      let idAuth = window.sessionStorage.getItem('idAuth');
+      setIdUsuario(idAuth);
+      setCasino({...casino, ['id_usuario']:idAuth});
+    } catch (err) { console.log('error obteniendo usuario: ', err) };
   }
 
+  async function sumbitCasino () {
+    try {
+      const resCasino = await API.graphql(graphqlOperation(createCasino, {input:casino}));
+      await sumbitHorariosFijos(resCasino.data.createCasino.id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  async function sumbitHorariosFijos(idCasino){
+    let DaysSelected = {
+      lunes: false,
+      martes: false,
+      miercoles: false,
+      jueves: false,
+      viernes: false,
+      sabado: false,
+      domingo: false
+    };
+    for (let day = 0; day < arrayDays.length; day++) {
+      let ban = false;
+      let horarioForSumbit = {
+        id_casino: idCasino,
+        hora_inicio: '2 pm',
+        hora_fin: '10 pm',
+        lunes: false,
+        martes: false,
+        miercoles: false,
+        jueves: false,
+        viernes: false,
+        sabado: false,
+        domingo: false,
+        precio: 0
+      }
+      if(DaysSelected[arrayDays[day]]) continue;
+      for (let index = day + 1; index <= arrayDays.length - 1; index++) {
+        if(days[arrayDays[day]] === days[arrayDays[index]]){
+          horarioForSumbit[arrayDays[index]] = true;
+          DaysSelected[arrayDays[index]] = true;
+          ban = true;
+        }
+      }
+      if(ban){
+        horarioForSumbit['precio'] = days[arrayDays[day]];
+        horarioForSumbit[arrayDays[day]] = true;
+        console.log(horarioForSumbit);
+        await API.graphql(graphqlOperation(createCasinoHorarioFijo, {input:horarioForSumbit}));
+      }else{
+        horarioForSumbit['precio'] = days[arrayDays[day]];
+        horarioForSumbit[arrayDays[day]] = true;
+        console.log(horarioForSumbit);
+        await API.graphql(graphqlOperation(createCasinoHorarioFijo, {input:horarioForSumbit}));
+      }
+    }
+  }
   return (
     <div>
       <Header
@@ -128,6 +164,8 @@ export default function StartEventPage(props) {
                 invalidText="Invalid error message."
                 labelText="Nombre"
                 placeholder="Ingresa el nombre del casino"
+                value={casino.titulo}
+                onChange = {e => setInput('titulo', e.target.value)}
               />
               <br />
               <TextInput
@@ -135,6 +173,8 @@ export default function StartEventPage(props) {
                 invalidText="Invalid error message."
                 labelText="Dirección"
                 placeholder="Ingresa la dirección del casino"
+                value={casino.direccion}
+                onChange = {e => setInput('direccion', e.target.value)}
               />
               <br />
               <TextInput
@@ -142,73 +182,97 @@ export default function StartEventPage(props) {
                 invalidText="Invalid error message."
                 labelText="Descripción"
                 placeholder="Ingresa la descripción del casino"
+                value={casino.descripcion}
+                onChange = {e => setInput('descripcion', e.target.value)}
+
               />
               <br />
-              <TextInput
+              <p>Capacidad maxima:</p>
+              <NumberInput
                 id="casinoCapacity"
                 invalidText="Invalid error message."
-                labelText="Capacidad máxima"
                 placeholder="Ingresa la capacidad máxima del casino"
+                min={0}
+                value={casino.cap_maxima}
+                onChange = {e => setInput('cap_maxima', e.target.value)}
               />
               <br />
-              <TextInput
+              <p>Precio por hora Lunes:</p>
+              <NumberInput
                 id="mondayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
+                helperText="Ingrese 0 para marcar el día como No Disponible"
                 invalidText="Invalid error message."
-                labelText="Precio por hora Lunes"
                 placeholder="Ingresa el precio por hora de Lunes"
+                min={0}
+                value={days.lunes}
+                onChange = {e => setDays('lunes', e.target.value)}
               />
               <br />
-              <TextInput
+              <p>Precio por hora Martes:</p>
+              <NumberInput
                 id="tuesdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
+                helperText="Ingrese 0 para marcar el día como No Disponible"
                 invalidText="Invalid error message."
-                labelText="Precio por hora Martes"
                 placeholder="Ingresa el precio por hora de Martes"
+                min={0}
+                value={days.martes}
+                onChange = {e => setDays('martes', e.target.value)}
               />
               <br />
-              <TextInput
+              <p>Precio por hora Miercoles:</p>
+              <NumberInput
                 id="wednesdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
+                helperText="Ingrese 0 para marcar el día como No Disponible"
                 invalidText="Invalid error message."
-                labelText="Precio por hora Miércoles"
                 placeholder="Ingresa el precio por hora de Miércoles"
+                min={0}
+                value={days.miercoles}
+                onChange = {e => setDays('miercoles', e.target.value)}
               />
               <br />
-              <TextInput
+              <p>Precio por hora Jueves:</p>
+              <NumberInput
                 id="thursdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
+                helperText="Ingrese 0 para marcar el día como No Disponible"
                 invalidText="Invalid error message."
-                labelText="Precio por hora Jueves"
                 placeholder="Ingresa el precio por hora de Jueves"
+                min={0}
+                value={days.jueves}
+                onChange = {e => setDays('jueves', e.target.value)}
               />
               <br />
-              <TextInput
+              <p>Precio por hora Viernes:</p>
+              <NumberInput
                 id="fridayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
+                helperText="Ingrese 0 para marcar el día como No Disponible"
                 invalidText="Invalid error message."
-                labelText="Precio por hora Viernes"
                 placeholder="Ingresa el precio por hora de Viernes"
+                value={days.viernes}
+                onChange = {e => setDays('viernes', e.target.value)}
               />
               <br />
-              <TextInput
+              <p>Precio por hora Sabado:</p>
+              <NumberInput
                 id="saturdayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
+                helperText="Ingrese 0 para marcar el día como No Disponible"
                 invalidText="Invalid error message."
-                labelText="Precio por hora Sábado"
                 placeholder="Ingresa el precio por hora de Sábado"
+                value={days.sabado}
+                onChange = {e => setDays('sabado', e.target.value)}
               />
               <br />
-              <TextInput
+              <p>Precio por hora Domingo:</p>
+              <NumberInput
                 id="sundayPrice"
-                helperText="Ingresa sólo valores numéricos, 0 para marcar el día como No Disponible"
+                helperText="Ingrese 0 para marcar el día como No Disponible"
                 invalidText="Invalid error message."
-                labelText="Precio por hora Domingo"
                 placeholder="Ingresa el precio por hora de Domingo"
+                value={days.domingo}
+                onChange = {e => setDays('domingo', e.target.value)}
               />
             </div>
             <br />
-            <Button color="primary" size="lg" href={ "/reviewEvent"}>
+            <Button color="primary" size="lg" onClick={sumbitCasino}>
                   Registrar casino
                 </Button>
           </div>
