@@ -94,7 +94,7 @@ export default function ComidaPage(props) {
                           Minimo de horas: {entr.minimo} 
                         </Card.Text>
                       </Card.Body>
-                      <Button color="primary">Detalles</Button>
+                      <Button href={"\\entretenimientodetails="+entr.id} color="primary">Detalles</Button>
                     </Card>
                     </Col>
                   </div>

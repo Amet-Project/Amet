@@ -93,9 +93,16 @@ export default function AdminCasinoProveedor(props) {
                   : null
                 }
                 <h3>Importe total del evento: ${importe_total}</h3>
-                <Button color="primary" size="lg" href={ "/reviewEvent=" + id}>
+                {
+                  (casino.reviewed && banquete.reviewed && entretenimiento.reviewed) ? 
+                  <Button color="primary" size="lg">
+                  Calificación enviada
+                  </Button>
+                  :
+                  <Button color="primary" size="lg" href={ "/reviewEvent=" + id}>
                   Calificar servicios
-                </Button>
+                  </Button>
+                }
               </div>
             );
           })}

@@ -225,17 +225,20 @@ export default function ReservePage(props) {
                 id_casino: casino.id,
                 fecha: date,
                 importe: price,
+                reviewed: false,
                 id_cas_hor_fijo: idHorFij
             };
             const entretenimientoOrder = {
                 id_entretenimiento: checkedStateMusic,
                 fecha: date,
+                reviewed: false,
                 horas: parseInt(checkedMusicHours),
                 importe: musicPriceTotal,
             };
             const banqueteOrder = {
                 id_banquete: checkedStateFood,
                 fecha: date,
+                reviewed: false,
                 numero_platillos: parseInt(checkedFoodPlates),
                 importe: banquetePriceTotal,
 
@@ -385,6 +388,7 @@ export default function ReservePage(props) {
             let eventsArray = eventosData.data.eventoPorFecha.items;
             let musicArray = musicaData.data.listEntretenimientos.items;
             let foodArray = comidaData.data.listBanquetes.items;
+            let indexVenueToDelete = -1;
             for (let idxMusic = 0; idxMusic < musicArray.length; idxMusic++) {
                 if (musicArray[idxMusic].imagenes.items.length === 0) {
                   musicArray[idxMusic].img = '';
@@ -395,6 +399,18 @@ export default function ReservePage(props) {
                   musicArray[idxMusic].img = img;
                 }
             }
+            for (let i = 0; i < eventsArray.length; i++) {
+                for (let j = 0; j < musicArray.length; j++) {
+                    if (eventsArray[i].entretenimiento.id_entretenimiento === musicArray[j].id) {
+                        indexVenueToDelete = j;
+                        break;
+                    }
+                }
+                if (indexVenueToDelete !== -1) {
+                    musicArray.splice(indexVenueToDelete, 1);
+                }
+            }
+            indexVenueToDelete = -1;
             for (let idxFood = 0; idxFood < foodArray.length; idxFood++) {
                 if (foodArray[idxFood].imagenes.items.length === 0) {
                   foodArray[idxFood].img = '';
@@ -405,8 +421,18 @@ export default function ReservePage(props) {
                   foodArray[idxFood].img = img;
                 }
             }
-            //console.log('Food: ', foodArray);
-            //console.log('Music: ', musicArray);
+
+            for (let i = 0; i < eventsArray.length; i++) {
+                for (let j = 0; j < foodArray.length; j++) {
+                  if (eventsArray[i].banquete.id_banquete === foodArray[j].id) {
+                    indexVenueToDelete = j;
+                    break;
+                  }      
+                }
+                if(indexVenueToDelete !== -1){
+                  foodArray.splice(indexVenueToDelete, 1);
+                }
+              }
             setFood(foodArray);
             setMusic(musicArray);
 

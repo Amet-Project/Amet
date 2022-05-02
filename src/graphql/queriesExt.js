@@ -209,6 +209,80 @@ export const getCasino = `
   }
 `;
 
+export const getBanquete = /* GraphQL */ `
+  query GetBanquete($id: ID!) {
+    getBanquete(id: $id) {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_unitario
+      minimo
+      aprobado
+      ordenes {
+        items {
+          id
+          id_banquete
+          fecha
+          numero_platillos
+          importe
+          reviewed
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          file {
+            key
+          }
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const getEntretenimiento = /* GraphQL */ `
+  query GetEntretenimiento($id: ID!) {
+    getEntretenimiento(id: $id) {
+      id
+      id_usuario
+      titulo
+      descripcion
+      rfc
+      precio_hora
+      minimo
+      aprobado
+      ordenes {
+        items {
+          id
+          id_entretenimiento
+          fecha
+          horas
+          importe
+          reviewed
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      imagenes {
+        items {
+          file {
+            key
+          }
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const GetUsuarioDetails = /* GraphQL */ `
   query GetUsuario($id: ID!) {
     getUsuario(id: $id) {
@@ -300,6 +374,7 @@ query ListEventsByUser($id: ID!) {
         id_orden_entretenimiento
         banquete {
           importe
+          reviewed
           banquete {
             titulo
             id
@@ -318,10 +393,12 @@ query ListEventsByUser($id: ID!) {
             }
           }
           importe
+          reviewed
         }
         entretenimiento {
           id
           importe
+          reviewed
           entretenimiento {
             titulo
           }
@@ -344,6 +421,7 @@ query getEvento($id: ID!) {
     id_orden_entretenimiento
     banquete {
       importe
+      reviewed
       banquete {
         titulo
         id
@@ -362,9 +440,11 @@ query getEvento($id: ID!) {
         }
       }
       importe
+      reviewed
     }
     entretenimiento {
       importe
+      reviewed
       entretenimiento {
         titulo
         id
