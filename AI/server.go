@@ -1,18 +1,19 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os/exec"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
 
 // codigo de type Casino struct
 type Recomendacion struct {
-	Id     string `json:"id"`
-	Nombre string `json:"nombre"`
-	Tipo   string `json:"tipo"`
+	Top        int    `json:"top"`
+	Id_Usuario string `json:"id_usuario"`
 }
 
 // funcion para llamar la ruta /alumno/{id}
@@ -20,7 +21,7 @@ func recomendacion(res http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 	idUsuario := vars["id"]
 
-	fmt.Println(req.Method) // imprimimos el método que se mando llamar
+	fmt.Println(req.Method, idUsuario) // imprimimos el método que se mando llamar
 
 	res_json, err := pyAlgorythm(idUsuario)
 	if err != nil { // si hubo un problema al obtener la recomendacion
@@ -52,7 +53,28 @@ func pyAlgorythm(id string) ([]byte, error) {
 	//	return jsonData, err2 // Error al convertir JSON
 	//}
 
-	return stdoutStderr, nil // Mandamos el JSON
+	s := string(stdoutStderr)
+	//result := []byte(s[313:])
+	//fmt.Println(s[313:])
+
+	//fmt.Println(strings.IndexByte(s, '"'))
+	list := make([]Recomendacion, 0)
+
+	idxI := strings.IndexByte(s, '"')
+	for i := 0; i < 3; i++ {
+		idxF := idxI + strings.IndexByte(s[idxI+1:], '"') + 1
+		//fmt.Println("indices primer: ", idxI, idxF)
+		//fmt.Println("sub string:" + s[idxI+1:idxF])
+		rec := Recomendacion{i, s[idxI+1 : idxF]}
+		list = append(list, rec)
+		//list = append(list, s[idxI+1:idxF])
+		idxI = idxF + strings.IndexByte(s[idxF+1:], '"') + 1
+
+	}
+
+	rec_enc, err := json.Marshal(list)
+
+	return rec_enc, nil // Mandamos el JSON
 }
 
 func main() {
