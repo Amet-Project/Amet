@@ -15,6 +15,7 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
+import { ratingCasinoPorUsuario } from '../../graphql/queries.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -23,6 +24,7 @@ const useStyles = makeStyles(informationPageStyle);
 export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const { date } = useParams()
+  const [favCasino, setFavCasino] = useState([]);
 
   setTimeout(function() {
     setCardAnimation("");
@@ -38,6 +40,18 @@ export default function StartEventPage(props) {
   async function fetchCasinos() {
     try {
       const idAuth = window.sessionStorage.getItem('idAuth');
+      let ratingData = await API.graphql(graphqlOperation(ratingCasinoPorUsuario, { id_usuario: idAuth }));
+      console.log('Rating data: ',ratingData);
+      let userRatings = ratingData.data.ratingCasinoPorUsuario.items;
+      let bestCasino = null;
+      let bestScore = 0;
+      for (let idxRatings = 0; idxRatings < userRatings.length; idxRatings++){
+        if (userRatings[idxRatings].rating >= 3 && userRatings[idxRatings].rating >= bestScore){
+          bestScore = userRatings[idxRatings].rating;
+          bestCasino = userRatings[idxRatings].id_casino;
+        }
+      };
+      setFavCasino(bestCasino);
       const baseURL= "https://gorest.co.in/public/v2";
       axios.get(`${baseURL}/users`).then(response =>{
         console.log('response: ', response.data);
@@ -69,12 +83,19 @@ export default function StartEventPage(props) {
               }}
           >
               <div className={classes.infoBigContainer}>
+                {
+                  favCasino ?
                   <div className={classes.infoContainerCenter}>
-                      <h2>Obteniendo tu recomendación de nuestra Inteligencia Artificial...</h2>
+                  <h2>Obteniendo tu recomendación de nuestra Inteligencia Artificial...</h2>
                       <Loading
                           description="Active loading indicator" withOverlay={false}
                       />
                   </div>
+                  :
+                  <div className={classes.infoContainerCenter}>
+                  <h2>No tenemos suficiente información para recomendarte</h2>
+                  </div>
+                }
               </div>
         <Footer whiteFont />
       </div>
