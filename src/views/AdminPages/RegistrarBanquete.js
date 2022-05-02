@@ -14,7 +14,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import { TextInput } from "carbon-components-react";
+import { NumberInput, TextInput } from "carbon-components-react";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";
@@ -22,85 +22,54 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
-import { listCasinosWithImage } from '../../graphql/queriesExt.js'
-import { eventoPorFecha } from '../../graphql/queriesExt.js'
+import { createBanquete } from '../../graphql/mutations.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(informationPageStyle);
 
-const days = [
-  'domingo',
-  'lunes',
-  'martes',
-  'miercoles',
-  'jueves',
-  'viernes',
-  'sabado',
-];
-
-//Variables
-let price = 0;
-let day;
-let startHour;
-let endHour;
 
 export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const { date } = useParams()
+  const [id_usuario, setIdUsuario] = useState('');
 
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
-  const [casinos, setCasinos] = useState([]);
-
-  useEffect(() => {
-    fetchCasinos()
-  }, []);
-
-  //Get the whole items
-  async function fetchCasinos() {
-    try {
-      const casinosData = await API.graphql(graphqlOperation(listCasinosWithImage));
-      const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
-      let eventsArray = eventosData.data.eventoPorFecha.items;
-      let venuesArray = casinosData.data.listCasinos.items;
-      
-      for (let idxCasino = 0; idxCasino < venuesArray.length; idxCasino++) {
-        if (venuesArray[idxCasino].imagenes.items.length === 0) {
-          venuesArray[idxCasino].img = '';
-        }else {
-          const key_image = venuesArray[idxCasino].imagenes.items[0].file.key;
-          //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
-          const img = await Storage.get(key_image, {level: 'public'});
-          venuesArray[idxCasino].img = img;
-        }
-      }
-      let indexVenueToDelete = -1;
-
-      const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
-      const dayNumber = new Date(dateMod).getDay();
-      day = days[dayNumber];
-      console.log('Casinos: ', venuesArray);
-      console.log('Eventos: ', eventsArray);
-
-      for (let i = 0; i < eventsArray.length; i++) {
-        for (let j = 0; j < venuesArray.length; j++) {
-          if (eventsArray[i].casino.id_casino === venuesArray[j].id) {
-            indexVenueToDelete = j;
-            break;
-          }      
-        }
-        if(indexVenueToDelete !== -1){
-          venuesArray.splice(indexVenueToDelete, 1);
-        }
-      }
-      console.log('Casinos: ', venuesArray);
-      setCasinos(venuesArray);
-    } catch (err) { console.log('error cargando casinos', err) }
+  const [banquete, setBanquete] = useState({
+    id_usuario: '',
+    titulo: '',
+    descripcion: '',
+    rfc: '',
+    precio_unitario: 0,
+    minimo: 0,
+    aprobado: false,
+  });
+  const setInput = (key, value) => {
+    setBanquete({...banquete, [key]: value});
   }
+  
+  useEffect(() => {
+    getidAuth();
+  }, []);
+  async function getidAuth() {
+    try {
+      let idAuth = window.sessionStorage.getItem('idAuth');
+      setIdUsuario(idAuth);
+      setBanquete({...banquete, ['id_usuario']:idAuth});
+    } catch (err) { console.log('error obteniendo usuario: ', err) };
+  }
+  async function sumbitBanquete () {
+    try {
+      const resBanquete = await API.graphql(graphqlOperation(createBanquete, {input:banquete}));
+      console.log(resBanquete.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   return (
     <div>
@@ -124,43 +93,52 @@ export default function StartEventPage(props) {
             <h2>Registrar Banquete</h2>
             <div>
               <TextInput
-                id="casinoName"
+                id="banqueteName"
                 invalidText="Invalid error message."
                 labelText="Nombre"
                 placeholder="Ingresa el nombre del banquete"
+                value={banquete.titulo}
+                onChange = {e => setInput('titulo', e.target.value)}
               />
               <br />
               <TextInput
-                id="casinoAddress"
+                id="banqueteAddress"
                 invalidText="Invalid error message."
                 labelText="RFC"
                 placeholder="Ingresa el RFC del banquete"
+                value={banquete.rfc}
+                onChange = {e => setInput('rfc', e.target.value)}
               />
               <br />
               <TextInput
-                id="casinoDescription"
+                id="banqueteDescription"
                 invalidText="Invalid error message."
                 labelText="Descripción"
                 placeholder="Ingresa la descripción del banquete"
+                value={banquete.descripcion}
+                onChange = {e => setInput('descripcion', e.target.value)}
               />
               <br />
-              <TextInput
-                id="casinoCapacity"
+              <p>Precio unitario</p>
+              <NumberInput
+                id="priceDishes"
                 helperText="Si el precio varía entre cada platillo, ingresar el precio más bajo"
                 invalidText="Invalid error message."
-                labelText="Precio unitario"
-                placeholder="Ingresa el precio unitario del platillo"
+                value={banquete.precio_unitario}
+                onChange = {e => setInput('precio_unitario', e.target.value)}
               />
               <br />
-              <TextInput
-                id="mondayPrice"
+              <p>Minimo de platillos:</p>
+              <NumberInput
+                id="minDishes"
                 invalidText="Invalid error message."
-                labelText="Cantidad mínima de platillos"
-                placeholder="Ingresa la cantidad mínima de platillos para contratación"
+                helperText="Ingresa la cantidad mínima de platillos para contratación"
+                value={banquete.minimo}
+                onChange = {e => setInput('minimo', e.target.value)}
               />
             </div>
             <br />
-            <Button color="primary" size="lg" href={ "/reviewEvent"}>
+            <Button color="primary" size="lg" onClick={sumbitBanquete}>
               Registrar banquete
             </Button>
           </div>

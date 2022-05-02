@@ -14,7 +14,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
-import { TextInput } from "carbon-components-react";
+import { NumberInput, TextInput } from "carbon-components-react";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";
@@ -22,85 +22,56 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
-import { listCasinosWithImage } from '../../graphql/queriesExt.js'
-import { eventoPorFecha } from '../../graphql/queriesExt.js'
+import { createEntretenimiento } from '../../graphql/mutations.js'
+
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(informationPageStyle);
 
-const days = [
-  'domingo',
-  'lunes',
-  'martes',
-  'miercoles',
-  'jueves',
-  'viernes',
-  'sabado',
-];
-
-//Variables
-let price = 0;
-let day;
-let startHour;
-let endHour;
 
 export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const { date } = useParams()
+  const [id_usuario, setIdUsuario] = useState('');
 
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
-  const [casinos, setCasinos] = useState([]);
+  const [entretenimiento, setEntretenimiento] = useState({
+    id_usuario: '',
+    titulo: '',
+    descripcion: '',
+    rfc: '',
+    precio_hora: 0,
+    minimo: 0,
+    aprobado: false,
+  });
 
-  useEffect(() => {
-    fetchCasinos()
-  }, []);
 
-  //Get the whole items
-  async function fetchCasinos() {
-    try {
-      const casinosData = await API.graphql(graphqlOperation(listCasinosWithImage));
-      const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
-      let eventsArray = eventosData.data.eventoPorFecha.items;
-      let venuesArray = casinosData.data.listCasinos.items;
-      
-      for (let idxCasino = 0; idxCasino < venuesArray.length; idxCasino++) {
-        if (venuesArray[idxCasino].imagenes.items.length === 0) {
-          venuesArray[idxCasino].img = '';
-        }else {
-          const key_image = venuesArray[idxCasino].imagenes.items[0].file.key;
-          //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
-          const img = await Storage.get(key_image, {level: 'public'});
-          venuesArray[idxCasino].img = img;
-        }
-      }
-      let indexVenueToDelete = -1;
-
-      const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
-      const dayNumber = new Date(dateMod).getDay();
-      day = days[dayNumber];
-      console.log('Casinos: ', venuesArray);
-      console.log('Eventos: ', eventsArray);
-
-      for (let i = 0; i < eventsArray.length; i++) {
-        for (let j = 0; j < venuesArray.length; j++) {
-          if (eventsArray[i].casino.id_casino === venuesArray[j].id) {
-            indexVenueToDelete = j;
-            break;
-          }      
-        }
-        if(indexVenueToDelete !== -1){
-          venuesArray.splice(indexVenueToDelete, 1);
-        }
-      }
-      console.log('Casinos: ', venuesArray);
-      setCasinos(venuesArray);
-    } catch (err) { console.log('error cargando casinos', err) }
+  const setInput = (key, value) => {
+    setEntretenimiento({...entretenimiento, [key]: value});
   }
+  
+  useEffect(() => {
+    getidAuth();
+  }, []);
+  async function getidAuth() {
+    try {
+      let idAuth = window.sessionStorage.getItem('idAuth');
+      setIdUsuario(idAuth);
+      setEntretenimiento({...entretenimiento, ['id_usuario']:idAuth});
+    } catch (err) { console.log('error obteniendo usuario: ', err) };
+  }
+  async function sumbitEntretenimiento () {
+    try {
+      const resEntretenimiento = await API.graphql(graphqlOperation(createEntretenimiento, {input:entretenimiento}));
+      console.log(resEntretenimiento.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -128,6 +99,8 @@ export default function StartEventPage(props) {
                 invalidText="Invalid error message."
                 labelText="Nombre"
                 placeholder="Ingresa el nombre del servicio de entretenimiento"
+                value={entretenimiento.titulo}
+                onChange = {e => setInput('titulo', e.target.value)}
               />
               <br />
               <TextInput
@@ -135,6 +108,8 @@ export default function StartEventPage(props) {
                 invalidText="Invalid error message."
                 labelText="RFC"
                 placeholder="Ingresa el RFC a registrar"
+                value={entretenimiento.rfc}
+                onChange = {e => setInput('rfc', e.target.value)}
               />
               <br />
               <TextInput
@@ -142,24 +117,30 @@ export default function StartEventPage(props) {
                 invalidText="Invalid error message."
                 labelText="Descripción"
                 placeholder="Ingresa la descripción del servicio de entretenimiento"
+                value={entretenimiento.descripcion}
+                onChange = {e => setInput('descripcion', e.target.value)}
               />
               <br />
-              <TextInput
+              <p>Precio por hora:</p>
+              <NumberInput
                 id="entreHourRate"
                 invalidText="Invalid error message."
-                labelText="Precio por hora"
-                placeholder="Ingresa el precio por hora"
+                helperText="Ingresa el precio por hora"
+                value={entretenimiento.precio_hora}
+                onChange = {e => setInput('precio_hora', e.target.value)}
               />
               <br />
-              <TextInput
+              <p>Minimo de horas:</p>
+              <NumberInput
                 id="entreMinHours"
                 invalidText="Invalid error message."
-                labelText="Horas mínimas"
-                placeholder="Ingresa las horas mínimas para contratar"
+                helperText="Ingresa las horas mínimas para contratar"
+                value={entretenimiento.minimo}
+                onChange = {e => setInput('minimo', e.target.value)}
               />
             </div>
             <br />
-            <Button color="primary" size="lg" href={ "/reviewEvent"}>
+            <Button color="primary" size="lg" onClick={sumbitEntretenimiento}>
               Registrar entretenimiento
             </Button>
           </div>
