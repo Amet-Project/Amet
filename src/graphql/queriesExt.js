@@ -374,6 +374,7 @@ query ListEventsByUser($id: ID!) {
         id_orden_entretenimiento
         banquete {
           importe
+          reviewed
           banquete {
             titulo
             id
@@ -392,10 +393,12 @@ query ListEventsByUser($id: ID!) {
             }
           }
           importe
+          reviewed
         }
         entretenimiento {
           id
           importe
+          reviewed
           entretenimiento {
             titulo
           }
@@ -418,6 +421,7 @@ query getEvento($id: ID!) {
     id_orden_entretenimiento
     banquete {
       importe
+      reviewed
       banquete {
         titulo
         id
@@ -436,9 +440,11 @@ query getEvento($id: ID!) {
         }
       }
       importe
+      reviewed
     }
     entretenimiento {
       importe
+      reviewed
       entretenimiento {
         titulo
         id

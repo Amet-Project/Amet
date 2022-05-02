@@ -21,7 +21,7 @@ import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
 
 import { getEvento } from "../../graphql/queriesExt";
 import awsExports from "../../aws-exports.js";
-import { createRatingCasino, createRatingBanquete, createRatingEntretenimiento } from '../../graphql/mutations';
+import { createRatingCasino, createRatingBanquete, createRatingEntretenimiento, updateOrdenCasino, updateOrdenEntretenimiento, updateOrdenBanquete } from '../../graphql/mutations';
 import { NumberInput } from "carbon-components-react";
 Amplify.configure(awsExports);
 
@@ -69,16 +69,19 @@ export default function ReviewEvent(props) {
   async function sumbitRates() {
     console.log(idAuth, casinoRate, banqueteRate, entretenimientoRate);
     try {
-      if(casinoRate !== undefined) {
-        const resCasino = await API.graphql(graphqlOperation(createRatingCasino, {input:casinoRate})) ;
+      if(casinoRate.length !== 0) {
+        const resCasino = await API.graphql(graphqlOperation(createRatingCasino, {input:casinoRate}));
+        await API.graphql(graphqlOperation(updateOrdenCasino, {input: { id:evento.id_orden_casino, reviewed: true }})) ;
         console.log(resCasino);
       }
-      if (banqueteRate !== undefined){
+      if (banqueteRate.length !== 0){
         const resBanquete = await API.graphql(graphqlOperation(createRatingBanquete, {input:banqueteRate}));
+        await API.graphql(graphqlOperation(updateOrdenBanquete, {input: { id:evento.id_orden_banquete, reviewed: true }})) ;
         console.log(resBanquete);
       }
-      if (entretenimientoRate !== undefined) {
+      if (entretenimientoRate.length !== 0) {
         const resEntretenimiento = await API.graphql(graphqlOperation(createRatingEntretenimiento, {input:entretenimientoRate}));
+        await API.graphql(graphqlOperation(updateOrdenEntretenimiento, {input: { id:evento.id_orden_entretenimiento, reviewed: true }})) ;
         console.log(resEntretenimiento);
       }
     } catch (error) {
@@ -122,7 +125,7 @@ export default function ReviewEvent(props) {
       >
         <div className={classes.infoBigContainer}>
             {
-                evento.casino ?
+                (evento.casino && !evento.casino.reviewed) ?
                     <div className={classes.infoContainer}>
                         <h2>{evento.casino.casino.titulo}</h2>
                         <hr className={classes.hrRound}></hr>
@@ -141,7 +144,7 @@ export default function ReviewEvent(props) {
                     : null
             }
             {
-                evento.entretenimiento ?
+                (evento.entretenimiento && !evento.entretenimiento.reviewed) ?
                     <div className={classes.infoContainer}>
                         <h2>{evento.entretenimiento.entretenimiento.titulo}</h2>
                         <hr className={classes.hrRound}></hr>
@@ -159,7 +162,7 @@ export default function ReviewEvent(props) {
                     : null
             }
             {
-                evento.banquete ?
+                (evento.banquete && !evento.banquete.reviewed) ?
                     <div className={classes.infoContainer}>
                         <h2>{evento.banquete.banquete.titulo}</h2>
                         <hr className={classes.hrRound}></hr>
