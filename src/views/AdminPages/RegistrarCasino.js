@@ -60,7 +60,8 @@ export default function StartEventPage(props) {
     descripcion: '',
     cap_maxima: 0,
     aprobado: false,
-    id_usuario: ''
+    id_usuario: '',
+    rfc: ''
   });
   const [id_usuario, setIdUsuario] = useState('');
   const [days, setUpDays] = useState({lunes: 0, martes: 0, miercoles: 0, jueves:0, viernes:0, sabado:0, domingo:0})
@@ -185,6 +186,15 @@ export default function StartEventPage(props) {
                 value={casino.descripcion}
                 onChange = {e => setInput('descripcion', e.target.value)}
 
+              />
+              <br />
+              <TextInput
+                id="casinoRFC"
+                invalidText="Invalid error message."
+                labelText="RFC"
+                placeholder="Ingresa el RFC a registrar"
+                value={casino.rfc}
+                onChange = {e => setInput('rfc', e.target.value)}
               />
               <br />
               <p>Capacidad maxima:</p>
