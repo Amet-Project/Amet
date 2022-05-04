@@ -20,11 +20,9 @@ import image from "assets/img/bg7.jpg";
 //Amplify imports
 import Amplify, { API, graphqlOperation } from 'aws-amplify'
 
-import { listCrudCasinos, listEntretenimientoWithImage } from "../../graphql/queriesExt";
-import { listCasinosByUser } from "../../graphql/queriesExt";
-import { listBanqueteByUser } from "../../graphql/queriesExt";
-import { listEntretenimientoByUser } from "../../graphql/queriesExt";
-import { listEventosByCasinoProv, listEventosByBanqueteProv, listEventosByEntretenimientoProv } from "../../graphql/queriesExt";
+import { updateOrdenCasino, updateOrdenEntretenimiento, updateOrdenBanquete } from "../../graphql/mutations.js";
+
+import { listEventosByCasinoProv, listEventosByBanqueteProv, listEventosByEntretenimientoProv,  } from "../../graphql/queriesExt";
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -41,10 +39,53 @@ export default function AdminCasinoProveedor(props) {
   const [musica, setMusica] = useState([]);
   const { ...rest } = props;
 
+
   useEffect(() => {
     getidAuth();
   }, [])
 
+  async function updateCasino(id_orden_casino, myStatus){
+    try {
+      const updatedOrder = {
+        id: id_orden_casino,
+        status: myStatus
+      };
+      const resCasino = await API.graphql(graphqlOperation(updateOrdenCasino, {input:updatedOrder}));
+      console.log(resCasino);
+      window.location.href="/admineventosproveedor"
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function updateBanquete(id_orden_banquete, myStatus){
+    try {
+      const updatedOrder = {
+        id: id_orden_banquete,
+        status: myStatus
+      };
+      const resBanquete = await API.graphql(graphqlOperation(updateOrdenBanquete, {input:updatedOrder}));
+      console.log(resBanquete);
+      window.location.href="/admineventosproveedor"
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function updateEntretenimiento(id_orden_entretenimiento, myStatus){
+    try {
+      const updatedOrder = {
+        id: id_orden_entretenimiento,
+        status: myStatus
+      };
+      const resEntretenimiento = await API.graphql(graphqlOperation(updateOrdenEntretenimiento, {input:updatedOrder}));
+      console.log(resEntretenimiento);
+      window.location.href="/admineventosproveedor"
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   async function getidAuth() {
     if(window.sessionStorage.getItem('auth') && window.sessionStorage.getItem('userRole') === 'PROVEEDOR'){
       let idAuth = window.sessionStorage.getItem('idAuth');
@@ -125,23 +166,31 @@ export default function AdminCasinoProveedor(props) {
               <h2>Casinos</h2>
               <hr className={classes.hrRound}></hr>
               <ul className="casino-list">
-                {casinos.map(({ casino, fecha, usuario }, index) => {
+                {casinos.map(({ casino, fecha, usuario, id_orden_casino  }, index) => {
                   return (
-                    <div>
-                      <li key={index}>
+                    <div  key={index}>
+                      <li>
                         <div className="music-list-item">
                           <div className="left-section">
+                            <h4>{casino.status}</h4>
                             <h3>{casino.casino.titulo} - {fecha}</h3>
                             <h4>Reservado por {usuario.nombres} {usuario.ap_paterno} {usuario.ap_materno}</h4>
                           </div>
                         </div>
                       </li>
-                      <Button color="primary" size="lg" href={"/admineventosproveedor"}>
+                      {
+                        casino.status === 'PENDING'?
+                        <Button color="primary" size="lg" onClick={() => updateCasino(id_orden_casino, "ACCEPTED")}>
                         Confirmar
-                      </Button>
-                      <Button color="danger" size="lg" href={"/admineventosproveedor"}>
-                        Cancelar
-                      </Button>
+                      </Button> : null
+
+                      }{ casino.status === 'PENDING' ? 
+                        <Button color="danger" size="lg" onClick={() => updateCasino(id_orden_casino, "CANCELLED")}>
+                          Cancelar
+                        </Button> : null
+                      }
+                      
+                      
                       <hr className={classes.hrRound}></hr>
                       <br/>
                     </div>
@@ -156,24 +205,30 @@ export default function AdminCasinoProveedor(props) {
                 <h2>Banquetes</h2>
                 <hr className={classes.hrRound}></hr>
                 <ul className="banquete-list">
-                  {banquetes.map(({ banquete, fecha, usuario }, index) => {
+                  {banquetes.map(({ banquete, fecha, usuario, id_orden_banquete }, index) => {
                     return (
-                      <div>
-                        <li key={index}>
+                      <div key={index}>
+                        <li>
                           <div className="music-list-item">
                             <div className="left-section">
+                              <h4>{banquete.status}</h4>
                               <h3>{banquete.banquete.titulo} - {fecha}</h3>
                               <h4>Número de platillos: {banquete.numero_platillos}</h4>
                               <h4>Reservado por {usuario.nombres} {usuario.ap_paterno} {usuario.ap_materno}</h4>
                             </div>
                           </div>
                         </li>
-                        <Button color="primary" size="lg" href={"/admineventosproveedor"}>
-                          Confirmar
-                        </Button>
-                        <Button color="danger" size="lg" href={"/admineventosproveedor"}>
+                        {
+                        banquete.status === 'PENDING'?
+                        <Button color="primary" size="lg" onClick={() => updateBanquete(id_orden_banquete, "ACCEPTED")}>
+                        Confirmar
+                      </Button> : null
+
+                      }{ banquete.status === 'PENDING' ? 
+                        <Button color="danger" size="lg" onClick={() => updateBanquete(id_orden_banquete, "CANCELLED")}>
                           Cancelar
-                        </Button>
+                        </Button> : null
+                      }
                         <hr className={classes.hrRound}></hr>
                         <br />
                       </div>
@@ -188,24 +243,31 @@ export default function AdminCasinoProveedor(props) {
                 <h2>Entretenimiento</h2>
                 <hr className={classes.hrRound}></hr>
                 <ul className="musica-list">
-                  {musica.map(({ entretenimiento, fecha, usuario }, index) => {
+                  {musica.map(({ entretenimiento, fecha, usuario, id_orden_entretenimiento }, index) => {
                     return (
-                      <div>
-                        <li key={index}>
+                      <div key={index}>
+                        <li>
                           <div className="music-list-item">
                             <div className="left-section">
+                              <h4>{entretenimiento.status}</h4>
                               <h3>{entretenimiento.entretenimiento.titulo} - {fecha}</h3>
                               <h4>Número de horas: {entretenimiento.horas}</h4>
                               <h4>Reservado por {usuario.nombres} {usuario.ap_paterno} {usuario.ap_materno}</h4>
                             </div>
                           </div>
                         </li>
-                        <Button color="primary" size="lg" href={"/admineventosproveedor"}>
-                          Confirmar
-                        </Button>
-                        <Button color="danger" size="lg" href={"/entretenimientosupload"}>
-                          Cancelar
-                        </Button>
+                        {
+                          entretenimiento.status === 'PENDING'?
+                          <Button color="primary" size="lg" onClick={() => updateEntretenimiento(id_orden_entretenimiento, "ACCEPTED")}>
+                            Confirmar
+                          </Button> : null
+
+                        }{ 
+                            entretenimiento.status === 'PENDING' ? 
+                            <Button color="danger" size="lg" onClick={() => updateEntretenimiento(id_orden_entretenimiento, "CANCELLED")}>
+                              Cancelar
+                            </Button> : null
+                        }
                         <hr className={classes.hrRound}></hr>
                         <br />
                       </div>
