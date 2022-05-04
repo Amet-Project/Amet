@@ -81,15 +81,15 @@ export default function AdminCasinoProveedor(props) {
               <div className={classes.infoContainer}>
                 <h2>{casino.casino.titulo} - {fecha}</h2>
                 <hr className={classes.hrRound}></hr>
-                <h3>Casino: {casino.casino.titulo}</h3>
+                <h3>Casino: {casino.casino.titulo} - {casino.status}</h3>
                 {
                   banquete ? 
-                  <h3>Banquete: {banquete.banquete.titulo}</h3>
+                  <h3>Banquete: {banquete.banquete.titulo} - {banquete.status}</h3>
                   : null
                 }
                 {
                   entretenimiento ? 
-                  <h3>Entretenimiento: {entretenimiento.entretenimiento.titulo}</h3>
+                  <h3>Entretenimiento: {entretenimiento.entretenimiento.titulo} - {entretenimiento.status}</h3>
                   : null
                 }
                 <h3>Importe total del evento: ${importe_total}</h3>

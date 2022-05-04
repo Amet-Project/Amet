@@ -70,9 +70,10 @@ export default function StartEventPage(props) {
       
       for (let idxCasino = 0; idxCasino < venuesArray.length; idxCasino++) {
         if (venuesArray[idxCasino].imagenes.items.length === 0) {
-          venuesArray[idxCasino].img = '';
+          venuesArray[idxCasino].img = 'https://weddingsparrow.com/uploads/slir/w1200/IMG_1028.jpg';
         }else {
           const key_image = venuesArray[idxCasino].imagenes.items[0].file.key;
+          console.log('Key image: ', key_image);
           //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
           const img = await Storage.get(key_image, {level: 'public'});
           venuesArray[idxCasino].img = img;
@@ -133,7 +134,6 @@ export default function StartEventPage(props) {
                           Descripción: {casino.descripcion} <br />
                           Horario: {startHour + " - " + endHour} <br />                         
                           Precio: ${price === 0 ? "No disponible este día" : price.toString()} <br />
-                          {console.log(casino.servicios)}
                           {casino.servicios.items.length !== 0 ? "Servicios" : ""}
                           <ul>
                             {casino.servicios && casino.servicios.items.map(srv => (

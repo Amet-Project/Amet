@@ -48,7 +48,7 @@ export default function CasinoPage(props) {
       // ITERATING THE ARRAY OF CASINOS TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
       for (let idxCasino = 0; idxCasino < casinos.length; idxCasino++) {
         if (casinos[idxCasino].imagenes.items.length === 0) {
-          casinos[idxCasino].img = '';
+          casinos[idxCasino].img = 'https://weddingsparrow.com/uploads/slir/w1200/IMG_1028.jpg';
         }else {
           const key_image = casinos[idxCasino].imagenes.items[0].file.key;
           //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO

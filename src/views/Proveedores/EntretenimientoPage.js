@@ -45,7 +45,7 @@ export default function ComidaPage(props) {
       // ITERATING THE ARRAY OF entretenimiento TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
       for (let idxEntretenimiento = 0; idxEntretenimiento < entretenimiento.length; idxEntretenimiento++) {
         if (entretenimiento[idxEntretenimiento].imagenes.items.length === 0) {
-          entretenimiento[idxEntretenimiento].img = '';
+          entretenimiento[idxEntretenimiento].img = 'http://bandboxjazz.com/wp-content/uploads/2022/02/51497wtzupcitylivemusicbyparraeventkochichristmas.jpg';
         }else {
           const key_image = entretenimiento[idxEntretenimiento].imagenes.items[0].file.key;
           //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING entr
