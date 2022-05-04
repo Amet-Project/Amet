@@ -1,0 +1,5 @@
+flask
+fuzzywuzzy
+scikit-learn
+scipy
+pandas

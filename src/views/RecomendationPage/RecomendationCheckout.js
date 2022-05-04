@@ -20,8 +20,7 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
-import { listCasinosWithImage } from '../../graphql/queriesExt.js'
-import { eventoPorFecha } from '../../graphql/queriesExt.js'
+import { getCasino } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -45,7 +44,7 @@ let endHour;
 
 export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const { date } = useParams()
+  const { date, idCasino1, idCasino2, idCasino3 } = useParams()
 
   setTimeout(function() {
     setCardAnimation("");
@@ -61,10 +60,13 @@ export default function StartEventPage(props) {
   //Get the whole items
   async function fetchCasinos() {
     try {
-      const casinosData = await API.graphql(graphqlOperation(listCasinosWithImage));
-      const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
-      let eventsArray = eventosData.data.eventoPorFecha.items;
-      let venuesArray = casinosData.data.listCasinos.items;
+      const casinosData = await API.graphql(graphqlOperation(getCasino, {id: idCasino1}));
+      const casinosData2 = await API.graphql(graphqlOperation(getCasino, {id: idCasino2}));
+      const casinosData3 = await API.graphql(graphqlOperation(getCasino, {id: idCasino3}));
+      let venuesArray = [];
+      venuesArray.push(casinosData.data.getCasino);
+      venuesArray.push(casinosData2.data.getCasino);
+      venuesArray.push(casinosData3.data.getCasino);
       
       for (let idxCasino = 0; idxCasino < venuesArray.length; idxCasino++) {
         if (venuesArray[idxCasino].imagenes.items.length === 0) {
@@ -76,26 +78,10 @@ export default function StartEventPage(props) {
           venuesArray[idxCasino].img = img;
         }
       }
-      let indexVenueToDelete = -1;
 
-      const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
+      const dateMod = date.slice(6) + "/" + date.slice(3, 5)+ "/" + date.slice(0, 2) + " 00:00:00";
       const dayNumber = new Date(dateMod).getDay();
       day = days[dayNumber];
-      console.log('Casinos: ', venuesArray);
-      console.log('Eventos: ', eventsArray);
-
-      for (let i = 0; i < eventsArray.length; i++) {
-        for (let j = 0; j < venuesArray.length; j++) {
-          if (eventsArray[i].casino.id_casino === venuesArray[j].id) {
-            indexVenueToDelete = j;
-            break;
-          }      
-        }
-        if(indexVenueToDelete !== -1){
-          venuesArray.splice(indexVenueToDelete, 1);
-        }
-      }
-      console.log('Casinos: ', venuesArray);
       setCasinos(venuesArray);
     } catch (err) { console.log('error cargando casinos', err) }
   }
@@ -112,9 +98,8 @@ export default function StartEventPage(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center"
+          backgroundColor: "black",
+          backgroundSize: "contain",
         }}
       >
         <div className={classes.container}>
@@ -123,7 +108,6 @@ export default function StartEventPage(props) {
             <GridItem xs={12} sm={12} md={4}>
             {
                 casinos && casinos.map(casino => (
-                  casino.aprobado ? 
                   <div>
                   <Card className={classes[cardAnimaton]}>
                     <form className={classes.form}>
@@ -168,7 +152,6 @@ export default function StartEventPage(props) {
                   </Card>
                   <br />
                 </div>
-                : null
                 ))
               }
             </GridItem>
