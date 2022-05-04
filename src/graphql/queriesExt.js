@@ -486,6 +486,7 @@ export const listEventosByCasinoProv = `
         casino {
           fecha
           importe
+          status
           casino {
             id_usuario
             titulo
@@ -519,6 +520,7 @@ export const listEventosByBanqueteProv = `
         banquete {
           fecha
           importe
+          status
           numero_platillos
           banquete {
             id_usuario
@@ -553,6 +555,7 @@ export const listEventosByEntretenimientoProv = `
           fecha
           importe
           horas
+          status
           entretenimiento {
             id_usuario
             titulo
