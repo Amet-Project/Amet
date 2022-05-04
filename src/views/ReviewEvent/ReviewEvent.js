@@ -84,6 +84,7 @@ export default function ReviewEvent(props) {
         await API.graphql(graphqlOperation(updateOrdenEntretenimiento, {input: { id:evento.id_orden_entretenimiento, reviewed: true }})) ;
         console.log(resEntretenimiento);
       }
+      window.location.href = "/admineventos";
     } catch (error) {
       console.log("Error creando reviwes:", error);
     }

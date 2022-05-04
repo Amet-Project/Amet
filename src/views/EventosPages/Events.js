@@ -94,7 +94,7 @@ export default function AdminCasinoProveedor(props) {
                 }
                 <h3>Importe total del evento: ${importe_total}</h3>
                 {
-                  (casino.reviewed && banquete.reviewed && entretenimiento.reviewed) ? 
+                  (casino.reviewed && ( banquete ? banquete.reviewed : true ) && (entretenimiento ? entretenimiento.reviewed : true)) ? 
                   <Button color="primary" size="lg">
                   Calificación enviada
                   </Button>
