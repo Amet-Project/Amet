@@ -14,7 +14,7 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
-import { listBanquetesWithImage } from '../../graphql/queriesExt.js'
+import { listEntretenimientoWithImage } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles(styles);
 
 export default function ComidaPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const [banquetes, setbanquetes] = useState([])
+  const [entretenimiento, setentretenimiento] = useState([])
 
   setTimeout(function() {
     setCardAnimation("");
@@ -33,29 +33,29 @@ export default function ComidaPage(props) {
   const { ...rest } = props;
 
   useEffect(() => {
-    fetchBanquetes();
+    fetchEntretenimiento();
   }, [])
 
-  async function fetchBanquetes() {
+  async function fetchEntretenimiento() {
     try {
-      // request banquetes list
-      let banquetesData = await API.graphql(graphqlOperation(listBanquetesWithImage));
-      let banquetes = banquetesData.data.listBanquetes.items;
+      // request entretenimiento list
+      let entretenimientoData = await API.graphql(graphqlOperation(listEntretenimientoWithImage));
+      let entretenimiento = entretenimientoData.data.listEntretenimientos.items;
 
-      // ITERATING THE ARRAY OF banquetes TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
-      for (let idxBanquete = 0; idxBanquete < banquetes.length; idxBanquete++) {
-        if (banquetes[idxBanquete].imagenes.items.length === 0) {
-          banquetes[idxBanquete].img = '';
+      // ITERATING THE ARRAY OF entretenimiento TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
+      for (let idxEntretenimiento = 0; idxEntretenimiento < entretenimiento.length; idxEntretenimiento++) {
+        if (entretenimiento[idxEntretenimiento].imagenes.items.length === 0) {
+          entretenimiento[idxEntretenimiento].img = '';
         }else {
-          const key_image = banquetes[idxBanquete].imagenes.items[0].file.key;
-          //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING banquete
+          const key_image = entretenimiento[idxEntretenimiento].imagenes.items[0].file.key;
+          //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING entr
           const img = await Storage.get(key_image, {level: 'public'});
-          banquetes[idxBanquete].img = img;
+          entretenimiento[idxEntretenimiento].img = img;
         }
       }
      
-      setbanquetes(banquetes);
-    } catch (err) { console.log('error cargando banquetes: ', err) }
+      setentretenimiento(entretenimiento);
+    } catch (err) { console.log('error cargando entretenimiento: ', err) }
   }
 
   return (
@@ -78,22 +78,23 @@ export default function ComidaPage(props) {
         <div className={classes.container}>
             <Row xs={3} md={4} className="g-4">
             {
-                banquetes && banquetes.map(banquete => (
-                  banquete.aprobado ? 
+                entretenimiento && entretenimiento.map(entr => (
+                  entr.aprobado ? 
                   <div>
-                    <Col key={banquete.id}>
+                    <Col key={entr.id}>
                     <Card text='dark'>
-                      <Card.Img variant="top" src={banquete.img} />
+                      <Card.Img variant="top" src={entr.img} />
                       <Card.Body>
                         <Card.Title>
-                          {banquete.titulo}
+                          {entr.titulo}
                         </Card.Title>
                         <Card.Text>
-                          {banquete.descripcion} <br />
-                          Precio unitario: {banquete.precio_unitario}
+                          {entr.descripcion} <br />
+                          Precio por hora: {entr.precio_hora} <br />
+                          Minimo de horas: {entr.minimo} 
                         </Card.Text>
                       </Card.Body>
-                      <Button href={"\\banquetedetails="+banquete.id} variant="primary">Detalles</Button>
+                      <Button href={"\\entretenimientodetails="+entr.id} color="primary">Detalles</Button>
                     </Card>
                     </Col>
                   </div>

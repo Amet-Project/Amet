@@ -1,13 +1,46 @@
 import { container } from "assets/jss/material-kit-react.js";
 
-const signupPageStyle = {
+const informationPageStyle = {
   container: {
     ...container,
     zIndex: "2",
     position: "relative",
     paddingTop: "20vh",
     color: "#FFFFFF",
-    paddingBottom: "200px"
+    paddingBottom: "20vh"
+  },
+  infoBigContainer: {
+    borderRadius: "25px",
+    padding: "100px",
+    zIndex: "2",
+    position: "absolute",
+    marginTop: "0vh",
+    width: "100%",
+    minHeight: "100vh",
+    backgroundColor: "black",
+  },
+  infoContainer: {
+    borderRadius: "25px",
+    padding: "20px",
+    zIndex: "2",
+    position: "relative",
+    marginTop: "1vh",
+    width: "100%",
+    background: "#e6e6e6",
+  },
+  infoContainerCenter: {
+    borderRadius: "25px",
+    padding: "20px",
+    zIndex: "2",
+    position: "relative",
+    marginTop: "1vh",
+    width: "100%",
+    background: "#e6e6e6",
+    textAlign: "-webkit-center"
+  },
+  hrRound: {
+    borderTop: "4px solid #000",
+    borderRadius: "5px",
   },
   cardHidden: {
     opacity: "0",
@@ -43,6 +76,12 @@ const signupPageStyle = {
       bottom: "0",
       width: "100%"
     }
+  },
+  pageFooter:{
+    position: "absolute",
+    width: "100%",
+    bottom: "0",
+    background: "#ddd"
   },
   form: {
     margin: "0"
@@ -93,11 +132,8 @@ const signupPageStyle = {
     color: "#495057"
   },
   casinoImage: {
-    width: "-webkit-fill-available",
+    width: "5%",
     verticalAlign: "middle"
-  },
-  serviceImage: {
-    width: "15%"
   },
   row: {
     marginLeft: "1rem !important",
@@ -107,4 +143,4 @@ const signupPageStyle = {
   }
 };
 
-export default signupPageStyle;
+export default informationPageStyle;

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
+import { TextInput, Loading } from 'carbon-components-react'
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
@@ -47,11 +48,13 @@ export default function SigninPage(props) {
   const { ...rest } = props;
   const [formState, setFormState] = useState(initialState)
   const [usuarios, setUsuarios] = useState([])
+  const [loading, setLoading] = useState(false);
 
   //Add to API function
   async function addUser() {
     try {
       //Inputs validation
+      setLoading(true);
       if (!formState.nombres || !formState.email || !formState.pwd ) {
         console.log("Favor de ingresar todos los campos")
         return 
@@ -67,6 +70,12 @@ export default function SigninPage(props) {
       usuario.pwd = bcrypt.hashSync(usuario.pwd, bcrypt.genSaltSync());
       setFormState(initialState)
       await API.graphql(graphqlOperation(createUsuario, {input: usuario}))
+      window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/login";
+
+      }, 1000);
     } catch (err) {
       console.log('error creando usuario:', err)
     }
@@ -95,6 +104,13 @@ export default function SigninPage(props) {
         }}
       >
         <div className={classes.container}>
+          {
+            loading ?
+              <Loading
+                description="Active loading indicator" withOverlay={true}
+              />
+              : null
+          }
           <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={4}>
               <Card className={classes[cardAnimaton]}>
@@ -131,34 +147,53 @@ export default function SigninPage(props) {
                       </Button>
                     </div>
                   </CardHeader>
-                  <p className={classes.divider}>O regístrate con Email</p>
                   <CardBody>
-                    <label>
-                      First Name
-                      <br />
-                      <input value={formState.nombres} onChange={e => setInput('nombres', e.target.value)}/>
-                    </label>
+                  <TextInput
+                      id="nameInput"
+                      labelText="Nombres:"
+                      value={formState.nombres}
+                      onChange={e => setInput('nombres', e.target.value)}
+                      className="emailInput"
+                    />
                     <br />
-                    <label>
-                      Last Name
-                      <br />
-                      <input value={formState.ap_paterno} onChange={e => setInput('ap_paterno', e.target.value)}/>
-                    </label>
+                    <TextInput
+                      id="lastNameInput"
+                      labelText="Apellido paterno:"
+                      value={formState.ap_paterno}
+                      onChange={e => setInput('ap_paterno', e.target.value)}
+                      className="emailInput"
+                    />
                     <br />
-                    <label>
-                      Email
-                      <br />
-                      <input value={formState.email} onChange={e => setInput('email', e.target.value)}/>
-                    </label>
+                    <TextInput
+                      id="lastNameInput2"
+                      labelText="Apellido materno:"
+                      value={formState.ap_materno}
+                      onChange={e => setInput('ap_materno', e.target.value)}
+                      className="emailInput"
+                    />
                     <br />
-                    <label>
-                      Password
-                      <br />
-                      <input value={formState.pwd} onChange={e => setInput('pwd', e.target.value)}/>
-                    </label>
+                    <TextInput
+                      id="emailInput"
+                      labelText="Correo electrónico:"
+                      value={formState.email}
+                      type='email'
+                      onChange={e => setInput('email', e.target.value)}
+                      className="emailInput"
+                    />
+                    <br />
+                    <TextInput.PasswordInput
+                      id="passwordInput"
+                      labelText="Contraseña:"
+                      value={formState.pwd}
+                      onChange={e => setInput('pwd', e.target.value)}
+                      className="passwordInput"
+                    />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg" onClick={addUser}>
+                    <Button color="danger" size="lg" href="/">
+                      Cancelar
+                    </Button>
+                    <Button color="primary" size="lg" onClick={addUser}>
                       Registrarme
                     </Button>
                   </CardFooter>

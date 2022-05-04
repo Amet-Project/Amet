@@ -1,7 +1,5 @@
 /*eslint-disable*/
 import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
 
@@ -13,6 +11,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
 import { Apps, AccountCircle } from "@material-ui/icons";
+import MenuIcon from '@mui/icons-material/Menu';
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -39,16 +38,52 @@ export default function HeaderLinks(props) {
           buttonIcon={Apps}
           dropdownList={[
             <Link to="/adminusers" className={classes.dropdownLink}>
-              Usuarios
+              Administrar Usuarios
             </Link>,
             <Link to="/admincasinos" className={classes.dropdownLink}>
-              Casinos
+              Administrar Casinos
+            </Link>,
+            <Link to="/admineventos" className={classes.dropdownLink}>
+              Administrar Eventos
             </Link>
           ]}
         />
       </ListItem>
       :
       null
+      }
+      {
+        window.sessionStorage.getItem('userRole') === 'PROVEEDOR' ?
+          <ListItem className={classes.listItem}>
+            <CustomDropdown
+              noLiPadding
+              buttonText="Administrar"
+              buttonProps={{
+                className: classes.navLink,
+                color: "transparent"
+              }}
+              buttonIcon={Apps}
+              dropdownList={[
+                <Link to="/registrarcasino" className={classes.dropdownLink}>
+                  Registrar Casino
+                </Link>,
+                <Link to="/registrarentretenimiento" className={classes.dropdownLink}>
+                  Registrar Entretenimiento
+                </Link>,
+                <Link to="/registrarbanquete" className={classes.dropdownLink}>
+                  Registrar Banquete
+                </Link>,
+                <Link to="/adminserviciosproveedor" className={classes.dropdownLink}>
+                  Administrar Servicios
+                </Link>,
+                <Link to="/admineventosproveedor" className={classes.dropdownLink}>
+                  Reservaciones Eventos
+                </Link>
+              ]}
+            />
+          </ListItem>
+          :
+          null
       }
       <ListItem className={classes.listItem}>
         <CustomDropdown
@@ -66,12 +101,49 @@ export default function HeaderLinks(props) {
             <Link to="/comida" className={classes.dropdownLink}>
             Comida
             </Link>,
-            <Link to="/musica" className={classes.dropdownLink}>
-              Música
+            <Link to="/entretenimiento" className={classes.dropdownLink}>
+              Entretenimiento
           </Link>
           ]}
         />
       </ListItem>
+      {
+        
+        window.sessionStorage.getItem('auth') ?
+          <ListItem className={classes.listItem}>
+            <CustomDropdown
+              noLiPadding
+              buttonText="MENU"
+              buttonProps={{
+                className: classes.navLink,
+                color: "transparent"
+              }}
+              buttonIcon={MenuIcon}
+              dropdownList={[
+                <Link to="/user" className={classes.dropdownLink}>
+                  Perfil
+                </Link>,
+                <Link to="/admineventos" className={classes.dropdownLink}>
+                  Mis eventos
+                </Link>,
+                <Link to="/logout" className={classes.dropdownLink}>
+                  Salir
+                </Link>
+                
+              ]}
+            />
+          </ListItem>
+          :
+          <ListItem className={classes.listItem}>
+          <Button
+            href="/login"
+            color="transparent"
+            className={classes.navLink}
+          >
+            <AccountCircle className={classes.icons} /> {'Iniciar Sesión' }
+          </Button>
+          </ListItem>
+      }{/*
       <ListItem className={classes.listItem}>
         <Button
           href= {window.sessionStorage.getItem('auth') ? "/user" : "/login"}
@@ -80,7 +152,7 @@ export default function HeaderLinks(props) {
         >
           <AccountCircle className={classes.icons} /> {window.sessionStorage.getItem('auth') ? 'Perfil' : 'Iniciar Sesión' }
         </Button>
-      </ListItem>
+      </ListItem>*/}
       <ListItem className={classes.listItem}>
         {/*<Tooltip title="Delete">
           <IconButton aria-label="Delete">
@@ -94,8 +166,6 @@ export default function HeaderLinks(props) {
           classes={{ tooltip: classes.tooltip }}
         >
           <Button
-            href="https://twitter.com/"
-            target="_blank"
             color="transparent"
             className={classes.navLink}
           >
@@ -112,8 +182,6 @@ export default function HeaderLinks(props) {
         >
           <Button
             color="transparent"
-            href="https://www.facebook.com/"
-            target="_blank"
             className={classes.navLink}
           >
             <i className={classes.socialIcons + " fab fa-facebook"} />
@@ -129,8 +197,6 @@ export default function HeaderLinks(props) {
         >
           <Button
             color="transparent"
-            href="https://www.instagram.com/"
-            target="_blank"
             className={classes.navLink}
           >
             <i className={classes.socialIcons + " fab fa-instagram"} />

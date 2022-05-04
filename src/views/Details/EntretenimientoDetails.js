@@ -21,8 +21,8 @@ import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
 import Amplify, { Storage, API, graphqlOperation } from 'aws-amplify'
-import { getCasino } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
+import { getEntretenimiento } from "graphql/queriesExt.js";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
@@ -36,17 +36,17 @@ export default function CasinoDetails(props) {
   }, 1500);
   const classes = useStyles();
   const { ...rest } = props;
-  const [casinosImgs, setCasinosImgs] = useState([]);
-  const [casino, setCasino] = useState([]);
+  const [entreImgs, setEntreImgs] = useState([]);
+  const [entretenimiento, setEntretenimiento] = useState([]);
   useEffect(() => {
     fetchCasinoData()
   }, [])
 
   async function fetchCasinoData() {
     try {
-      const responseGql = await API.graphql(graphqlOperation(getCasino, {id: id}));
-      const casinoData = responseGql.data.getCasino;
-      const casinoKeyImages = casinoData.imagenes.items;
+      const responseGql = await API.graphql(graphqlOperation(getEntretenimiento, {id: id}));
+      const entreData = responseGql.data.getEntretenimiento;
+      const casinoKeyImages = entreData.imagenes.items;
       let arrayImages = [];
       //REQUESTING IMAGES BY ITS KEY ON THE BUCKET OF S3
       casinoKeyImages.forEach(image => {
@@ -54,9 +54,8 @@ export default function CasinoDetails(props) {
           arrayImages.push(response)
         });
       });
-      setCasinosImgs(arrayImages);
-      setCasino(casinoData);
-      console.log(casinoData)
+      setEntreImgs(arrayImages);
+      setEntretenimiento(entreData);
     } catch (err) { console.log('error cargando las imagenes de casino', err); }
   }
 
@@ -85,21 +84,22 @@ export default function CasinoDetails(props) {
                 <Card className={classes[cardAnimaton]}>
                   <form className={classes.form}>
                     <CardHeader color="primary" className={classes.cardHeader}>
-                      <h3>{casino.titulo}</h3>
+                      <h3>{entretenimiento.titulo}</h3>
                     </CardHeader>
                     <CardBody>
-                      <p>{casino.descripcion}</p>
-                      <p>Direccion: {casino.direccion}</p>
-                      <p>Capacidad maxima: {casino.cap_maxima} personas</p>
+                      <p>{entretenimiento.descripcion}</p>
+                      <p>RFC: {entretenimiento.rfc}</p>
+                      <p>Precio por hora: ${entretenimiento.precio_hora}</p>
+                      <p>Mínimo de horas: {entretenimiento.minimo}</p>
                       {
-                        casinosImgs.map(img => (
+                        entreImgs.map(img => (
                           <img key={img} className={classes.casinoImage} src={img} />
                         ))
                       }
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button color="primary" size="lg">
-                        Reservar
+                      <Button href={"\\"} color="primary" size="lg">
+                        Volver
                       </Button>
                     </CardFooter>
                   </form>

@@ -13,6 +13,7 @@ export const createOrdenCasino = /* GraphQL */ `
       id_casino
       fecha
       importe
+      reviewed
       casino_servicios_extras {
         items {
           id
@@ -144,6 +145,7 @@ export const updateOrdenCasino = /* GraphQL */ `
       id_casino
       fecha
       importe
+      reviewed
       casino_servicios_extras {
         items {
           id
@@ -275,6 +277,7 @@ export const deleteOrdenCasino = /* GraphQL */ `
       id_casino
       fecha
       importe
+      reviewed
       casino_servicios_extras {
         items {
           id
@@ -420,6 +423,7 @@ export const createCasinoHorarioFijo = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -504,6 +508,7 @@ export const updateCasinoHorarioFijo = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -588,6 +593,7 @@ export const deleteCasinoHorarioFijo = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -664,6 +670,7 @@ export const createCasinoHorarioFlex = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -721,6 +728,7 @@ export const updateCasinoHorarioFlex = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -778,6 +786,7 @@ export const deleteCasinoHorarioFlex = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -1149,6 +1158,7 @@ export const createCasino = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -1288,6 +1298,7 @@ export const updateCasino = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -1427,6 +1438,7 @@ export const deleteCasino = /* GraphQL */ `
           id_casino
           fecha
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -2390,6 +2402,7 @@ export const createOrdenCasinoSE = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -2483,6 +2496,7 @@ export const updateOrdenCasinoSE = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -2576,6 +2590,7 @@ export const deleteOrdenCasinoSE = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -2875,6 +2890,7 @@ export const createBanquete = /* GraphQL */ `
           fecha
           numero_platillos
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -2943,6 +2959,7 @@ export const updateBanquete = /* GraphQL */ `
           fecha
           numero_platillos
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -3011,6 +3028,7 @@ export const deleteBanquete = /* GraphQL */ `
           fecha
           numero_platillos
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -3225,6 +3243,7 @@ export const createOrdenBanquete = /* GraphQL */ `
       fecha
       numero_platillos
       importe
+      reviewed
       banquete {
         id
         id_usuario
@@ -3274,6 +3293,7 @@ export const updateOrdenBanquete = /* GraphQL */ `
       fecha
       numero_platillos
       importe
+      reviewed
       banquete {
         id
         id_usuario
@@ -3323,6 +3343,7 @@ export const deleteOrdenBanquete = /* GraphQL */ `
       fecha
       numero_platillos
       importe
+      reviewed
       banquete {
         id
         id_usuario
@@ -3382,6 +3403,7 @@ export const createEntretenimiento = /* GraphQL */ `
           fecha
           horas
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -3450,6 +3472,7 @@ export const updateEntretenimiento = /* GraphQL */ `
           fecha
           horas
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -3518,6 +3541,7 @@ export const deleteEntretenimiento = /* GraphQL */ `
           fecha
           horas
           importe
+          reviewed
           createdAt
           updatedAt
         }
@@ -3732,6 +3756,7 @@ export const createOrdenEntretenimiento = /* GraphQL */ `
       fecha
       horas
       importe
+      reviewed
       entretenimiento {
         id
         id_usuario
@@ -3781,6 +3806,7 @@ export const updateOrdenEntretenimiento = /* GraphQL */ `
       fecha
       horas
       importe
+      reviewed
       entretenimiento {
         id
         id_usuario
@@ -3830,6 +3856,7 @@ export const deleteOrdenEntretenimiento = /* GraphQL */ `
       fecha
       horas
       importe
+      reviewed
       entretenimiento {
         id
         id_usuario
@@ -3915,6 +3942,7 @@ export const createEvento = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -3963,6 +3991,7 @@ export const createEvento = /* GraphQL */ `
         fecha
         numero_platillos
         importe
+        reviewed
         banquete {
           id
           id_usuario
@@ -3984,6 +4013,7 @@ export const createEvento = /* GraphQL */ `
         fecha
         horas
         importe
+        reviewed
         entretenimiento {
           id
           id_usuario
@@ -4051,6 +4081,7 @@ export const updateEvento = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -4099,6 +4130,7 @@ export const updateEvento = /* GraphQL */ `
         fecha
         numero_platillos
         importe
+        reviewed
         banquete {
           id
           id_usuario
@@ -4120,6 +4152,7 @@ export const updateEvento = /* GraphQL */ `
         fecha
         horas
         importe
+        reviewed
         entretenimiento {
           id
           id_usuario
@@ -4187,6 +4220,7 @@ export const deleteEvento = /* GraphQL */ `
         id_casino
         fecha
         importe
+        reviewed
         casino_servicios_extras {
           nextToken
         }
@@ -4235,6 +4269,7 @@ export const deleteEvento = /* GraphQL */ `
         fecha
         numero_platillos
         importe
+        reviewed
         banquete {
           id
           id_usuario
@@ -4256,6 +4291,7 @@ export const deleteEvento = /* GraphQL */ `
         fecha
         horas
         importe
+        reviewed
         entretenimiento {
           id
           id_usuario
@@ -4514,6 +4550,726 @@ export const deleteUsuario = /* GraphQL */ `
         nextToken
       }
       rol
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createRatingCasino = /* GraphQL */ `
+  mutation CreateRatingCasino(
+    $input: CreateRatingCasinoInput!
+    $condition: ModelRatingCasinoConditionInput
+  ) {
+    createRatingCasino(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_casino
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        aprobado
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateRatingCasino = /* GraphQL */ `
+  mutation UpdateRatingCasino(
+    $input: UpdateRatingCasinoInput!
+    $condition: ModelRatingCasinoConditionInput
+  ) {
+    updateRatingCasino(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_casino
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        aprobado
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteRatingCasino = /* GraphQL */ `
+  mutation DeleteRatingCasino(
+    $input: DeleteRatingCasinoInput!
+    $condition: ModelRatingCasinoConditionInput
+  ) {
+    deleteRatingCasino(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_casino
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      casino {
+        id
+        id_usuario
+        direccion
+        titulo
+        descripcion
+        rfc
+        cap_maxima
+        aprobado
+        horarios_fijos {
+          nextToken
+        }
+        precios_flexibles {
+          nextToken
+        }
+        areas {
+          nextToken
+        }
+        servicios {
+          nextToken
+        }
+        servicios_extras {
+          nextToken
+        }
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createRatingBanquete = /* GraphQL */ `
+  mutation CreateRatingBanquete(
+    $input: CreateRatingBanqueteInput!
+    $condition: ModelRatingBanqueteConditionInput
+  ) {
+    createRatingBanquete(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_banquete
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateRatingBanquete = /* GraphQL */ `
+  mutation UpdateRatingBanquete(
+    $input: UpdateRatingBanqueteInput!
+    $condition: ModelRatingBanqueteConditionInput
+  ) {
+    updateRatingBanquete(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_banquete
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteRatingBanquete = /* GraphQL */ `
+  mutation DeleteRatingBanquete(
+    $input: DeleteRatingBanqueteInput!
+    $condition: ModelRatingBanqueteConditionInput
+  ) {
+    deleteRatingBanquete(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_banquete
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      banquete {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_unitario
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createRatingEntretenimiento = /* GraphQL */ `
+  mutation CreateRatingEntretenimiento(
+    $input: CreateRatingEntretenimientoInput!
+    $condition: ModelRatingEntretenimientoConditionInput
+  ) {
+    createRatingEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_entretenimiento
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateRatingEntretenimiento = /* GraphQL */ `
+  mutation UpdateRatingEntretenimiento(
+    $input: UpdateRatingEntretenimientoInput!
+    $condition: ModelRatingEntretenimientoConditionInput
+  ) {
+    updateRatingEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_entretenimiento
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteRatingEntretenimiento = /* GraphQL */ `
+  mutation DeleteRatingEntretenimiento(
+    $input: DeleteRatingEntretenimientoInput!
+    $condition: ModelRatingEntretenimientoConditionInput
+  ) {
+    deleteRatingEntretenimiento(input: $input, condition: $condition) {
+      id
+      id_usuario
+      id_entretenimiento
+      rating
+      usuario {
+        id
+        nombres
+        ap_paterno
+        ap_materno
+        nacimiento
+        sexo
+        email
+        telefono
+        celular
+        pwd
+        eventos {
+          nextToken
+        }
+        casinos {
+          nextToken
+        }
+        banquete {
+          nextToken
+        }
+        entretenimiento {
+          nextToken
+        }
+        rol
+        createdAt
+        updatedAt
+      }
+      entretenimiento {
+        id
+        id_usuario
+        titulo
+        descripcion
+        rfc
+        precio_hora
+        minimo
+        aprobado
+        ordenes {
+          nextToken
+        }
+        imagenes {
+          nextToken
+        }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          pwd
+          rol
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
