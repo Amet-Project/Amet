@@ -180,7 +180,7 @@ export default function ReviewEvent(props) {
                     </div>
                     : null
             }
-            <Button color="primary" size="lg" onClick={sumbitRates}>
+            <Button color="primary" size="lg" onClick={() => sumbitRates()}>
                 Enviar calificación
             </Button>
         </div>
