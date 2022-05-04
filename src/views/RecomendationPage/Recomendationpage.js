@@ -9,6 +9,7 @@ import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import { Loading } from "carbon-components-react";
+import { Modal, ComposedModal, ModalHeader, ModalFooter } from "carbon-components-react";
 
 import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";
 import image from "assets/img/bg7.jpg";
@@ -26,6 +27,7 @@ export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const { date } = useParams()
   const [favCasino, setFavCasino] = useState([]);
+  const [open, setOpen] = useState(false);
 
   setTimeout(function() {
     setCardAnimation("");
@@ -37,6 +39,11 @@ export default function StartEventPage(props) {
     fetchCasinos()
   }, []);
 
+  const onSubmitClick= (e) => {
+    e.preventDefault();
+    window.location.href="/"
+}
+
   //Get the whole items
   async function fetchCasinos() {
     try {
@@ -44,8 +51,10 @@ export default function StartEventPage(props) {
       let ratingData = await API.graphql(graphqlOperation(ratingCasinoPorUsuario, { id_usuario: idAuth }));
       const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
       let eventsArray = eventosData.data.eventoPorFecha.items;
-      console.log('Rating data: ',ratingData);
       let userRatings = ratingData.data.ratingCasinoPorUsuario.items;
+      if(userRatings.length < 3){
+        setOpen(true);
+      }
       let bestCasino = null;
       let bestScore = 0;
       let user1;
@@ -74,6 +83,7 @@ export default function StartEventPage(props) {
       userRatings = ratingData1.data.ratingCasinoPorUsuario.items;
       bestScore = 0;
       let found = false;
+      let bestCasinos = [];
       for (let idxRatings = 0; idxRatings < userRatings.length; idxRatings++){
         if (userRatings[idxRatings].rating >= bestScore){
           for (let i = 0; i < eventsArray.length; i++){
@@ -83,6 +93,9 @@ export default function StartEventPage(props) {
             }
           }
           if(!found){
+            if(userRatings[idxRatings].rating == 5){
+              bestCasinos.push(userRatings[idxRatings].id_casino);
+            }
             bestScore = userRatings[idxRatings].rating;
             bestCasino1 = userRatings[idxRatings].id_casino;
           }
@@ -100,7 +113,10 @@ export default function StartEventPage(props) {
               break;
             }
           }
-          if(!found && userRatings[idxRatings].id_casino != bestCasino1){
+          if(!found){
+            if(userRatings[idxRatings].rating == 5 && !bestCasinos.includes(userRatings[idxRatings].id_casino)){
+              bestCasinos.push(userRatings[idxRatings].id_casino);
+            }
             bestScore = userRatings[idxRatings].rating;
             bestCasino2 = userRatings[idxRatings].id_casino;
           }
@@ -118,21 +134,27 @@ export default function StartEventPage(props) {
               break;
             }
           }
-          if(!found && (userRatings[idxRatings].id_casino != bestCasino1 && userRatings[idxRatings].id_casino != bestCasino2)){
+          if(!found){
+            if(userRatings[idxRatings].rating == 5 && !bestCasinos.includes(userRatings[idxRatings].id_casino)){
+              bestCasinos.push(userRatings[idxRatings].id_casino);
+            }
             bestScore = userRatings[idxRatings].rating;
             bestCasino3 = userRatings[idxRatings].id_casino;
           }
           found = false;
         }
       };
+      var item = bestCasinos[Math.floor(Math.random()*bestCasinos.length)];
+      var item2 = bestCasinos[Math.floor(Math.random()*bestCasinos.length)];
+      var item3 = bestCasinos[Math.floor(Math.random()*bestCasinos.length)];
 
       window.setTimeout(function(){
 
         // Move to a new location or you can do something else
-        window.location.href = "/recomendationcheckout="+date+"="+bestCasino1+"="+bestCasino2+"="+bestCasino3;
+        window.location.href = "/recomendationcheckout="+date+"="+item+"="+item2+"="+item3;
 
     }, 5000);
-    } catch (err) { console.log('error cargando casinos', err) }
+    } catch (err) { setOpen(true) }
   }
 
   return (
@@ -153,20 +175,24 @@ export default function StartEventPage(props) {
               }}
           >
               <div className={classes.infoBigContainer}>
-                {
-                  favCasino ?
-                  <div className={classes.infoContainerCenter}>
-                  <h2>Obteniendo tu recomendación de nuestra Inteligencia Artificial...</h2>
-                      <Loading
-                          description="Active loading indicator" withOverlay={false}
-                      />
-                  </div>
-                  :
-                  <div className={classes.infoContainerCenter}>
-                  <h2>No tenemos suficiente información para recomendarte</h2>
-                  </div>
-                }
+                <div className={classes.infoContainerCenter}>
+                <h2>Obteniendo tu recomendación de nuestra Inteligencia Artificial...</h2>
+                    <Loading
+                        description="Active loading indicator" withOverlay={false}
+                    />
+                </div>
               </div>
+
+              <ComposedModal open={open} onClose={e => onSubmitClick(e)} onRequestClose={e => onSubmitClick(e)} preventCloseOnClickOutside={true}>
+                  <ModalHeader label={"Mensaje"}>
+                      <h1>
+                          Sin recomendación
+                      </h1>
+                      <h2>No tenemos suficiente información para recomendarte.</h2>
+                      <h2>Puedes crear un evento de manera normal, no es necesario utilizar recomendación por IA.</h2>
+                  </ModalHeader>
+                  <ModalFooter primaryButtonText="OK" onRequestSubmit={e => onSubmitClick(e)}/>
+              </ComposedModal>
         <Footer whiteFont />
       </div>
     </div>

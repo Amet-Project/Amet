@@ -39,6 +39,20 @@
     -->
     <title>Amet - Eventos</title>
   </head>
+
+  <script>
+    window.watsonAssistantChatOptions = {
+        integrationID: "d39045c9-e1d3-49fc-8df4-925fcf678005", // The ID of this integration.
+        region: "us-south", // The region your integration is hosted in.
+        serviceInstanceID: "2c3cb7b2-005f-46e1-b0a6-443b436ee95e", // The ID of your service instance.
+        onLoad: function(instance) { instance.render(); }
+      };
+    setTimeout(function(){
+      const t=document.createElement('script');
+      t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js"
+      document.head.appendChild(t);
+    });
+  </script>
   <body>
     <noscript> You need to enable JavaScript to run this app. </noscript>
     <div id="root"></div>

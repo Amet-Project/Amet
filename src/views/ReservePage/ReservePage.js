@@ -226,12 +226,14 @@ export default function ReservePage(props) {
                 fecha: date,
                 importe: price,
                 reviewed: false,
+                status: "PENDING",
                 id_cas_hor_fijo: idHorFij
             };
             const entretenimientoOrder = {
                 id_entretenimiento: checkedStateMusic,
                 fecha: date,
                 reviewed: false,
+                status: "PENDING",
                 horas: parseInt(checkedMusicHours),
                 importe: musicPriceTotal,
             };
@@ -239,6 +241,7 @@ export default function ReservePage(props) {
                 id_banquete: checkedStateFood,
                 fecha: date,
                 reviewed: false,
+                status: "PENDING",
                 numero_platillos: parseInt(checkedFoodPlates),
                 importe: banquetePriceTotal,
 
@@ -391,7 +394,7 @@ export default function ReservePage(props) {
             let indexVenueToDelete = -1;
             for (let idxMusic = 0; idxMusic < musicArray.length; idxMusic++) {
                 if (musicArray[idxMusic].imagenes.items.length === 0) {
-                  musicArray[idxMusic].img = '';
+                  musicArray[idxMusic].img = 'http://bandboxjazz.com/wp-content/uploads/2022/02/51497wtzupcitylivemusicbyparraeventkochichristmas.jpg';
                 }else {
                   const key_image = musicArray[idxMusic].imagenes.items[0].file.key;
                   //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
@@ -413,7 +416,7 @@ export default function ReservePage(props) {
             indexVenueToDelete = -1;
             for (let idxFood = 0; idxFood < foodArray.length; idxFood++) {
                 if (foodArray[idxFood].imagenes.items.length === 0) {
-                  foodArray[idxFood].img = '';
+                  foodArray[idxFood].img = 'https://i.pinimg.com/originals/0b/de/4d/0bde4de25d244c95f3be932c2188ed13.jpg';
                 }else {
                   const key_image = foodArray[idxFood].imagenes.items[0].file.key;
                   //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO

@@ -383,6 +383,7 @@ query ListEventsByUser($id: ID!) {
         banquete {
           importe
           reviewed
+          status
           banquete {
             titulo
             id
@@ -402,11 +403,13 @@ query ListEventsByUser($id: ID!) {
           }
           importe
           reviewed
+          status
         }
         entretenimiento {
           id
           importe
           reviewed
+          status
           entretenimiento {
             titulo
           }

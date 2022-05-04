@@ -45,7 +45,7 @@ export default function ComidaPage(props) {
       // ITERATING THE ARRAY OF banquetes TO ASSIGN THEM THE IMAGES ON THE S3 BUCKET
       for (let idxBanquete = 0; idxBanquete < banquetes.length; idxBanquete++) {
         if (banquetes[idxBanquete].imagenes.items.length === 0) {
-          banquetes[idxBanquete].img = '';
+          banquetes[idxBanquete].img = 'https://i.pinimg.com/originals/0b/de/4d/0bde4de25d244c95f3be932c2188ed13.jpg';
         }else {
           const key_image = banquetes[idxBanquete].imagenes.items[0].file.key;
           //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING banquete
