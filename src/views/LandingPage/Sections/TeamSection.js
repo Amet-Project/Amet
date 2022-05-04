@@ -16,9 +16,9 @@ import CardFooter from "components/Card/CardFooter.js";
 
 import styles from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.js";
 
-import team1 from "assets/img/faces/avatar.jpg";
-import team2 from "assets/img/faces/christian.jpg";
-import team3 from "assets/img/faces/kendall.jpg";
+import team1 from "assets/img/faces/isaac.jpg";
+import team2 from "assets/img/faces/oscar.jpg";
+import team3 from "assets/img/faces/paris.jpg";
 
 const useStyles = makeStyles(styles);
 
@@ -31,7 +31,7 @@ export default function TeamSection() {
   );
   return (
     <div className={classes.section}>
-      <h2 className={classes.title}>Conoce al equipo de Wevent</h2>
+      <h2 className={classes.title}>Conoce al equipo de Amet</h2>
       <div>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
@@ -42,14 +42,11 @@ export default function TeamSection() {
               <h4 className={classes.cardTitle}>
                 Isaac Márquez
                 <br />
-                <small className={classes.smallTitle}>Malacopa</small>
+                <small className={classes.smallTitle}>Backend Dev</small>
               </h4>
               <CardBody>
                 <p className={classes.description}>
-                  Isaac es joto pero es buen pedo, solo cuídenlo en la peda
-                  porque a veces se roba cosas como <a href="#pablo">botellas</a> encendedores,
-                  entre otras cosas.
-                </p>
+                Encargado tanto de la implementación y diseño de la base de datos como la comunicación entre las capas del sistema.                 </p>
               </CardBody>
               <CardFooter className={classes.justifyCenter}>
                 <Button
@@ -84,13 +81,11 @@ export default function TeamSection() {
               <h4 className={classes.cardTitle}>
                 Oscar López
                 <br />
-                <small className={classes.smallTitle}>Enfierrado</small>
+                <small className={classes.smallTitle}>Frontend Dev</small>
               </h4>
               <CardBody>
                 <p className={classes.description}>
-                  Esta es una prueba. Esta es una prueba. Esta es una prueba. 
-                  Esta es una prueba. Esta es una prueba. Esta es una prueba. 
-                  Esta es una prueba. Esta es una prueba. Esta es una prueba. 
+                  Encargado del diseño e implementación de la interfaz de usuario. 
                 </p>
               </CardBody>
               <CardFooter className={classes.justifyCenter}>
@@ -119,13 +114,11 @@ export default function TeamSection() {
               <h4 className={classes.cardTitle}>
                 Páris Flores
                 <br />
-                <small className={classes.smallTitle}>El Mijo</small>
+                <small className={classes.smallTitle}>Product Owner</small>
               </h4>
               <CardBody>
                 <p className={classes.description}>
-                Esta es una prueba. Esta es una prueba. Esta es una prueba. 
-                Esta es una prueba. Esta es una prueba. Esta es una prueba. 
-                Esta es una prueba. Esta es una prueba. Esta es una prueba. 
+                Encargado del la gestion del los objetivos y metas para la constante entrega de valor.
                 </p>
               </CardBody>
               <CardFooter className={classes.justifyCenter}>
