@@ -78,7 +78,7 @@ ReactDOM.render(
       <Route path="/admineventosproveedor" component={AdminEventsProveedorPage} />
       <Route path="/registrarcasino" component={RegistrarCasinoPage} />
       <Route path="/recomendation=:date" component={RecomendationPage} />
-      <Route path="/recomendationcheckout=:date" component={RecomendationCheckout} />
+      <Route path="/recomendationcheckout=:date=:idCasino1=:idCasino2=:idCasino3" component={RecomendationCheckout} />
       <Route path="/reviewEvent=:idEvent" component={ReviewEvent} />
       <Route path="/" component={LandingPage} />
     </Switch>

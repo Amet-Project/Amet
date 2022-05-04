@@ -364,15 +364,15 @@ export default function ReservePage(props) {
             const casinoHF = casinoData.horarios_fijos.items;
             //console.log("Datos del casino: ", casinoData);
             //console.log("Servicios extras: ", casinoSE);
-            const dateMod = date.slice(6) + "-" + date.slice(3, 5) + "-" + date.slice(0, 2) + " 00:00:00";
+            const dateMod = date.slice(6) + "/" + date.slice(3, 5) + "/" + date.slice(0, 2) + " 00:00:00";
             const dayNumber = new Date(dateMod).getDay();
             day = days[dayNumber];
             setServiciosExtras(casinoSE);
             setHorariosFijos(casinoHF);
             setCheckedState(new Array(casinoSE.length).fill(false))
-            const key_image = casinoData.imagenes.items[0].file.key;
+            const key_image = casinoData.imagenes.items[0] ? casinoData.imagenes.items[0].file.key : null;
             //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
-            const img = await Storage.get(key_image, { level: 'public' });
+            const img = key_image ? await Storage.get(key_image, { level: 'public' }) : 'https://weddingsparrow.com/uploads/slir/w1200/IMG_1028.jpg';
             casinoData.img = img;
             setCasino(casinoData);
             casinoHF.map(hf => {
@@ -451,9 +451,8 @@ export default function ReservePage(props) {
           <div
               className={classes.pageHeader}
               style={{
-                  backgroundImage: "url(" + image + ")",
-                  backgroundSize: "cover",
-                  backgroundPosition: "top center"
+                backgroundColor: "black",
+                backgroundSize: "contain",
               }}
           >
               <div className={classes.container}>

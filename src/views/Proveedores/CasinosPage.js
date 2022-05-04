@@ -73,9 +73,8 @@ export default function CasinoPage(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center"
+          backgroundColor: "black",
+          backgroundSize: "contain",
         }}
       >
         <div className={classes.container}>

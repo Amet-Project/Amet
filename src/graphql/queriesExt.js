@@ -16,6 +16,9 @@ export const eventoPorFecha =`
       nextToken: $nextToken
     ) {
       items {
+        id
+        fecha
+        importe_total
         casino {
           id_casino
         }
@@ -24,6 +27,11 @@ export const eventoPorFecha =`
         }
         entretenimiento {
           id_entretenimiento
+        }
+        usuario {
+          nombres
+          ap_materno
+          ap_paterno
         }
       }
       nextToken

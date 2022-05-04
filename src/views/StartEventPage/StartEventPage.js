@@ -78,7 +78,7 @@ export default function StartEventPage(props) {
       }
       let indexVenueToDelete = -1;
 
-      const dateMod = date.slice(6) + "-" + date.slice(3, 5)+ "-" + date.slice(0, 2) + " 00:00:00";
+      const dateMod = date.slice(6) + "/" + date.slice(3, 5)+ "/" + date.slice(0, 2) + " 00:00:00";
       const dayNumber = new Date(dateMod).getDay();
       day = days[dayNumber];
       console.log('Casinos: ', venuesArray);
@@ -112,9 +112,8 @@ export default function StartEventPage(props) {
       <div
         className={classes.pageHeader}
         style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center"
+          backgroundColor: "black",
+          backgroundSize: "contain",
         }}
       >
         <div className={classes.container}>
@@ -142,7 +141,7 @@ export default function StartEventPage(props) {
                               endHour = hf.hora_fin;                               
                             }
                           })
-                          }                           
+                          }                       
                           <img className={classes.casinoImage} src={casino.img} />
                           Dirección: {casino.direccion} <br />
                           Descripción: {casino.descripcion} <br />
