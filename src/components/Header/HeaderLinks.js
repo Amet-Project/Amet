@@ -168,6 +168,7 @@ export default function HeaderLinks(props) {
           <Button
             color="transparent"
             className={classes.navLink}
+            href="https://twitter.com/amet_iop"
           >
             <i className={classes.socialIcons + " fab fa-twitter"} />
           </Button>
@@ -183,23 +184,9 @@ export default function HeaderLinks(props) {
           <Button
             color="transparent"
             className={classes.navLink}
+            href="https://www.facebook.com/ametiop"
           >
             <i className={classes.socialIcons + " fab fa-facebook"} />
-          </Button>
-        </Tooltip>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-tooltip"
-          title="Sígenos en Instagram"
-          placement={window.innerWidth > 959 ? "top" : "left"}
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            color="transparent"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-instagram"} />
           </Button>
         </Tooltip>
       </ListItem>
