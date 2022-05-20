@@ -108,6 +108,7 @@ export default function StartEventPage(props) {
       >
 
               <div className={classes.infoBigContainer}>
+                <h1 style={{color: "white"}}>Casinos recomendados por Inteligencia Artificial</h1>
                   {casinos && casinos.map(casino => {
                       return (
                           <div className={classes.infoContainer}>
