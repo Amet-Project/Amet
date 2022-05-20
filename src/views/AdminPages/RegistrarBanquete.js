@@ -64,7 +64,6 @@ export default function StartEventPage(props) {
   async function sumbitBanquete () {
     try {
       const resBanquete = await API.graphql(graphqlOperation(createBanquete, {input:banquete}));
-      console.log(resBanquete.data);
     } catch (error) {
       console.log(error);
     }

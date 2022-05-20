@@ -67,7 +67,6 @@ export default function StartEventPage(props) {
   async function sumbitEntretenimiento () {
     try {
       const resEntretenimiento = await API.graphql(graphqlOperation(createEntretenimiento, {input:entretenimiento}));
-      console.log(resEntretenimiento.data);
     } catch (error) {
       console.log(error);
     }

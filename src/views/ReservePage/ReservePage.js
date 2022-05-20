@@ -160,7 +160,6 @@ export default function ReservePage(props) {
         if(checkedMusicPrice>0){
             let totalPrice = subtotal + (hours * checkedMusicPrice);
             setTotal(totalPrice);
-            //console.log("horas musica:", hours, " precio por hora", checkedMusicPrice);
             setMusicPriceTotal(hours * checkedMusicPrice);
         }
         else{
@@ -189,7 +188,6 @@ export default function ReservePage(props) {
         setCheckedFoodPlates(plates);
         if(checkedFoodPrice>0){
             let totalPrice = subtotal + (plates * checkedFoodPrice);
-            //console.log("precio:", checkedFoodPrice, " platillos", plates);
             setBanquetePriceTotal(checkedFoodPrice * plates);
             setTotal(totalPrice);
         }
@@ -212,7 +210,6 @@ export default function ReservePage(props) {
         const idAuth = window.sessionStorage.getItem('idAuth');
         let resBanquete, resCasino, resEntretenimiento;
         try {
-            //console.log("horarios fijos", horariosFijos);
             let price = 0;
             let idHorFij = "";
             horariosFijos.map(hf => {
@@ -251,16 +248,13 @@ export default function ReservePage(props) {
             else{
                 console.log("Falta informacion para el banquete") 
             }
-            console.log("Orden banquete", resBanquete);
             if(entretenimientoOrder.id_entretenimiento !== undefined  || entretenimientoOrder.horas !== 0) 
                 resEntretenimiento = await API.graphql(graphqlOperation(createOrdenEntretenimiento, {input:entretenimientoOrder}));
             else{
                 console.log("Falta informacion para el entretenimiento") 
             }
             
-            console.log("Orden entretenimiento", resEntretenimiento);
             resCasino = await API.graphql(graphqlOperation(createOrdenCasino, {input:casinoOrder}));
-            console.log("Orden casino", resCasino);
 
             if(banqueteOrder.id_banquete == undefined && entretenimientoOrder.id_entretenimiento == undefined){
                 const event = {
@@ -270,11 +264,8 @@ export default function ReservePage(props) {
                 importe_total: total,
                 };
 
-                console.log("Entrando a solo casino");
-
                 //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
                 const resEvent = await API.graphql(graphqlOperation(createEventoCasino, {input:event}));
-                console.log("Evento creado: ", resEvent);
                 setIdEvent(resEvent.data.createEvento.id);
             }
             else if (banqueteOrder.id_banquete == undefined){
@@ -286,11 +277,8 @@ export default function ReservePage(props) {
                     importe_total: total,
                 };
 
-                console.log("Entrando a casino sin banquete");
-
                 //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
                 const resEvent = await API.graphql(graphqlOperation(createEventoCasEnt, {input:event}));
-                console.log("Evento creado: ", resEvent);
                 setIdEvent(resEvent.data.createEvento.id);
             }
             else if(entretenimientoOrder.id_entretenimiento == undefined){
@@ -302,11 +290,8 @@ export default function ReservePage(props) {
                     importe_total: total,
                 };
                 
-                console.log("Entrando a casino sin entretenimiento");
-
                 //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
                 const resEvent = await API.graphql(graphqlOperation(createEventoCasBan, {input:event}));
-                console.log("Evento creado: ", resEvent);
                 setIdEvent(resEvent.data.createEvento.id);
             }
             else{
@@ -321,7 +306,6 @@ export default function ReservePage(props) {
 
                 //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
                 const resEvent = await API.graphql(graphqlOperation(createEvento, {input:event}));
-                console.log("Evento creado: ", resEvent);
                 setIdEvent(resEvent.data.createEvento.id);
             }
         } catch (error) {
@@ -365,8 +349,6 @@ export default function ReservePage(props) {
                 servExtraCount++;
             }
             const casinoHF = casinoData.horarios_fijos.items;
-            //console.log("Datos del casino: ", casinoData);
-            //console.log("Servicios extras: ", casinoSE);
             const dateMod = date.slice(6) + "/" + date.slice(3, 5) + "/" + date.slice(0, 2) + " 00:00:00";
             const dayNumber = new Date(dateMod).getDay();
             day = days[dayNumber];

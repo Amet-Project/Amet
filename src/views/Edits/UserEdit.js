@@ -66,7 +66,6 @@ export default function SigninPage(props) {
     try {
       //Inputs validation
       if (formState.pwd !== formState.pwd_2) {
-        console.log("Las contraseñas no coinciden.", formState.pwd, formState.pwd_2);
         return 
       }
       //Email exist validation
@@ -93,14 +92,12 @@ export default function SigninPage(props) {
   }
 
   const setInput = (key, value) => {
-    //console.log(formState)
     setFormState({ ...formState, [key]: value })
   }
 
   async function fetchUser(){
     const idAuthMine = window.sessionStorage.getItem('idAuth');
     setidAuth(idAuthMine);
-    console.log("idAuth: ", idAuthMine);
     try {
       const response = await API.graphql(graphqlOperation(GetUsuarioDetails, {id: idAuthMine}));
       setUsuarios(response.data.getUsuario);
@@ -116,7 +113,6 @@ export default function SigninPage(props) {
         rol: 'CLIENTE'
       }
       setFormState(updateState)
-      //console.log(response.data.getUsuario);
     } catch (err) {
       console.log('Error cargando usuario: ',err);
     }

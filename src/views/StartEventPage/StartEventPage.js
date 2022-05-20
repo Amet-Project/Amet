@@ -81,8 +81,6 @@ export default function StartEventPage(props) {
       const dateMod = date.slice(6) + "/" + date.slice(3, 5)+ "/" + date.slice(0, 2) + " 00:00:00";
       const dayNumber = new Date(dateMod).getDay();
       day = days[dayNumber];
-      console.log('Casinos: ', venuesArray);
-      console.log('Eventos: ', eventsArray);
 
       for (let i = 0; i < eventsArray.length; i++) {
         for (let j = 0; j < venuesArray.length; j++) {
@@ -95,7 +93,6 @@ export default function StartEventPage(props) {
           venuesArray.splice(indexVenueToDelete, 1);
         }
       }
-      console.log('Casinos: ', venuesArray);
       setCasinos(venuesArray);
     } catch (err) { console.log('error cargando casinos', err) }
   }
@@ -142,7 +139,6 @@ export default function StartEventPage(props) {
                           Descripción: {casino.descripcion} <br />
                           Horario: {startHour + " - " + endHour} <br />                         
                           Precio: ${price === 0 ? "No disponible este día" : price.toString()} <br />
-                          {console.log(casino.servicios)}
                           {casino.servicios.items.length !== 0 ? "Servicios" : ""}
                           <ul>
                             {casino.servicios && casino.servicios.items.map(srv => (

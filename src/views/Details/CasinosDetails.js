@@ -56,7 +56,6 @@ export default function CasinoDetails(props) {
       });
       setCasinosImgs(arrayImages);
       setCasino(casinoData);
-      console.log(casinoData)
     } catch (err) { console.log('error cargando las imagenes de casino', err); }
   }
 

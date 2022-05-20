@@ -58,7 +58,6 @@ export default function StartEventPage(props) {
 
       let userRatings1 = ratingData1.data.ratingCasinoPorUsuario.items;
       let userRatings2 = ratingData2.data.ratingCasinoPorUsuario.items;
-      console.log('User Ratings 2: ', userRatings2);
       let sameCasino = [];
       let similarCasino = [];
       let differentCasino = [];

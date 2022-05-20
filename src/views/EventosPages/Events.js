@@ -54,7 +54,6 @@ export default function AdminCasinoProveedor(props) {
         }
       }
       setEventos(eventList);
-      console.log(eventList);
     } catch (err) { console.log('error cargando eventos: ', err) };
   }
 

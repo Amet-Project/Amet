@@ -129,12 +129,10 @@ export default function StartEventPage(props) {
       if(ban){
         horarioForSumbit['precio'] = days[arrayDays[day]];
         horarioForSumbit[arrayDays[day]] = true;
-        console.log(horarioForSumbit);
         await API.graphql(graphqlOperation(createCasinoHorarioFijo, {input:horarioForSumbit}));
       }else{
         horarioForSumbit['precio'] = days[arrayDays[day]];
         horarioForSumbit[arrayDays[day]] = true;
-        console.log(horarioForSumbit);
         await API.graphql(graphqlOperation(createCasinoHorarioFijo, {input:horarioForSumbit}));
       }
     }

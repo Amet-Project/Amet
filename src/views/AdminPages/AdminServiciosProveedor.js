@@ -50,17 +50,14 @@ export default function AdminCasinoProveedor(props) {
         const casinosData = await API.graphql(graphqlOperation(listCasinosByUser, {id: idAuth}));
         const casinoList = casinosData.data.getUsuario.casinos.items;
         setCasinos(casinoList);
-        console.log('casinos: ', casinoList);
 
         const entretenimientoData = await API.graphql(graphqlOperation(listEntretenimientoByUser, {id: idAuth}));
         const entretenimientosList = entretenimientoData.data.getUsuario.entretenimiento.items;
         setEntretenimientos(entretenimientosList);
-        console.log('entretenimiento: ', entretenimientosList);
 
         const banquetesData = await API.graphql(graphqlOperation(listBanqueteByUser, {id: idAuth}));
         const banqueteList = banquetesData.data.getUsuario.banquete.items;
         setBanquetes(banqueteList);
-        console.log('banquetes: ', banqueteList);
   
       }catch(err){console.log('error cargando casinos: ', err)};
 

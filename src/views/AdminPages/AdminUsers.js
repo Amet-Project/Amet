@@ -44,7 +44,6 @@ export default function AdminUsers(props) {
       const usuariosData = await API.graphql(graphqlOperation(listUsuarios));
       const usuariosList = usuariosData.data.listUsuarios.items;
       setUsuarios(usuariosList);
-      console.log(usuariosList);
     }catch(err){console.log('error cargando usuarios: ', err)};
   }
 

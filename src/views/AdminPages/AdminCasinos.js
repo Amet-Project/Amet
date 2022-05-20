@@ -52,7 +52,6 @@ export default function AdminCasinos(props) {
       const casinosData = await API.graphql(graphqlOperation(listCrudCasinos));
       const casinoList = casinosData.data.listCasinos.items;
       setCasinos(casinoList);
-      console.log(casinoList);
     }catch(err){console.log('error cargando casinos: ', err)};
   }
 

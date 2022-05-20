@@ -45,7 +45,6 @@ export default function UploadBanqueteImages(props) {
         const banquetesData = await API.graphql(graphqlOperation(listBanqueteByUser, {id: idAuth}));
         const banqueteList = banquetesData.data.getUsuario.banquete.items;
         setBanquetes(banqueteList);
-        console.log(banqueteList);
 
       }catch(err){console.log('error cargando banquetes: ', err)};
 
@@ -58,7 +57,6 @@ export default function UploadBanqueteImages(props) {
 
 
   const addImageToDB = async (image) => {
-    console.log('addimage to db');
     try {
         //SAVE DATA TO THE IMAGEN TABLE ON DYNAMODB
         await API.graphql(graphqlOperation(createImagenBanquete, {input:image}));
@@ -68,21 +66,18 @@ export default function UploadBanqueteImages(props) {
   }
 
   function onBanqueteSelected(e) {
-    console.log(e.target.value);
     setId(e.target.value);
   }
   function onFileSelected(e) {
     setFile(e.target.files[0]);
   }
   function onChange() {
-    console.log("id:",idSelected, file);
     //SAVING THE IMAGE ON THE BUCKET OF S3
     const uniqueName = uuidv4(); //HERE GENERATES AN UNIQUE ID FOR THE IMAGE
     Storage.put(uniqueName, file, {
       level: 'public',
       contentType: 'image/png',
     }).then((response) => {
-      console.log("imagen subida: ", response);
       const image = {
       id_banquete: idSelected,
       //url: url_img,

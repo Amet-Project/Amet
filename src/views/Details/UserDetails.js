@@ -51,11 +51,9 @@ export default function UserDetails(props) {
   async function fetchUser(){
     const idAuthMine = window.sessionStorage.getItem('idAuth');
     setidAuth(idAuthMine);
-    console.log("idAuth: ", idAuthMine);
     try {
       const response = await API.graphql(graphqlOperation(GetUsuarioDetails, {id: idAuthMine}));
       setUser(response.data.getUsuario);
-      console.log(response.data.getUsuario);
     } catch (err) {
       console.log('Error cargando usuario: ',err);
     }

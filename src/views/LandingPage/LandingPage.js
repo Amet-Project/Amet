@@ -46,9 +46,7 @@ export default function LandingPage(props) {
   }, [])
 
   function validateAuthentication() {
-    //let authen = window.sessionStorage.getItem('auth');
-    console.log("AUTH:", window.sessionStorage.getItem('auth'))
-
+    let authen = window.sessionStorage.getItem('auth');
   }
 
   return (

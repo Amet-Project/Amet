@@ -67,22 +67,18 @@ export default function ReviewEvent(props) {
   };
   
   async function sumbitRates() {
-    console.log(idAuth, casinoRate, banqueteRate, entretenimientoRate);
     try {
       if(casinoRate.length !== 0) {
         const resCasino = await API.graphql(graphqlOperation(createRatingCasino, {input:casinoRate}));
         await API.graphql(graphqlOperation(updateOrdenCasino, {input: { id:evento.id_orden_casino, reviewed: true }})) ;
-        console.log(resCasino);
       }
       if (banqueteRate.length !== 0){
         const resBanquete = await API.graphql(graphqlOperation(createRatingBanquete, {input:banqueteRate}));
         await API.graphql(graphqlOperation(updateOrdenBanquete, {input: { id:evento.id_orden_banquete, reviewed: true }})) ;
-        console.log(resBanquete);
       }
       if (entretenimientoRate.length !== 0) {
         const resEntretenimiento = await API.graphql(graphqlOperation(createRatingEntretenimiento, {input:entretenimientoRate}));
         await API.graphql(graphqlOperation(updateOrdenEntretenimiento, {input: { id:evento.id_orden_entretenimiento, reviewed: true }})) ;
-        console.log(resEntretenimiento);
       }
       window.location.href = "/admineventos";
     } catch (error) {
@@ -98,10 +94,8 @@ export default function ReviewEvent(props) {
     try {
       let idAuth = window.sessionStorage.getItem('idAuth');
       setidAuth(idAuth);
-      console.log("idEvent: ",idEvent);
       const eventData = await API.graphql(graphqlOperation(getEvento, { id: idEvent }));
       const event = eventData.data.getEvento;
-      console.log(event);
       setEvento(event);
     } catch (err) { console.log('error cargando eventos: ', err) };
   }

@@ -75,7 +75,6 @@ export default function StartEventPage(props) {
       let user3;
       const baseURL= "https://amet-ffts6w3jba-uc.a.run.app/rating";
       await axios.get(`${baseURL}?hashuser=${idAuth}`).then(response =>{
-        console.log('response: ', response.data);
         user1 = response.data[0];
         user2 = response.data[1];
         user3 = response.data[2];

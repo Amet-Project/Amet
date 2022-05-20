@@ -51,7 +51,6 @@ export default function AdminCasinoProveedor(props) {
         status: myStatus
       };
       const resCasino = await API.graphql(graphqlOperation(updateOrdenCasino, {input:updatedOrder}));
-      console.log(resCasino);
       window.location.href="/admineventosproveedor"
     } catch (error) {
       console.log(error);
@@ -65,7 +64,6 @@ export default function AdminCasinoProveedor(props) {
         status: myStatus
       };
       const resBanquete = await API.graphql(graphqlOperation(updateOrdenBanquete, {input:updatedOrder}));
-      console.log(resBanquete);
       window.location.href="/admineventosproveedor"
     } catch (error) {
       console.log(error);
@@ -79,7 +77,6 @@ export default function AdminCasinoProveedor(props) {
         status: myStatus
       };
       const resEntretenimiento = await API.graphql(graphqlOperation(updateOrdenEntretenimiento, {input:updatedOrder}));
-      console.log(resEntretenimiento);
       window.location.href="/admineventosproveedor"
     } catch (error) {
       console.log(error);
@@ -95,15 +92,12 @@ export default function AdminCasinoProveedor(props) {
         
         let casinosUser = []
         for (let idxCasino = 0; idxCasino < casinoList.length; idxCasino++) {
-          //console.log('usuario prov:', idAuth, ' - Usuario due;o: ', casinoList[idxCasino].casino.casino.id_usuario)
           if(casinoList[idxCasino].casino.casino.id_usuario == idAuth){
             casinosUser.push(casinoList[idxCasino])
-            //console.log('casino del usuario: ', idAuth, ' - ', casinoList[idxCasino].fecha);
           }
         }
 
         setCasinos(casinosUser);
-        console.log('casinos: ', casinosUser);
 
         const entData = await API.graphql(graphqlOperation(listEventosByEntretenimientoProv));
         const entList = entData.data.listEventos.items;
@@ -116,9 +110,7 @@ export default function AdminCasinoProveedor(props) {
             }
           }
         }
-        setMusica(entUser);
-        console.log('music: ', entUser);
-        
+        setMusica(entUser);        
 
         const banqueteData = await API.graphql(graphqlOperation(listEventosByBanqueteProv));
         const banqueteList = banqueteData.data.listEventos.items;
@@ -131,9 +123,7 @@ export default function AdminCasinoProveedor(props) {
             }
           }
         }
-        setBanquetes(banqueteUser);
-        console.log('banquetes: ', banqueteUser);
-  
+        setBanquetes(banqueteUser);  
       }catch(err){console.log('error cargando eventos: ', err)};
 
     }else{
