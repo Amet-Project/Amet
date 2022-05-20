@@ -187,7 +187,7 @@ export default function StartEventPage(props) {
         // Move to a new location or you can do something else
         window.location.href = "/recomendationcheckout="+date+"="+item+"="+item2+"="+item3;
 
-    }, 20000);
+    }, 3000);
     } catch (err) { setOpen(true) }
   }
 

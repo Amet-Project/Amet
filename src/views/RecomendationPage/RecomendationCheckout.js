@@ -7,16 +7,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
-
-import styles from "assets/jss/material-kit-react/views/loginPage.js";
-import image from "assets/img/bg7.jpg";
+import informationPageStyle from "assets/jss/material-kit-react/views/informationPage.js";
 
 //Amplify Imports
 import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
@@ -24,7 +16,7 @@ import { getCasino } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(informationPageStyle);
 
 const days = [
   'domingo',
@@ -44,7 +36,7 @@ let endHour;
 
 export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const { date, idCasino1, idCasino2, idCasino3 } = useParams()
+  const { date, idCasino1, idCasino2, idCasino3,  } = useParams()
 
   setTimeout(function() {
     setCardAnimation("");
@@ -114,21 +106,15 @@ export default function StartEventPage(props) {
           backgroundSize: "contain",
         }}
       >
-        <div className={classes.container}>
-          <GridContainer justify="center">
-          <h1>Casinos Recomendados por Inteligencia Artificial:</h1>
-            <GridItem xs={12} sm={12} md={4}>
-            {
-                casinos && casinos.map(casino => (
-                  <div>
-                  <Card className={classes[cardAnimaton]}>
-                    <form className={classes.form}>
-                      <CardHeader color="primary" className={classes.cardHeader}>
-                        <h3>{casino.titulo}</h3>
-                      </CardHeader>
-                      <CardBody>
-                        <div id={casino.id}>                                                   
-                          { 
+
+              <div className={classes.infoBigContainer}>
+                  {casinos && casinos.map(casino => {
+                      return (
+                          <div className={classes.infoContainer}>
+                              <h2>{casino.titulo}</h2>
+                              <hr className={classes.hrRound}></hr>
+                              <img className={classes.casinoListImage} src={casino.img} />
+                              { 
                           price = 0,
                           startHour = "",
                           endHour = "", 
@@ -139,12 +125,14 @@ export default function StartEventPage(props) {
                               endHour = hf.hora_fin;                               
                             }
                           })
-                          }                           
-                          <img className={classes.casinoImage} src={casino.img} />
+                          }
+                          <br/>
+                          <div className={classes.listText}>
                           Dirección: {casino.direccion} <br />
                           Descripción: {casino.descripcion} <br />
                           Horario: {startHour + " - " + endHour} <br />                         
                           Precio: ${price === 0 ? "No disponible este día" : price.toString()} <br />
+                          {console.log(casino.servicios)}
                           {casino.servicios.items.length !== 0 ? "Servicios" : ""}
                           <ul>
                             {casino.servicios && casino.servicios.items.map(srv => (
@@ -152,23 +140,17 @@ export default function StartEventPage(props) {
                               ))
                             }
                           </ul>
+                          <Button className={classes.btnList} color="primary" size="lg" disabled={price === 0} href={ "/reserveevent=" + date + "=" + casino.id}>
+                          Reservar  
+                          </Button>
                         </div>
-                      </CardBody>
-                      <CardFooter className={classes.cardFooter}>
-                        <Button color="primary" size="lg" disabled={price === 0} href={ "/reserveevent=" + date + "=" + casino.id}>
-                          Reservar
-                        </Button>
-                      </CardFooter>
-                    </form>
-                  </Card>
-                  <br />
-                </div>
-                ))
-              }
-            </GridItem>
-          </GridContainer>
+                      </div>
+                    );
+                  })}
+          <div className={classes.pageFooter}>
+            <Footer whiteFont />
+          </div>
         </div>
-        <Footer whiteFont />
       </div>
     </div>
   );
