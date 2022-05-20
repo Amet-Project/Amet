@@ -72,12 +72,12 @@ class KnnRecommender:
         """
         # read data
         df_usuarios = pd.read_csv(
-            os.path.join(self.path_usuarios),
+            'usuarios.csv',
             usecols=['usuarioId', 'title'],
             dtype={'usuarioId': 'str', 'title': 'str'})
 
         df_ratings = pd.read_csv(
-            os.path.join(self.path_ratings),
+            'ratings.csv',
             usecols=['casinoId', 'usuarioId', 'rating'],
             dtype={'casinoId': 'str', 'usuarioId': 'str', 'rating': 'int32'})
 
@@ -223,7 +223,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         prog="Usuario Recommender",
         description="Run KNN Usuario Recommender")
-    parser.add_argument('--path', nargs='?', default='C:/Users/ismarque/Documents/Amet/ServerFinal',
+    parser.add_argument('--path', nargs='?', default='/Users/oscarlopez/dev/Proyecto-Modular/Amet/AI',
                         help='input data path')
     parser.add_argument('--usuarios_filename', nargs='?', default='usuarios.csv',
                         help='provide usuarios filename')
@@ -240,7 +240,7 @@ if __name__ == '__main__':
     # get args
     #print(sys.argv[1])
     #args = parse_args()
-    data_path = 'C:/Users/ismarque/Documents/Amet/ServerFinal' #args.path
+    data_path = '/Users/oscarlopez/dev/Proyecto-Modular/Amet/AI' #args.path
     usuarios_filename = 'usuarios.csv' #args.usuarios_filename
     ratings_filename = 'ratings.csv' #args.ratings_filename
     usuario_name = sys.argv[1] #args.usuario_name
@@ -251,7 +251,7 @@ if __name__ == '__main__':
         os.path.join(data_path, usuarios_filename),
         os.path.join(data_path, ratings_filename))
     # set params
-    recommender.set_filter_params(10, 10)
+    recommender.set_filter_params(3, 1)
     recommender.set_model_params(20, 'brute', 'cosine', -1)
     # make recommendations
     print(recommender.make_recommendations(usuario_name, top_n))
