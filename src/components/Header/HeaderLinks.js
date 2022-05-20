@@ -168,7 +168,6 @@ export default function HeaderLinks(props) {
           <Button
             color="transparent"
             className={classes.navLink}
-            href="https://twitter.com/amet_iop"
           >
             <i className={classes.socialIcons + " fab fa-twitter"} />
           </Button>
@@ -184,7 +183,6 @@ export default function HeaderLinks(props) {
           <Button
             color="transparent"
             className={classes.navLink}
-            href="https://www.facebook.com/ametiop"
           >
             <i className={classes.socialIcons + " fab fa-facebook"} />
           </Button>

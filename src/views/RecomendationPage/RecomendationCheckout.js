@@ -60,23 +60,34 @@ export default function StartEventPage(props) {
   //Get the whole items
   async function fetchCasinos() {
     try {
-      const casinosData = await API.graphql(graphqlOperation(getCasino, {id: idCasino1}));
-      const casinosData2 = await API.graphql(graphqlOperation(getCasino, {id: idCasino2}));
-      const casinosData3 = await API.graphql(graphqlOperation(getCasino, {id: idCasino3}));
       let venuesArray = [];
-      venuesArray.push(casinosData.data.getCasino);
-      venuesArray.push(casinosData2.data.getCasino);
-      venuesArray.push(casinosData3.data.getCasino);
+      if(idCasino1 != "undefined"){
+        const casinosData = await API.graphql(graphqlOperation(getCasino, {id: idCasino1}));
+        venuesArray.push(casinosData.data.getCasino);
+      }
+      if(idCasino2 != "undefined"){
+        const casinosData2 = await API.graphql(graphqlOperation(getCasino, {id: idCasino2}));
+        venuesArray.push(casinosData2.data.getCasino);
+      }
+      if(idCasino3 != "undefined"){
+        const casinosData3 = await API.graphql(graphqlOperation(getCasino, {id: idCasino3}));
+        venuesArray.push(casinosData3.data.getCasino);
+      }
+      console.log(venuesArray);
       
       for (let idxCasino = 0; idxCasino < venuesArray.length; idxCasino++) {
-        if (venuesArray[idxCasino].imagenes.items.length === 0) {
+        if(venuesArray[idxCasino].imagenes){
+          if (venuesArray[idxCasino].imagenes.items.length === 0) {
+            venuesArray[idxCasino].img = 'https://weddingsparrow.com/uploads/slir/w1200/IMG_1028.jpg';
+          }else {
+            const key_image = venuesArray[idxCasino].imagenes.items[0].file.key;
+            console.log('Key image: ', key_image);
+            //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
+            const img = await Storage.get(key_image, {level: 'public'});
+            venuesArray[idxCasino].img = img;
+          }
+        } else {
           venuesArray[idxCasino].img = 'https://weddingsparrow.com/uploads/slir/w1200/IMG_1028.jpg';
-        }else {
-          const key_image = venuesArray[idxCasino].imagenes.items[0].file.key;
-          console.log('Key image: ', key_image);
-          //REQUESTING THE IMAGE OF THE S3 BUCKET WITH THE INFO OBTEINED OF THE CORRESPONDING CASINO
-          const img = await Storage.get(key_image, {level: 'public'});
-          venuesArray[idxCasino].img = img;
         }
       }
 

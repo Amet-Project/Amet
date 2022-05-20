@@ -35,8 +35,9 @@ import RegistrarEntretenimientoPage from "views/AdminPages/RegistrarEntretenimie
 import RegistrarBanquetePage from "views/AdminPages/RegistrarBanquete.js";
 import SigninProveedores from "views/SignupPage/SignupProveedores.js";
 import RecomendationPage from "views/RecomendationPage/Recomendationpage.js";
-import RecomendationCheckout from "views/RecomendationPage/RecomendationCheckout.js"
-import ReviewEvent from "views/ReviewEvent/ReviewEvent.js"
+import RecomendationCheckout from "views/RecomendationPage/RecomendationCheckout.js";
+import ReviewEvent from "views/ReviewEvent/ReviewEvent.js";
+import CompareRatings from "views/CompareUsers/CompareUsers.js";
 
 //Amplify AWS
 import Amplify from 'aws-amplify';
@@ -80,6 +81,7 @@ ReactDOM.render(
       <Route path="/recomendation=:date" component={RecomendationPage} />
       <Route path="/recomendationcheckout=:date=:idCasino1=:idCasino2=:idCasino3" component={RecomendationCheckout} />
       <Route path="/reviewEvent=:idEvent" component={ReviewEvent} />
+      <Route path="/compareRatings=:userid1=:userid2" component={CompareRatings} />
       <Route path="/" component={LandingPage} />
     </Switch>
   </Router>,

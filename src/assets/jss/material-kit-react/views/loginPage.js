@@ -99,6 +99,9 @@ const signupPageStyle = {
   serviceImage: {
     width: "15%"
   },
+  cardImage: {
+    maxHeight: "150px"
+  },
   row: {
     marginLeft: "1rem !important",
   },

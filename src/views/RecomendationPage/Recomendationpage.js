@@ -17,7 +17,7 @@ import image from "assets/img/bg7.jpg";
 //Amplify Imports
 import Amplify, {Storage, API, graphqlOperation } from 'aws-amplify'
 import { ratingCasinoPorUsuario } from '../../graphql/queries.js'
-import { eventoPorFecha } from '../../graphql/queriesExt.js'
+import { eventoPorFecha, listEventsByUser } from '../../graphql/queriesExt.js'
 import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
@@ -26,7 +26,6 @@ const useStyles = makeStyles(informationPageStyle);
 export default function StartEventPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   const { date } = useParams()
-  const [favCasino, setFavCasino] = useState([]);
   const [open, setOpen] = useState(false);
 
   setTimeout(function() {
@@ -50,26 +49,30 @@ export default function StartEventPage(props) {
       const idAuth = window.sessionStorage.getItem('idAuth');
       let ratingData = await API.graphql(graphqlOperation(ratingCasinoPorUsuario, { id_usuario: idAuth }));
       const eventosData = await API.graphql(graphqlOperation(eventoPorFecha, {fecha: date}));
+      const userEventData = await API.graphql(graphqlOperation(listEventsByUser, { id: idAuth }));
       let eventsArray = eventosData.data.eventoPorFecha.items;
       let userRatings = ratingData.data.ratingCasinoPorUsuario.items;
+      let userEvents = userEventData.data.getUsuario.eventos.items;
       if(userRatings.length < 3){
         setOpen(true);
       }
-      let bestCasino = null;
+      let positiveRatings = 0;
+      for (let idx = 0; idx < userRatings.length; idx++){
+        if(userRatings[idx].rating >= 3){
+          positiveRatings++;
+        }
+      };
+      if(positiveRatings < 2){
+        setOpen(true);
+      }
+      let userCasinos = [];
+      for (let idx = 0; idx < userEvents.length; idx++){
+        userCasinos.push(userEvents[idx].casino.casino.id);
+      };
       let bestScore = 0;
       let user1;
       let user2;
       let user3;
-      let bestCasino1 = null;
-      let bestCasino2 = null;
-      let bestCasino3 = null;
-      for (let idxRatings = 0; idxRatings < userRatings.length; idxRatings++){
-        if (userRatings[idxRatings].rating >= 3 && userRatings[idxRatings].rating >= bestScore){
-          bestScore = userRatings[idxRatings].rating;
-          bestCasino = userRatings[idxRatings].id_casino;
-        }
-      };
-      setFavCasino(bestCasino);
       const baseURL= "https://amet-ffts6w3jba-uc.a.run.app/rating";
       await axios.get(`${baseURL}?hashuser=${idAuth}`).then(response =>{
         console.log('response: ', response.data);
@@ -77,6 +80,7 @@ export default function StartEventPage(props) {
         user2 = response.data[1];
         user3 = response.data[2];
       });
+      console.log('1: ', user1, ' 2: ', user2, ' 3: ', user3);
       let ratingData1 = await API.graphql(graphqlOperation(ratingCasinoPorUsuario, { id_usuario: user1 }));
       let ratingData2 = await API.graphql(graphqlOperation(ratingCasinoPorUsuario, { id_usuario: user2 }));
       let ratingData3 = await API.graphql(graphqlOperation(ratingCasinoPorUsuario, { id_usuario: user3 }));
@@ -84,6 +88,10 @@ export default function StartEventPage(props) {
       bestScore = 0;
       let found = false;
       let bestCasinos = [];
+      let bestCasinos2 = [];
+      let bestCasinos2BU = []
+      let bestCasinos3 = [];
+      let bestCasinos3BU = [];
       for (let idxRatings = 0; idxRatings < userRatings.length; idxRatings++){
         if (userRatings[idxRatings].rating >= bestScore){
           for (let i = 0; i < eventsArray.length; i++){
@@ -93,16 +101,22 @@ export default function StartEventPage(props) {
             }
           }
           if(!found){
-            if(userRatings[idxRatings].rating == 5){
+            if(userRatings[idxRatings].rating > bestScore && !userCasinos.includes(userRatings[idxRatings].id_casino)){
+              bestCasinos = [];
               bestCasinos.push(userRatings[idxRatings].id_casino);
+              bestScore = userRatings[idxRatings].rating;
             }
-            bestScore = userRatings[idxRatings].rating;
-            bestCasino1 = userRatings[idxRatings].id_casino;
+            else{
+              if(!userCasinos.includes(userRatings[idxRatings].id_casino)){
+                bestCasinos.push(userRatings[idxRatings].id_casino);
+                bestScore = userRatings[idxRatings].rating;
+              }
+            }
           }
           found = false;
         }
       };
-
+      found = false;
       userRatings = ratingData2.data.ratingCasinoPorUsuario.items;
       bestScore = 0;
       for (let idxRatings = 0; idxRatings < userRatings.length; idxRatings++){
@@ -114,16 +128,26 @@ export default function StartEventPage(props) {
             }
           }
           if(!found){
-            if(userRatings[idxRatings].rating == 5 && !bestCasinos.includes(userRatings[idxRatings].id_casino)){
-              bestCasinos.push(userRatings[idxRatings].id_casino);
+            if(userRatings[idxRatings].rating > bestScore && !bestCasinos.includes(userRatings[idxRatings].id_casino) && !userCasinos.includes(userRatings[idxRatings].id_casino)){
+              bestCasinos2BU.push.apply(bestCasinos2BU, bestCasinos2);
+              bestCasinos2 = [];
+              bestCasinos2.push(userRatings[idxRatings].id_casino);
+              bestScore = userRatings[idxRatings].rating;
             }
-            bestScore = userRatings[idxRatings].rating;
-            bestCasino2 = userRatings[idxRatings].id_casino;
+            else{
+              if(!bestCasinos.includes(userRatings[idxRatings].id_casino) && !userCasinos.includes(userRatings[idxRatings].id_casino)){
+                bestCasinos2.push(userRatings[idxRatings].id_casino);
+                bestScore = userRatings[idxRatings].rating;
+              }
+            }
           }
           found = false;
         }
       };
-
+      if(bestCasinos2.length == 0){
+        bestCasinos2.push.apply(bestCasinos2, bestCasinos2BU);
+      }
+      found = false;
       userRatings = ratingData3.data.ratingCasinoPorUsuario.items;
       bestScore = 0;
       for (let idxRatings = 0; idxRatings < userRatings.length; idxRatings++){
@@ -135,25 +159,35 @@ export default function StartEventPage(props) {
             }
           }
           if(!found){
-            if(userRatings[idxRatings].rating == 5 && !bestCasinos.includes(userRatings[idxRatings].id_casino)){
-              bestCasinos.push(userRatings[idxRatings].id_casino);
+            if(userRatings[idxRatings].rating > bestScore && !bestCasinos.includes(userRatings[idxRatings].id_casino) && !bestCasinos2.includes(userRatings[idxRatings].id_casino) && !userCasinos.includes(userRatings[idxRatings].id_casino)){
+              bestCasinos3BU.push.apply(bestCasinos3BU, bestCasinos3);
+              bestCasinos3 = [];
+              bestCasinos3.push(userRatings[idxRatings].id_casino);
+              bestScore = userRatings[idxRatings].rating;
             }
-            bestScore = userRatings[idxRatings].rating;
-            bestCasino3 = userRatings[idxRatings].id_casino;
+            else{
+              if(!bestCasinos.includes(userRatings[idxRatings].id_casino) && !bestCasinos2.includes(userRatings[idxRatings].id_casino) && !userCasinos.includes(userRatings[idxRatings].id_casino)){
+                bestCasinos3.push(userRatings[idxRatings].id_casino);
+                bestScore = userRatings[idxRatings].rating;
+              }
+            }
           }
           found = false;
         }
       };
+      if(bestCasinos3.length == 0){
+        bestCasinos3.push.apply(bestCasinos3, bestCasinos3BU);
+      }
       var item = bestCasinos[Math.floor(Math.random()*bestCasinos.length)];
-      var item2 = bestCasinos[Math.floor(Math.random()*bestCasinos.length)];
-      var item3 = bestCasinos[Math.floor(Math.random()*bestCasinos.length)];
+      var item2 = bestCasinos2[Math.floor(Math.random()*bestCasinos2.length)];
+      var item3 = bestCasinos3[Math.floor(Math.random()*bestCasinos3.length)];
 
       window.setTimeout(function(){
 
         // Move to a new location or you can do something else
         window.location.href = "/recomendationcheckout="+date+"="+item+"="+item2+"="+item3;
 
-    }, 5000);
+    }, 20000);
     } catch (err) { setOpen(true) }
   }
 

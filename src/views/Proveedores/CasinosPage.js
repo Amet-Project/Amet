@@ -10,6 +10,7 @@ import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
+import cardStyle from "assets/jss/material-kit-react/components/cardStyle.js";
 import image from "assets/img/bg7.jpg";
 import Button from "components/CustomButtons/Button.js";
 
@@ -21,6 +22,7 @@ import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
+const cardStyles = makeStyles(cardStyle);
 
 //variables
 let lowPrice = 0;
@@ -34,6 +36,7 @@ export default function CasinoPage(props) {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
+  const cardClasses = cardStyles();
   const { ...rest } = props;
 
   useEffect(() => {
@@ -83,8 +86,8 @@ export default function CasinoPage(props) {
                 casinos && casinos.map(casino => (
                   casino.aprobado ? 
                     <Col key={casino.id}>
-                    <Card text='dark'>
-                      <Card.Img variant="top" src={casino.img} />
+                    <Card className={cardClasses.card} text='dark'>
+                      <Card.Img variant="top" src={casino.img} className={classes.cardImage}/>
                       <Card.Body>
                         <Card.Title>
                           {casino.titulo}
@@ -101,6 +104,7 @@ export default function CasinoPage(props) {
                             }
                           })}
                           <p>{casino.descripcion}</p>
+                          <p>Teléfono: {casino.usuario.telefono}</p>
                           <p>Precio: ${lowPrice + " - $" + highPrice}</p>
                         </Card.Text>
                       </Card.Body>

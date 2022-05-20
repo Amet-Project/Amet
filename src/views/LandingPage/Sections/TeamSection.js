@@ -42,7 +42,7 @@ export default function TeamSection() {
               <h4 className={classes.cardTitle}>
                 Isaac Márquez
                 <br />
-                <small className={classes.smallTitle}>Backend Dev</small>
+                <small className={classes.smallTitle}>Back-End Dev</small>
               </h4>
               <CardBody>
                 <p className={classes.description}>
@@ -54,6 +54,7 @@ export default function TeamSection() {
                   color="transparent"
                   className={classes.margin5}
                   href={"https://www.linkedin.com/in/iamr30/"}
+                  target="_blank"
                 >
                   <i className={classes.socials + " fab fa-linkedin"} />
                 </Button>
@@ -68,7 +69,7 @@ export default function TeamSection() {
               <h4 className={classes.cardTitle}>
                 Oscar López
                 <br />
-                <small className={classes.smallTitle}>Frontend Dev</small>
+                <small className={classes.smallTitle}>Front-End Dev</small>
               </h4>
               <CardBody>
                 <p className={classes.description}>
@@ -81,6 +82,7 @@ export default function TeamSection() {
                   color="transparent"
                   className={classes.margin5}
                   href={"https://www.linkedin.com/in/oscar-lopez-l/"}
+                  target="_blank"
                 >
                   <i className={classes.socials + " fab fa-linkedin"} />
                 </Button>
@@ -108,6 +110,7 @@ export default function TeamSection() {
                   color="transparent"
                   className={classes.margin5}
                   href={"https://www.linkedin.com/in/parisfb/"}
+                  target="_blank"
                 >
                   <i className={classes.socials + " fab fa-linkedin"} />
                 </Button>
