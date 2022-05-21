@@ -260,7 +260,7 @@ def get_rating():
         os.path.join(data_path, usuarios_filename),
         os.path.join(data_path, ratings_filename))
     # set params
-    recommender.set_filter_params(10, 10)
+    recommender.set_filter_params(3, 1)
     recommender.set_model_params(20, 'brute', 'cosine', -1)
     
     # make recommendations

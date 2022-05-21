@@ -82,6 +82,7 @@ export default function AdminCasinoProveedor(props) {
                 <h2>{casino.casino.titulo} - {fecha}</h2>
                 <hr className={classes.hrRound}></hr>
                 <h3>Casino: {casino.casino.titulo} - {casino.status}</h3>
+                <h3>Teléfono: {casino.casino.usuario.telefono}</h3>
                 {
                   banquete ? 
                   <h3>Banquete: {banquete.banquete.titulo} - {banquete.status}</h3>

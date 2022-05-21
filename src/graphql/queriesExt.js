@@ -90,6 +90,18 @@ export const listCasinosWithImage = `
             hora_fin
           }
         }
+        usuario {
+          id
+          nombres
+          ap_paterno
+          ap_materno
+          nacimiento
+          sexo
+          email
+          telefono
+          celular
+          rol
+        }
         servicios {
           items {
             descripcion
@@ -399,6 +411,17 @@ query ListEventsByUser($id: ID!) {
                   key
                 }
               }
+            }
+            usuario {
+              id
+              nombres
+              ap_paterno
+              ap_materno
+              nacimiento
+              sexo
+              email
+              telefono
+              celular
             }
           }
           importe
