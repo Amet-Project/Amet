@@ -27,6 +27,7 @@ const informationPageStyle = {
     marginTop: "1vh",
     width: "100%",
     background: "#e6e6e6",
+    overflow: "auto"
   },
   infoContainerCenter: {
     borderRadius: "25px",
@@ -140,6 +141,21 @@ const informationPageStyle = {
   },
   "g-4": {
     marginLeft: "1rem !important",
+  },
+  casinoListImage: {
+    width: "320px",
+    float: "left",
+    maxHeight: "250px"
+  },
+  listText: {
+    marginLeft: "360px",
+    fontSize: "larger"
+  },
+  btnListDiv: {
+    textAlign: "center"
+  },
+  btnList: {
+    width: "30%"
   }
 };
 

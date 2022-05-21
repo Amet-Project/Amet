@@ -10,6 +10,7 @@ import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
+import cardStyle from "assets/jss/material-kit-react/components/cardStyle.js";
 import image from "assets/img/bg7.jpg";
 
 //Amplify Imports
@@ -19,6 +20,7 @@ import awsExports from "../../aws-exports.js";
 Amplify.configure(awsExports);
 
 const useStyles = makeStyles(styles);
+const cardStyles = makeStyles(cardStyle);
 
 //variables
 
@@ -30,6 +32,7 @@ export default function ComidaPage(props) {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
+  const cardClasses = cardStyles();
   const { ...rest } = props;
 
   useEffect(() => {
@@ -82,8 +85,8 @@ export default function ComidaPage(props) {
                   banquete.aprobado ? 
                   <div>
                     <Col key={banquete.id}>
-                    <Card text='dark'>
-                      <Card.Img variant="top" src={banquete.img} />
+                    <Card className={cardClasses.foodCard} text='dark'>
+                      <Card.Img variant="top" src={banquete.img} className={classes.cardImage}/>
                       <Card.Body>
                         <Card.Title>
                           {banquete.titulo}

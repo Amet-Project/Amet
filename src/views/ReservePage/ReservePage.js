@@ -404,9 +404,11 @@ export default function ReservePage(props) {
             }
             for (let i = 0; i < eventsArray.length; i++) {
                 for (let j = 0; j < musicArray.length; j++) {
-                    if (eventsArray[i].entretenimiento.id_entretenimiento === musicArray[j].id) {
-                        indexVenueToDelete = j;
-                        break;
+                    if(eventsArray[i].entretenimiento){
+                        if (eventsArray[i].entretenimiento.id_entretenimiento === musicArray[j].id) {
+                            indexVenueToDelete = j;
+                            break;
+                        }
                     }
                 }
                 if (indexVenueToDelete !== -1) {
@@ -427,10 +429,12 @@ export default function ReservePage(props) {
 
             for (let i = 0; i < eventsArray.length; i++) {
                 for (let j = 0; j < foodArray.length; j++) {
-                  if (eventsArray[i].banquete.id_banquete === foodArray[j].id) {
-                    indexVenueToDelete = j;
-                    break;
-                  }      
+                    if(eventsArray[i].banquete){
+                        if (eventsArray[i].banquete.id_banquete === foodArray[j].id) {
+                            indexVenueToDelete = j;
+                            break;
+                          }   
+                    }   
                 }
                 if(indexVenueToDelete !== -1){
                   foodArray.splice(indexVenueToDelete, 1);
